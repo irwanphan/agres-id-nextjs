@@ -150,13 +150,19 @@ const MainHeader = ({ headerData }: IProps) => {
 
           {/* Support, Account, Cart */}
           <div className="flex items-center gap-8">
-            <div className="flex items-center gap-2">
+            <Link 
+              href="https://wa.me/6281297009800" 
+              className="flex items-center gap-2 transition hover:text-blue focus:outline-none" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+            >
               <IconBrandWhatsappFilled color="#25D366" />
               <div>
                 <div className="text-xs text-gray-400">24/7 SUPPORT</div>
                 <div className="font-semibold">(+62) 812-9700-9800</div>
               </div>
-            </div>
+            </Link>
             <div>
               <Link
                 href={
