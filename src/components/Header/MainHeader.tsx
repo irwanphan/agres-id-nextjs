@@ -19,7 +19,7 @@ import {
 import GlobalSearchModal from "../Common/GlobalSearch";
 import { HeaderSetting } from "@prisma/client";
 import { useAppSelector } from "@/redux/store";
-import { WhatsappIcon } from "next-share";
+import { IconBrandWhatsappFilled } from "@tabler/icons-react";
 
 type IProps = {
   headerData?: HeaderSetting | null;
@@ -100,18 +100,6 @@ const MainHeader = ({ headerData }: IProps) => {
                     Create an account
                   </Link>
                 )}
-                <Link
-                  href={
-                    session?.user?.role === "ADMIN"
-                      ? "/admin/dashboard"
-                      : session?.user?.role === "USER"
-                      ? "/my-account"
-                      : "/signin"
-                  }
-                  className="pl-3 text-sm font-medium text-white transition hover:text-blue-300"
-                >
-                  {session?.user.name?.split(" ")[0] || "Sign In"}
-                </Link>
               </div>
             </div>
           </div>
@@ -150,10 +138,10 @@ const MainHeader = ({ headerData }: IProps) => {
           {/* Support, Account, Cart */}
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-2">
-              <WhatsappIcon />
+              <IconBrandWhatsappFilled color="#25D366" />
               <div>
                 <div className="text-xs text-gray-400">24/7 SUPPORT</div>
-                <div className="font-semibold">(+965) 7492-3477</div>
+                <div className="font-semibold">(+62) 812-9700-9800</div>
               </div>
             </div>
             <div>
@@ -169,7 +157,10 @@ const MainHeader = ({ headerData }: IProps) => {
                 aria-label="Account"
               >
                 <UserIcon />
-                {session?.user.name?.split(" ")[0] || "Sign In"}
+                <div>
+                  <div className="text-xs text-gray-400">ACCOUNT</div>
+                  {session?.user.name?.split(" ")[0] || "Sign In"}
+                </div>
               </Link>
             </div>
             <div className="flex items-center gap-2">
@@ -184,10 +175,10 @@ const MainHeader = ({ headerData }: IProps) => {
                     {cartCount || 0}
                   </span>
                 </div>
-                <span className="relative">
-                  <span className="absolute -top-2 -right-2 bg-blue-500 text-white rounded-full text-xs px-1">3</span>
+                <div>
+                  <div className="text-xs text-gray-400 text-left">CART</div>
                   <span>Rp 1800</span>
-                </span>
+                </div>
               </button>
             </div>
           </div>
