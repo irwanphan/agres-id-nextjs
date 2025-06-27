@@ -77,7 +77,7 @@ const MainHeader = ({ headerData }: IProps) => {
         }`}
       >
         {/* Topbar */}
-        <div className={`bg-[#3c0366] transition-all ease-in-out duration-300 ${stickyMenu ? "h-0 py-0" : "h-10 py-2"}`}>
+        <div className={`bg-[#3c0366] transition-all ease-in-out duration-300 ${stickyMenu ? "h-0 py-0" : "h-10 py-2"} overflow-hidden`}>
           <div className="px-4 mx-auto max-w-7xl sm:px-6 xl:px-0">
             <div className="flex justify-between">
               <div className="hidden lg:flex flex-row gap-3 items-center">
