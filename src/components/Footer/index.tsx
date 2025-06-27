@@ -1,4 +1,4 @@
-import { CallIcon, EmailIcon, MapIcon } from "@/assets/icons";
+import { CallIcon, MapIcon } from "@/assets/icons";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -10,6 +10,7 @@ import AccountLinks from "./AccountLinks";
 import FooterBottom from "./FooterBottom";
 import { AppStoreIcon, GooglePlayIcon } from "./icons";
 import QuickLinks from "./QuickLinks";
+import { IconBrandInstagram } from "@tabler/icons-react";
 
 const Footer = () => {
   return (
@@ -27,26 +28,30 @@ const Footer = () => {
                 <span className="shrink-0">
                   <MapIcon className="fill-blue" width={24} height={24} />
                 </span>
-                685 Market Street,Las Vegas, LA 95820,United States.
+                JL. Gunung Sahari Raya 1, Mangga Dua Square Blok A No. 8, Jakarta Utara
               </li>
 
               <li>
                 <Link
-                  href="tel:+099 532-786-9843"
+                  href="https://wa.me/6281297009800"
                   className="flex items-center gap-4.5 text-base"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <CallIcon className="fill-blue" width={24} height={24} />
-                  (+099) 532-786-9843
+                  (+62) 812-9700-9800
                 </Link>
               </li>
 
               <li>
                 <Link
-                  href="mailto:support@example.com"
+                  href="https://www.instagram.com/agres.id/"
                   className="flex items-center gap-4.5 text-base"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <EmailIcon className="fill-blue" width={24} height={24} />
-                  support@example.com
+                  <IconBrandInstagram className="text-blue" stroke={1.5} width={24} height={24} />
+                  agres.id
                 </Link>
               </li>
             </ul>
