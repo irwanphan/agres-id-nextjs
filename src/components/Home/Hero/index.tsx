@@ -7,7 +7,9 @@ const Hero = async () => {
   const sliders = await getHeroSliders();
 
   return (
-    <section className="overflow-hidden pb-12 pt-40 bg-[#F7F7F7] ">
+    <section className="overflow-hidden 
+                        pb-12 pt-56 bg-[#F7F7F7] 
+                        bg-gradient-to-r 45deg from-yellow-dark via-orange-dark to-red-dark">
       <div className="w-full px-4 mx-auto max-w-7xl sm:px-8 xl:px-0">
         <div className="grid grid-cols-1 gap-5 xl:grid-cols-3">
           <div className="w-full xl:col-span-2">

@@ -87,13 +87,13 @@ const MainHeader = ({ headerData }: IProps) => {
                 </div>
                 <div>|</div>
                 <div className="flex flex-row gap-4 items-center">
-                  <Link href="/" className="text-sm font-semibold text-white">Agres Komputer</Link>
-                  <Link href="/" className="text-sm font-semibold text-white">Agres Care</Link>
-                  <Link href="/" className="text-sm font-semibold text-white">
+                  <Link href="https://agreskomputer.com" className="text-sm font-semibold text-white">Agres Komputer</Link>
+                  <Link href="https://agrescare.com" className="text-sm font-semibold text-white">Agres Care</Link>
+                  <Link href="https://starlink.com" className="text-sm font-semibold text-white">
                     <Image src="/images/brands/starlink-text.svg" alt="Starlink" width={120} height={16} 
                       className="w-auto h-[1rem]"/>
                   </Link>
-                  <Link href="/" className="text-sm font-semibold text-white">
+                  <Link href="https://digitalalliance.co.id/" className="text-sm font-semibold text-white">
                     <Image src="/images/brands/DA-Black.svg" alt="DA" width={148} height={24}
                       className="w-auto h-[1rem]"/>
                   </Link>
@@ -218,8 +218,6 @@ const MainHeader = ({ headerData }: IProps) => {
               >
                 <SearchIcon />
               </button>
-
-              
 
               <Link
                 href="/wishlist"
