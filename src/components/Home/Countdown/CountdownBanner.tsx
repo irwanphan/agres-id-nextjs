@@ -14,7 +14,10 @@ const CountdownBanner = ({ data }: CountdownBannerProps) => {
   return (
     <section className="py-20 overflow-hidden">
       <div className="w-full px-4 mx-auto max-w-7xl sm:px-8 xl:px-0">
-        <div className="relative overflow-hidden z-1 rounded-xl bg-gray-2 p-4 sm:p-7.5 lg:p-10 xl:p-15">
+        <div className="relative overflow-hidden z-1 rounded-xl 
+                        bg-gray-2 hover:bg-red-light-4 transition-all duration-300
+                        p-4 sm:p-7.5 lg:p-10 xl:p-15
+                        ">
           <div className="max-w-[422px] w-full">
             <span className="block font-medium lg text-blue mb-2.5">
               {data.subtitle}
