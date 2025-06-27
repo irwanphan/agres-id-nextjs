@@ -35,7 +35,7 @@ const DesktopMenu = ({ menuData, stickyMenu }: DesktopMenuProps) => {
             {menuItem.submenu ? (
               <>
                 <button
-                  className={`flex items-center gap-1 hover:text-blue font-medium ${stickyMenu ? "py-4" : "py-6"} relative text-sm font-medium ${menuItem.submenu?.some(subItem => pathname === subItem.path) ? "text-blue" : "text-dark"}`}
+                  className={`flex items-center gap-1 hover:text-blue font-medium ${stickyMenu ? "py-2" : "py-3"} relative text-sm font-medium ${menuItem.submenu?.some(subItem => pathname === subItem.path) ? "text-blue" : "text-dark"}`}
                 >
                   {menuItem.title}
                   <svg
@@ -76,7 +76,7 @@ const DesktopMenu = ({ menuData, stickyMenu }: DesktopMenuProps) => {
             ) : (
               <Link
                 href={menuItem.path || "#"}
-                className={`hover:text-blue font-medium ${stickyMenu ? "py-4" : "py-6"} block relative text-sm ${menuItem.path && pathname.split('?')[0] === menuItem.path.split('?')[0] ? "text-blue" : "text-dark"}`}
+                className={`hover:text-blue font-medium ${stickyMenu ? "py-2" : "py-3"} block relative text-sm ${menuItem.path && pathname.split('?')[0] === menuItem.path.split('?')[0] ? "text-blue" : "text-dark"}`}
               >
                 {menuItem.title}
               </Link>

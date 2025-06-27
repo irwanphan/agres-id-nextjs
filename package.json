@@ -20,6 +20,7 @@
     "@reduxjs/toolkit": "^2.2.2",
     "@stripe/react-stripe-js": "^3.5.0",
     "@stripe/stripe-js": "^3.1.0",
+    "@tabler/icons-react": "^3.34.0",
     "@tippyjs/react": "^4.2.6",
     "algoliasearch": "^4.23.3",
     "axios": "^1.6.8",

@@ -19,6 +19,7 @@ import {
 import GlobalSearchModal from "../Common/GlobalSearch";
 import { HeaderSetting } from "@prisma/client";
 import { useAppSelector } from "@/redux/store";
+import { WhatsappIcon } from "next-share";
 
 type IProps = {
   headerData?: HeaderSetting | null;
@@ -71,12 +72,12 @@ const MainHeader = ({ headerData }: IProps) => {
   return (
     <>
       <header
-        className={`fixed left-0 top-0 w-full z-50 bg-white transition-all  ease-in-out duration-300 ${
+        className={`fixed left-0 top-0 w-full z-50 bg-white transition-all ease-in-out duration-300 ${
           stickyMenu && "shadow-sm"
         }`}
       >
         {/* Topbar */}
-        <div className="bg-dark py-2.5">
+        <div className={`bg-dark transition-all ease-in-out duration-300 ${stickyMenu ? "h-0 py-0" : "h-10 py-2.5"}`}>
           <div className="px-4 mx-auto max-w-7xl sm:px-6 xl:px-0">
             <div className="flex justify-between">
               <div className="hidden lg:block">
@@ -116,9 +117,16 @@ const MainHeader = ({ headerData }: IProps) => {
           </div>
         </div>
 
-        {/* Main Header */}
-        <div className="px-4 mx-auto max-w-7xl sm:px-6 xl:px-0">
-          <div className="flex items-center justify-between py-4 xl:py-0">
+        {/* Middle Header */}
+        <div className={` 
+                          mx-auto max-w-7xl 
+                          px-4 sm:px-6 xl:px-0 
+                          flex justify-between items-center
+                          transition-all ease-in-out duration-300
+                          ${stickyMenu ? "py-2" : "py-4"}
+                        `}>
+          {/* Logo */}
+          <div className="flex items-center">
             {/* Logo */}
             <div>
               <Link className="block py-2 shrink-0" href="/">
@@ -131,6 +139,66 @@ const MainHeader = ({ headerData }: IProps) => {
                 />
               </Link>
             </div>
+            {/* <span className="ml-2 font-bold text-2xl">NextMerce</span> */}
+          </div>
+
+          {/* Search Bar */}
+          {/* <div className="flex-1 mx-8">
+            <SearchBarComponent />
+          </div> */}
+
+          {/* Support, Account, Cart */}
+          <div className="flex items-center gap-8">
+            <div className="flex items-center gap-2">
+              <WhatsappIcon />
+              <div>
+                <div className="text-xs text-gray-400">24/7 SUPPORT</div>
+                <div className="font-semibold">(+965) 7492-3477</div>
+              </div>
+            </div>
+            <div>
+              <Link
+                href={
+                  session?.user?.role === "ADMIN"
+                    ? "/admin/dashboard"
+                    : session?.user?.role === "USER"
+                    ? "/my-account"
+                    : "/signin"
+                }
+                className="transition hover:text-blue focus:outline-none flex items-center gap-2"
+                aria-label="Account"
+              >
+                <UserIcon />
+                {session?.user.name?.split(" ")[0] || "Sign In"}
+              </Link>
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                className="flex items-center gap-2 text-gray-700 transition hover:text-blue focus:outline-none"
+                onClick={handleOpenCartModal}
+                aria-label="Cart"
+              >
+                <div className="relative">
+                  <CartIcon />
+                  <span className="absolute -top-1.5 -right-1.5 w-[18px] h-[18px] text-white bg-red-600 text-[10px] font-normal rounded-full inline-flex items-center justify-center">
+                    {cartCount || 0}
+                  </span>
+                </div>
+                <span className="relative">
+                  <span className="absolute -top-2 -right-2 bg-blue-500 text-white rounded-full text-xs px-1">3</span>
+                  <span>Rp 1800</span>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <hr className="border-slate-50 border-b border-[0.5px] block opacity-10"/>
+
+        {/* Navigation Header */}
+        <div className={`px-4 mx-auto max-w-7xl sm:px-6 xl:px-0 transition-all ease-in-out duration-300 ${stickyMenu ? "py-0" : "py-2"}`}>
+          <div className="flex items-center justify-between">
+            
 
             {/* Desktop Menu - Hidden on mobile */}
             <div className="hidden xl:block">
@@ -147,19 +215,7 @@ const MainHeader = ({ headerData }: IProps) => {
                 <SearchIcon />
               </button>
 
-              <Link
-                href={
-                  session?.user?.role === "ADMIN"
-                    ? "/admin/dashboard"
-                    : session?.user?.role === "USER"
-                    ? "/my-account"
-                    : "/signin"
-                }
-                className="transition hover:text-blue focus:outline-none"
-                aria-label="Account"
-              >
-                <UserIcon />
-              </Link>
+              
 
               <Link
                 href="/wishlist"
@@ -172,16 +228,7 @@ const MainHeader = ({ headerData }: IProps) => {
                 </span>
               </Link>
 
-              <button
-                className="relative text-gray-700 transition hover:text-blue focus:outline-none"
-                onClick={handleOpenCartModal}
-                aria-label="Cart"
-              >
-                <CartIcon />
-                <span className="absolute -top-1.5 -right-1.5 w-[18px] h-[18px] text-white bg-red-600 text-[10px] font-normal rounded-full inline-flex items-center justify-center">
-                  {cartCount || 0}
-                </span>
-              </button>
+              
 
               {/* Mobile Menu Toggle */}
               <button
