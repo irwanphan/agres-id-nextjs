@@ -77,14 +77,27 @@ const MainHeader = ({ headerData }: IProps) => {
         }`}
       >
         {/* Topbar */}
-        <div className={`bg-dark transition-all ease-in-out duration-300 ${stickyMenu ? "h-0 py-0" : "h-10 py-2.5"}`}>
+        <div className={`bg-[#3c0366] transition-all ease-in-out duration-300 ${stickyMenu ? "h-0 py-0" : "h-10 py-2"}`}>
           <div className="px-4 mx-auto max-w-7xl sm:px-6 xl:px-0">
             <div className="flex justify-between">
-              <div className="hidden lg:block">
-                <p className="text-sm font-medium text-white">
+              <div className="hidden lg:flex flex-row gap-3 items-center">
+                <div className="text-sm font-medium text-white">
                   {headerData?.headerText ||
                     "Get free delivery on orders over $100"}
-                </p>
+                </div>
+                <div>|</div>
+                <div className="flex flex-row gap-4 items-center">
+                  <Link href="/" className="text-sm font-semibold text-white">Agres Komputer</Link>
+                  <Link href="/" className="text-sm font-semibold text-white">Agres Care</Link>
+                  <Link href="/" className="text-sm font-semibold text-white">
+                    <Image src="/images/brands/starlink-text.svg" alt="Starlink" width={120} height={16} 
+                      className="w-auto h-[1rem]"/>
+                  </Link>
+                  <Link href="/" className="text-sm font-semibold text-white">
+                    <Image src="/images/brands/DA-Black.svg" alt="DA" width={148} height={24}
+                      className="w-auto h-[1rem]"/>
+                  </Link>
+                </div>
               </div>
               <div className="flex divide-x divide-white/20">
                 {session?.user ? (
@@ -218,8 +231,6 @@ const MainHeader = ({ headerData }: IProps) => {
                   {wishlistCount}
                 </span>
               </Link>
-
-              
 
               {/* Mobile Menu Toggle */}
               <button
