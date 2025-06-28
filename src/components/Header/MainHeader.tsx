@@ -122,25 +122,32 @@ const MainHeader = ({ headerData }: IProps) => {
         <div className={` 
                           mx-auto max-w-7xl 
                           px-4 sm:px-6 xl:px-0 
-                          flex justify-between items-center
+                          flex flex-col sm:flex-row
+                          justify-between items-start sm:items-center
                           transition-all ease-in-out duration-300
-                          ${stickyMenu ? "py-2" : "py-4"}
+                          ${stickyMenu ? "py-0 sm:py-2" : "py-2 sm:py-4"}
                         `}>
           {/* Logo */}
-          <div className="flex items-center">
-            {/* Logo */}
-            <div>
-              <Link className="block py-2 shrink-0" href="/">
-                <Image
-                  src={headerData?.headerLogo || "/images/logo/logo.svg"}
-                  alt="Logo"
-                  width={148}
-                  height={36}
-                  priority
-                />
-              </Link>
-            </div>
+          <div className="flex w-full justify-between items-center border-b border-gray-3 sm:border-b-0">
+            <Link className="block py-3 sm:py-2 shrink-0" href="/">
+              <Image
+                src={headerData?.headerLogo || "/images/logo/logo.svg"}
+                alt="Logo"
+                width={148}
+                height={36}
+                priority
+              />
+            </Link>
             {/* <span className="ml-2 font-bold text-2xl">NextMerce</span> */}
+
+            {/* Mobile Menu Toggle */}
+            <button
+              className="transition xl:hidden focus:outline-none"
+              onClick={() => setNavigationOpen(!navigationOpen)}
+              aria-label={navigationOpen ? "Close menu" : "Open menu"}
+            >
+              {navigationOpen ? <CloseIcon /> : <MenuIcon />}
+            </button>
           </div>
 
           {/* Search Bar */}
@@ -149,18 +156,19 @@ const MainHeader = ({ headerData }: IProps) => {
           </div> */}
 
           {/* Support, Account, Cart */}
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-2 sm:gap-6 py-3 sm:py-0">
             <Link 
               href="https://wa.me/6281297009800" 
-              className="flex items-center gap-2 transition hover:text-blue focus:outline-none" 
+              className="flex items-center gap-1 sm:gap-2 transition hover:text-blue focus:outline-none" 
               target="_blank" 
               rel="noopener noreferrer"
               aria-label="WhatsApp"
             >
               <IconBrandWhatsappFilled color="#25D366" />
               <div>
-                <div className="text-xs text-gray-400">24/7 SUPPORT</div>
-                <div className="font-semibold">(+62) 812-9700-9800</div>
+                <div className="hidden sm:block text-xs text-gray-400">24/7 SUPPORT</div>
+                <div className="text-base hidden sm:block whitespace-nowrap">(+62) 812-9700-9800</div>
+                <div className="text-sm sm:hidden font-semibold whitespace-nowrap">Support</div>
               </div>
             </Link>
             <div>
@@ -172,19 +180,19 @@ const MainHeader = ({ headerData }: IProps) => {
                     ? "/my-account"
                     : "/signin"
                 }
-                className="transition hover:text-blue focus:outline-none flex items-center gap-2"
+                className="transition hover:text-blue focus:outline-none flex items-center gap-1 sm:gap-2"
                 aria-label="Account"
               >
                 <UserIcon />
                 <div>
-                  <div className="text-xs text-gray-400">ACCOUNT</div>
-                  {session?.user.name?.split(" ")[0] || "Sign In"}
+                  <div className="hidden sm:block text-xs text-gray-400">ACCOUNT</div>
+                  <div className="text-sm sm:text-base font-semibold whitespace-nowrap">{session?.user.name?.split(" ")[0] || "Sign In"}</div>
                 </div>
               </Link>
             </div>
             <div className="flex items-center gap-2">
               <button
-                className="flex items-center gap-2 text-gray-700 transition hover:text-blue focus:outline-none"
+                className="flex items-center gap-1 sm:gap-2 text-gray-700 transition hover:text-blue focus:outline-none"
                 onClick={handleOpenCartModal}
                 aria-label="Cart"
               >
@@ -195,8 +203,8 @@ const MainHeader = ({ headerData }: IProps) => {
                   </span>
                 </div>
                 <div>
-                  <div className="text-xs text-gray-400 text-left">CART</div>
-                  <span>Rp 1800</span>
+                  <div className="hidden sm:block text-xs text-gray-400 text-left">CART</div>
+                  <span className="text-sm sm:text-base font-semibold whitespace-nowrap">Rp 1800</span>
                 </div>
               </button>
             </div>
@@ -236,14 +244,7 @@ const MainHeader = ({ headerData }: IProps) => {
                 </span>
               </Link>
 
-              {/* Mobile Menu Toggle */}
-              <button
-                className="transition xl:hidden focus:outline-none"
-                onClick={() => setNavigationOpen(!navigationOpen)}
-                aria-label={navigationOpen ? "Close menu" : "Open menu"}
-              >
-                {navigationOpen ? <CloseIcon /> : <MenuIcon />}
-              </button>
+              
             </div>
           </div>
         </div>
