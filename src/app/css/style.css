@@ -556,3 +556,7 @@ input[type="search"]::-webkit-search-results-decoration {
   font-size: 16px;
   line-height: 1.5;
 }
+
+main {
+  @apply pt-10 sm:pt-15;
+}
