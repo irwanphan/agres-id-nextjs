@@ -72,7 +72,7 @@ const MainHeader = ({ headerData }: IProps) => {
   return (
     <>
       <header
-        className={`fixed left-0 top-0 w-full z-50 bg-white transition-all ease-in-out duration-300 ${
+        className={`fixed left-0 top-0 w-full z-50 bg-white transition-all ease-in-out duration-300 border-b border-gray-3 ${
           stickyMenu && "shadow-sm"
         }`}
       >
@@ -125,6 +125,7 @@ const MainHeader = ({ headerData }: IProps) => {
                           flex flex-col sm:flex-row
                           justify-between items-start sm:items-center
                           transition-all ease-in-out duration-300
+                          border-gray-3 sm:border-b
                           ${stickyMenu ? "py-0 sm:py-2" : "py-2 sm:py-4"}
                         `}>
           {/* Logo */}
@@ -155,69 +156,80 @@ const MainHeader = ({ headerData }: IProps) => {
             <SearchBarComponent />
           </div> */}
 
-          {/* Support, Account, Cart */}
-          <div className="flex items-center gap-2 sm:gap-6 py-3 sm:py-0">
-            <Link 
-              href="https://wa.me/6281297009800" 
-              className="flex items-center gap-1 sm:gap-2 transition hover:text-blue focus:outline-none" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              aria-label="WhatsApp"
-            >
-              <IconBrandWhatsappFilled color="#25D366" />
-              <div>
-                <div className="hidden sm:block text-xs text-gray-400">24/7 SUPPORT</div>
-                <div className="text-base hidden sm:block whitespace-nowrap">(+62) 812-9700-9800</div>
-                <div className="text-sm sm:hidden font-semibold whitespace-nowrap">Support</div>
-              </div>
-            </Link>
-            <div>
-              <Link
-                href={
-                  session?.user?.role === "ADMIN"
-                    ? "/admin/dashboard"
-                    : session?.user?.role === "USER"
-                    ? "/my-account"
-                    : "/signin"
-                }
-                className="transition hover:text-blue focus:outline-none flex items-center gap-1 sm:gap-2"
-                aria-label="Account"
+          {/* Bottom Header on Mobile */}
+          <div className="flex w-full justify-between sm:justify-end items-center">
+            {/* Support, Account, Cart */}
+            <div className="flex items-center gap-2 sm:gap-6 py-3 sm:py-0">
+              <Link 
+                href="https://wa.me/6281297009800" 
+                className="flex items-center gap-1 sm:gap-2 transition hover:text-blue focus:outline-none" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
               >
-                <UserIcon />
+                <IconBrandWhatsappFilled color="#25D366" />
                 <div>
-                  <div className="hidden sm:block text-xs text-gray-400">ACCOUNT</div>
-                  <div className="text-sm sm:text-base font-semibold whitespace-nowrap">{session?.user.name?.split(" ")[0] || "Sign In"}</div>
+                  <div className="hidden sm:block text-xs text-gray-400">24/7 SUPPORT</div>
+                  <div className="text-base hidden sm:block whitespace-nowrap">(+62) 812-9700-9800</div>
+                  <div className="text-sm sm:hidden font-semibold whitespace-nowrap">Support</div>
                 </div>
               </Link>
+              <div>
+                <Link
+                  href={
+                    session?.user?.role === "ADMIN"
+                      ? "/admin/dashboard"
+                      : session?.user?.role === "USER"
+                      ? "/my-account"
+                      : "/signin"
+                  }
+                  className="transition hover:text-blue focus:outline-none flex items-center gap-1 sm:gap-2"
+                  aria-label="Account"
+                >
+                  <UserIcon />
+                  <div>
+                    <div className="hidden sm:block text-xs text-gray-400">ACCOUNT</div>
+                    <div className="text-sm sm:text-base font-semibold whitespace-nowrap">{session?.user.name?.split(" ")[0] || "Sign In"}</div>
+                  </div>
+                </Link>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  className="flex items-center gap-1 sm:gap-2 text-gray-700 transition hover:text-blue focus:outline-none"
+                  onClick={handleOpenCartModal}
+                  aria-label="Cart"
+                >
+                  <div className="relative">
+                    <CartIcon />
+                    <span className="absolute -top-1.5 -right-1.5 w-[18px] h-[18px] text-white bg-red-600 text-[10px] font-normal rounded-full inline-flex items-center justify-center">
+                      {cartCount || 0}
+                    </span>
+                  </div>
+                  <div>
+                    <div className="hidden sm:block text-xs text-gray-400 text-left">CART</div>
+                    <span className="text-sm sm:text-base font-semibold whitespace-nowrap">Rp 1800</span>
+                  </div>
+                </button>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <button
-                className="flex items-center gap-1 sm:gap-2 text-gray-700 transition hover:text-blue focus:outline-none"
-                onClick={handleOpenCartModal}
-                aria-label="Cart"
-              >
-                <div className="relative">
-                  <CartIcon />
-                  <span className="absolute -top-1.5 -right-1.5 w-[18px] h-[18px] text-white bg-red-600 text-[10px] font-normal rounded-full inline-flex items-center justify-center">
-                    {cartCount || 0}
-                  </span>
-                </div>
-                <div>
-                  <div className="hidden sm:block text-xs text-gray-400 text-left">CART</div>
-                  <span className="text-sm sm:text-base font-semibold whitespace-nowrap">Rp 1800</span>
-                </div>
-              </button>
-            </div>
+
+            <button
+              className="block sm:hidden transition hover:text-blue focus:outline-none"
+              onClick={() => setSearchModalOpen(true)}
+              aria-label="Search"
+            >
+              <SearchIcon />
+            </button>
           </div>
         </div>
 
-        <hr className="border-slate-50 border-b border-[0.5px] block opacity-10"/>
-
         {/* Navigation Header */}
-        <div className={`px-4 mx-auto max-w-7xl sm:px-6 xl:px-0 transition-all ease-in-out duration-300 ${stickyMenu ? "py-0" : "py-2"}`}>
+        <div className={`px-4 mx-auto max-w-7xl sm:px-6 xl:px-0 
+                        transition-all ease-in-out duration-300
+                        hidden sm:block
+                        ${stickyMenu ? "py-0" : "py-2"}`}>
           <div className="flex items-center justify-between">
             
-
             {/* Desktop Menu - Hidden on mobile */}
             <div className="hidden xl:block">
               <DesktopMenu menuData={menuData} stickyMenu={stickyMenu} />
