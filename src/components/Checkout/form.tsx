@@ -7,6 +7,7 @@ import type {
   UseFormSetValue,
   UseFormWatch,
 } from 'react-hook-form';
+import { RajaOngkirDestination, RajaOngkirShippingCost } from '../../lib/rajaongkir';
 
 type FormContextType = {
   register: UseFormRegister<CheckoutInput>;
@@ -71,6 +72,9 @@ export type CheckoutInput = {
   shippingMethod: {
     name: string;
     price: number;
+    courier?: string;
+    service?: string;
+    etd?: string;
   };
   paymentMethod: string;
   notes?: string;
@@ -81,4 +85,14 @@ export type CheckoutInput = {
     price: number;
     quantity: number;
   }[];
+  // RajaOngkir specific fields
+  originDestination?: string;
+  destinationDestination?: string;
+  packageWeight?: number;
+  rajaOngkirData?: {
+    origin: RajaOngkirDestination;
+    destination: RajaOngkirDestination;
+    weight: number;
+    selectedOption: RajaOngkirShippingCost;
+  };
 };
