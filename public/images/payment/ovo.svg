@@ -1,0 +1,6 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="40" height="40" rx="8" fill="#4C3494"/>
+  <path d="M12 14h16v12H12z" fill="white"/>
+  <path d="M14 16h12v8H14z" fill="#4C3494"/>
+  <text x="20" y="22" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="8" font-weight="bold">OVO</text>
+</svg> 

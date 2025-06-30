@@ -1,22 +1,11 @@
 "use client";
-import convertToSubcurrency from "@/lib/convertToSubcurrency";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
 import { useForm } from "react-hook-form";
 import { CheckoutFormProvider, CheckoutInput } from "./form";
 import { useShoppingCart } from "use-shopping-cart";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { EmptyCartIcon } from "@/assets/icons";
-import CheckoutPaymentArea from "./CheckoutPaymentArea";
-import CheckoutAreaWithoutStripe from "./CheckoutAreaWithoutStripe";
-
-if (process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY === undefined) {
-  throw new Error("NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY is not defined");
-}
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-);
+import CheckoutAreaXendit from "./CheckoutAreaXendit";
 
 export default function CheckoutMain() {
   const session = useSession();
@@ -27,7 +16,7 @@ export default function CheckoutMain() {
           name: "free",
           price: 0,
         },
-        paymentMethod: "bank",
+        paymentMethod: "OVO", // Default to OVO instead of bank
         couponDiscount: 0,
         couponCode: "",
         billing: {
@@ -87,29 +76,7 @@ export default function CheckoutMain() {
     );
   }
 
-  return amount > 0 ? (
-    <Elements
-      stripe={stripePromise}
-      options={{
-        mode: "payment",
-        amount: convertToSubcurrency(amount),
-        currency: "usd",
-      }}
-    >
-      <CheckoutFormProvider
-        value={{
-          register,
-          watch,
-          control,
-          setValue,
-          errors: formState.errors,
-          handleSubmit,
-        }}
-      >
-        <CheckoutPaymentArea amount={amount} />
-      </CheckoutFormProvider>
-    </Elements>
-  ) : (
+  return (
     <CheckoutFormProvider
       value={{
         register,
@@ -120,7 +87,7 @@ export default function CheckoutMain() {
         handleSubmit,
       }}
     >
-      <CheckoutAreaWithoutStripe amount={amount} />
+      <CheckoutAreaXendit amount={amount} />
     </CheckoutFormProvider>
   );
 }
