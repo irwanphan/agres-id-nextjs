@@ -81,8 +81,6 @@ class RajaOngkirService {
     if (!response.ok) {
       throw new Error(`Proxy API error: ${response.status} ${response.statusText}`);
     }
-
-    console.log(process.env.NEXT_PUBLIC_RAJAONGKIR_API_KEY);
     return response.json();
   }
 
