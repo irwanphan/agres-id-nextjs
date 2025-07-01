@@ -149,7 +149,7 @@ export default function DashboardHeader({
                   </div>
                   <div className="text-left">
                     <p className="font-medium text-sm text-dark mb-0.5">
-                      {user?.name}
+                      {user?.name || "Unknown User"}
                     </p>
                     <p className="text-custom-xs">{user?.role}</p>
                   </div>
