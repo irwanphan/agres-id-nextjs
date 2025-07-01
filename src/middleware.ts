@@ -14,6 +14,16 @@ const managerRestrictedPaths = [
 ];
 
 export async function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+
+  // 1️⃣ Let Midtrans notification/status callbacks through untouched:
+  if (
+    pathname === "/api/midtrans/notification" ||
+    pathname.startsWith("/api/midtrans/status")
+  ) {
+    return NextResponse.next();
+  }
+
   const token = await getToken({
     req,
     secret: process.env.NEXTAUTH_SECRET,
@@ -24,7 +34,9 @@ export async function middleware(req: NextRequest) {
         : "next-auth.session-token",
   });
   
-  const pathname = req.nextUrl.pathname;
+  console.log("Middleware Debug:", { pathname, hasToken: !!token });
+
+  // const pathname = req.nextUrl.pathname;
   const isAdminRoute = pathname.startsWith("/admin");
   const isAuthPage = pathname === "/signin" || pathname === "/signup";
 
