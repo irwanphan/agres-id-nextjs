@@ -2,21 +2,24 @@ import midtransClient from 'midtrans-client';
 
 // Create Snap API instance
 export const snap = new midtransClient.Snap({
-  isProduction: process.env.NODE_ENV === 'production',
+  // isProduction: process.env.NODE_ENV === 'production',
+  isProduction: false,
   serverKey: process.env.MIDTRANS_SERVER_KEY!,
   clientKey: process.env.MIDTRANS_CLIENT_KEY!,
 });
 
 // Create Core API instance for bank transfer
 export const core = new midtransClient.CoreApi({
-  isProduction: process.env.NODE_ENV === 'production',
+  // isProduction: process.env.NODE_ENV === 'production',
+  isProduction: false,
   serverKey: process.env.MIDTRANS_SERVER_KEY!,
   clientKey: process.env.MIDTRANS_CLIENT_KEY!,
 });
 
 // Create Iris API instance for disbursement
 export const iris = new midtransClient.Iris({
-  isProduction: process.env.NODE_ENV === 'production',
+  // isProduction: process.env.NODE_ENV === 'production',
+  isProduction: false,
   serverKey: process.env.MIDTRANS_SERVER_KEY!,
   clientKey: process.env.MIDTRANS_CLIENT_KEY!,
 });
