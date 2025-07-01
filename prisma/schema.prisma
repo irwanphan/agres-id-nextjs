@@ -86,21 +86,27 @@ enum EnumShippingStatus {
 }
 
 model Order {
-  id             String             @id @default(cuid())
-  userId         String?
-  billing        Json
-  shipping       Json?
-  shippingMethod Json
-  paymentMethod  String
-  notes          String?
-  couponDiscount Float?
-  products       Json
-  totalAmount    Float
-  paymentStatus  String             @default("pending")
-  createdAt      DateTime           @default(now())
-  updatedAt      DateTime           @updatedAt
-  shippingStatus EnumShippingStatus @default(pending)
-  user           User?              @relation(fields: [userId], references: [id])
+  id                     String             @id @default(cuid())
+  userId                 String?
+  billing                Json
+  shipping               Json?
+  shippingMethod         Json
+  paymentMethod          String
+  notes                  String?
+  couponDiscount         Float?
+  products               Json
+  totalAmount            Float
+  paymentStatus          String             @default("pending")
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+  shippingStatus         EnumShippingStatus @default(pending)
+  // Midtrans fields
+  midtransTransactionId  String?
+  midtransPaymentType    String?
+  midtransTransactionTime DateTime?
+  midtransGrossAmount    Float?
+  midtransStatusCode     String?
+  user                   User?              @relation(fields: [userId], references: [id])
 }
 
 model Coupon {

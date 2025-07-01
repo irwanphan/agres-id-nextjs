@@ -10,6 +10,7 @@ import Link from "next/link";
 import { EmptyCartIcon } from "@/assets/icons";
 import CheckoutPaymentArea from "./CheckoutPaymentArea";
 import CheckoutAreaWithoutStripe from "./CheckoutAreaWithoutStripe";
+import CheckoutAreaWithMidtrans from "./CheckoutAreaWithMidtrans";
 
 if (process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY === undefined) {
   throw new Error("NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY is not defined");
@@ -87,29 +88,8 @@ export default function CheckoutMain() {
     );
   }
 
-  return amount > 0 ? (
-    <Elements
-      stripe={stripePromise}
-      options={{
-        mode: "payment",
-        amount: convertToSubcurrency(amount),
-        currency: "usd",
-      }}
-    >
-      <CheckoutFormProvider
-        value={{
-          register,
-          watch,
-          control,
-          setValue,
-          errors: formState.errors,
-          handleSubmit,
-        }}
-      >
-        <CheckoutPaymentArea amount={amount} />
-      </CheckoutFormProvider>
-    </Elements>
-  ) : (
+  // Use Midtrans for all payments
+  return (
     <CheckoutFormProvider
       value={{
         register,
@@ -120,7 +100,7 @@ export default function CheckoutMain() {
         handleSubmit,
       }}
     >
-      <CheckoutAreaWithoutStripe amount={amount} />
+      <CheckoutAreaWithMidtrans amount={amount} />
     </CheckoutFormProvider>
   );
 }

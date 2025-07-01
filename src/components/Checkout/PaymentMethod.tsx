@@ -22,9 +22,23 @@ const PaymentMethod = ({ amount }: { amount: number }) => {
               render={({ field }) => (
                 <RadioInput
                   {...field}
-                  value="bank"
+                  value="midtrans"
                   defaultChecked
-                  label={<PaymentMethodCard method="bank" />}
+                  label={<PaymentMethodCard method="midtrans" />}
+                />
+              )}
+            />
+          )}
+
+          {amount > 0 && (
+            <Controller
+              name="paymentMethod"
+              control={control}
+              render={({ field }) => (
+                <RadioInput
+                  {...field}
+                  value="bank_transfer"
+                  label={<PaymentMethodCard method="bank_transfer" />}
                 />
               )}
             />
@@ -41,20 +55,6 @@ const PaymentMethod = ({ amount }: { amount: number }) => {
               />
             )}
           />
-
-          {/* {amount > 0 && (
-            <Controller
-              name="paymentMethod"
-              control={control}
-              render={({ field }) => (
-                <RadioInput
-                  {...field}
-                  value="paypal"
-                  label={<PaymentMethodCard method="paypal" />}
-                />
-              )}
-            />
-          )} */}
         </div>
 
         {errors.paymentMethod && (
@@ -63,9 +63,18 @@ const PaymentMethod = ({ amount }: { amount: number }) => {
           </p>
         )}
 
-        {paymentMethod === "bank" && amount > 0 && (
+        {paymentMethod === "midtrans" && amount > 0 && (
           <div className="mt-5">
-            <PaymentElement />
+            <p className="text-sm text-gray-600">
+              You will be redirected to Midtrans payment gateway to complete your payment.
+            </p>
+          </div>
+        )}
+        {paymentMethod === "bank_transfer" && amount > 0 && (
+          <div className="mt-5">
+            <p className="text-sm text-gray-600">
+              You will receive bank transfer instructions after placing your order.
+            </p>
           </div>
         )}
         {paymentMethod === "cod" && (
@@ -82,18 +91,23 @@ const PaymentMethod = ({ amount }: { amount: number }) => {
 export default PaymentMethod;
 
 type CardProps = {
-  method: "bank" | "cod";
+  method: "midtrans" | "cod" | "bank_transfer";
 };
-// type CardProps = {
-//   method: "bank" | "cod" | "paypal";
-// };
 
 function PaymentMethodCard({ method }: CardProps) {
   const data = {
-    bank: {
-      name: "Stripe",
+    midtrans: {
+      name: "Midtrans",
       image: {
-        src: "/images/checkout/stripe.svg",
+        src: "/images/checkout/midtrans.svg",
+        width: 75,
+        height: 20,
+      },
+    },
+    bank_transfer: {
+      name: "Bank Transfer",
+      image: {
+        src: "/images/checkout/bank-transfer.svg",
         width: 75,
         height: 20,
       },
@@ -106,14 +120,6 @@ function PaymentMethodCard({ method }: CardProps) {
         height: 21,
       },
     },
-    // paypal: {
-    //   name: "Paypal",
-    //   image: {
-    //     src: "/images/checkout/paypal.svg",
-    //     width: 75,
-    //     height: 20,
-    //   },
-    // },
   };
 
   return (
