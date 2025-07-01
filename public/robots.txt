@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://demo.cozycommerce.dev
+Host: http://localhost:3000
 
 # Sitemaps
-Sitemap: https://demo.cozycommerce.dev/sitemap.xml
+Sitemap: http://localhost:3000/sitemap.xml

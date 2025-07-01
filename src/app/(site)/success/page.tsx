@@ -15,9 +15,9 @@ export const generateMetadata = async (): Promise<Metadata> => {
 const Success = async ({
   searchParams,
 }: {
-  searchParams: Promise<{ amount: string }>;
+  searchParams: Promise<{ amount: string; bankInfo?: string }>;
 }) => {
-  const { amount } = await searchParams;
+  const { amount, bankInfo } = await searchParams;
   return (
     <main>
       <Breadcrumb
@@ -32,7 +32,7 @@ const Success = async ({
           },
         ]}
       />
-      <CheckoutSuccess amount={amount} />
+      <CheckoutSuccess amount={amount} bankInfo={bankInfo} />
     </main>
   );
 };
