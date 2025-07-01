@@ -1,13 +1,13 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from "next/server";
 import { core } from '@/lib/midtrans';
 import { sendErrorResponse, sendSuccessResponse } from '@/utils/sendResponse';
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { orderId: string } }
+  context: { params: { orderId: string } }
 ) {
   try {
-    const { orderId } = params;
+    const { orderId } = context.params;
 
     if (!orderId) {
       return sendErrorResponse(400, 'Order ID is required');
