@@ -17,7 +17,8 @@ export async function POST(req: NextRequest) {
     const statusCode = body.status_code;
     const grossAmount = body.gross_amount;
     const serverKey = process.env.MIDTRANS_SERVER_KEY!;
-    
+    const transactionStatus = body.transaction_status;
+
     // Create expected signature key
     const expectedSignature = crypto
       .createHash('sha512')
@@ -37,12 +38,11 @@ export async function POST(req: NextRequest) {
     }
 
     // Get transaction status from Midtrans
-    const transactionStatus = await core.status(orderId);
     
     // Update order status based on transaction status
     let paymentStatus: 'pending' | 'paid' | 'failed' | 'expired' = 'pending';
     
-    switch (transactionStatus.transaction_status) {
+    switch (transactionStatus) {
       case 'capture':
       case 'settlement':
         paymentStatus = 'paid';
@@ -64,11 +64,11 @@ export async function POST(req: NextRequest) {
       where: { id: orderId },
       data: {
         paymentStatus,
-        midtransTransactionId: transactionStatus.transaction_id,
-        midtransPaymentType: transactionStatus.payment_type,
-        midtransTransactionTime: new Date(transactionStatus.transaction_time),
-        midtransGrossAmount: parseFloat(transactionStatus.gross_amount),
-        midtransStatusCode: transactionStatus.status_code,
+        midtransTransactionId: body.transaction_id,
+        midtransPaymentType: body.payment_type,
+        midtransTransactionTime: new Date(body.transaction_time),
+        midtransGrossAmount: parseFloat(body.gross_amount),
+        midtransStatusCode: body.status_code,
         updatedAt: new Date(),
       },
     });
