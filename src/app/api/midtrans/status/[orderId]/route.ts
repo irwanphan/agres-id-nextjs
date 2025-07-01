@@ -4,7 +4,7 @@ import { sendErrorResponse, sendSuccessResponse } from '@/utils/sendResponse';
 
 export async function GET(
   req: NextRequest,
-  context: { params: { orderId: string } }
+  context: any
 ) {
   try {
     const { orderId } = context.params;
