@@ -23,13 +23,24 @@ export async function middleware(req: NextRequest) {
         ? "__Secure-next-auth.session-token"
         : "next-auth.session-token",
   });
+  
   const pathname = req.nextUrl.pathname;
   const isAdminRoute = pathname.startsWith("/admin");
   const isAuthPage = pathname === "/signin" || pathname === "/signup";
 
+  // Debug logging
+  console.log("Middleware Debug:", {
+    pathname,
+    isAdminRoute,
+    hasToken: !!token,
+    tokenRole: token?.role,
+    tokenEmail: token?.email
+  });
+
   // Protect /admin routes
   if (isAdminRoute) {
     if (!token || (token.role !== "ADMIN" && token.role !== "MANAGER")) {
+      console.log("Access denied to admin route:", pathname);
       return NextResponse.redirect(new URL("/unauthorized", req.url));
     }
   }

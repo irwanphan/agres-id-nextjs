@@ -5,8 +5,11 @@ import { sendErrorResponse, sendSuccessResponse } from '@/utils/sendResponse';
 import crypto from 'crypto';
 
 export async function POST(req: NextRequest) {
+  console.log('🔔 Midtrans webhook hit at', new Date().toISOString())
+
+  let body: any
   try {
-    const body = await req.json();
+    body = await req.json();
     
     // Verify signature key
     const signatureKey = body.signature_key;

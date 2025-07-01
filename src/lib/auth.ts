@@ -74,6 +74,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Incorrect password");
         }
 
+        console.log("User authenticated:", { email: user.email, role: user.role });
         return user;
       },
     }),
@@ -93,12 +94,14 @@ export const authOptions: NextAuthOptions = {
     jwt: async (payload: any) => {
       const { token, user } = payload;
       if (user) {
+        console.log("JWT Callback - User data:", { id: user.id, role: user.role });
         return {
           ...token,
           id: user.id,
           role: user.role,
         };
       }
+      console.log("JWT Callback - Token data:", { id: token.id, role: token.role });
       return token;
     },
 
@@ -106,7 +109,11 @@ export const authOptions: NextAuthOptions = {
       if (session?.user) {
         session.user.id = token.id as string;
         session.user.role = token.role as string;
-
+        console.log("Session Callback - Session data:", { 
+          id: session.user.id, 
+          role: session.user.role,
+          email: session.user.email 
+        });
         return session;
       }
       return session;
@@ -119,7 +126,9 @@ export const authOptions: NextAuthOptions = {
 
 export async function authenticate() {
   const session = await getServerSession(authOptions);
+  console.log("Authenticate function - Session:", session);
   if (!session || session.user.role !== "ADMIN" && session.user.role !== "MANAGER") {
+    console.log("Authentication failed - No session or insufficient role");
     return null;
   }
   return session;
