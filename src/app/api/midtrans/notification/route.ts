@@ -21,6 +21,13 @@ export async function POST(req: NextRequest) {
       .update(orderId + statusCode + grossAmount + serverKey)
       .digest('hex');
     
+    console.log('orderId:', orderId);
+    console.log('statusCode:', statusCode, typeof statusCode);
+    console.log('grossAmount:', grossAmount, typeof grossAmount);
+    console.log('serverKey:', serverKey);
+    console.log('signatureKey (from midtrans):', signatureKey);
+    console.log('expectedSignature (backend):', expectedSignature);
+    
     if (signatureKey !== expectedSignature) {
       console.error('Invalid signature key');
       return sendErrorResponse(400, 'Invalid signature key');
