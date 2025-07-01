@@ -97,7 +97,7 @@ type CardProps = {
 function PaymentMethodCard({ method }: CardProps) {
   const data = {
     midtrans: {
-      name: "Midtrans",
+      name: "Payment Gateway",
       image: {
         src: "/images/checkout/midtrans.svg",
         width: 75,
@@ -105,7 +105,7 @@ function PaymentMethodCard({ method }: CardProps) {
       },
     },
     bank_transfer: {
-      name: "Bank Transfer",
+      name: "Transfer Bank",
       image: {
         src: "/images/checkout/bank-transfer.svg",
         width: 75,
@@ -113,7 +113,7 @@ function PaymentMethodCard({ method }: CardProps) {
       },
     },
     cod: {
-      name: "Cash on delivery",
+      name: "Bayar COD",
       image: {
         src: "/images/checkout/cash.svg",
         width: 21,
