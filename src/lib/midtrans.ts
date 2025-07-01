@@ -21,6 +21,7 @@ export const iris = new midtransClient.Iris({
   clientKey: process.env.MIDTRANS_CLIENT_KEY!,
 });
 
+console.log('NODE_ENV:', process.env.NODE_ENV);
 console.log('MIDTRANS_SERVER_KEY:', process.env.MIDTRANS_SERVER_KEY);
 
 export interface MidtransTransactionDetails {
