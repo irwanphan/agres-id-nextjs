@@ -46,21 +46,21 @@ export const WelcomeEmail = ({
           </Section>
 
           <Section style={content}>
-            <Text style={text}>Hi {username},</Text>
+            <Text style={text}>Hallo, {username},</Text>
             <Text style={text}>
-              Welcome to {siteName}! Your account has been successfully created, and you&apos;re now part of our community.
+              Selamat bergabung di {siteName}! Akun Anda sudah berhasil dibuat, dan Anda menjadi bagian dari komunitas kami yang berharga.
             </Text>
             <Text style={text}>
-              Explore our wide range of products, enjoy exclusive offers, and track your orders with ease.
+              Silahkan jelajahi berbagai lini produk kami, nikmati penawaran ekslusif, dan lacak pesanan Anda dengan mudah melalui dashboard kami. Kami selalu siap membantu Anda.
             </Text>
 
             {verificationUrl && (
               <Section style={buttonContainer}>
                 <Button style={button} href={verificationUrl}>
-                  Verify Email Address
+                  Verifikasi Alamat Email
                 </Button>
                 <Text style={text}>
-                  If the button above doesn&apos;t work, you can also copy and paste this link into your browser:
+                  Apabila tombol di atas tidak bekerja, Anda juga dapat menyalin dan menempelkan tautan ini ke peramban Anda:
                 </Text>
                 <Link href={verificationUrl} style={link}>
                   {verificationUrl}
@@ -70,7 +70,7 @@ export const WelcomeEmail = ({
 
             <Section style={buttonContainer}>
               <Button style={button} href={`${process.env.SITE_URL}/shop`}>
-                Start Shopping
+                Gasss.. Belanja aja dulu!
               </Button>
             </Section>
           </Section>

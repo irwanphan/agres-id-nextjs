@@ -14,7 +14,8 @@ export const getProductsIdAndTitle = unstable_cache(
       },
     });
   },
-  ['products'], { tags: ['products'] }
+  ['products'],
+  { tags: ['products'], revalidate: 60 }
 );
 
 // get new arrival product
@@ -58,7 +59,8 @@ export const getNewArrivalsProduct = unstable_cache(
       discountedPrice: item?.discountedPrice ? item.discountedPrice.toNumber() : null
     }))
   },
-  ['products'], { tags: ['products'] }
+  ['products'],
+  { tags: ['products'], revalidate: 60 }
 );
 
 // get best selling product
@@ -106,7 +108,8 @@ export const getBestSellingProducts = unstable_cache(
       discountedPrice: item?.discountedPrice ? item.discountedPrice.toNumber() : null
     }));
   },
-  ['products'], { tags: ['products'] }
+  ['products'],
+  { tags: ['products'], revalidate: 60 }
 );
 
 // get latest product
@@ -153,7 +156,8 @@ export const getLatestProducts = unstable_cache(
       discountedPrice: item?.discountedPrice ? item.discountedPrice.toNumber() : null
     }));
   },
-  ['products'], { tags: ['products'] }
+  ['products'],
+  { tags: ['products'], revalidate: 60 }
 );
 
 
@@ -199,85 +203,90 @@ export const getAllProducts = unstable_cache(
       discountedPrice: item?.discountedPrice ? item.discountedPrice.toNumber() : null
     }));
   },
-  ['products'], { tags: ['products'] }
+  ['products'],
+  { tags: ['products'], revalidate: 60 }
 );
 
 // GET PRODUCT BY SLUG
-export const getProductBySlug = async (slug: string) => {
-  const product = await prisma.product.findUnique({
-    where: { slug },
-    select: {
-      id: true,
-      title: true,
-      shortDescription: true,
-      description: true,
-      price: true,
-      discountedPrice: true,
-      slug: true,
-      quantity: true,
-      updatedAt: true,
-      category: {
-        select: {
-          title: true,
-          slug: true,
+export const getProductBySlug = unstable_cache(
+  async (slug: string) => {
+    const product = await prisma.product.findUnique({
+      where: { slug },
+      select: {
+        id: true,
+        title: true,
+        shortDescription: true,
+        description: true,
+        price: true,
+        discountedPrice: true,
+        slug: true,
+        quantity: true,
+        updatedAt: true,
+        category: {
+          select: {
+            title: true,
+            slug: true,
+          },
         },
-      },
-      productVariants: {
-        select: {
-          image: true,
-          color: true,
-          size: true,
-          isDefault: true
-        }
-      },
-      _count: {
-        select: {
-          reviews: {
-            where: {
-              isApproved: true
+        productVariants: {
+          select: {
+            image: true,
+            color: true,
+            size: true,
+            isDefault: true
+          }
+        },
+        _count: {
+          select: {
+            reviews: {
+              where: {
+                isApproved: true
+              }
             }
           }
-        }
-      },
-      additionalInformation: {
-        select: {
-          name: true,
-          description: true
-        }
-      },
-      customAttributes: {
-        select: {
-          attributeName: true,
-          attributeValues: {
-            select: {
-              id: true,
-              title: true
+        },
+        additionalInformation: {
+          select: {
+            name: true,
+            description: true
+          }
+        },
+        customAttributes: {
+          select: {
+            attributeName: true,
+            attributeValues: {
+              select: {
+                id: true,
+                title: true
+              }
             }
           }
-        }
+        },
+        body: true,
+        reviews: {
+          select: {
+            name: true,
+            comment: true,
+            email: true,
+            ratings: true
+          }
+        },
+        tags: true,
+        offers: true,
+        sku: true,
       },
-      body: true,
-      reviews: {
-        select: {
-          name: true,
-          comment: true,
-          email: true,
-          ratings: true
-        }
-      },
-      tags: true,
-      offers: true,
-      sku: true,
-    },
-  });
-  const transformProduct = {
-    ...product,
-    price: product?.price.toNumber(),
-    discountedPrice: product?.discountedPrice ? product.discountedPrice.toNumber() : null,
-    reviews: product?._count.reviews,
-  }
-  return transformProduct;
-}
+    });
+    const transformProduct = {
+      ...product,
+      price: product?.price.toNumber(),
+      discountedPrice: product?.discountedPrice ? product.discountedPrice.toNumber() : null,
+      reviews: product?._count.reviews,
+    }
+    return transformProduct;
+  },
+  ['product'],
+  { tags: ['products'], revalidate: 60 }
+);
 
 // GET PRODUCT BY ID
 export const getProductById = async (productId: string) => {
@@ -314,7 +323,12 @@ export const getProductById = async (productId: string) => {
 
 
 export const getRelatedProducts = unstable_cache(
-  async (category: string, tags: string[] | undefined, currentProductId: string, productTitle: string) => {
+  async (
+    category: string,
+    tags: string[] | undefined,
+    currentProductId: string,
+    productTitle: string
+  ) => {
     const orFilters: any[] = [];
     if (category) {
       orFilters.push({
@@ -387,5 +401,5 @@ export const getRelatedProducts = unstable_cache(
     }));
   },
   ['related-products'],
-  { tags: ['products'] }
+  { tags: ['products'], revalidate: 60 }
 );

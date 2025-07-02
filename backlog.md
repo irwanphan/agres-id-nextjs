@@ -31,6 +31,7 @@ Admin Page
 
 Auth
 - [] fix: after success login, user is being redirected, but no information is shown on the page when loading and might confuse users
+- [] Email verification is not implemented yet, need to set verificationUrl, clue in WelcomeEmail.tsx
 
 Overview
 - [] Use Indonesian language and currency symbol
