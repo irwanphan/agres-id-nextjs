@@ -8,6 +8,7 @@ export async function POST(req: NextRequest) {
     const {
       orderId,
       paymentStatus,
+      midtransVaNumber,
       midtransTransactionId,
       midtransPaymentType,
       midtransTransactionTime,
@@ -23,7 +24,8 @@ export async function POST(req: NextRequest) {
     const updatedPaymentTransaction = await prisma.paymentTransaction.updateMany({
       where: { orderId: orderId },
       data: {
-        selectedBank: midtransPaymentType,
+        selectedBank: midtransVaNumber[0].bank,
+        vaNumber: midtransVaNumber[0].va_number,
         paymentType: midtransPaymentType,
         transactionId: midtransTransactionId,
         transactionTime: new Date(midtransTransactionTime),

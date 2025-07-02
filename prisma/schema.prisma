@@ -106,7 +106,7 @@ model Order {
 
 model PaymentTransaction {
   id                  String   @id @default(cuid())
-  orderId             String
+  orderId             String   @unique
   order               Order    @relation(fields: [orderId], references: [id])
   provider            String   // e.g., "midtrans"
   selectedBank        String?  // e.g., "bca", "bni"
