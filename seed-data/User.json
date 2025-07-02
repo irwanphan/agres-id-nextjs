@@ -5,7 +5,7 @@
     "email": "john.doe@gmail.com",
     "emailVerified": null,
     "image": null,
-    "password": "$2b$10$CJ7NrFoUUsvXuD1K0LAlm.efA/ZjJ9Um8mwGYAen5lUS9yYQWTyMG",
+    "password": "$2b$10$1Nv1PmvH7HC.ia0KaW9dpel7Q3hBP/3yhKC48sLo7URFKmZ8KUlj2",
     "passwordResetToken": null,
     "passwordResetTokenExp": null,
     "role": "MANAGER"
@@ -16,7 +16,7 @@
     "email": "mark.doe@gmail.com",
     "emailVerified": null,
     "image": "https://res.cloudinary.com/dc6svbdh9/image/upload/v1746441292/next-merce-admin-uploads/k56dbgcxzgkuttqg4ug1.jpg",
-    "password": "$2b$10$QVCzulHeJksWYZKHEkFSKOeQPvXgH7L45zzytn2DebM1dfGIBv8US",
+    "password": "$2b$10$1Nv1PmvH7HC.ia0KaW9dpel7Q3hBP/3yhKC48sLo7URFKmZ8KUlj2",
     "passwordResetToken": null,
     "passwordResetTokenExp": null,
     "role": "ADMIN"
@@ -27,7 +27,7 @@
     "email": "jane.doe@gmail.com",
     "emailVerified": null,
     "image": null,
-    "password": "$2b$10$xK0MI2Rit3Hh6Zp9sw/eL.q4RKqiHd7xjP3hfZW0g1MjXBpAAlsxq",
+    "password": "$2b$10$1Nv1PmvH7HC.ia0KaW9dpel7Q3hBP/3yhKC48sLo7URFKmZ8KUlj2",
     "passwordResetToken": null,
     "passwordResetTokenExp": null,
     "role": "USER"
@@ -38,7 +38,7 @@
     "email": "barry.allen@gmail.com",
     "emailVerified": null,
     "image": null,
-    "password": "$2b$10$c5Sz69nv.hUwNLRjkKUiWO4eJzJT7lL3HwexbJHVxoazXDk/JIWa2",
+    "password": "$2b$10$1Nv1PmvH7HC.ia0KaW9dpel7Q3hBP/3yhKC48sLo7URFKmZ8KUlj2",
     "passwordResetToken": "c9699fed3b5eb074d32d0126edd373ec9c69e64f",
     "passwordResetTokenExp": "2025-04-21 17:18:22.312",
     "role": "USER"
@@ -49,9 +49,20 @@
     "email": "clark.kent@gmail.com",
     "emailVerified": null,
     "image": null,
-    "password": "$2b$10$KbD2Uv7VF6X.4TE4C/1O9eAyxApytig5a2vup17cb4HFrYL7mstjK",
+    "password": "$2b$10$1Nv1PmvH7HC.ia0KaW9dpel7Q3hBP/3yhKC48sLo7URFKmZ8KUlj2",
     "passwordResetToken": null,
     "passwordResetTokenExp": null,
     "role": "USER"
+  },
+  {
+    "id": "cmclexgh90000l404qkemmawu",
+    "name": "Irwan Phan",
+    "email": "irwanphan@gmail.com",
+    "emailVerified": null,
+    "image": null,
+    "password": "$2b$10$1Nv1PmvH7HC.ia0KaW9dpel7Q3hBP/3yhKC48sLo7URFKmZ8KUlj2",
+    "passwordResetToken": null,
+    "passwordResetTokenExp": null,
+    "role": "ADMIN"
   }
 ]

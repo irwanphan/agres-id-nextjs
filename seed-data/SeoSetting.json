@@ -1,11 +1,11 @@
 [
   {
     "id": 2,
-    "favicon": "https://res.cloudinary.com/dc6svbdh9/image/upload/v1746332266/seo/xehlqpadroiierasnaki.ico",
-    "metadescription": "Cozy-commerce is a next.js e-commerce boilerplate built with nextjs, typescript, tailwindcss, and prisma.",
-    "metaImage": null,
-    "metaKeywords": "e-commerce, online store",
-    "siteName": "Cozy-commerce",
-    "siteTitle": "Home Page"
+    "favicon": "https://res.cloudinary.com/dbuug9eey/image/upload/v1751432456/seo/utli18uwx3sywl5jeuts.svg",
+    "metadescription": "Agres ID adalah platform e-commerce terpercaya untuk belanja online produk elektronik, laptop, smartphone, aksesoris, dan kebutuhan teknologi terbaru dengan harga terbaik.",
+    "metaImage": "https://res.cloudinary.com/dbuug9eey/image/upload/v1751432138/seo/kbhu8nviojhioykzutzu.svg",
+    "metaKeywords": "agres, e-commerce, online store, laptop, laptop gaming, distributor, computer, pc, pc-gaming, starlink, belanja online, hp, produk elektronik",
+    "siteName": "Agres ID",
+    "siteTitle": "Agres Home Page"
   }
 ]

@@ -10,3 +10,7 @@ Midtrans Integration
 - [] Test snap payment
 - [] Add Midtrans BRI Virtual Account Integration
 - [] Add Midtrans Mandiri Virtual Account Integration
+
+Checkout Page
+- [] fix: Autofill name show Full Name as First Name
+- [] Region select box
