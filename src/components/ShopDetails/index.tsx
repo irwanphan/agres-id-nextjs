@@ -216,7 +216,7 @@ const ShopDetails = ({ product, avgRating, totalRating }: IProps) => {
                   </div>
 
                   <div className="flex flex-wrap sm:flex-nowrap gap-4.5 mt-6">
-                    {product.productVariants.map((item: any, key: any) => (
+                    {(product.productVariants || []).map((item: any, key: any) => (
                       <button
                         onClick={() => setPreviewImg(item?.image)}
                         key={key}
@@ -293,7 +293,7 @@ const ShopDetails = ({ product, avgRating, totalRating }: IProps) => {
                   </h3>
 
                   <ul className="flex flex-col gap-2">
-                    {product.offers?.map((offer, key) => (
+                    {(product.offers || []).map((offer, key) => (
                       <li
                         key={key}
                         className="flex items-center gap-2.5 font-normal"
@@ -315,13 +315,13 @@ const ShopDetails = ({ product, avgRating, totalRating }: IProps) => {
                         </div>
 
                         <ul className="flex items-center gap-2.5">
-                          {product?.productVariants?.map((item, key) => (
+                          {(product?.productVariants || []).map((item, key) => (
                             <li
                               key={key}
                               onClick={() => {
                                 setActiveColor(item.color);
                                 setPreviewImg(
-                                  product.productVariants.find(
+                                  (product.productVariants || []).find(
                                     (pv) => pv.color === item.color
                                   )?.image || ""
                                 );
@@ -366,7 +366,7 @@ const ShopDetails = ({ product, avgRating, totalRating }: IProps) => {
                       </div>
 
                       {product?.customAttributes &&
-                        product.customAttributes?.map((item, itemIndex) => (
+                        (product.customAttributes || []).map((item, itemIndex) => (
                           <div
                             key={itemIndex}
                             className="flex items-center gap-4"
@@ -377,7 +377,7 @@ const ShopDetails = ({ product, avgRating, totalRating }: IProps) => {
                               </h4>
                             </div>
                             <div className="flex items-center gap-4">
-                              {item.attributeValues.map((value, valueIndex) => (
+                              {(item.attributeValues || []).map((value, valueIndex) => (
                                 <span
                                   key={valueIndex}
                                   onClick={() =>
@@ -404,7 +404,7 @@ const ShopDetails = ({ product, avgRating, totalRating }: IProps) => {
                               </h4>
                             </div>
                             <div className="flex items-center gap-4">
-                              {product?.productVariants.map(
+                              {(product?.productVariants || []).map(
                                 (value, valueIndex) => (
                                   <span
                                     key={valueIndex}
