@@ -73,6 +73,7 @@ export type CheckoutInput = {
     price: number;
   };
   paymentMethod: string;
+  selectedBank?: string;
   notes?: string;
   couponDiscount?: number;
   couponCode?: string;

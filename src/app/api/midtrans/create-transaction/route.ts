@@ -10,7 +10,17 @@ export async function POST(req: NextRequest) {
       amount, 
       customerDetails, 
       itemDetails, 
-      enabledPayments = ['bank_transfer', 'credit_card', 'gopay', 'shopeepay'],
+      enabledPayments = [
+        'bank_transfer',
+        'bca_va',
+        'bni_va', 
+        'bri_va',
+        'mandiri_va',
+        'permata_va',
+        'credit_card', 
+        'gopay', 
+        'shopeepay'
+      ],
       callbacks 
     } = body;
 

@@ -3,10 +3,17 @@ import { Controller } from "react-hook-form";
 import { RadioInput } from "../ui/input/radio";
 import { useCheckoutForm } from "./form";
 import { PaymentElement } from "@stripe/react-stripe-js";
+import BankSelection from "./BankSelection";
 
 const PaymentMethod = ({ amount }: { amount: number }) => {
-  const { register, errors, control, watch } = useCheckoutForm();
+  const { register, errors, control, watch, setValue } = useCheckoutForm();
   const paymentMethod = watch("paymentMethod");
+  const selectedBank = watch("selectedBank") || "bca";
+
+  const handleBankSelect = (bankCode: string) => {
+    setValue("selectedBank", bankCode);
+  };
+
   return (
     <div className="bg-white shadow-1 rounded-[10px]">
       <div className="px-6 py-5 border-b border-gray-3">
@@ -22,9 +29,9 @@ const PaymentMethod = ({ amount }: { amount: number }) => {
               render={({ field }) => (
                 <RadioInput
                   {...field}
-                  value="midtrans"
+                  value="snap"
                   defaultChecked
-                  label={<PaymentMethodCard method="midtrans" />}
+                  label={<PaymentMethodCard method="snap" />}
                 />
               )}
             />
@@ -63,20 +70,24 @@ const PaymentMethod = ({ amount }: { amount: number }) => {
           </p>
         )}
 
-        {paymentMethod === "midtrans" && amount > 0 && (
+          {paymentMethod === "snap" && amount > 0 && (
           <div className="mt-5">
             <p className="text-sm text-gray-600">
-              You will be redirected to Midtrans payment gateway to complete your payment.
+              You will be redirected to Midtrans Snap payment gateway to complete your payment.
             </p>
           </div>
         )}
+        
         {paymentMethod === "bank_transfer" && amount > 0 && (
           <div className="mt-5">
-            <p className="text-sm text-gray-600">
-              You will receive bank transfer instructions after placing your order.
-            </p>
+            <BankSelection
+              selectedBank={selectedBank}
+              onBankSelect={handleBankSelect}
+              disabled={false}
+            />
           </div>
         )}
+        
         {paymentMethod === "cod" && (
           <p className="mt-5 text-green">
             You have selected Cash on Delivery. Your order will be processed and
@@ -91,23 +102,23 @@ const PaymentMethod = ({ amount }: { amount: number }) => {
 export default PaymentMethod;
 
 type CardProps = {
-  method: "midtrans" | "cod" | "bank_transfer";
+  method: "snap" | "cod" | "bank_transfer";
 };
 
 function PaymentMethodCard({ method }: CardProps) {
   const data = {
-    midtrans: {
-      name: "Payment Gateway",
-      image: {
-        src: "/images/checkout/midtrans.svg",
-        width: 75,
-        height: 20,
-      },
-    },
     bank_transfer: {
       name: "Transfer Bank",
       image: {
         src: "/images/checkout/bank-transfer.svg",
+        width: 75,
+        height: 20,
+      },
+    },
+    snap: {
+      name: "Other Payments",
+      image: {
+        src: "/images/checkout/midtrans.svg",
         width: 75,
         height: 20,
       },
