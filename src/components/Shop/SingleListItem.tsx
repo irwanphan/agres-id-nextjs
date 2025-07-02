@@ -116,7 +116,7 @@ const SingleListItem = ({ item }: { item: Product }) => {
                 disabled={item.quantity < 1}
                 className="inline-flex font-medium text-custom-sm h-[38px] py-2 px-5 rounded-lg bg-blue text-white ease-out duration-200 hover:bg-blue-dark"
               >
-                {item.quantity < 1 ? "Out of Stock" : "Add to cart"}
+                {item.quantity < 1 ? "Out of Stock" : "Masukkan Keranjang"}
               </button>
             )}
             {/* wishlist button */}

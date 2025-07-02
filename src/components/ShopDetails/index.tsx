@@ -82,7 +82,7 @@ const ShopDetails = ({ product, avgRating, totalRating }: IProps) => {
 
   const handleAddToCart = async (isCheckout: boolean = false) => {
     if (quantity > product.quantity) {
-      toast.error(`Only ${product.quantity} available in stock!`);
+      toast.error(`Hanya ${product.quantity} tersedia!`);
       return;
     }
   
@@ -111,7 +111,7 @@ const ShopDetails = ({ product, avgRating, totalRating }: IProps) => {
       await incrementItem(cartItem.id);
     }
   
-    toast.success("Product added to cart!");
+    toast.success("Produk berhasil ditambahkan ke keranjang!");
   };
   
 
@@ -473,7 +473,7 @@ const ShopDetails = ({ product, avgRating, totalRating }: IProps) => {
                           ? "Added"
                           : product.quantity < 1
                             ? "Out of Stock"
-                            : "Add to Cart"}
+                            : "Masukkan Keranjang"}
                       </button>
 
                       <button

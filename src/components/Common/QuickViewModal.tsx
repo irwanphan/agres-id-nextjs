@@ -326,7 +326,9 @@ const QuickViewModal = () => {
                       onClick={() => handleAddToCart()}
                       className="inline-flex py-3 font-medium text-white duration-200 ease-out rounded-lg bg-blue px-7 hover:bg-blue-dark"
                     >
-                      {product.quantity > 0 ? "Add to Cart" : "Out of Stock"}
+                      {product.quantity > 0
+                        ? "Masukkan Keranjang"
+                        : "Tidak Tersedia"}
                     </button>
 
                     <button
@@ -336,8 +338,8 @@ const QuickViewModal = () => {
                     >
                       <HeartIcon />
                       {isAlreadyInWishlist
-                        ? "Added to Wishlist"
-                        : "Add to Wishlist"}
+                        ? "Ditambahkan ke Wishlist"
+                        : "Tambah ke Wishlist"}
                     </button>
                   </div>
                 </div>

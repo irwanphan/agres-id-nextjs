@@ -32,9 +32,9 @@ const SingleItem = ({ item }: { item: WishlistItem }) => {
     if (item.quantity > 0) {
       // @ts-ignore
       addItem(cartItem);
-      toast.success("Product added to cart!");
+      toast.success("Produk berhasil ditambahkan ke keranjang!");
     } else {
-      toast.error("This product is out of stock!");
+      toast.error("Produk tidak tersedia!");
     }
   };
 
@@ -84,7 +84,7 @@ const SingleItem = ({ item }: { item: WishlistItem }) => {
           className="inline-flex text-dark hover:text-white bg-gray-1 border
         border-gray-3 py-2.5 px-6 rounded-lg ease-out duration-200 hover:bg-blue"
         >
-          {item.quantity < 1 ? "Out of Stock" : "Add to Cart"}
+          {item.quantity < 1 ? "Out of Stock" : "Masukkan Keranjang"}
         </button>
       </td>
 
