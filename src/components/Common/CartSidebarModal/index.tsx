@@ -56,7 +56,7 @@ const CartSidebarModal = () => {
       >
         <div className="sticky top-0 bg-white flex items-center justify-between pb-7 pt-4 sm:pt-7.5 lg:pt-10 border-b border-gray-3 mb-7.5">
           <h2 className="text-lg font-medium text-dark sm:text-2xl">
-            Cart View
+            Keranjang Belanja
           </h2>
           <button
             onClick={() => handleCartClick()}
@@ -97,7 +97,7 @@ const CartSidebarModal = () => {
               href="/cart"
               className="flex justify-center w-full px-6 py-3 text-base font-medium text-white duration-200 ease-out rounded-lg bg-blue hover:bg-blue-dark"
             >
-              View Cart
+              Lihat Keranjang
             </Link>
 
             <button

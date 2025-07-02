@@ -1,4 +1,3 @@
-
 Midtrans Integration
 - [ok] Add Midtrans Integration
 - [ok] Add Midtrans Snap Integration
@@ -15,6 +14,7 @@ Checkout Page
 - [] fix: Autofill name show Full Name as First Name
 - [] Region select box cannot use directional arrow to select region
 - [] fix: email is prefilled with the email of the user who is logged in, but checkout is failed with email not filled
+- [] Page for user to check order status based on Order ID
 
 RBAC / Fine Grained Access Control
 - [] Add RBAC / Fine Grained Access Control
@@ -26,5 +26,11 @@ Admin Page
 - [] Use button to set payment status to Paid or Failed from Pending
 - [] Button to set paid/failed can only be accessed by finance team
 
+Auth
+- [] fix: after success login, user is being redirected, but no information is shown on the page when loading and might confuse users
+
 Overview
 - [] Use Indonesian language and currency symbol
+
+Footer
+- [] Social links can be dynamic from the database and edited on admin page

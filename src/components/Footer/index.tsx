@@ -59,23 +59,29 @@ const Footer = () => {
             {/* <!-- Social Links start --> */}
             <div className="flex items-center gap-4 mt-7.5">
               <Link
-                href="#"
+                href="https://www.facebook.com/agres.id"
                 className="flex duration-200 ease-out hover:text-blue"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <span className="sr-only">Facebook link</span>
                 <FacebookIcon />
               </Link>
 
               <Link
-                href="#"
+                href="https://x.com/agres_id"
                 className="flex duration-200 ease-out hover:text-blue"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <span className="sr-only">Twitter link</span>
                 <TwitterIcon />
               </Link>
 
               <Link
-                href="#"
+                href="https://www.instagram.com/agres.id/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex duration-200 ease-out hover:text-blue"
               >
                 <span className="sr-only">Instagram link</span>
@@ -83,9 +89,11 @@ const Footer = () => {
               </Link>
 
               <Link
-                href="#"
+                href="https://www.linkedin.com/company/agres-id"
                 aria-label="Linkedin Social Link"
                 className="flex duration-200 ease-out hover:text-blue"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <span className="sr-only">LinkedIn link</span>
                 <LinkedInIcon />
