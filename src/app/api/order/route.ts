@@ -37,11 +37,14 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { shipToDifferentAddress, couponDiscount, couponCode, products, ...orderData } = body;
 
+    // Remove selectedBank from orderData if present
+    const { selectedBank, ...orderDataWithoutBank } = orderData;
+
     // Start a transaction to ensure atomic updates
     const order = await prisma.$transaction(async (tx) => {
       const newOrder = await tx.order.create({
         data: {
-          ...orderData,
+          ...orderDataWithoutBank,
           products, 
           couponDiscount,
         },

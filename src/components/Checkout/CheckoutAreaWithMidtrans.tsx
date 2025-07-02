@@ -115,7 +115,7 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
     }
 
     try {
-      if (data.paymentMethod === "midtrans") {
+      if (data.paymentMethod === "snap") {
         // Create Midtrans transaction
         const midtransResponse = await fetch("/api/midtrans/create-transaction", {
           method: "POST",
@@ -188,7 +188,7 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
               quantity: item.quantity,
               name: item.name,
             })),
-            bankType: "bca", // Default to BCA, you can make this configurable
+            bankType: data.selectedBank || "bca", // Use selected bank or default to BCA
           }),
         });
 

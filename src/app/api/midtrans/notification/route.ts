@@ -25,12 +25,12 @@ export async function POST(req: NextRequest) {
       .update(orderId + statusCode + grossAmount + serverKey)
       .digest('hex');
     
-    console.log('orderId:', orderId);
-    console.log('statusCode:', statusCode, typeof statusCode);
-    console.log('grossAmount:', grossAmount, typeof grossAmount);
-    console.log('serverKey:', serverKey);
-    console.log('signatureKey (from midtrans):', signatureKey);
-    console.log('expectedSignature (backend):', expectedSignature);
+      // console.log('orderId:', orderId);
+      // console.log('statusCode:', statusCode, typeof statusCode);
+      // console.log('grossAmount:', grossAmount, typeof grossAmount);
+      // console.log('serverKey:', serverKey);
+      // console.log('signatureKey (from midtrans):', signatureKey);
+      // console.log('expectedSignature (backend):', expectedSignature);
     
     if (signatureKey !== expectedSignature) {
       console.error('Invalid signature key');
@@ -59,16 +59,16 @@ export async function POST(req: NextRequest) {
         paymentStatus = 'pending';
     }
 
-    // Update order in database
-    const updatedOrder = await prisma.order.update({
-      where: { id: orderId },
+    const updatedOrder = await prisma.paymentTransaction.create({
       data: {
-        paymentStatus,
-        midtransTransactionId: body.transaction_id,
-        midtransPaymentType: body.payment_type,
-        midtransTransactionTime: new Date(body.transaction_time),
-        midtransGrossAmount: parseFloat(body.gross_amount),
-        midtransStatusCode: body.status_code,
+        orderId: orderId,
+        provider: 'midtrans',
+        selectedBank: body.va_numbers,
+        paymentType: body.payment_type,
+        transactionId: body.transaction_id,
+        transactionTime: new Date(body.transaction_time),
+        grossAmount: parseFloat(body.gross_amount),
+        statusCode: paymentStatus,
         updatedAt: new Date(),
       },
     });
