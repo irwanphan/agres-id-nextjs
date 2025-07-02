@@ -3,17 +3,17 @@ import Link from "next/link";
 const quickLinks = [
   {
     id: 1,
-    label: "Privacy Policy",
+    label: "Kebijakan Privasi",
     href: "/privacy-policy",
   },
   {
     id: 2,
-    label: "Refund Policy",
+    label: "Kebijakan Pengembalian",
     href: "/terms-condition",
   },
   {
     id: 3,
-    label: "Terms of Use",
+    label: "Syarat dan Ketentuan Penggunaan",
     href: "/terms-condition",
   },
   {
@@ -23,7 +23,7 @@ const quickLinks = [
   },
   {
     id: 5,
-    label: "Contact",
+    label: "Kontak",
     href: "/contact",
   },
 ];
@@ -31,7 +31,7 @@ const quickLinks = [
 export default function QuickLinks() {
   return (
     <div className="w-full sm:w-auto">
-      <h2 className="mb-7.5 text-xl font-semibold text-dark">Quick Link</h2>
+      <h2 className="mb-7.5 text-xl font-semibold text-dark">Tautan Cepat</h2>
 
       <ul className="flex flex-col gap-3">
         {quickLinks.map((link) => (

@@ -42,14 +42,14 @@ export default function FooterBottom() {
   const year = new Date().getFullYear();
 
   return (
-    <div className="py-5 xl:py-7.5 bg-gray-1">
+    <div className="py-5 xl:py-7.5 bg-red">
       <div className="px-4 mx-auto max-w-7xl sm:px-8 xl:px-0">
-        <div className="flex flex-wrap items-center justify-between gap-5">
-          <p className="text-sm font-normal text-dark">
-            &copy; {year}. All rights reserved by Pimjo.
+        <div className="flex flex-wrap items-center justify-center gap-5">
+          <p className="text-md font-normal text-white">
+            &copy; {year}. All rights reserved by Agres ID.
           </p>
 
-          <div className="flex flex-wrap items-center gap-4">
+          {/* <div className="flex flex-wrap items-center gap-4">
             <p className="font-normal">We Accept:</p>
 
             <div className="flex flex-wrap items-center gap-5">
@@ -64,7 +64,7 @@ export default function FooterBottom() {
                 />
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

@@ -3,12 +3,12 @@ import Link from "next/link";
 const accountLinks = [
   {
     id: 1,
-    label: "Login / Register",
+    label: "Masuk / Daftar",
     href: "/signin",
   },
   {
     id: 2,
-    label: "Cart",
+    label: "Keranjang",
     href: "/cart",
   },
   {
@@ -18,14 +18,14 @@ const accountLinks = [
   },
   {
     id: 4,
-    label: "Shop",
+    label: "Toko",
     href: "/shop",
   },
 ];
 export default function AccountLinks() {
   return (
     <div className="w-full sm:w-auto">
-      <h2 className="mb-7.5 text-xl font-semibold text-dark">Account</h2>
+      <h2 className="mb-7.5 text-xl font-semibold text-dark">Akun Anda</h2>
 
       <ul className="flex flex-col gap-3.5">
         {accountLinks.map((link) => (
