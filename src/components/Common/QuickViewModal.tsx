@@ -102,13 +102,20 @@ const QuickViewModal = () => {
       }
     }
 
+    function handleEsc(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        closeModal();
+      }
+    }
+
     if (isModalOpen) {
       document.addEventListener("mousedown", handleClickOutside);
+      window.addEventListener("keydown", handleEsc);
     }
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
-
+      window.removeEventListener("keydown", handleEsc);
       setQuantity(1);
     };
   }, [isModalOpen, closeModal]);

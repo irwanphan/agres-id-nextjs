@@ -39,6 +39,17 @@ const CartSidebarModal = () => {
     router.push("/checkout");
     handleCartClick();
   };
+
+  useEffect(() => {
+    if (!shouldDisplayCart) return;
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        handleCartClick();
+      }
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [shouldDisplayCart, handleCartClick]);
   
   return (
     <>
