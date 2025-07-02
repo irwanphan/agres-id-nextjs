@@ -1,16 +1,18 @@
 "use client";
 import convertToSubcurrency from "@/lib/convertToSubcurrency";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
 import { useForm } from "react-hook-form";
 import { CheckoutFormProvider, CheckoutInput } from "./form";
 import { useShoppingCart } from "use-shopping-cart";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { EmptyCartIcon } from "@/assets/icons";
-import CheckoutPaymentArea from "./CheckoutPaymentArea";
-import CheckoutAreaWithoutStripe from "./CheckoutAreaWithoutStripe";
 import CheckoutAreaWithMidtrans from "./CheckoutAreaWithMidtrans";
+
+// Stripe
+// import { Elements } from "@stripe/react-stripe-js";
+// import { loadStripe } from "@stripe/stripe-js";
+// import CheckoutPaymentArea from "./CheckoutPaymentArea";
+// import CheckoutAreaWithoutStripe from "./CheckoutAreaWithoutStripe";
 
 // if (process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY === undefined) {
 //   throw new Error("NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY is not defined");
@@ -28,7 +30,7 @@ export default function CheckoutMain() {
           name: "free",
           price: 0,
         },
-        paymentMethod: "bank",
+        paymentMethod: "midtrans",
         couponDiscount: 0,
         couponCode: "",
         billing: {
