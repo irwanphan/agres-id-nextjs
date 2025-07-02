@@ -96,12 +96,12 @@ const ProductDetails = async ({ params }: Props) => {
   const product = await getProductBySlug(slug);
   if (!product) notFound();
 
-  const recentProducts = await getRelatedProducts(
-    product.category?.title!,
-    product.tags!,
-    product.id!,
-    product.title!
-  );
+  const recentProducts = (await getRelatedProducts(
+    product.category?.title || "",
+    product.tags || [],
+    product.id || "",
+    product.title || ""
+  )) || [];
 
   const defaultVariant = product?.productVariants?.find(
     (variant) => variant.isDefault

@@ -314,7 +314,23 @@ export const getProductById = async (productId: string) => {
 
 
 export const getRelatedProducts = unstable_cache(
-  async (category: string, tags: string[] | undefined, currentProductId: string,productTitle:string) => {
+  async (category: string, tags: string[] | undefined, currentProductId: string, productTitle: string) => {
+    const orFilters: any[] = [];
+    if (category) {
+      orFilters.push({
+        category: {
+          is: {
+            title: { contains: category, mode: 'insensitive' }
+          }
+        }
+      });
+    }
+    if (tags && tags.length) {
+      orFilters.push({ tags: { hasSome: tags } });
+    }
+    if (productTitle) {
+      orFilters.push({ title: { contains: productTitle, mode: 'insensitive' } });
+    }
     const products = await prisma.product.findMany({
       select: {
         id: true,
@@ -326,7 +342,7 @@ export const getRelatedProducts = unstable_cache(
         quantity: true,
         updatedAt: true,
         tags: true,
-        category:{
+        category: {
           select: {
             title: true
           }
@@ -353,29 +369,8 @@ export const getRelatedProducts = unstable_cache(
         id: {
           not: currentProductId, // Exclude the current product
         },
-        OR: [
-          {
-            category:{
-              title: {
-                contains: category,
-                mode: 'insensitive',
-              },
-            }
-          },
-          {
-            tags: {
-              hasSome: tags,
-            }
-          },
-          {
-            title: {
-              contains: productTitle,
-              mode: 'insensitive',
-            }
-          }
-        ]
+        ...(orFilters.length > 0 ? { OR: orFilters } : {}),
       },
-      
       orderBy: {
         updatedAt: 'desc',
       },
@@ -384,7 +379,7 @@ export const getRelatedProducts = unstable_cache(
 
     return products.map(({ _count, ...item }) => ({
       ...item,
-      reviews: _count.reviews,
+      reviews: _count?.reviews ?? 0,
       price: item.price.toNumber(),
       discountedPrice: item?.discountedPrice
         ? item.discountedPrice.toNumber()

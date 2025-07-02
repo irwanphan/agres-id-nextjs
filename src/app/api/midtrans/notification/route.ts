@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
         paymentStatus = 'pending';
     }
 
-    const updatedOrder = await prisma.paymentTransaction.create({
+    const updatedPaymentTransaction = await prisma.paymentTransaction.create({
       data: {
         orderId: orderId,
         provider: 'midtrans',
@@ -69,6 +69,13 @@ export async function POST(req: NextRequest) {
         transactionTime: new Date(body.transaction_time),
         grossAmount: parseFloat(body.gross_amount),
         statusCode: paymentStatus,
+        updatedAt: new Date(),
+      },
+    });
+    const updatedOrder = await prisma.order.update({
+      where: { id: orderId },
+      data: {
+        paymentStatus,
         updatedAt: new Date(),
       },
     });

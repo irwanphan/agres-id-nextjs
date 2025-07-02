@@ -19,15 +19,23 @@ export async function POST(req: NextRequest) {
       return sendErrorResponse(400, 'Order ID and payment status are required');
     }
 
+    // TOFIX: orderId should have been unique, but it's not, so we need to use updateMany
+    const updatedPaymentTransaction = await prisma.paymentTransaction.updateMany({
+      where: { orderId: orderId },
+      data: {
+        selectedBank: midtransPaymentType,
+        paymentType: midtransPaymentType,
+        transactionId: midtransTransactionId,
+        transactionTime: new Date(midtransTransactionTime),
+        grossAmount: parseFloat(midtransGrossAmount),
+        statusCode: midtransStatusCode,
+        updatedAt: new Date(),
+      },
+    });
     const updatedOrder = await prisma.order.update({
       where: { id: orderId },
       data: {
         paymentStatus,
-        midtransTransactionId,
-        midtransPaymentType,
-        midtransTransactionTime: midtransTransactionTime ? new Date(midtransTransactionTime) : undefined,
-        midtransGrossAmount,
-        midtransStatusCode,
         updatedAt: new Date(),
       },
     });
