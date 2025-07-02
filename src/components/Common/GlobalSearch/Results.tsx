@@ -10,7 +10,7 @@ const Results = (props: any) => {
         <>
           {filterValue === "all" && (
             <h2 className="mb-2 text-lg font-medium uppercase text-dark">
-              Products
+              Produk
             </h2>
           )}
           <Hits
@@ -34,7 +34,7 @@ const Results = (props: any) => {
         <>
           {filterValue === "all" && (
             <h2 className="mb-2 text-lg font-medium uppercase text-dark">
-              Blogs
+              Blog
             </h2>
           )}
           <Hits

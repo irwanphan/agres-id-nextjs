@@ -7,8 +7,11 @@ Midtrans Integration
 - [] Check order payment status for user dashboard
 - [ok] Test bank transfer payment
 - [] Test snap payment
-- [] Add Midtrans BRI Virtual Account Integration
-- [] Add Midtrans Mandiri Virtual Account Integration
+- [] Cancel placed order by user after 1 hours
+- [] Email notification template to user when order is placed with payment link
+- [] Link to success page after order is placed
+- [] Email notification template to user when order is canceled
+- [] Email notification template to user when order is shipped
 
 Checkout Page
 - [] fix: Autofill name show Full Name as First Name

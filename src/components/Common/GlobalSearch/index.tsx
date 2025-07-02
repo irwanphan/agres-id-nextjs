@@ -58,7 +58,7 @@ const GlobalSearchModal = (props: any) => {
                 indexName={algoliaIndexName}
               >
                 <CustomSearchBox
-                  placeholder="Type anything to search..."
+                  placeholder="Ketikkan pencarian Anda ..."
                   className="p-10 pb-7"
                   inputClassName="flex h-[56px] w-full items-center rounded-lg border border-gray-3 pl-12 pr-6 outline-hidden duration-300 focus:border-primary"
                   iconClassName="absolute left-0 top-0 w-[56px] h-[56px] flex items-center justify-center p-5"
