@@ -107,36 +107,33 @@ export default function Billing() {
           />
         </div>
 
-        <div>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            {/* <select
-              {...register("billing.regionName", { required: true })}
-              id="regionName"
-              className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
-              required
-            >
-              <option value="" hidden>
-                Select your country
-              </option>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+          {/* <select
+            {...register("billing.regionName", { required: true })}
+            id="regionName"
+            className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
+            required
+          >
+            <option value="" hidden>
+              Select your country
+            </option>
 
-              <option value="australia">Australia</option>
-              <option value="america">America</option>
-              <option value="england">England</option>
-            </select> */}
-            <RajaOngkirProvinceDatalist 
-              provinces={provinces}
-              name="billing.province"
-              register={register} 
-              error={errors.billing?.province}
-              setValue={setValue}
-            />
-            <RajaOngkirCityDatalist 
-              cities={cities}
-              name="billing.city" 
-              register={register} 
-              error={errors.billing?.city} />
-          </div>
-
+            <option value="australia">Australia</option>
+            <option value="america">America</option>
+            <option value="england">England</option>
+          </select> */}
+          <RajaOngkirProvinceDatalist 
+            provinces={provinces}
+            name="billing.province"
+            register={register} 
+            error={errors.billing?.province}
+            setValue={setValue}
+          />
+          <RajaOngkirCityDatalist 
+            cities={cities}
+            name="billing.city" 
+            register={register} 
+            error={errors.billing?.city} />
         </div>
 
         <div>
@@ -187,7 +184,7 @@ export default function Billing() {
           />
         </div> */}
 
-        <div>
+        {/* <div>
           <Controller
             control={control}
             rules={{ required: true }}
@@ -202,9 +199,9 @@ export default function Billing() {
               />
             )}
           />
-        </div>
+        </div> */}
 
-        <div>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <Controller
             control={control}
             rules={{ required: true }}
@@ -222,9 +219,7 @@ export default function Billing() {
               />
             )}
           />
-        </div>
 
-        <div>
           <Controller
             control={control}
             rules={{ required: true }}
