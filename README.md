@@ -1,145 +1,142 @@
-# Full-Stack Self-Hosted eCommerce Solution
+# Agres ID - Ecommerce Platform
 
-A full-stack, self-hosted eCommerce platform built with Next.js. Launch your online store with core features like product management, secure Stripe payments, built-in custom CMS, and responsive design. Enjoy full control, lifetime free updates, and comprehensive documentation to build, develop, and scale your store effortlessly.
+Internal ecommerce platform for **Agres ID**. Built with Next.js 15, TypeScript, and Tailwind CSS, this platform provides ecommerce solution with advanced features to manage Agres ID's online store.
 
-#### [🌐 Visit Website](https://cozycommerce.dev/)
-#### [📑 Explore Docs](https://cozycommerce.dev/docs)
-#### [🚀 Live Demo](https://demo.cozycommerce.dev/)
+## Key Features
 
----
+### 🛍️ **Product Management**
+- **Complete Product Catalog**: Product management system with categories, variants, and custom attributes
+- **Product Variants**: Support for multiple colors, sizes, and images for each product
+- **SKU Management**: Automatic SKU system for inventory tracking
+- **Dynamic Pricing**: Flexible discount and special pricing system
+- **Stock Management**: Real-time stock tracking with automatic notifications
 
+### 💳 **Payment System**
+- **Midtrans Integration**: Bank transfer, e-wallet, and credit card payments
+- **Stripe Payment**: International payments with multi-currency support
+- **Multiple Payment Methods**: Bank transfer, e-wallet, credit card, and COD
+- **Payment Status Tracking**: Real-time payment status tracking
+- **Secure Transactions**: End-to-end encryption for transaction security
 
-# CozyCommerce Installation
+### 🛒 **Shopping Experience**
+- **Shopping Cart**: Persistent shopping cart with localStorage
+- **Wishlist**: Wishlist system for saving favorite products
+- **Quick View**: Quick product preview without leaving the page
+- **Product Search**: Advanced product search with Algolia
+- **Product Filtering**: Filter by category, price, and attributes
+- **Product Reviews**: Product review and rating system
 
-Welcome to **CozyCommerce** — a modern, high-performance ecommerce solution based on Next.js built for scalability and developer productivity.
+### 👤 **User Management**
+- **Authentication**: Login with email/password, Google, and GitHub OAuth
+- **User Profiles**: User profile management with multiple addresses
+- **Order History**: Complete order history with tracking
+- **Address Management**: Shipping and billing address system
+- **Role-based Access**: Admin, Manager, and User roles
 
-This guide will walk you through setting up the project locally and deploying it to production using Vercel. Whether you're building an e-commerce MVP or scaling an enterprise storefront, CozyCommerce offers the tools and structure to get started quickly.
+### 📊 **Admin Dashboard**
+- **Analytics Dashboard**: Analytics dashboard with Chart.js
+- **Order Management**: Order management with status tracking
+- **Product Management**: Product CRUD with bulk operations
+- **Customer Management**: Customer management and their data
+- **Sales Reports**: Sales reports and business analytics
+- **Inventory Management**: Stock tracking and low stock alerts
 
----
+### 🎨 **Content Management**
+- **Blog System**: Blog system with categories and authors
+- **Hero Banners**: Promotional banner management
+- **Countdown Timers**: Countdown timers for flash sales
+- **SEO Management**: SEO optimization with dynamic meta tags
+- **Content Editor**: Rich text editor with Quill.js
 
-## 🚧 Prerequisites
+### 🚚 **Shipping & Logistics**
+- **Multiple Shipping Methods**: DHL, FedEx, and custom shipping
+- **Shipping Calculator**: Automatic shipping cost calculation
+- **Order Tracking**: Real-time shipping status tracking
+- **Address Validation**: Shipping address validation
 
-Before you begin, ensure that the following tools are installed on your machine:
+### 🎯 **Marketing & Promotions**
+- **Coupon System**: Coupon system with usage limitations
+- **Discount Management**: Product and category discount management
+- **Email Marketing**: Automatic emails for order confirmation
+- **Newsletter**: Newsletter system with Formbold integration
 
-* **[Node.js](https://nodejs.org/)** version 19.0.0 or higher
-* **[npm](https://www.npmjs.com/)** version 10.0.0 or higher
-* **[Git](https://git-scm.com/)** for version control
+### 🔍 **Search & Discovery**
+- **Algolia Search**: Advanced product search with AI
+- **Product Recommendations**: Product recommendations based on behavior
+- **Category Navigation**: Intuitive category navigation
+- **Product Tags**: Product tagging system for discovery
 
-We recommend using a version manager like [`nvm`](https://github.com/nvm-sh/nvm) to manage Node.js versions easily.
+### 📱 **Responsive Design**
+- **Mobile-First**: Responsive design for all devices
+- **Progressive Web App**: PWA features for mobile experience
+- **Touch-Friendly**: Interface optimized for touch devices
+- **Fast Loading**: Performance optimization with Next.js 15
 
----
+## 🛠️ Tech Stack
 
-## ⚙️ Environment Setup
+### **Frontend**
+- **Next.js 15**: React framework with App Router
+- **TypeScript**: Type safety and developer experience
+- **Tailwind CSS**: Utility-first CSS framework
+- **Redux Toolkit**: State management
+- **React Hook Form**: Form handling
+- **Swiper**: Touch slider for carousel
 
-Create a `.env` file in the root directory and add the following environment variables:
+### **Backend**
+- **Next.js API Routes**: Serverless API endpoints
+- **Prisma ORM**: Database ORM with type safety
+- **PostgreSQL**: Main database
+- **NextAuth.js**: Authentication system
+- **Midtrans**: Indonesian payment gateway
+- **Stripe**: Payment processing
 
-```env
-NEXTAUTH_URL="http://localhost:3000"
-NEXT_PUBLIC_SITE_URL="http://localhost:3000"
-SITE_URL="http://localhost:3000"
-SITE_NAME="CozyCommerce"
-GITHUB_CLIENT_SECRET="your_github_client_secret"
-GITHUB_CLIENT_ID="your_github_client_id"
-GOOGLE_CLIENT_SECRET="your_google_client_secret"
-GOOGLE_CLIENT_ID="your_google_client_id"
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="your_stripe_publishable_key"
-STRIPE_SECRET_KEY="your_stripe_secret_key"
-NEXT_PUBLIC_SUCCESS_URL="http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}"
-NEXT_PUBLIC_CANCEL_URL="http://localhost:3000"
-NEXT_PUBLIC_ALGOLIA_PROJECT_ID="your_algolia_project_id"
-NEXT_PUBLIC_ALGOLIA_WRITE_API_KEY="your_algolia_write_api_key"
-NEXT_PUBLIC_ALGOLIA_INDEX="your_algolia_index"
-EMAIL_SERVER_HOST="smtp.resend.com"
-EMAIL_SERVER_PORT=465
-EMAIL_SERVER_USER="resend"
-EMAIL_SERVER_PASSWORD="your_resend_api_key"
-EMAIL_FROM="your_email"
-ADMIN_EMAILS="admin@example.com"
-NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="your_cloudinary_cloud_name"
-CLOUDINARY_API_KEY="your_cloudinary_api_key"
-CLOUDINARY_API_SECRET="your_cloudinary_api_secret"
-DATABASE_URL="your_database_url"
-NEXTAUTH_SECRET="your_nextauth_secret"
-FORMBOLD_FORM_ID="your_formbold_form_id"
-```
+### **Third-Party Services**
+- **Cloudinary**: Image hosting and optimization
+- **Algolia**: Search engine
+- **Resend / Brevo**: Email service
+- **Formbold**: Form handling
 
-> ⚠️ **Important:** Replace the placeholder values with your actual API keys and credentials. Never commit your `.env` file to version control to protect sensitive data.
+## 🚀 Installation
 
----
+### Prerequisites
+- Node.js 19.0.0 or higher
+- npm 10.0.0 or higher
+- PostgreSQL database
+- Git
 
-## 📦 Installation Steps
+### Setup Environment
+Create a `.env` file in the root directory:
 
-Follow these steps to get the project running locally:
+## 📈 Analytics Features
 
-1. **Install project dependencies:**
+### Sales Analytics
+- Daily/monthly/yearly total sales
+- Best-selling products
+- Most popular categories
+- Customer behavior analysis
 
-   ```bash
-   npm install
-   ```
+### Performance Metrics
+- Page load times
+- Search performance
+- Conversion rates
+- User engagement
 
-2. **Generate the Prisma client (for database access):**
+## 🔒 Security Features
 
-   ```bash
-   npx prisma generate
-   ```
+- **Authentication**: JWT-based authentication
+- **Authorization**: Role-based access control
+- **Data Encryption**: End-to-end encryption
+- **Rate Limiting**: Protection against abuse
+- **CSRF Protection**: Cross-site request forgery protection
 
-3. **Start the development server:**
+## 📱 Mobile Features
 
-   ```bash
-   npm run dev
-   ```
+- **Responsive Design**: Optimal on all devices
+- **Touch Gestures**: Gesture support for mobile
+- **Offline Support**: Basic offline functionality
+- **Push Notifications**: Real-time notifications
 
-Once the server is running, you can access your local store at: [http://localhost:3000](http://localhost:3000)
+## 🌐 Internationalization
 
----
-
-## ☁️ Deployment on Vercel
-
-Deploy your CozyCommerce store in minutes using [Vercel](https://vercel.com):
-
-1. **Push your code to GitHub** (or another supported Git provider like GitLab or Bitbucket).
-
-2. **Log in to [Vercel](https://vercel.com)** and click “Import Project.”
-
-3. **Connect your Git repository**, then:
-
-   * Select **Next.js** as the framework preset.
-   * Add all required environment variables from your `.env` file under the "Environment Variables" section.
-   * For your database, use a cloud service like [Neon](https://neon.tech) and provide the connection string in `DATABASE_URL`.
-
-4. **Click "Deploy"** — Vercel will handle the rest, including continuous deployment on every push to your main branch.
-
-5. After deployment, you’ll receive a Vercel-hosted URL. You can also [add a custom domain](https://vercel.com/docs/concepts/projects/domains) if needed.
-
----
-
-## 🔌 Required Third-Party Services
-
-To enable full functionality, set up the following services and add the relevant credentials to your `.env` file:
-
-1. **[Neon](https://neon.tech)** — PostgreSQL database with serverless autoscaling.
-2. **[Cloudinary](https://cloudinary.com)** — Image storage, optimization, and delivery.
-3. **[Stripe](https://stripe.com)** — Payment processing and checkout.
-4. **[Algolia](https://www.algolia.com)** — Lightning-fast search powered by AI.
-5. **[Resend](https://resend.com)** — Transactional email delivery via SMTP or API.
-6. **[GitHub OAuth](https://github.com/settings/developers)** / [Google OAuth](https://console.cloud.google.com/apis/credentials)\*\* — Enable social login functionality.
-7. **[Formbold](https://formbold.com)** — Simple form backend for contact forms and submissions.
-
----
-
-## 📚 Additional Documentation
-
-Explore our full documentation for deeper integration guidance:
-
-* [Database Integration](https://cozycommerce.dev/docs/database)
-* [Authentication](https://cozycommerce.dev/docs/authentication)
-* [Payment Gateways](https://cozycommerce.dev/docs/stripe)
-* [Algolia - AI-Powered Search](https://cozycommerce.dev/docs/algolia)
-* [Cloudinary - Image Hosting](https://cozycommerce.dev/docs/cloudinary)
-* [Email - Transactional/SMTP](https://cozycommerce.dev/docs/email)
-* [Admin Access](https://cozycommerce.dev/docs/admin-access)
-
----
-
-Need help? Feel free to reach out or open an issue on the [GitHub repository](https://github.com/CozyCommerce/cozycommerce-lite). Happy coding! 🎉
-
+- **Currency Support**: Multiple currency support
+- **Localization**: Adaptation for local markets
