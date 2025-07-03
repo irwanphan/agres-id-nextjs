@@ -36,8 +36,8 @@ export default function CheckoutMain() {
         couponCode: "",
         billing: {
           address: {
-            street: "",
-            apartment: "",
+            address1: "",
+            address2: "",
           },
           companyName: "",
           country: "",

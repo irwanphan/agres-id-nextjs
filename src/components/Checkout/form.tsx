@@ -51,8 +51,8 @@ export type CheckoutInput = {
     provinceId: string;
     city: string;
     address: {
-      street: string;
-      apartment?: string;
+      address1: string;
+      address2?: string;
     };
     // town: string;
     country?: string;

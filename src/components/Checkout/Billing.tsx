@@ -140,7 +140,7 @@ export default function Billing() {
           <Controller
             control={control}
             rules={{ required: true }}
-            name="billing.address.street"
+            name="billing.address.address1"
             render={({ field, fieldState }) => (
               <InputGroup
                 label="Street Address"
@@ -158,7 +158,7 @@ export default function Billing() {
           <div className="mt-5">
             <input
               type="text"
-              {...register("billing.address.apartment")}
+              {...register("billing.address.address2")}
               placeholder="Apartment, suite, unit, etc. (optional)"
               className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
             />

@@ -132,7 +132,7 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
                 firstName: data.billing.firstName,
                 lastName: data.billing.lastName,
                 phone: data.billing.phone,
-                address: `${data.billing.address.street} ${data.billing.address.apartment}`,
+                address: `${data.billing.address.address1} ${data.billing.address.address2}`,
                 city: data.billing.city,
                 postalCode: "",
                 countryCode: "IDN",
