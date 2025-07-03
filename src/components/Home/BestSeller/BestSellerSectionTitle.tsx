@@ -8,8 +8,7 @@ export default function BestSellerSectionTitle() {
           Best Selling Products
         </h2>
         <p className="text-base text-center text-dark-3">
-          These top picks are flying off the shelves! Find out what everyone’s
-          loving right now.
+          Produk terlaris yang menjadi favorit pelanggan kami!
         </p>
       </div>
     </div>

@@ -11,7 +11,7 @@ export default async function DashboardWrapper({
   children: React.ReactNode;
 }) {
   const session = await getServerSession(authOptions);
-  const user = await getSingleUser(session?.user?.email as string);
+  const user = await getSingleUser(session?.user?.email as string) || { name: "Unknown", image: null, role: "USER" };
   const headerSetting = await getHeaderSettings();
   return (
     <div className="h-screen lg:flex bg-gray-2">

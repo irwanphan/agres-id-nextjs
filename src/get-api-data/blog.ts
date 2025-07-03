@@ -9,7 +9,8 @@ export const getBlogs = unstable_cache(
       orderBy: {updatedAt: "desc"},
     });
   },
-  ['posts'],{tags: ['posts'] }
+  ['posts'],
+  { tags: ['posts'], revalidate: 60 }
 );
 
 // GET POST CATEGORY
@@ -33,7 +34,8 @@ export const getPostCategory = unstable_cache(
       postCounts: item._count.posts
     }))
   },
-  ['postCategories'],{tags: ['postCategories'] }
+  ['postCategories'],
+  { tags: ['postCategories'], revalidate: 60 }
 );
 
 // GET POST TAGS
@@ -45,7 +47,8 @@ export const getPostTags = unstable_cache(
       }
     });
   },
-  ['posts'],{tags: ['posts'] }
+  ['posts'],
+  { tags: ['posts'], revalidate: 60 }
 );
 
 // GET SINGLE BLOG
@@ -79,7 +82,8 @@ export const getPostsByCategory = unstable_cache(
       }
     });
   },
-  ['posts'],{tags: ['posts'] }
+  ['posts'],
+  { tags: ['posts'], revalidate: 60 }
 );
 
 // GET CATEGORY BY SLUG
@@ -91,7 +95,8 @@ export const getPostCategoryBySlug = unstable_cache(
       }
     });
   },
-  ['postCategories'],{tags: ['postCategories'] }
+  ['postCategories'],
+  { tags: ['postCategories'], revalidate: 60 }
 );
 
 // GET POST CATEGORIES
@@ -101,7 +106,8 @@ export const getPostCategories = unstable_cache(
       orderBy: {updatedAt: "desc"},
     });
   },
-  ['postCategories'],{tags: ['postCategories'] }
+  ['postCategories'],
+  { tags: ['postCategories'], revalidate: 60 }
 );
 
 // GET POST BY TAG
@@ -115,5 +121,6 @@ export const getPostsByTag = unstable_cache(
       }
     });
   },
-  ['posts'],{tags: ['posts'] }
-)
+  ['posts'],
+  { tags: ['posts'], revalidate: 60 }
+);

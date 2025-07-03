@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import { useShoppingCart } from "use-shopping-cart";
 import { ArrowLeftIcon } from "./_components/icons";
 
-const CheckoutSuccess = ({ amount }: { amount: string }) => {
+const CheckoutSuccess = ({ amount, bankInfo }: { amount: string; bankInfo?: string }) => {
   const { clearCart } = useShoppingCart();
   const [loading, setLoading] = React.useState(true);
 
@@ -81,6 +81,23 @@ const CheckoutSuccess = ({ amount }: { amount: string }) => {
                   Sign In with & Track the order. If you are not already Signed
                   Up use the purchase email to Sign up.
                 </p>
+
+                {bankInfo && (
+                  <div className="max-w-[491px] w-full mx-auto mb-7.5 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <h3 className="font-semibold text-blue mb-2">Bank Transfer Instructions</h3>
+                    <p className="text-sm text-gray-700 mb-2">
+                      Please transfer the amount to the following account:
+                    </p>
+                    <div className="bg-white p-3 rounded border">
+                      <pre className="text-sm font-mono text-gray-800 whitespace-pre-wrap">
+                        {decodeURIComponent(bankInfo)}
+                      </pre>
+                    </div>
+                    <p className="text-xs text-gray-600 mt-2">
+                      Please complete the transfer within 24 hours to avoid order cancellation.
+                    </p>
+                  </div>
+                )}
 
                 <div className="flex justify-center gap-5">
                   <Link

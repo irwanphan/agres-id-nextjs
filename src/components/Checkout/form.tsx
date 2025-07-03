@@ -77,6 +77,7 @@ export type CheckoutInput = {
     etd?: string;
   };
   paymentMethod: string;
+  selectedBank?: string;
   notes?: string;
   couponDiscount?: number;
   couponCode?: string;

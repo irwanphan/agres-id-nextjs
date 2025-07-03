@@ -9,7 +9,8 @@ export const getCategories = unstable_cache(
       orderBy: { updatedAt: "desc" },
     });
   },
-  ['categories'], { tags: ['categories'] }
+  ['categories'],
+  { tags: ['categories'], revalidate: 60 }
 );
 
 // GET CATEGORY BY SLUG
@@ -21,7 +22,8 @@ export const getCategoryBySlug = unstable_cache(
       }
     });
   },
-  ['categories'], { tags: ['categories'] }
+  ['categories'],
+  { tags: ['categories'], revalidate: 60 }
 );
 
 // GET CATEGORY BY ID
@@ -33,5 +35,6 @@ export const getCategoryById = unstable_cache(
       }
     });
   },
-  ['categories'], { tags: ['categories'] }
+  ['categories'],
+  { tags: ['categories'], revalidate: 60 }
 );

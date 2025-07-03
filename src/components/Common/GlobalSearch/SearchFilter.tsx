@@ -1,14 +1,14 @@
 const filtersData = [
   {
-    label: "All",
+    label: "Semua",
     value: "all",
   },
   {
-    label: "Products",
+    label: "Produk",
     value: "products",
   },
   {
-    label: "Blogs",
+    label: "Blog",
     value: "blogs",
   },
 ];

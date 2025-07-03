@@ -3,10 +3,17 @@ import { Controller } from "react-hook-form";
 import { RadioInput } from "../ui/input/radio";
 import { useCheckoutForm } from "./form";
 import { PaymentElement } from "@stripe/react-stripe-js";
+import BankSelection from "./BankSelection";
 
 const PaymentMethod = ({ amount }: { amount: number }) => {
-  const { register, errors, control, watch } = useCheckoutForm();
+  const { register, errors, control, watch, setValue } = useCheckoutForm();
   const paymentMethod = watch("paymentMethod");
+  const selectedBank = watch("selectedBank") || "bca";
+
+  const handleBankSelect = (bankCode: string) => {
+    setValue("selectedBank", bankCode);
+  };
+
   return (
     <div className="bg-white shadow-1 rounded-[10px]">
       <div className="px-6 py-5 border-b border-gray-3">
@@ -22,9 +29,23 @@ const PaymentMethod = ({ amount }: { amount: number }) => {
               render={({ field }) => (
                 <RadioInput
                   {...field}
-                  value="bank"
+                  value="snap"
                   defaultChecked
-                  label={<PaymentMethodCard method="bank" />}
+                  label={<PaymentMethodCard method="snap" />}
+                />
+              )}
+            />
+          )}
+
+          {amount > 0 && (
+            <Controller
+              name="paymentMethod"
+              control={control}
+              render={({ field }) => (
+                <RadioInput
+                  {...field}
+                  value="bank_transfer"
+                  label={<PaymentMethodCard method="bank_transfer" />}
                 />
               )}
             />
@@ -41,20 +62,6 @@ const PaymentMethod = ({ amount }: { amount: number }) => {
               />
             )}
           />
-
-          {/* {amount > 0 && (
-            <Controller
-              name="paymentMethod"
-              control={control}
-              render={({ field }) => (
-                <RadioInput
-                  {...field}
-                  value="paypal"
-                  label={<PaymentMethodCard method="paypal" />}
-                />
-              )}
-            />
-          )} */}
         </div>
 
         {errors.paymentMethod && (
@@ -63,11 +70,24 @@ const PaymentMethod = ({ amount }: { amount: number }) => {
           </p>
         )}
 
-        {paymentMethod === "bank" && amount > 0 && (
+          {paymentMethod === "snap" && amount > 0 && (
           <div className="mt-5">
-            <PaymentElement />
+            <p className="text-sm text-gray-600">
+              You will be redirected to Midtrans Snap payment gateway to complete your payment.
+            </p>
           </div>
         )}
+        
+        {paymentMethod === "bank_transfer" && amount > 0 && (
+          <div className="mt-5">
+            <BankSelection
+              selectedBank={selectedBank}
+              onBankSelect={handleBankSelect}
+              disabled={false}
+            />
+          </div>
+        )}
+        
         {paymentMethod === "cod" && (
           <p className="mt-5 text-green">
             You have selected Cash on Delivery. Your order will be processed and
@@ -82,38 +102,35 @@ const PaymentMethod = ({ amount }: { amount: number }) => {
 export default PaymentMethod;
 
 type CardProps = {
-  method: "bank" | "cod";
+  method: "snap" | "cod" | "bank_transfer";
 };
-// type CardProps = {
-//   method: "bank" | "cod" | "paypal";
-// };
 
 function PaymentMethodCard({ method }: CardProps) {
   const data = {
-    bank: {
-      name: "Stripe",
+    bank_transfer: {
+      name: "Transfer Bank",
       image: {
-        src: "/images/checkout/stripe.svg",
+        src: "/images/checkout/bank-transfer.svg",
+        width: 75,
+        height: 20,
+      },
+    },
+    snap: {
+      name: "Other Payments",
+      image: {
+        src: "/images/checkout/midtrans.svg",
         width: 75,
         height: 20,
       },
     },
     cod: {
-      name: "Cash on delivery",
+      name: "Bayar COD",
       image: {
         src: "/images/checkout/cash.svg",
         width: 21,
         height: 21,
       },
     },
-    // paypal: {
-    //   name: "Paypal",
-    //   image: {
-    //     src: "/images/checkout/paypal.svg",
-    //     width: 75,
-    //     height: 20,
-    //   },
-    // },
   };
 
   return (

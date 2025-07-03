@@ -207,7 +207,7 @@ const MainHeader = ({ headerData }: IProps) => {
                   </div>
                   <div>
                     <div className="hidden sm:block text-xs text-gray-400 text-left">CART</div>
-                    <span className="text-sm sm:text-base font-semibold whitespace-nowrap">Rp 1800</span>
+                    <span className="text-sm sm:text-base font-semibold whitespace-nowrap">Rp {totalPrice}</span>
                   </div>
                 </button>
               </div>

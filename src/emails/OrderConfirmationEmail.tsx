@@ -60,19 +60,19 @@ export const OrderConfirmationEmail = ({
               width={150}
               style={logo}
             />
-            <Heading style={h1}>Order Confirmation</Heading>
+            <Heading style={h1}>Konfirmasi Pesanan Anda</Heading>
           </Section>
 
           <Section style={content}>
-            <Text style={text}>Hi {customerName},</Text>
+            <Text style={text}>Hello, {customerName},</Text>
             <Text style={text}>
-              Thank you for your order! We&apos;re excited to let you know that your order #{orderNumber} has been successfully placed.
+              Terima kasih telah memesan di {siteName}! Kami dengan senang hati memberitahukan bahwa pesanan Anda #{orderNumber} telah berhasil dibuat. Segera lakukan pembayaran melalui link yang telah kami sediakan di laman website kami.
             </Text>
 
             <Section style={orderDetails}>
-              <Heading style={h3}>Order Details</Heading>
+              <Heading style={h3}>Detail Pesanan</Heading>
               <Text style={text}>
-                <strong>Order Date:</strong> {orderDate}
+                <strong>Tanggal Pesanan:</strong> {orderDate}
               </Text>
               <Text style={text}>
                 <strong>Item(s):</strong>
@@ -86,7 +86,7 @@ export const OrderConfirmationEmail = ({
                 <strong>Total:</strong> ${totalAmount}
               </Text>
               <Text style={text}>
-                <strong>Shipping Address:</strong>
+                <strong>Alamat Pengiriman:</strong>
               </Text>
               <Text style={addressText}>
                 {shippingAddress.name}<br />
@@ -97,19 +97,19 @@ export const OrderConfirmationEmail = ({
             </Section>
 
             <Text style={text}>
-              We&apos;ll notify you once your order ships with tracking details.
+              Kami akan memberi tahu Anda setelah pesanan Anda dikirim dengan detail pengiriman.
             </Text>
 
             <Section style={buttonContainer}>
               <Button style={button} href={`${process.env.SITE_URL}/my-account/orders`}>
-                View Order
+                Lihat Pesanan
               </Button>
             </Section>
           </Section>
 
           <Section style={footer}>
             <Text style={footerText}>
-              Need help? Contact us at{" "}
+              Butuh bantuan? Hubungi kami melalui{" "}
               <Link href={`mailto:${supportEmail}`} style={link}>
                 {supportEmail}
               </Link>

@@ -118,7 +118,7 @@ const SingleItem = ({ item }: { item: Product }) => {
         <div className="absolute right-0 bottom-0  w-full flex flex-col gap-2 p-5.5 ease-linear duration-300 group-hover:translate-x-0 translate-x-full">
           <ActionBtn
             handleClick={handleQuickViewUpdate}
-            text="Quick View"
+            text="Lihat Detail"
             icon={"quick-view"}
           />
 
@@ -129,7 +129,7 @@ const SingleItem = ({ item }: { item: Product }) => {
               handleClick={() => {
                 handleAddToCart();
               }}
-              text="Add to cart"
+              text="Masukkan Keranjang"
               icon="cart"
               isDisabled={item.quantity < 1 ? true : false}
             />
@@ -137,7 +137,7 @@ const SingleItem = ({ item }: { item: Product }) => {
 
           <ActionBtn
             handleClick={handleItemToWishList}
-            text="Add to Wishlist"
+            text="Tambahkan ke Wishlist"
             icon="wishlist"
             addedToWishlist={isAlradyWishListed}
           />

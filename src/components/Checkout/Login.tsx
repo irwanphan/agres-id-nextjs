@@ -27,7 +27,9 @@ const Login = () => {
       if (res?.error) {
         toast.error(res?.error);
       } else if (res?.ok) {
-        toast.success("Sign in Successful!");
+        toast.success("Sign in Successful! Redirecting to dashboard...", {
+          duration: 3000,
+        });
         form.reset();
 
         router.push("/my-account");

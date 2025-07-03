@@ -18,7 +18,7 @@ const TestimonialsHeader = ({
     <div className="flex items-center justify-between mb-10">
       <div>
         <h2 className="text-xl font-semibold xl:text-heading-5 text-dark">
-          User Feedbacks
+          Feedback Pelanggan Agres ID
         </h2>
       </div>
 

@@ -28,7 +28,9 @@ const Signin = () => {
         if (callback?.error) {
           toast.error(callback?.error);
         } else if (callback?.ok) {
-          toast.success("Sign in Successful!");
+          toast.success("Sign in Successful! Redirecting to dashboard...", {
+            duration: 3000,
+          });
           reset();
           router.refresh();
         }
