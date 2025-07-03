@@ -46,7 +46,8 @@ export type CheckoutInput = {
     firstName: string;
     lastName?: string;
     companyName?: string;
-    regionName: string;
+    // regionName: string;
+    province: string;
     address: {
       street: string;
       apartment?: string;

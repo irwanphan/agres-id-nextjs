@@ -6,6 +6,7 @@ import { useCheckoutForm } from "./form";
 import { ChevronDown } from "./icons";
 import { useSession } from "next-auth/react";
 import { splitName } from "@/utils/splitName";
+import RajaOngkirProvinceDatalist from "./RajaOngkirProvinceDatalist";
 
 export default function Billing() {
   const { register, errors, control } = useCheckoutForm();
@@ -77,16 +78,8 @@ export default function Billing() {
         </div>
 
         <div>
-          <label
-            htmlFor="regionName"
-            className="block mb-1.5 text-sm text-gray-6"
-          >
-            Region
-            <span className="text-red">*</span>
-          </label>
-
-          <div className="relative">
-            <select
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {/* <select
               {...register("billing.regionName", { required: true })}
               id="regionName"
               className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
@@ -99,12 +92,13 @@ export default function Billing() {
               <option value="australia">Australia</option>
               <option value="america">America</option>
               <option value="england">England</option>
-            </select>
+            </select> */}
+            <RajaOngkirProvinceDatalist 
+              name="billing.province" 
+              register={register} 
+              error={errors.billing?.province} />
           </div>
 
-          {errors.billing?.regionName && (
-            <p className="text-sm text-red mt-1.5">Region is required</p>
-          )}
         </div>
 
         <div>
