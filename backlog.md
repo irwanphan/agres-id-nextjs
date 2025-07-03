@@ -13,11 +13,20 @@ Midtrans Integration
 - [] Email notification template to user when order is canceled
 - [] Email notification template to user when order is shipped
 
+RajaOngkir Integration
+- [ok] Integration to set Country and City on Billing detail using v1
+- [ok] Integration to set destination city on Shipping detail using v2
+- [ok] Create options
+- [] Repack using modular option
+- [ok] Test Rajaongkir API
+- [] Fixcheckout doesn't have weight to calculate shipping cost
+
 Checkout Page
-- [] fix: Autofill name show Full Name as First Name
-- [] Region select box cannot use directional arrow to select region
-- [] fix: email is prefilled with the email of the user who is logged in, but checkout is failed with email not filled
+- [ok] fix: Autofill name show Full Name as First Name
+- [ok] Region select box cannot use directional arrow to select region
+- [ok] fix: email is prefilled with the email of the user who is logged in, but checkout is failed with email not filled
 - [] Page for user to check order status based on Order ID
+- [] Calculate total with shipping cost
 
 RBAC / Fine Grained Access Control
 - [] Add RBAC / Fine Grained Access Control
@@ -28,13 +37,14 @@ Admin Page
 - [] Restrictions: Finished cannot be Canceled or set to Processing, Canceled cannot be set to Processing
 - [] Use button to set payment status to Paid or Failed from Pending
 - [] Button to set paid/failed can only be accessed by finance team
+- [] FIx admin page padding and off-scroll caused by double height of container
 
 Auth
-- [] fix: after success login, user is being redirected, but no information is shown on the page when loading and might confuse users
+- [ok] fix: after success login, user is being redirected, but no information is shown on the page when loading and might confuse users
 - [] Email verification is not implemented yet, need to set verificationUrl, clue in WelcomeEmail.tsx
 
 Overview
-- [] Use Indonesian language and currency symbol
+- [ok] Use Indonesian language and currency symbol
 
 Footer
 - [] Social links can be dynamic from the database and edited on admin page
