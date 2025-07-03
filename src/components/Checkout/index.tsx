@@ -47,7 +47,8 @@ export default function CheckoutMain() {
           phone: "",
           // regionName: "",
           province: "",
-          town: "",
+          // town: "",
+          city: "",
           createAccount: false,
         },
         shipping: {

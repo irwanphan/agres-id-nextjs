@@ -1,9 +1,8 @@
 'use client';
 
-import { useEffect, useState } from "react";
 import { FieldError } from "react-hook-form";
 
-type Province = {
+export type Province = {
   province_id: string;
   province: string;
 };
@@ -12,19 +11,11 @@ type Props = {
   name: string;
   register: any;
   error?: FieldError;
+  provinces: Province[];
+  setValue: (name: any, value: string) => void;
 };
 
-export default function RajaOngkirProvinceDatalist({ name, register, error }: Props) { 
-  const [provinces, setProvinces] = useState<Province[]>([]);
-
-  useEffect(() => {
-    fetch('/api/rajaongkir/province')
-    .then((res) => res.json())
-    .then((data) => setProvinces(data));
-  }, []);
-
-  console.log(provinces);
-
+export default function RajaOngkirProvinceDatalist({ provinces, name, register, error, setValue }: Props) { 
   return (
     <div>
       <label htmlFor="province">
@@ -33,13 +24,8 @@ export default function RajaOngkirProvinceDatalist({ name, register, error }: Pr
       <input
         list="province-list" 
         id="province" 
-        // {...register("billing.regionName", { required: true })}
-        // {...register(name, {
-        //   required: true,
-        //   validate: (value: string) => provinces.some(province => province.province === value) || "Pilih provinsi yang valid"
-        // })}
         {...register(name, {
-          required: "Province is required",
+          required: true,
           validate: (value: string) =>
             provinces.some(province => province.province === value) || "Pilih provinsi yang valid"
         })}
@@ -48,6 +34,11 @@ export default function RajaOngkirProvinceDatalist({ name, register, error }: Pr
         // autoComplete="on" 
         className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
         placeholder="Silahkan Ketik dan Pilih Provinsi..."
+        onBlur={e => {
+          const selected = provinces.find(p => p.province === e.target.value);
+          setValue("billing.province", selected ? selected.province : "");
+          setValue("billing.provinceId", selected ? selected.province_id : "");
+        }}
       />
       <datalist id="province-list">
         {provinces.map((province) => (

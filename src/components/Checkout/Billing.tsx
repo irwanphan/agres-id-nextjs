@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { Controller } from "react-hook-form";
 import RajaOngkirProvinceDatalist from "./RajaOngkirProvinceDatalist";
@@ -7,14 +7,34 @@ import { InputGroup } from "../ui/input";
 import { useCheckoutForm } from "./form";
 import { splitName } from "@/utils/splitName";
 import { CheckMarkIcon } from "@/assets/icons";
+import RajaOngkirCityDatalist from "./RajaOngkirCityDatalist";
 // import { ChevronDown } from "./icons";
+import { Province } from "./RajaOngkirProvinceDatalist";
+import { City } from "./RajaOngkirCityDatalist";
 
 export default function Billing() {
-  const { register, errors, control, setValue } = useCheckoutForm();
+  const { register, errors, control, setValue, watch } = useCheckoutForm();
   const session = useSession();
-  // Split user name for display & submit
-  const userFullName = session.data?.user?.name || "";
-  const { firstName: sessionFirstName, lastName: sessionLastName } = splitName(userFullName);
+  const provinceId = watch("billing.provinceId");
+  const [provinces, setProvinces] = useState<Province[]>([]);
+  const [cities, setCities] = useState<City[]>([]);
+
+  console.log(provinceId);
+
+  useEffect(() => {
+    fetch('/api/rajaongkir/province')
+    .then((res) => res.json())
+    .then((data) => setProvinces(data));
+  }, []);
+
+  useEffect(() => {
+    if (!provinceId) return setCities([]);
+    fetch(`/api/rajaongkir/city?provinceId=${provinceId}`)
+    .then((res) => res.json())
+    .then((data) => setCities(data));
+  }, [provinceId]);
+
+  console.log(cities);
 
   useEffect(() => {
     if (session.data?.user?.name && session.data?.user?.email) {
@@ -104,9 +124,17 @@ export default function Billing() {
               <option value="england">England</option>
             </select> */}
             <RajaOngkirProvinceDatalist 
-              name="billing.province" 
+              provinces={provinces}
+              name="billing.province"
               register={register} 
-              error={errors.billing?.province} />
+              error={errors.billing?.province}
+              setValue={setValue}
+            />
+            <RajaOngkirCityDatalist 
+              cities={cities}
+              name="billing.city" 
+              register={register} 
+              error={errors.billing?.city} />
           </div>
 
         </div>
@@ -140,7 +168,7 @@ export default function Billing() {
           </div>
         </div>
 
-        <div>
+        {/* <div>
           <Controller
             control={control}
             rules={{ required: true }}
@@ -157,7 +185,7 @@ export default function Billing() {
               />
             )}
           />
-        </div>
+        </div> */}
 
         <div>
           <Controller

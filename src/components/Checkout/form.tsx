@@ -48,11 +48,13 @@ export type CheckoutInput = {
     companyName?: string;
     // regionName: string;
     province: string;
+    provinceId: string;
+    city: string;
     address: {
       street: string;
       apartment?: string;
     };
-    town: string;
+    // town: string;
     country?: string;
     phone: string;
     email: string;
