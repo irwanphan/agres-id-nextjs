@@ -11,43 +11,28 @@ import RajaOngkirCityDatalist from "./RajaOngkirCityDatalist";
 // import { ChevronDown } from "./icons";
 import { Province } from "./RajaOngkirProvinceDatalist";
 import { City } from "./RajaOngkirCityDatalist";
-import { useShippingContext } from "./ShippingContext";
 
 export default function Billing() {
   const { register, errors, control, setValue, watch } = useCheckoutForm();
   const session = useSession();
-  // const provinceId = watch("billing.provinceId");
+  const provinceId = watch("billing.provinceId");
   // const cityId = watch("billing.cityId");
-  // const [provinces, setProvinces] = useState<Province[]>([]);
-  // const [cities, setCities] = useState<City[]>([]);
-  const { setDestinationCityId } = useShippingContext();
-  const [citySearch, setCitySearch] = useState("");
-  const [cityOptions, setCityOptions] = useState<any[]>([]);
-  const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(null);
-
+  const [provinces, setProvinces] = useState<Province[]>([]);
+  const [cities, setCities] = useState<City[]>([]);
   // console.log(cityId);
 
-  // useEffect(() => {
-  //   if (cityId) {
-  //     console.log('cityId set to ShippingContext', cityId);
-  //     setDestinationCityId(cityId);
-  //   }
-  // }, [cityId, setDestinationCityId]);
+  useEffect(() => {
+    fetch('/api/rajaongkir/province')
+    .then((res) => res.json())
+    .then((data) => setProvinces(data));
+  }, []);
 
-  // useEffect(() => {
-  //   fetch('/api/rajaongkir/province')
-  //   .then((res) => res.json())
-  //   .then((data) => setProvinces(data));
-  // }, []);
-
-  // useEffect(() => {
-  //   if (!provinceId) return setCities([]);
-  //   fetch(`/api/rajaongkir/city?search=${search}&provinceId=${provinceId}`)
-  //   .then((res) => res.json())
-  //   .then((data) => setCities(data));
-  // }, [provinceId]);
-
-  // console.log(cities);
+  useEffect(() => {
+    if (!provinceId) return setCities([]);
+    fetch(`/api/rajaongkir/city?provinceId=${provinceId}`)
+    .then((res) => res.json())
+    .then((data) => setCities(data));
+  }, [provinceId]);
 
   useEffect(() => {
     if (session.data?.user?.name && session.data?.user?.email) {
@@ -58,56 +43,10 @@ export default function Billing() {
     }
   }, [session.data?.user, setValue])
 
-  useEffect(() => {
-    if (citySearch.length < 3) {
-      setCityOptions([]);
-      return;
-    }
-    if (searchTimeout) clearTimeout(searchTimeout);
-    const timeout = setTimeout(async () => {
-      try {
-        const res = await fetch(`/api/rajaongkir/destination?search=${encodeURIComponent(citySearch)}`);
-        const data = await res.json();
-        setCityOptions(data.data || []);
-      } catch {
-        setCityOptions([]);
-      }
-    }, 400); // 400ms debounce
-    setSearchTimeout(timeout);
-    // Cleanup
-    return () => clearTimeout(timeout);
-  }, [citySearch]);
-
-  // Handler pencarian kota destinasi
-  const handleCitySearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setCitySearch(value);
-    if (value.length < 3) {
-      setCityOptions([]);
-      return;
-    }
-    try {
-      const res = await fetch(`/api/rajaongkir/destination?search=${encodeURIComponent(value)}`);
-      const data = await res.json();
-      setCityOptions(data.data || []);
-    } catch (err) {
-      setCityOptions([]);
-    }
-  };
-
-  // Handler saat user memilih kota dari datalist
-  const handleCitySelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const label = e.target.value;
-    const found = cityOptions.find(opt => opt.label === label);
-    if (found) {
-      setDestinationCityId(String(found.id));
-    }
-  };
-
   return (
     <div className="bg-white shadow-1 rounded-[10px] ">
       <div className="p-6 py-5 border-b border-gray-3">
-        <h2 className="text-lg font-medium text-dark">Detail Pengiriman</h2>
+        <h2 className="text-lg font-medium text-dark">Detail Billing</h2>
       </div>
 
       <div className="p-6 space-y-5">
@@ -181,7 +120,7 @@ export default function Billing() {
             <option value="america">America</option>
             <option value="england">England</option>
           </select> */}
-          {/* <RajaOngkirProvinceDatalist 
+          <RajaOngkirProvinceDatalist 
             provinces={provinces}
             name="billing.province"
             register={register} 
@@ -194,7 +133,7 @@ export default function Billing() {
             register={register} 
             error={errors.billing?.city}
             setValue={setValue}
-          /> */}
+          />
         </div>
 
         <div>
@@ -323,25 +262,7 @@ export default function Billing() {
           </div>
         )}
 
-        <div className="mb-5">
-          <label htmlFor="destination-city-search" className="block mb-1.5 text-sm text-gray-6">
-            Cari Kota Tujuan (API Komerce)
-          </label>
-          <input
-            id="destination-city-search"
-            className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11 focus:border-blue focus:outline-0 placeholder:text-dark-5 w-full py-2.5 px-4 duration-200 focus:ring-0"
-            list="destination-city-options"
-            value={citySearch}
-            onChange={handleCitySearch}
-            onBlur={handleCitySelect}
-            placeholder="Ketik nama kota tujuan..."
-          />
-          <datalist id="destination-city-options">
-            {cityOptions.map(opt => (
-              <option key={opt.id} value={opt.label} />
-            ))}
-          </datalist>
-        </div>
+        
       </div>
     </div>
   );

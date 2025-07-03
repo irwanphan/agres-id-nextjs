@@ -3,21 +3,44 @@ import { Controller } from "react-hook-form";
 import { InputGroup } from "../ui/input";
 import { useCheckoutForm } from "./form";
 import { ChevronDown } from "./icons";
-import { useShippingContext } from "./ShippingContext";
 
 export default function Shipping() {
-  const [dropdown, setDropdown] = useState(false);
+  const [dropdown, setDropdown] = useState(true);
   const { register, control, setValue, watch } = useCheckoutForm();
   const shipToDifferentAddress = watch("shipToDifferentAddress");
   const [selectedCourier, setSelectedCourier] = useState<string>("");
   const [shippingCost, setShippingCost] = useState<number|null>(null);
   const [loadingOngkir, setLoadingOngkir] = useState(false);
-  const {
-    // originCityId,
-    destinationCityId,
-  } = useShippingContext();
 
-  // console.log(originCityId, destinationCityId);
+  const [citySearch, setCitySearch] = useState("");
+  const [cityOptions, setCityOptions] = useState<any[]>([]);
+  const [destinationCityId, setDestinationCityId] = useState<string>("");
+
+  // Handler pencarian kota destinasi
+  const handleCitySearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setCitySearch(value);
+    if (value.length < 3) {
+      setCityOptions([]);
+      return;
+    }
+    try {
+      const res = await fetch(`/api/rajaongkir/destination?search=${encodeURIComponent(value)}`);
+      const data = await res.json();
+      setCityOptions(data.data || []);
+    } catch (err) {
+      setCityOptions([]);
+    }
+  };
+
+  // Handler saat user memilih kota dari datalist
+  const handleCitySelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const label = e.target.value;
+    const found = cityOptions.find(opt => opt.label === label);
+    if (found) {
+      setDestinationCityId(String(found.id));
+    }
+  };
 
   useEffect(() => {
     if (dropdown) {
@@ -30,11 +53,12 @@ export default function Shipping() {
   // Handler untuk fetch ongkir
   const handleCourierChange = async (courier: string) => {
     console.log(destinationCityId);
+
     setSelectedCourier(courier);
     setLoadingOngkir(true);
     setShippingCost(null);
     try {
-      const res = await fetch("/api/rajaongkir/cost", {
+      const res = await fetch("/api/rajaongkir/calculate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -73,120 +97,24 @@ export default function Shipping() {
       {dropdown && (
         <div className="p-6 border-t border-gray-3">
           <div className="mb-5">
-            <label
-              htmlFor="shipping-country-name"
-              className="block mb-1.5 text-sm text-gray-6"
-            >
-              Country/ Region
-              <span className="text-red">*</span>
+            <label htmlFor="destination-city-search" className="block mb-1.5 text-sm text-gray-6">
+              Cari Kota Tujuan (API Komerce)
             </label>
-
-            <div className="relative">
-              <select
-                {...register("shipping.countryName", {
-                  required: shipToDifferentAddress
-                    ? "Country is required"
-                    : false,
-                })}
-                id="shipping-country-name"
-                className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
-              >
-                <option value="">Select a country</option>
-                <option value="australia">Australia</option>
-                <option value="america">America</option>
-                <option value="england">England</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="mb-5">
-            <Controller
-              control={control}
-              name="shipping.address.street"
-              render={({ field }) => (
-                <InputGroup
-                  label="Street Address"
-                  placeholder="House number and street name"
-                  required
-                  name={field.name}
-                  value={field.value}
-                  onChange={field.onChange}
-                />
-              )}
+            <input
+              id="destination-city-search"
+              className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11 focus:border-blue focus:outline-0 placeholder:text-dark-5 w-full py-2.5 px-4 duration-200 focus:ring-0"
+              list="destination-city-options"
+              value={citySearch}
+              onChange={handleCitySearch}
+              onBlur={handleCitySelect}
+              placeholder="Ketik nama kota tujuan..."
             />
-
-            <div className="mt-5">
-              <input
-                type="text"
-                {...register("shipping.address.apartment")}
-                placeholder="Apartment, suite, unit, etc. (optional)"
-                className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
-              />
-            </div>
+            <datalist id="destination-city-options">
+              {cityOptions.map(opt => (
+                <option key={opt.id} value={opt.label} />
+              ))}
+            </datalist>
           </div>
-
-          <div className="mb-5">
-            <Controller
-              control={control}
-              name="shipping.town"
-              render={({ field }) => (
-                <InputGroup
-                  label="Town/City"
-                  required
-                  name={field.name}
-                  value={field.value}
-                  onChange={field.onChange}
-                />
-              )}
-            />
-          </div>
-
-          <div className="mb-5">
-            <Controller
-              control={control}
-              name="shipping.country"
-              render={({ field }) => (
-                <InputGroup
-                  label="Country"
-                  name={field.name}
-                  value={field.value}
-                  onChange={field.onChange}
-                />
-              )}
-            />
-          </div>
-
-          <div className="mb-5">
-            <Controller
-              control={control}
-              name="shipping.phone"
-              render={({ field }) => (
-                <InputGroup
-                  type="tel"
-                  label="Phone"
-                  required
-                  name={field.name}
-                  value={field.value}
-                  onChange={field.onChange}
-                />
-              )}
-            />
-          </div>
-
-          <Controller
-            control={control}
-            name="shipping.email"
-            render={({ field }) => (
-              <InputGroup
-                label="Email Address"
-                type="email"
-                required
-                name={field.name}
-                value={field.value}
-                onChange={field.onChange}
-              />
-            )}
-          />
 
           <div className="mb-5">
             <label className="block mb-1.5 text-sm text-gray-6">Kurir</label>

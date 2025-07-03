@@ -10,6 +10,11 @@ export async function POST(req: NextRequest) {
 
   // const origin = 155 // Rajaongkir ID for Jakarta Utara, API v1
   const origin = 17650 // Rajaongkir ID for Jakarta Utara, API v2
+  
+  // console.log('origin: ', origin);
+  // console.log('destination: ', destination);
+  // console.log('weight: ', weight);
+  // console.log('courier: ', courier);
 
   const response = await fetch('https://rajaongkir.komerce.id/api/v1/calculate/domestic-cost', {
     method: 'POST',
@@ -23,10 +28,11 @@ export async function POST(req: NextRequest) {
       destination,
       weight,
       courier,
-      price: 'lowest',
+      // price: 'lowest',
     }),
   });
 
+  console.log('response: ', response);
   const data = await response.json();
   return NextResponse.json(data);
 }
