@@ -128,7 +128,9 @@ export default function Shipping() {
                   value="free" 
                   checked={selectedCourier==="free"} 
                   onChange={()=>handleCourierChange("free")} />
-                  Pickup di Gerai <strong>AGRES</strong>
+                  <div className="rounded-md border-[0.5px] shadow-1 border-gray-4 py-3.5 px-5 ease-out duration-200 hover:bg-gray-2 hover:border-transparent hover:shadow-none peer-checked:shadow-none peer-checked:border-transparent peer-checked:bg-gray-2">
+                    Pickup di Gerai <strong>AGRES</strong>
+                  </div>
               </label>
               <label className="flex items-center gap-2">
                 <input 

@@ -11,7 +11,7 @@ export default function Notes() {
       <textarea
         {...register("notes")}
         id="notes"
-        rows={5}
+        rows={3}
         placeholder="Catatan terkait pesanan Anda, misalnya catatan khusus untuk pengiriman."
         className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3   focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
       />
