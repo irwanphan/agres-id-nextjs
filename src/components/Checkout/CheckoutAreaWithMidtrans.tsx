@@ -14,6 +14,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useShoppingCart } from "use-shopping-cart";
+import { formatPrice } from "@/utils/formatePrice";
 
 const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
   const { handleSubmit } = useCheckoutForm();
@@ -253,7 +254,7 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
                   type="submit"
                   className="flex justify-center w-full px-6 py-3 font-medium text-white duration-200 ease-out rounded-md bg-blue hover:bg-blue-dark "
                 >
-                  {!loading ? `Pay $${amount}` : "Processing..."}
+                  {!loading ? `Bayar ${formatPrice(amount)}` : "Processing..."}
                 </button>
               </div>
             </div>

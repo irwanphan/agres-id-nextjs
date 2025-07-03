@@ -65,10 +65,10 @@ const BankSelection: React.FC<BankSelectionProps> = ({
   return (
     <div className={`space-y-3 ${className}`}>
       <h3 className="text-lg font-semibold text-gray-900 mb-4">
-        Select Bank for Transfer
+        Pilih Bank untuk Transfer
       </h3>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 gap-3">
         {banks.map((bank) => (
           <BankOptionCard
             key={bank.id}
@@ -83,7 +83,7 @@ const BankSelection: React.FC<BankSelectionProps> = ({
       {selectedBank && (
         <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
           <p className="text-sm text-blue-800">
-            You will receive Virtual Account instructions for{' '}
+            Anda akan menerima instruksi pembayaran via {' '}
             <span className="font-semibold">
               {banks.find(b => b.code === selectedBank)?.name}
             </span>
@@ -113,9 +113,9 @@ const BankOptionCard: React.FC<BankOptionCardProps> = ({
       onClick={onSelect}
       disabled={disabled}
       className={`
-        relative w-full p-4 border-2 rounded-lg transition-all duration-200
+        relative w-full p-3 border-1 rounded-lg transition-all duration-200
         ${isSelected 
-          ? 'border-blue-500 bg-blue-50 shadow-md' 
+          ? 'border-blue-500 bg-blue-light-5 shadow-md' 
           : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm'
         }
         ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
@@ -129,16 +129,16 @@ const BankOptionCard: React.FC<BankOptionCardProps> = ({
             alt={`${bank.name} logo`}
             width={40}
             height={40}
-            className="w-10 h-10 object-contain"
+            className="w-16 h-10 object-contain"
           />
         </div>
         
         <div className="flex-1 text-left">
-          <h4 className="font-medium text-gray-900 text-sm">
+          <p className="font-medium text-gray-7 text-md">
             {bank.name}
-          </h4>
+          </p>
           {bank.description && (
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-gray-6 mt-1">
               {bank.description}
             </p>
           )}
