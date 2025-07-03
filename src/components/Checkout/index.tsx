@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { EmptyCartIcon } from "@/assets/icons";
 import CheckoutAreaWithMidtrans from "./CheckoutAreaWithMidtrans";
+import { splitName } from "@/utils/splitName";
 
 // Stripe
 // import { Elements } from "@stripe/react-stripe-js";
@@ -41,8 +42,8 @@ export default function CheckoutMain() {
           companyName: "",
           country: "",
           email: session.data?.user?.email || "",
-          firstName: session.data?.user?.name || "",
-          lastName: "",
+          firstName: session.data?.user?.name ? splitName(session.data.user.name).firstName : "",
+          lastName: session.data?.user?.name ? splitName(session.data.user.name).lastName : "",
           phone: "",
           regionName: "",
           town: "",

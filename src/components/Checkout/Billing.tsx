@@ -5,15 +5,19 @@ import { InputGroup } from "../ui/input";
 import { useCheckoutForm } from "./form";
 import { ChevronDown } from "./icons";
 import { useSession } from "next-auth/react";
+import { splitName } from "@/utils/splitName";
 
 export default function Billing() {
   const { register, errors, control } = useCheckoutForm();
   const session = useSession();
+  // Split user name for display & submit
+  const userFullName = session.data?.user?.name || "";
+  const { firstName: sessionFirstName, lastName: sessionLastName } = splitName(userFullName);
 
   return (
     <div className="bg-white shadow-1 rounded-[10px] ">
       <div className="p-6 py-5 border-b border-gray-3">
-        <h2 className="text-lg font-medium text-dark">Billing details</h2>
+        <h2 className="text-lg font-medium text-dark">Detail Pengiriman</h2>
       </div>
 
       <div className="p-6 space-y-5">
@@ -30,7 +34,7 @@ export default function Billing() {
                 error={!!fieldState.error}
                 errorMessage="First name is required"
                 name={field.name}
-                value={session.data?.user?.name || field.value}
+                value={session.data?.user?.name ? sessionFirstName : field.value}
                 onChange={field.onChange}
                 readOnly={!!session.data?.user?.name}
               />
@@ -45,11 +49,13 @@ export default function Billing() {
               <InputGroup
                 label="Last Name"
                 placeholder="Doe"
+                required
                 error={!!fieldState.error}
                 errorMessage="Last name is required"
                 name={field.name}
-                value={field.value}
+                value={session.data?.user?.name ? sessionLastName : field.value}
                 onChange={field.onChange}
+                readOnly={!!session.data?.user?.name}
               />
             )}
           />
