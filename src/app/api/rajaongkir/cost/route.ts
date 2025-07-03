@@ -1,7 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
-  const { origin, destination, weight, courier } = await req.json();
+  const { 
+    // origin, 
+    destination, 
+    weight, 
+    courier,
+  } = await req.json();
+
+  const origin = 155 // Rajaongkir ID for Jakarta Utara, API v1
 
   const response = await fetch('https://api.rajaongkir.com/starter/cost', {
     method: 'POST',

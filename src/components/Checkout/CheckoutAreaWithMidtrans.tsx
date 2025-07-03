@@ -238,8 +238,8 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
           <form onSubmit={handleSubmit(handleCheckout)}>
             <div className="grid gap-6 lg:grid-cols-5">
               <div className="w-full space-y-6 lg:col-span-3">
-                <Billing />
                 <ShippingProvider>
+                  <Billing />
                   <Shipping />
                 </ShippingProvider>
                 <Notes />

@@ -12,9 +12,12 @@ export default function Shipping() {
   const [selectedCourier, setSelectedCourier] = useState<string>("");
   const [shippingCost, setShippingCost] = useState<number|null>(null);
   const [loadingOngkir, setLoadingOngkir] = useState(false);
-  const { originCityId, destinationCityId } = useShippingContext();
+  const {
+    // originCityId,
+    destinationCityId,
+  } = useShippingContext();
 
-  console.log(originCityId, destinationCityId);
+  // console.log(originCityId, destinationCityId);
 
   useEffect(() => {
     if (dropdown) {
@@ -26,6 +29,7 @@ export default function Shipping() {
 
   // Handler untuk fetch ongkir
   const handleCourierChange = async (courier: string) => {
+    console.log(destinationCityId);
     setSelectedCourier(courier);
     setLoadingOngkir(true);
     setShippingCost(null);
@@ -34,7 +38,7 @@ export default function Shipping() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          origin: originCityId,
+          // origin: originCityId,
           destination: destinationCityId,
           weight: 1000,
           courier,

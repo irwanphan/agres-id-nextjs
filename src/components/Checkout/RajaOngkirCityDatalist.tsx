@@ -13,9 +13,10 @@ type Props = {
   register: any;
   error?: FieldError;
   cities: City[];
+  setValue: (name: any, value: string) => void;
 };
 
-export default function RajaOngkirCityDatalist({ name, register, error, cities }: Props) { 
+export default function RajaOngkirCityDatalist({ name, register, error, cities, setValue }: Props) { 
   return (
     <div>
       <label htmlFor="province">
@@ -34,6 +35,11 @@ export default function RajaOngkirCityDatalist({ name, register, error, cities }
         // autoComplete="on" 
         className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
         placeholder="Silahkan Ketik dan Pilih Kota..."
+        onBlur={e => {
+          const selected = cities.find(c => c.city_name === e.target.value);
+          setValue("billing.city", selected ? selected.city_name : "");
+          setValue("billing.cityId", selected ? selected.city_id : "");
+        }}
       />
       <datalist id="city-list">
         {cities.map((city) => (

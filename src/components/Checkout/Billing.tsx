@@ -17,37 +17,34 @@ export default function Billing() {
   const { register, errors, control, setValue, watch } = useCheckoutForm();
   const session = useSession();
   const provinceId = watch("billing.provinceId");
-  const citySelected = watch("billing.city");
+  const cityId = watch("billing.cityId");
   const [provinces, setProvinces] = useState<Province[]>([]);
   const [cities, setCities] = useState<City[]>([]);
   const { setDestinationCityId } = useShippingContext();
 
+  console.log(cityId);
+
   useEffect(() => {
-    if (citySelected) {
-      fetch(`/api/rajaongkir/destination?search=${citySelected}`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setDestinationCityId(data);
-      });
+    if (cityId) {
+      console.log('cityId set to ShippingContext', cityId);
+      setDestinationCityId(cityId);
     }
-  }, [citySelected]);
-  
+  }, [cityId, setDestinationCityId]);
+
   useEffect(() => {
     fetch('/api/rajaongkir/province')
     .then((res) => res.json())
     .then((data) => setProvinces(data));
   }, []);
-  
+
   useEffect(() => {
     if (!provinceId) return setCities([]);
     fetch(`/api/rajaongkir/city?provinceId=${provinceId}`)
     .then((res) => res.json())
     .then((data) => setCities(data));
   }, [provinceId]);
-  
-  // console.log(cities);
-  // console.log(citySelected);
+
+  console.log(cities);
 
   useEffect(() => {
     if (session.data?.user?.name && session.data?.user?.email) {
@@ -147,6 +144,7 @@ export default function Billing() {
             name="billing.city" 
             register={register} 
             error={errors.billing?.city}
+            setValue={setValue}
           />
         </div>
 

@@ -1,13 +1,15 @@
 import React, { createContext, useContext, useState } from "react";
 
+// TODO: originCityId is set static, need to be changed to dynamic later ...
+
 interface ShippingContextProps {
-  originCityId: string;
+  // originCityId: string;
   destinationCityId: string;
   setDestinationCityId: (id: string) => void;
 }
 
 const ShippingContext = createContext<ShippingContextProps>({
-  originCityId: "17650", // Jakarta Utara
+  // originCityId: "17650", // Jakarta Utara
   destinationCityId: "",
   setDestinationCityId: () => {},
 });
@@ -17,7 +19,7 @@ export const ShippingProvider = ({ children }: { children: React.ReactNode }) =>
   // Nanti bisa dihubungkan ke form address
   return (
     <ShippingContext.Provider value={{
-      originCityId: "17650",
+      // originCityId: "17650",
       destinationCityId,
       setDestinationCityId,
     }}>
