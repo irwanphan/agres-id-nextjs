@@ -16,14 +16,14 @@ export default function Orders() {
   return (
     <div className="bg-white shadow-1 rounded-[10px]">
       <h3 className="px-4 py-5 text-lg font-medium border-b text-dark border-gray-3 sm:px-6">
-        Your Order
+        Pesanan Anda
       </h3>
 
       <div className="px-6 pt-1 pb-6">
         <table className="w-full text-dark">
           <thead>
             <tr className="border-b border-gray-3">
-              <th className="py-5 text-base font-medium text-left">Product</th>
+              <th className="py-5 text-base font-medium text-left">Produk</th>
               <th className="py-5 text-base font-medium text-right">
                 Subtotal
               </th>
@@ -43,7 +43,7 @@ export default function Orders() {
             ) : (
               <tr>
                 <td className="py-5 text-center" colSpan={2}>
-                  No items in cart
+                  Tidak ada produk di keranjang
                 </td>
               </tr>
             )}
@@ -55,7 +55,7 @@ export default function Orders() {
                   <td className="py-5">
                     <div className="flex items-center gap-2">
                       <IconTruck className="h-4 w-4 text-blue" />
-                      <span>Shipping Fee</span>
+                      <span>Ongkos Kirim</span>
                     </div>
                     {shippingMethod.courier && (
                       <div className="text-xs text-gray-5 mt-1 ml-6">

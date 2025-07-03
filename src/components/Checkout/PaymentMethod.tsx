@@ -17,7 +17,7 @@ const PaymentMethod = ({ amount }: { amount: number }) => {
   return (
     <div className="bg-white shadow-1 rounded-[10px]">
       <div className="px-6 py-5 border-b border-gray-3">
-        <h3 className="text-lg font-medium text-dark">Payment Method</h3>
+        <h3 className="text-lg font-medium text-dark">Metode Pembayaran</h3>
       </div>
 
       <div className="p-6">
