@@ -84,7 +84,7 @@ export default function Shipping() {
         onClick={() => setDropdown(!dropdown)}
         className="cursor-pointer flex items-center gap-2.5 font-medium text-lg text-dark py-5 px-6 "
       >
-        Ship to a different address?
+        Detil Alamat Pengiriman
         <ChevronDown
           className={`fill-current ease-out duration-200 ${
             dropdown && "rotate-180"
