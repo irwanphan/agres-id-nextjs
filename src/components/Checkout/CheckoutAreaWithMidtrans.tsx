@@ -239,14 +239,13 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
               <div className="w-full space-y-6 lg:col-span-3">
                 <Billing />
                 <Shipping />
-                <Notes />
               </div>
               <div className="w-full space-y-6 lg:col-span-2">
                 <Orders />
+                <Notes />
+                {/* <Coupon /> */}
+                {/* <ShippingMethod /> */}
 
-                <Coupon />
-
-                <ShippingMethod />
 
                 <PaymentMethod amount={amount} />
 

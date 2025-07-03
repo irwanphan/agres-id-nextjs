@@ -4,6 +4,8 @@ import { InputGroup } from "../ui/input";
 import { useCheckoutForm } from "./form";
 import { ChevronDown } from "./icons";
 
+import { SHIPPING_METHODS, ShippingMethodsCard } from "./ShippingMethod";
+
 export default function Shipping() {
   const [dropdown, setDropdown] = useState(true);
   const { register, control, setValue, watch } = useCheckoutForm();
@@ -118,12 +120,33 @@ export default function Shipping() {
 
           <div className="mb-5">
             <label className="block mb-1.5 text-sm text-gray-6">Kurir</label>
-            <div className="flex gap-4">
+            <div className="grid grid-cols-2 gap-4">
               <label className="flex items-center gap-2">
-                <input type="radio" name="courier" value="jne" checked={selectedCourier==="jne"} onChange={()=>handleCourierChange("jne")} /> JNE
+                <input 
+                  type="radio" 
+                  name="courier" 
+                  value="free" 
+                  checked={selectedCourier==="free"} 
+                  onChange={()=>handleCourierChange("free")} />
+                  Pickup di Gerai <strong>AGRES</strong>
               </label>
               <label className="flex items-center gap-2">
-                <input type="radio" name="courier" value="jnt" checked={selectedCourier==="jnt"} onChange={()=>handleCourierChange("jnt")} /> JNT
+                <input 
+                  type="radio" 
+                  name="courier" 
+                  value="jne" 
+                  checked={selectedCourier==="jne"} 
+                  onChange={()=>handleCourierChange("jne")} />
+                  { ShippingMethodsCard({method: "jne"})}
+              </label>
+              <label className="flex items-center gap-2">
+                <input 
+                  type="radio" 
+                  name="courier" 
+                  value="sicepat" 
+                  checked={selectedCourier==="sicepat"} 
+                  onChange={()=>handleCourierChange("sicepat")} />
+                  { ShippingMethodsCard({method: "sicepat"})}
               </label>
             </div>
             {loadingOngkir && <div className="text-sm text-gray-500 mt-2">Menghitung ongkir...</div>}
