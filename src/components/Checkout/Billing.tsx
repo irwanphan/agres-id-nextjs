@@ -1,19 +1,29 @@
 "use client";
-import { CheckMarkIcon } from "@/assets/icons";
+import { useEffect } from "react";
+import { useSession } from "next-auth/react";
 import { Controller } from "react-hook-form";
+import RajaOngkirProvinceDatalist from "./RajaOngkirProvinceDatalist";
 import { InputGroup } from "../ui/input";
 import { useCheckoutForm } from "./form";
-import { ChevronDown } from "./icons";
-import { useSession } from "next-auth/react";
 import { splitName } from "@/utils/splitName";
-import RajaOngkirProvinceDatalist from "./RajaOngkirProvinceDatalist";
+import { CheckMarkIcon } from "@/assets/icons";
+// import { ChevronDown } from "./icons";
 
 export default function Billing() {
-  const { register, errors, control } = useCheckoutForm();
+  const { register, errors, control, setValue } = useCheckoutForm();
   const session = useSession();
   // Split user name for display & submit
   const userFullName = session.data?.user?.name || "";
   const { firstName: sessionFirstName, lastName: sessionLastName } = splitName(userFullName);
+
+  useEffect(() => {
+    if (session.data?.user?.name && session.data?.user?.email) {
+      const { firstName, lastName } = splitName(session.data.user.name);
+      setValue("billing.firstName", firstName);
+      setValue("billing.lastName", lastName);
+      setValue("billing.email", session.data.user.email);
+    }
+  }, [session.data?.user, setValue])
 
   return (
     <div className="bg-white shadow-1 rounded-[10px] ">
@@ -35,7 +45,7 @@ export default function Billing() {
                 error={!!fieldState.error}
                 errorMessage="First name is required"
                 name={field.name}
-                value={session.data?.user?.name ? sessionFirstName : field.value}
+                value={field.value}
                 onChange={field.onChange}
                 readOnly={!!session.data?.user?.name}
               />
@@ -54,7 +64,7 @@ export default function Billing() {
                 error={!!fieldState.error}
                 errorMessage="Last name is required"
                 name={field.name}
-                value={session.data?.user?.name ? sessionLastName : field.value}
+                value={field.value}
                 onChange={field.onChange}
                 readOnly={!!session.data?.user?.name}
               />
@@ -199,7 +209,7 @@ export default function Billing() {
                 error={!!fieldState.error}
                 errorMessage="Email is required"
                 name={field.name}
-                value={session?.data?.user?.email || field.value}
+                value={field.value}
                 onChange={field.onChange}
                 readOnly={!!session?.data?.user?.email}
               />
