@@ -6,6 +6,7 @@ import { useCheckoutForm } from "./form";
 import { rajaOngkirService, RajaOngkirDestination, RajaOngkirShippingCost } from "../../lib/rajaongkir";
 import { IconMapPin, IconPackage, IconTruck, IconLoader, IconSearch, IconEdit } from "@tabler/icons-react";
 import { formatPrice, getDestinationDisplayText, getCourierIcon, formatEtd } from "../../utils/rajaongkir";
+import Image from "next/image";
 
 export default function RajaOngkirShipping() {
   const { control, setValue, watch } = useCheckoutForm();
@@ -403,7 +404,7 @@ export default function RajaOngkirShipping() {
                       <div className="flex items-center justify-between flex-1">
                         <div className="flex items-center">
                           <div className="pr-4">
-                            <img
+                            <Image
                               src={getCourierIcon(option.courier)}
                               alt={`Logo ${option.courier}`}
                               className="h-8 w-auto object-contain"

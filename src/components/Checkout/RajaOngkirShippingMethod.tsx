@@ -6,6 +6,7 @@ import { RadioInput } from '../ui/input/radio';
 import { useCheckoutForm } from './form';
 import { rajaOngkirService, RajaOngkirShippingCost, RajaOngkirDestination } from '../../lib/rajaongkir';
 import { IconTruck, IconClock, IconLoader } from '@tabler/icons-react';
+import Image from 'next/image';
 
 interface RajaOngkirShippingMethodProps {
   originDestination?: RajaOngkirDestination;
@@ -187,7 +188,7 @@ function ShippingOptionCard({
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <div className="pr-4">
-            <img
+            <Image
               src={courierIcon}
               alt={`Logo ${option.courier}`}
               className="h-8 w-auto object-contain"

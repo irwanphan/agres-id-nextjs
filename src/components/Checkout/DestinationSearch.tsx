@@ -27,7 +27,7 @@ export default function DestinationSearch({
   const [destinations, setDestinations] = useState<RajaOngkirDestination[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedDestination, setSelectedDestination] = useState<RajaOngkirDestination | null>(null);
-  const searchTimeoutRef = useRef<NodeJS.Timeout>();
+  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
