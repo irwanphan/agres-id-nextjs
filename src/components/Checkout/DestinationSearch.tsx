@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect, useRef } from 'react';
 import { Controller } from 'react-hook-form';
 import { useCheckoutForm } from './form';

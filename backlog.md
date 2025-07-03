@@ -9,7 +9,7 @@ Midtrans Integration
 - [] Test snap payment
 - [] Cancel placed order by user after 1 hours
 - [] Email notification template to user when order is placed with payment link
-- [] Link to success page after order is placed
+- [] Link to success page after order is placed to enable revisit the payment instruction
 - [] Email notification template to user when order is canceled
 - [] Email notification template to user when order is shipped
 

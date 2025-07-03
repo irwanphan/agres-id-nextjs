@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect } from 'react';
 import { Controller } from 'react-hook-form';
 import { RadioInput } from '../ui/input/radio';

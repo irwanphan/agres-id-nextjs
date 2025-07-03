@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react';
 import DestinationSearch from './DestinationSearch';
 import { RajaOngkirDestination } from '../../lib/rajaongkir';
