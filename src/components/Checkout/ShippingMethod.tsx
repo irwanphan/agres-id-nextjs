@@ -3,16 +3,14 @@ import { Controller } from "react-hook-form";
 import { RadioInput } from "../ui/input/radio";
 import { useCheckoutForm } from "./form";
 
-const SHIPPING_METHODS = {
-  fedex: {
-    name: "Fedex",
-    price: 10.99,
-    image: "/images/checkout/fedex.svg",
+export const SHIPPING_METHODS = {
+  jne: {
+    name: "jne",
+    image: "/images/checkout/jne.svg",
   },
-  dhl: {
-    name: "DHL",
-    price: 12.5,
-    image: "/images/checkout/dhl.svg",
+  sicepat: {
+    name: "sicepat",
+    image: "/images/checkout/sicepat.svg",
   },
 };
 
@@ -39,7 +37,7 @@ export default function ShippingMethod() {
                 onChange={(e) =>
                   field.onChange({
                     name: e.currentTarget.value,
-                    price: 0,
+                    // price: 0,
                   })
                 }
               />
@@ -52,12 +50,12 @@ export default function ShippingMethod() {
             render={({ field }) => (
               <RadioInput
                 name={field.name}
-                value="fedex"
-                label={<ShippingMethodsCard method="fedex" />}
+                value="jne"
+                label={<ShippingMethodsCard method="jne" />}
                 onChange={(e) =>
                   field.onChange({
                     name: e.currentTarget.value,
-                    price: SHIPPING_METHODS.fedex.price,
+                    // price: SHIPPING_METHODS.fedex.price,
                   })
                 }
               />
@@ -70,12 +68,12 @@ export default function ShippingMethod() {
             render={({ field }) => (
               <RadioInput
                 name={field.name}
-                value="dhl"
-                label={<ShippingMethodsCard method="dhl" />}
+                value="sicepat"
+                label={<ShippingMethodsCard method="sicepat" />}
                 onChange={(e) =>
                   field.onChange({
                     name: e.currentTarget.value,
-                    price: SHIPPING_METHODS.dhl.price,
+                    // price: SHIPPING_METHODS.dhl.price,
                   })
                 }
               />
@@ -93,7 +91,7 @@ export default function ShippingMethod() {
   );
 }
 
-function ShippingMethodsCard({ method }: { method: "fedex" | "dhl" }) {
+export function ShippingMethodsCard({ method }: { method: "jne" | "sicepat" }) {
   const data = SHIPPING_METHODS;
 
   return (
@@ -109,7 +107,7 @@ function ShippingMethodsCard({ method }: { method: "fedex" | "dhl" }) {
         </div>
 
         <div className="pl-4 border-l border-gray-4">
-          <p className="font-semibold text-dark">${data[method].price}</p>
+          {/* <p className="font-semibold text-dark">${data[method].price}</p> */}
           <p className="text-custom-xs">Standard Shipping</p>
         </div>
       </div>

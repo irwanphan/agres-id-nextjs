@@ -14,6 +14,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useShoppingCart } from "use-shopping-cart";
+import { formatPrice } from "@/utils/formatePrice";
 
 const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
   const { handleSubmit } = useCheckoutForm();
@@ -132,8 +133,8 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
                 firstName: data.billing.firstName,
                 lastName: data.billing.lastName,
                 phone: data.billing.phone,
-                address: `${data.billing.address.street} ${data.billing.address.apartment}`,
-                city: data.billing.town,
+                address: `${data.billing.address.address1} ${data.billing.address.address2}`,
+                city: data.billing.city,
                 postalCode: "",
                 countryCode: "IDN",
               },
@@ -239,14 +240,13 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
               <div className="w-full space-y-6 lg:col-span-3">
                 <Billing />
                 <Shipping />
-                <Notes />
               </div>
               <div className="w-full space-y-6 lg:col-span-2">
                 <Orders />
+                <Notes />
+                {/* <Coupon /> */}
+                {/* <ShippingMethod /> */}
 
-                <Coupon />
-
-                <ShippingMethod />
 
                 <PaymentMethod amount={amount} />
 
@@ -254,7 +254,7 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
                   type="submit"
                   className="flex justify-center w-full px-6 py-3 font-medium text-white duration-200 ease-out rounded-md bg-blue hover:bg-blue-dark "
                 >
-                  {!loading ? `Pay $${amount}` : "Processing..."}
+                  {!loading ? `Bayar ${formatPrice(amount)}` : "Processing..."}
                 </button>
               </div>
             </div>

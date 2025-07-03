@@ -16,6 +16,7 @@ import convertToSubcurrency from "@/lib/convertToSubcurrency";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useShoppingCart } from "use-shopping-cart";
+import RajaOngkirShipping from "./RajaOngkirShipping";
 
 const CheckoutPaymentArea = ({ amount }: { amount: number }) => {
   const { handleSubmit } = useCheckoutForm();
@@ -193,15 +194,16 @@ const CheckoutPaymentArea = ({ amount }: { amount: number }) => {
             <div className="grid gap-6 lg:grid-cols-5">
               <div className="w-full space-y-6 lg:col-span-3">
                 <Billing />
-                <Shipping />
+                <RajaOngkirShipping />
+                {/* <Shipping /> */}
                 <Notes />
               </div>
               <div className="w-full space-y-6 lg:col-span-2">
                 <Orders />
 
-                <Coupon />
+                {/* <Coupon /> */}
 
-                <ShippingMethod />
+                {/* <ShippingMethod /> */}
 
                 <PaymentMethod amount={amount} />
 

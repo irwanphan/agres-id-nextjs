@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { EmptyCartIcon } from "@/assets/icons";
 import CheckoutAreaWithMidtrans from "./CheckoutAreaWithMidtrans";
+import { splitName } from "@/utils/splitName";
 
 // Stripe
 // import { Elements } from "@stripe/react-stripe-js";
@@ -35,17 +36,19 @@ export default function CheckoutMain() {
         couponCode: "",
         billing: {
           address: {
-            street: "",
-            apartment: "",
+            address1: "",
+            address2: "",
           },
           companyName: "",
           country: "",
           email: session.data?.user?.email || "",
-          firstName: session.data?.user?.name || "",
-          lastName: "",
+          firstName: session.data?.user?.name ? splitName(session.data.user.name).firstName : "",
+          lastName: session.data?.user?.name ? splitName(session.data.user.name).lastName : "",
           phone: "",
-          regionName: "",
-          town: "",
+          // regionName: "",
+          province: "",
+          // town: "",
+          city: "",
           createAccount: false,
         },
         shipping: {
@@ -78,13 +81,13 @@ export default function CheckoutMain() {
           <EmptyCartIcon className="mx-auto text-blue" />
         </div>
         <h2 className="pb-5 text-2xl font-medium text-center text-dark">
-          No items found in your cart to checkout.
+          Tidak ada produk di keranjang untuk checkout.
         </h2>
         <Link
           href="/shop"
           className="w-96 mx-auto flex justify-center font-medium text-white bg-blue py-[13px] px-6 rounded-md ease-out duration-200 hover:bg-blue-dark"
         >
-          Continue Shopping
+          Gasss! Lanjut Belanja!
         </Link>
       </div>
     );
