@@ -30,9 +30,9 @@ export async function generateMetadata({ params }: Props) {
   const siteURL = process.env.SITE_URL;
   const site_name = await getSiteName();
 
-  const defaultVariant = product?.productVariants?.find(
-    (variant) => variant.isDefault
-  );
+  const defaultVariant = Array.isArray(product?.productVariants)
+    ? product.productVariants.find((variant) => variant.isDefault)
+    : undefined;
 
   if (!product) {
     return {
@@ -103,9 +103,9 @@ const ProductDetails = async ({ params }: Props) => {
     product.title || ""
   )) || [];
 
-  const defaultVariant = product?.productVariants?.find(
-    (variant) => variant.isDefault
-  );
+  const defaultVariant = Array.isArray(product?.productVariants)
+    ? product.productVariants.find((variant) => variant.isDefault)
+    : undefined;
 
   const { avgRating, totalRating } = await getReviews(product.slug!);
 
