@@ -14,6 +14,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useShoppingCart } from "use-shopping-cart";
+import { ShippingProvider } from "./ShippingContext";
 
 const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
   const { handleSubmit } = useCheckoutForm();
@@ -238,7 +239,9 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
             <div className="grid gap-6 lg:grid-cols-5">
               <div className="w-full space-y-6 lg:col-span-3">
                 <Billing />
-                <Shipping />
+                <ShippingProvider>
+                  <Shipping />
+                </ShippingProvider>
                 <Notes />
               </div>
               <div className="w-full space-y-6 lg:col-span-2">

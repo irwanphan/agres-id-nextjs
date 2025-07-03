@@ -50,6 +50,7 @@ export type CheckoutInput = {
     province: string;
     provinceId: string;
     city: string;
+    cityId: string;
     address: {
       address1: string;
       address2?: string;

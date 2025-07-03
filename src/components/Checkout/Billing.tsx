@@ -11,30 +11,43 @@ import RajaOngkirCityDatalist from "./RajaOngkirCityDatalist";
 // import { ChevronDown } from "./icons";
 import { Province } from "./RajaOngkirProvinceDatalist";
 import { City } from "./RajaOngkirCityDatalist";
+import { useShippingContext } from "./ShippingContext";
 
 export default function Billing() {
   const { register, errors, control, setValue, watch } = useCheckoutForm();
   const session = useSession();
   const provinceId = watch("billing.provinceId");
+  const citySelected = watch("billing.city");
   const [provinces, setProvinces] = useState<Province[]>([]);
   const [cities, setCities] = useState<City[]>([]);
+  const { setDestinationCityId } = useShippingContext();
 
-  console.log(provinceId);
-
+  useEffect(() => {
+    if (citySelected) {
+      fetch(`/api/rajaongkir/destination?search=${citySelected}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setDestinationCityId(data);
+      });
+    }
+  }, [citySelected]);
+  
   useEffect(() => {
     fetch('/api/rajaongkir/province')
     .then((res) => res.json())
     .then((data) => setProvinces(data));
   }, []);
-
+  
   useEffect(() => {
     if (!provinceId) return setCities([]);
     fetch(`/api/rajaongkir/city?provinceId=${provinceId}`)
     .then((res) => res.json())
     .then((data) => setCities(data));
   }, [provinceId]);
-
-  console.log(cities);
+  
+  // console.log(cities);
+  // console.log(citySelected);
 
   useEffect(() => {
     if (session.data?.user?.name && session.data?.user?.email) {
@@ -133,7 +146,8 @@ export default function Billing() {
             cities={cities}
             name="billing.city" 
             register={register} 
-            error={errors.billing?.city} />
+            error={errors.billing?.city}
+          />
         </div>
 
         <div>
