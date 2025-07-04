@@ -9,7 +9,7 @@ import { ChevronDown } from "./icons";
 import { SHIPPING_METHODS, ShippingMethodsCard } from "./ShippingMethod";
 import { IconChevronsUpRight } from "@tabler/icons-react";
 import { formatPrice } from "@/utils/formatePrice";
-import Billing from "./Billing";
+import { RajaOngkirCalculateDomesticCostResponse, RajaOngkirCalculateResponse } from "@/types";
 
 export default function Shipping() {
   const [dropdown, setDropdown] = useState(true);
@@ -90,12 +90,17 @@ export default function Shipping() {
           courier,
         }),
       });
-      const data = await res.json();
+      const data: RajaOngkirCalculateDomesticCostResponse = await res.json();
       // Ambil ongkir dari response (asumsi response format RajaOngkir)
-      const cost = data?.rajaongkir?.results?.[0]?.costs?.[0]?.cost?.[0]?.value;
-      setShippingCost(cost || null);
+      const selectedShipping = data.data[0];
+      const cost = selectedShipping?.cost ?? 0;
+      setShippingCost(cost || 0);
+      setValue("shippingMethod.name", selectedShipping.name);
+      setValue("shippingMethod.price", selectedShipping.cost);
+      setValue("shippingMethod.service", selectedShipping.service);
     } catch (e) {
       setShippingCost(null);
+      throw e;
     }
     setLoadingOngkir(false);
   };

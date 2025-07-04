@@ -1,3 +1,4 @@
+import { RajaOngkirCalculateDomesticCostResponse } from '@/types';
 import { NextRequest, NextResponse } from 'next/server';
 
 type RequestBodyParams = {
@@ -13,6 +14,13 @@ export async function POST(req: NextRequest) {
     weight, 
     courier,
   }: RequestBodyParams = await req.json();
+
+  if (!destination) {
+    return NextResponse.json({
+      status: 'failed',
+      message: 'Destinasi harus dipilih terlebih dahulu.',
+    });
+  }
 
   // const origin = 155 // Rajaongkir ID for Jakarta Utara, API v1
   const origin = '17650' // Rajaongkir ID for Jakarta Utara, API v2
@@ -45,6 +53,6 @@ export async function POST(req: NextRequest) {
   });
 
   console.log('response: ', response);
-  const data = await response.json();
+  const data: RajaOngkirCalculateDomesticCostResponse = await response.json();
   return NextResponse.json(data);
 }

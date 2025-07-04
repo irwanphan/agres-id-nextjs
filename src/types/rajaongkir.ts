@@ -50,3 +50,42 @@ export interface RajaOngkirCheckoutData {
   selectedOption: RajaOngkirShippingCost;
   itemValue?: number;
 } 
+
+
+// V2 API
+export interface RajaOngkirDomesticDestination {
+  id: number;
+  label: string;
+  province_name: string;
+  city_name: string;
+  district_name: string;
+  subdistrict_name: string;
+  zip_code: string;
+}
+
+export interface RajaOngkirDomesticDestinationResponse {
+  meta: {
+    message: string;
+    code: number;
+    status: string;
+  };
+  data: RajaOngkirDomesticDestination[];
+}
+
+export interface RajaOngkirDomesticShippingCost {
+  name: string;
+  code: string;
+  service: string;
+  description: string;
+  cost: number;
+  etd: string;
+}
+
+export interface RajaOngkirCalculateDomesticCostResponse {
+  meta: {
+    message: string;
+    code: number;
+    status: string;
+  };
+  data: RajaOngkirDomesticShippingCost[];
+}
