@@ -149,6 +149,7 @@ export default function Shipping() {
                   label="Street Address"
                   placeholder="House number and street name"
                   required
+                  readOnly={shipToDifferentAddress}
                   name={field.name}
                   value={field.value}
                   onChange={field.onChange}
@@ -160,6 +161,7 @@ export default function Shipping() {
               <input
                 type="text"
                 {...register("shipping.address.apartment")}
+                readOnly={shipToDifferentAddress}
                 placeholder="Apartment, suite, unit, etc. (optional)"
                 className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
               />
@@ -175,6 +177,7 @@ export default function Shipping() {
                   type="tel"
                   label="Phone"
                   required
+                  readOnly={shipToDifferentAddress}
                   name={field.name}
                   value={field.value}
                   onChange={field.onChange}
@@ -190,6 +193,7 @@ export default function Shipping() {
                   label="Email Address"
                   type="email"
                   required
+                  readOnly={shipToDifferentAddress}
                   name={field.name}
                   value={field.value}
                   onChange={field.onChange}
