@@ -107,7 +107,7 @@ type CardProps = {
 function PaymentMethodCard({ method }: CardProps) {
   const data = {
     bank_transfer: {
-      name: "Transfer Bank",
+      name: "Transfer Bank (Virtual Account)",
       image: {
         src: "/images/checkout/bank-transfer.svg",
         width: 75,
@@ -115,7 +115,7 @@ function PaymentMethodCard({ method }: CardProps) {
       },
     },
     snap: {
-      name: "Ragam Pembayaran",
+      name: "Ragam Channel Pembayaran",
       image: {
         src: "/images/checkout/midtrans.svg",
         width: 75,
