@@ -109,22 +109,81 @@ export default function Shipping() {
         <div className="p-6 border-t border-gray-3">
           <div className="mb-5">
             <label htmlFor="destination-city-search" className="block mb-1.5 text-sm text-gray-6">
-              Cari Kota Tujuan (API Komerce)
+              Cari Kota / Kabupaten Tujuan <span className="text-red">*</span>
             </label>
             <input
               id="destination-city-search"
               className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11 focus:border-blue focus:outline-0 placeholder:text-dark-5 w-full py-2.5 px-4 duration-200 focus:ring-0"
               list="destination-city-options"
               value={citySearch}
+              required
               onChange={handleCitySearch}
               onBlur={handleCitySelect}
-              placeholder="Ketik nama kota tujuan..."
+              placeholder="Mulai cari nama kota atau kabupaten tujuan..."
             />
             <datalist id="destination-city-options">
               {cityOptions.map(opt => (
                 <option key={opt.id} value={opt.label} />
               ))}
             </datalist>
+          </div>
+
+          <div className="mb-5">
+            <Controller
+              control={control}
+              name="shipping.address.street"
+              render={({ field }) => (
+                <InputGroup
+                  label="Street Address"
+                  placeholder="House number and street name"
+                  required
+                  name={field.name}
+                  value={field.value}
+                  onChange={field.onChange}
+                />
+              )}
+            />
+
+            <div className="mt-5">
+              <input
+                type="text"
+                {...register("shipping.address.apartment")}
+                placeholder="Apartment, suite, unit, etc. (optional)"
+                className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 mb-5">
+            <Controller
+              control={control}
+              name="shipping.phone"
+              render={({ field }) => (
+                <InputGroup
+                  type="tel"
+                  label="Phone"
+                  required
+                  name={field.name}
+                  value={field.value}
+                  onChange={field.onChange}
+                />
+              )}
+            />
+
+            <Controller
+              control={control}
+              name="shipping.email"
+              render={({ field }) => (
+                <InputGroup
+                  label="Email Address"
+                  type="email"
+                  required
+                  name={field.name}
+                  value={field.value}
+                  onChange={field.onChange}
+                />
+              )}
+            />
           </div>
 
           <div className="mb-5">
