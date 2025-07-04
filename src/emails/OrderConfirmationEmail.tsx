@@ -12,7 +12,6 @@ import {
   Img,
 } from "@react-email/components";
 import * as React from "react";
-import Image from "next/image";
 
 interface OrderConfirmationEmailProps {
   orderNumber: string;
@@ -55,7 +54,7 @@ export const OrderConfirmationEmail = ({
       <Body style={main}>
         <Container style={container}>
           <Section style={header}>
-            <Image
+            <img
               src={logoUrl}
               alt={`${siteName} Logo`}
               width={150}

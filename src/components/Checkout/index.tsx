@@ -27,20 +27,13 @@ export default function CheckoutMain() {
   const { register, formState, watch, control, handleSubmit, setValue } =
     useForm<CheckoutInput>({
       defaultValues: {
-        shippingMethod: {
-          name: "free",
-          price: 0,
-        },
-        paymentMethod: "midtrans",
-        couponDiscount: 0,
-        couponCode: "",
         billing: {
           address: {
             address1: "",
             address2: "",
           },
           companyName: "",
-          country: "",
+          // country: "",
           email: session.data?.user?.email || "",
           firstName: session.data?.user?.name ? splitName(session.data.user.name).firstName : "",
           lastName: session.data?.user?.name ? splitName(session.data.user.name).lastName : "",
@@ -56,12 +49,21 @@ export default function CheckoutMain() {
             address1: "",
             address2: "",
           },
-          country: "",
+          // country: "",
           email: "",
           phone: "",
-          town: "",
-          countryName: "",
+          // town: "",
+          // countryName: "",
+          destination: "",
+          weight: 0,
         },
+        shippingMethod: {
+          name: "free",
+          price: 0,
+        },
+        paymentMethod: "midtrans",
+        couponDiscount: 0,
+        couponCode: "",
         notes: "",
         shipToDifferentAddress: false,
       },

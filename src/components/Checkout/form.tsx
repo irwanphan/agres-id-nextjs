@@ -45,6 +45,8 @@ export type CheckoutInput = {
   billing: {
     firstName: string;
     lastName?: string;
+    phone: string;
+    email: string;
     companyName?: string;
     // regionName: string;
     province: string;
@@ -56,20 +58,21 @@ export type CheckoutInput = {
       address2?: string;
     };
     // town: string;
-    country?: string;
-    phone: string;
-    email: string;
+    // country?: string;
     createAccount?: boolean;
   };
   shipToDifferentAddress: boolean;
   shipping?: {
-    countryName: string;
+    // origin: string;
+    destination: string;
+    weight?: number;
+    // countryName: string;
     address: {
       address1: string;
       address2?: string;
     };
-    town: string;
-    country?: string;
+    // town: string;
+    // country?: string;
     phone: string;
     email: string;
   };
@@ -91,13 +94,13 @@ export type CheckoutInput = {
     quantity: number;
   }[];
   // RajaOngkir specific fields
-  originDestination?: string;
-  destinationDestination?: string;
-  packageWeight?: number;
-  rajaOngkirData?: {
-    origin: RajaOngkirDestination;
-    destination: RajaOngkirDestination;
-    weight: number;
-    selectedOption: RajaOngkirShippingCost;
-  };
+  // originDestination?: string;
+  // destinationDestination?: string;
+  // packageWeight?: number;
+  // rajaOngkirData?: {
+  //   origin: RajaOngkirDestination;
+  //   destination: RajaOngkirDestination;
+  //   weight: number;
+  //   selectedOption: RajaOngkirShippingCost;
+  // };
 };
