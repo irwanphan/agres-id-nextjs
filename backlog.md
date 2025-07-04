@@ -27,6 +27,8 @@ Checkout Page
 - [ok] fix: email is prefilled with the email of the user who is logged in, but checkout is failed with email not filled
 - [] Page for user to check order status based on Order ID
 - [] Calculate total with shipping cost
+- [] "Pickup di Gerai AGRES" option shows Pickup Point selection
+- [] Show map for Pickup Point selection
 
 RBAC / Fine Grained Access Control
 - [] Add RBAC / Fine Grained Access Control

@@ -162,8 +162,8 @@ export default function Shipping() {
             </div>
             {loadingOngkir && <div className="text-sm text-gray-500 mt-2">Menghitung ongkir...</div>}
             {shippingCost!==null && !loadingOngkir && (
-              <div className="text-sm text-green-600 mt-4 flex items-center justify-between px-4 gap-2 border border-gray-3 h-12">
-                <span className="text-sm">
+              <div className="text-sm text-green-600 mt-4 flex items-center justify-between px-4 gap-2 border border-gray-4 h-14 rounded-lg">
+                <span className="text-sm font-bold">
                   Ongkos kirim: Rp {formatPrice(shippingCost).toLocaleString()}
                 </span>
                 <span className="text-sm">
