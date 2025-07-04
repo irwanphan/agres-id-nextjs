@@ -1,7 +1,7 @@
 import { useShoppingCart } from "use-shopping-cart";
 import { useCheckoutForm } from "./form";
 import { formatPrice } from "@/utils/formatePrice";
-import { IconTruck, IconMapPin } from "@tabler/icons-react";
+import { IconTruck, IconMapPin, IconChevronsDown } from "@tabler/icons-react";
 
 export default function Orders() {
   const { watch } = useCheckoutForm();
@@ -142,6 +142,23 @@ export default function Orders() {
             </div>
           </div>
         )}
+
+        <div className="text-sm text-green-600 mt-4 flex items-center justify-end gap-2 h-14 rounded-lg">
+          <span className="text-sm">
+          <button type="button" onClick={()=>{
+              const element = document.getElementById("section-payment-method");
+              if (element) {
+                const elementPosition = element.offsetTop - 128;
+                window.scrollTo({
+                  top: elementPosition,
+                  behavior: "smooth"
+                });
+              }
+            }} className="text-sm text-blue-light flex items-center gap-2">
+              Next, Scroll ke Detail Pesanan <IconChevronsDown className="w-4 h-4" />
+            </button>
+          </span>
+        </div>
       </div>
     </div>
   );
