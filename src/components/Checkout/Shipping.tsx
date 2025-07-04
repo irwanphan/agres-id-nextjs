@@ -7,6 +7,8 @@ import { useCheckoutForm } from "./form";
 import { ChevronDown } from "./icons";
 
 import { SHIPPING_METHODS, ShippingMethodsCard } from "./ShippingMethod";
+import { IconChevronsUpRight } from "@tabler/icons-react";
+import { formatPrice } from "@/utils/formatePrice";
 
 export default function Shipping() {
   const [dropdown, setDropdown] = useState(true);
@@ -59,6 +61,11 @@ export default function Shipping() {
     console.log(destinationCityId);
 
     setSelectedCourier(courier);
+    if (courier === "free") {
+      setShippingCost(0);
+      setLoadingOngkir(false);
+      return;
+    }
     setLoadingOngkir(true);
     setShippingCost(null);
     try {
@@ -155,7 +162,25 @@ export default function Shipping() {
             </div>
             {loadingOngkir && <div className="text-sm text-gray-500 mt-2">Menghitung ongkir...</div>}
             {shippingCost!==null && !loadingOngkir && (
-              <div className="text-sm text-green-600 mt-2">Ongkos kirim: Rp{shippingCost.toLocaleString()}</div>
+              <div className="text-sm text-green-600 mt-4 flex items-center justify-between px-4 gap-2 border border-gray-3 h-12">
+                <span className="text-sm">
+                  Ongkos kirim: Rp {formatPrice(shippingCost).toLocaleString()}
+                </span>
+                <span className="text-sm">
+                <button type="button" onClick={()=>{
+                    const element = document.getElementById("section-orders");
+                    if (element) {
+                      const elementPosition = element.offsetTop - 128;
+                      window.scrollTo({
+                        top: elementPosition,
+                        behavior: "smooth"
+                      });
+                    }
+                  }} className="text-sm text-blue-light flex items-center gap-2">
+                    Next, Scroll ke Detail Pesanan <IconChevronsUpRight className="w-4 h-4" />
+                  </button>
+                </span>
+              </div>
             )}
           </div>
         </div>

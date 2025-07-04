@@ -14,7 +14,7 @@ export default function Orders() {
   const packageWeight = watch("packageWeight");
 
   return (
-    <div className="bg-white shadow-1 rounded-[10px]">
+    <div id="section-orders" className="bg-white shadow-1 rounded-[10px]">
       <h3 className="px-4 py-5 text-lg font-medium border-b text-dark border-gray-3 sm:px-6">
         Pesanan Anda
       </h3>
