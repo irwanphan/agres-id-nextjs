@@ -9,9 +9,12 @@ export default function Orders() {
 
   const shippingMethod = watch("shippingMethod");
   const couponDiscount = ((watch("couponDiscount") || 0) * totalPrice) / 100;
-  const originDestination = watch("originDestination");
+  // const originDestination = watch("originDestination");
+  const originDestination = "AGRES.ID Mangga Dua Square";
   const destinationDestination = watch("destinationDestination");
   const packageWeight = watch("packageWeight");
+
+  console.log(watch("destinationDestination"));
 
   return (
     <div id="section-orders" className="bg-white shadow-1 rounded-[10px]">
@@ -118,8 +121,9 @@ export default function Orders() {
         </table>
 
         {/* Shipping Details */}
+        {/* {originDestination && destinationDestination && ( */}
         {originDestination && destinationDestination && (
-          <div className="mt-6 p-4 bg-gray-1 rounded-lg">
+          <div className="mt-4 p-4 bg-gray-1 rounded-lg">
             <h4 className="font-medium text-dark mb-3 flex items-center gap-2">
               <IconMapPin className="h-4 w-4 text-blue" />
               Shipping Details
@@ -127,11 +131,11 @@ export default function Orders() {
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-gray-5">From:</span>
-                <span className="text-dark">{originDestination}</span>
+                <span className="text-dark text-right">{originDestination}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-5">To:</span>
-                <span className="text-dark">{destinationDestination}</span>
+                <span className="text-dark text-right">{destinationDestination}</span>
               </div>
               {packageWeight && (
                 <div className="flex justify-between">
@@ -143,7 +147,7 @@ export default function Orders() {
           </div>
         )}
 
-        <div className="text-sm text-green-600 mt-4 flex items-center justify-end gap-2 h-14 rounded-lg">
+        <div className="text-sm text-green-600 flex items-center justify-end gap-2 h-14 rounded-lg">
           <span className="text-sm">
           <button type="button" onClick={()=>{
               const element = document.getElementById("section-payment-method");

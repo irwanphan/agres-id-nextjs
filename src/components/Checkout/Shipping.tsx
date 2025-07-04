@@ -63,6 +63,7 @@ export default function Shipping() {
     const found = cityOptions.find(opt => opt.label === label);
     if (found) {
       setDestinationCityId(String(found.id));
+      setValue("destinationDestination", found.label);
     }
   };
 
