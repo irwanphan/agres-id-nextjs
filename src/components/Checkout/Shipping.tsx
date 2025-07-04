@@ -25,6 +25,21 @@ export default function Shipping() {
 
   console.log(watch("shipToDifferentAddress"));
 
+  useEffect(() => {
+    if (shipToDifferentAddress) {
+      setValue("shipping.address.address1", watch("billing.address.address1"));
+      setValue("shipping.address.address2", watch("billing.address.address2"));
+      setValue("shipping.phone", watch("billing.phone"));
+      setValue("shipping.email", watch("billing.email"));
+    } else {
+      setValue("shipping.address.address1", "");
+      setValue("shipping.address.address2", "");
+      setValue("shipping.phone", "");
+      setValue("shipping.email", "");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shipToDifferentAddress, setValue]);
+
   // Handler pencarian kota destinasi
   const handleCitySearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -143,7 +158,7 @@ export default function Shipping() {
           <div className="mb-5">
             <Controller
               control={control}
-              name="shipping.address.street"
+              name="shipping.address.address1"
               render={({ field }) => (
                 <InputGroup
                   label="Street Address"
@@ -151,7 +166,7 @@ export default function Shipping() {
                   required
                   readOnly={shipToDifferentAddress}
                   name={field.name}
-                  value={field.value}
+                  value={field.value !== undefined ? field.value : ""}
                   onChange={field.onChange}
                 />
               )}
@@ -160,7 +175,7 @@ export default function Shipping() {
             <div className="mt-5">
               <input
                 type="text"
-                {...register("shipping.address.apartment")}
+                {...register("shipping.address.address2")}
                 readOnly={shipToDifferentAddress}
                 placeholder="Apartment, suite, unit, etc. (optional)"
                 className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
@@ -179,7 +194,7 @@ export default function Shipping() {
                   required
                   readOnly={shipToDifferentAddress}
                   name={field.name}
-                  value={field.value}
+                  value={field.value !== undefined ? field.value : ""}
                   onChange={field.onChange}
                 />
               )}
@@ -195,7 +210,7 @@ export default function Shipping() {
                   required
                   readOnly={shipToDifferentAddress}
                   name={field.name}
-                  value={field.value}
+                  value={field.value !== undefined ? field.value : ""}
                   onChange={field.onChange}
                 />
               )}

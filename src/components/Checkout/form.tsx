@@ -65,8 +65,8 @@ export type CheckoutInput = {
   shipping?: {
     countryName: string;
     address: {
-      street: string;
-      apartment?: string;
+      address1: string;
+      address2?: string;
     };
     town: string;
     country?: string;
