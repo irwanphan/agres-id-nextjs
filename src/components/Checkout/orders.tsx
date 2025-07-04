@@ -4,17 +4,17 @@ import { formatPrice } from "@/utils/formatePrice";
 import { IconTruck, IconMapPin, IconChevronsDown } from "@tabler/icons-react";
 
 export default function Orders() {
-  const { watch } = useCheckoutForm();
+  const { watch, register } = useCheckoutForm();
   const { cartCount, cartDetails, totalPrice = 0 } = useShoppingCart();
 
   const shippingMethod = watch("shippingMethod");
   const couponDiscount = ((watch("couponDiscount") || 0) * totalPrice) / 100;
-  // const originDestination = watch("originDestination");
-  const originDestination = "AGRES.ID Mangga Dua Square";
-  const destinationDestination = watch("destinationDestination");
+  // const origin = watch("shipping.origin");
+  const origin = "AGRES.ID Mangga Dua Square";
+  const destination = watch("shipping.destination");
   const packageWeight = watch("packageWeight");
 
-  console.log(watch("destinationDestination"));
+  // console.log(watch("shipping.destination"));
 
   return (
     <div id="section-orders" className="bg-white shadow-1 rounded-[10px]">
@@ -23,7 +23,7 @@ export default function Orders() {
       </h3>
 
       <div className="px-6 pt-1 pb-6">
-        <table className="w-full text-dark">
+        <table className="w-full text-dark mb-5">
           <thead>
             <tr className="border-b border-gray-3">
               <th className="py-5 text-base font-medium text-left">Produk</th>
@@ -120,9 +120,20 @@ export default function Orders() {
           </tfoot>
         </table>
 
+        <label htmlFor="notes" className="block pt-5 mb-1.5 text-sm text-gray-6 border-t border-gray-3">
+          Catatan (opsional)
+        </label>
+        <textarea
+          {...register("notes")}
+          id="notes"
+          rows={3}
+          placeholder="Catatan terkait pesanan Anda, misalnya catatan khusus untuk pengiriman."
+          className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3   focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
+        />
+
         {/* Shipping Details */}
-        {/* {originDestination && destinationDestination && ( */}
-        {originDestination && destinationDestination && (
+        {/* {origin && destination && ( */}
+        {origin && destination && (
           <div className="mt-4 p-4 bg-gray-1 rounded-lg">
             <h4 className="font-medium text-dark mb-3 flex items-center gap-2">
               <IconMapPin className="h-4 w-4 text-blue" />
@@ -131,11 +142,11 @@ export default function Orders() {
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-gray-5">From:</span>
-                <span className="text-dark text-right">{originDestination}</span>
+                <span className="text-dark text-right">{origin}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-5">To:</span>
-                <span className="text-dark text-right">{destinationDestination}</span>
+                <span className="text-dark text-right">{destination}</span>
               </div>
               {packageWeight && (
                 <div className="flex justify-between">

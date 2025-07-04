@@ -9,12 +9,12 @@ import { ChevronDown } from "./icons";
 import { SHIPPING_METHODS, ShippingMethodsCard } from "./ShippingMethod";
 import { IconChevronsUpRight } from "@tabler/icons-react";
 import { formatPrice } from "@/utils/formatePrice";
-import Billing from "./Billing";
 
 export default function Shipping() {
   const [dropdown, setDropdown] = useState(true);
   const { register, control, setValue, watch } = useCheckoutForm();
   const shipToDifferentAddress = watch("shipToDifferentAddress");
+  const shipToDestination = watch("shipping.destination");
   const [selectedCourier, setSelectedCourier] = useState<string>("");
   const [shippingCost, setShippingCost] = useState<number|null>(null);
   const [loadingOngkir, setLoadingOngkir] = useState(false);
@@ -23,7 +23,13 @@ export default function Shipping() {
   const [cityOptions, setCityOptions] = useState<any[]>([]);
   const [destinationCityId, setDestinationCityId] = useState<string>("");
 
-  console.log(watch("shipToDifferentAddress"));
+  // console.log(watch("shipToDifferentAddress"));
+  console.log(shipToDestination);
+  
+  // testing purpose only
+  useEffect(() => {
+    setValue("shipping.destination", 'Jalan-jalan Ke Puncak Gunung, Tinggi 2 kilometer');
+  }, [setValue]);
 
   useEffect(() => {
     if (shipToDifferentAddress) {
@@ -63,7 +69,7 @@ export default function Shipping() {
     const found = cityOptions.find(opt => opt.label === label);
     if (found) {
       setDestinationCityId(String(found.id));
-      setValue("destinationDestination", found.label);
+      setValue("shipping.destination", found.label);
     }
   };
 
@@ -92,7 +98,10 @@ export default function Shipping() {
       });
       const data = await res.json();
       // Ambil ongkir dari response (asumsi response format RajaOngkir)
-      const cost = data?.rajaongkir?.results?.[0]?.costs?.[0]?.cost?.[0]?.value;
+      console.log('data: ', data);
+      // const cost = data?.rajaongkir?.results?.[0]?.costs?.[0]?.cost?.[0]?.value;
+      const cost = data?.data?.[0]?.cost?.[0]?.value;
+      console.log('cost: ', cost);
       setShippingCost(cost || null);
     } catch (e) {
       setShippingCost(null);
@@ -147,7 +156,6 @@ export default function Shipping() {
                 <InputGroup
                   type="checkbox"
                   label="Gunakan alamat pengiriman yang sama dengan alamat pembayaran"
-                  required
                   name={field.name}
                   value={field.value.toString()}
                   onChange={field.onChange}
