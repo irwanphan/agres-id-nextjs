@@ -48,14 +48,6 @@ export default function Shipping() {
     }
   };
 
-  useEffect(() => {
-    if (dropdown) {
-      setValue("shipToDifferentAddress", true);
-    } else {
-      setValue("shipToDifferentAddress", false);
-    }
-  }, [dropdown, setValue]);
-
   // Handler untuk fetch ongkir
   const handleCourierChange = async (courier: string) => {
     console.log(destinationCityId);
@@ -126,6 +118,15 @@ export default function Shipping() {
                 <option key={opt.id} value={opt.label} />
               ))}
             </datalist>
+          </div>
+
+          <div className="mb-5">
+            <label htmlFor="destination-city-search" className="block mb-1.5 text-sm text-gray-6">
+              Gunakan alamat pengiriman yang sama dengan alamat pembayaran
+              <input type="checkbox" id="use-billing-address" onChange={(e)=>{
+                setValue("shipToDifferentAddress", !e.target.checked);
+              }} />
+            </label>
           </div>
 
           <div className="mb-5">
