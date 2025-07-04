@@ -9,6 +9,7 @@ import { ChevronDown } from "./icons";
 import { SHIPPING_METHODS, ShippingMethodsCard } from "./ShippingMethod";
 import { IconChevronsUpRight } from "@tabler/icons-react";
 import { formatPrice } from "@/utils/formatePrice";
+import Billing from "./Billing";
 
 export default function Shipping() {
   const [dropdown, setDropdown] = useState(true);
@@ -21,6 +22,8 @@ export default function Shipping() {
   const [citySearch, setCitySearch] = useState("");
   const [cityOptions, setCityOptions] = useState<any[]>([]);
   const [destinationCityId, setDestinationCityId] = useState<string>("");
+
+  console.log(watch("shipToDifferentAddress"));
 
   // Handler pencarian kota destinasi
   const handleCitySearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -121,12 +124,20 @@ export default function Shipping() {
           </div>
 
           <div className="mb-5">
-            <label htmlFor="destination-city-search" className="block mb-1.5 text-sm text-gray-6">
-              Gunakan alamat pengiriman yang sama dengan alamat pembayaran
-              <input type="checkbox" id="use-billing-address" onChange={(e)=>{
-                setValue("shipToDifferentAddress", !e.target.checked);
-              }} />
-            </label>
+            <Controller
+              control={control}
+              name="shipToDifferentAddress"
+              render={({ field }) => (
+                <InputGroup
+                  type="checkbox"
+                  label="Gunakan alamat pengiriman yang sama dengan alamat pembayaran"
+                  required
+                  name={field.name}
+                  value={field.value.toString()}
+                  onChange={field.onChange}
+                />
+              )}
+            />
           </div>
 
           <div className="mb-5">

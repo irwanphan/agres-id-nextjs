@@ -17,10 +17,13 @@ export function InputGroup({
 }: PropsType) {
   const id = useId();
   return (
-    <div>
+    <div className={`${props.type === "checkbox" ? "flex flex-row-reverse justify-end items-center gap-2" : ""}`}>
       <label
         htmlFor={id}
-        className="block text-sm font-normal text-gray-6 mb-1.5"
+        className={`
+          block text-sm font-normal text-gray-6
+          ${props.type === "checkbox" ? "mb-0" : "mb-1.5"}
+        `}
       >
         {label} {props?.required && <span className="text-red">*</span>}
       </label>
@@ -28,8 +31,12 @@ export function InputGroup({
       <input
         id={id}
         {...props}
-        className={cn(
-          "rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0",
+        className={cn(`
+          border border-gray-3 focus:border-blue focus:outline-0 
+          placeholder:text-sm text-sm placeholder:font-normal placeholder:text-dark-5 
+          py-2.5 px-4 duration-200 focus:ring-0 
+          ${props.type === "checkbox" ? "w-5 h-5 p-2 rounded-sm" : "w-full h-11 rounded-lg"}
+        `,
           className,
           {
             "border-red": error,
