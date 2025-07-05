@@ -39,7 +39,7 @@ export default function CheckoutMain() {
           lastName: session.data?.user?.name ? splitName(session.data.user.name).lastName : "",
           phone: "",
           // regionName: "",
-          province: "",
+          province: "KALIMANTAN BARAT",
           // town: "",
           city: "",
           createAccount: false,

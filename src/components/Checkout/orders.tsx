@@ -93,7 +93,7 @@ export default function Orders() {
                   </div>
                 </td>
                 <td className="py-5 text-right">
-                  {formatPrice(0)}
+                  {formatPrice(shippingMethod.price)}
                 </td>
               </tr>
             )}
