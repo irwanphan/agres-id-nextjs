@@ -19,7 +19,7 @@ RajaOngkir Integration
 - [ok] Create options
 - [] Repack using modular option
 - [ok] Test Rajaongkir API
-- [] Fixcheckout doesn't have weight to calculate shipping cost
+- [] Fix:checkout doesn't have weight to calculate shipping cost
 
 Shopping Cart Page
 - [ok] Fix: Formatting language and currency
@@ -37,7 +37,7 @@ Checkout Page
 - [ok] Implement province and city local datalist
 - [ok] Remove RajaOngkir API from the code and Rajaongkir name from any route and path
 - [ok] auto fetch billing address from user account management page to billing section
-- [] auto fetch shipping address from user account management page to shipping section
+- [ok] auto fetch shipping address from user account management page to shipping section
 
 RBAC / Fine Grained Access Control
 - [] Add RBAC / Fine Grained Access Control

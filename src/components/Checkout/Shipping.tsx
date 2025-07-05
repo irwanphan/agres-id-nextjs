@@ -237,7 +237,7 @@ export default function Shipping() {
                   label="Street Address"
                   placeholder="House number and street name"
                   required
-                  readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
+                  // readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
                   name={field.name}
                   value={field.value !== undefined ? field.value : ""}
                   onChange={field.onChange}
@@ -249,7 +249,7 @@ export default function Shipping() {
               <input
                 type="text"
                 {...register("shipping.address.address2")}
-                readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
+                // readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
                 placeholder="Apartment, suite, unit, etc. (optional)"
                 className={`
                   rounded-lg border placeholder:text-sm 
@@ -257,8 +257,8 @@ export default function Shipping() {
                   focus:border-blue focus:outline-0
                   placeholder:text-dark-5 w-full
                   py-2.5 px-4 duration-200 focus:ring-0
-                  ${shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default" ? "bg-gray-2" : ""}
-                `}
+                  `}
+                  // ${shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default" ? "bg-gray-2" : ""}
               />
             </div>
           </div>
@@ -272,7 +272,7 @@ export default function Shipping() {
                   type="tel"
                   label="Phone"
                   required
-                  readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
+                  // readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
                   name={field.name}
                   value={field.value !== undefined ? field.value : ""}
                   onChange={field.onChange}
@@ -288,7 +288,7 @@ export default function Shipping() {
                   label="Email Address"
                   type="email"
                   required
-                  readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
+                  // readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
                   name={field.name}
                   value={field.value !== undefined ? field.value : ""}
                   onChange={field.onChange}
