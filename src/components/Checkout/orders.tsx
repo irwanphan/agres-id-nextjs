@@ -12,7 +12,7 @@ export default function Orders() {
   // const origin = watch("shipping.origin");
   const origin = "AGRES.ID Mangga Dua Square";
   const destination = watch("shipping.destination");
-  const packageWeight = watch("packageWeight");
+  const packageWeight = watch("shipping.weight");
 
   // console.log(watch("shipping.destination"));
 
