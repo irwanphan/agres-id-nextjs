@@ -62,3 +62,4 @@ Affiliate & Store Account Management
 
 Product Management
 - [] Add Weight to main Product model
+- [] fix: product page doesn't show the updated data after editing or adding new product
