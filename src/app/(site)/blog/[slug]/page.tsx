@@ -94,15 +94,11 @@ const BlogDetailsPage = async ({ params }: Params) => {
     imageURL: post?.mainImage as string,
   });
 
-  return (
-    <>
-      {post ? (
-        <BlogDetails blogData={post} />
-      ) : (
-        <div className="pb-20 pt-40 text-center">No blog article has been found</div>
-      )}
-    </>
-  );
+  if (!post) {
+    return <div className="pb-20 pt-40 text-center">No blog article has been found</div>
+  }
+
+  return <BlogDetails blogData={post} />;
 };
 
 export default BlogDetailsPage;
