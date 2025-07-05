@@ -56,5 +56,9 @@ Pickup Point
 - [] Add Pickup Point to the Checkout Page
 - [] Add Pickup Management Page to Admin Page
 
+Affiliate & Store Account Management
+- [] Confirm how to treat the store account and affiliate account, bonus, discount, etc.
+- [] Add Affiliate & Store Account Management Page to Admin Page
+
 Product Management
 - [] Add Weight to main Product model
