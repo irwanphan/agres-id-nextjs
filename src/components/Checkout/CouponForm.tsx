@@ -33,7 +33,7 @@ export default function CouponForm() {
     <>
       <input
         type="text"
-        placeholder="Enter coupon code"
+        placeholder="Masukkan kode diskon"
         className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
         disabled={alreadyApplied}
         value={coupon}
@@ -46,7 +46,7 @@ export default function CouponForm() {
         className="inline-flex px-6 py-3 text-sm font-normal text-white duration-200 ease-out rounded-lg disabled:pointer-events-none disabled:opacity-80 bg-blue hover:bg-blue-dark"
         disabled={alreadyApplied || loading}
       >
-        {alreadyApplied ? "Applied" : loading ? "Applying..." : "Apply"}
+        {alreadyApplied ? "Diterapkan" : loading ? "Menerapkan..." : "Terapkan"}
       </button>
     </>
   );

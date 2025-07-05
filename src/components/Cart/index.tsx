@@ -49,9 +49,9 @@ const Cart = () => {
         <section className="pb-20 overflow-hidden bg-gray-2">
           <div className="w-full px-4 mx-auto max-w-7xl sm:px-8 xl:px-0">
             <div className="flex flex-wrap items-center justify-between gap-5 mb-7.5">
-              <h2 className="text-xl font-medium text-dark">Your Cart</h2>
+              <h2 className="text-xl font-medium text-dark">Keranjang Belanja Anda</h2>
               <button onClick={() => clearCart()} className="text-blue">
-                Clear Shopping Cart
+                Kosongkan Keranjang Belanja
               </button>
             </div>
 
@@ -62,15 +62,15 @@ const Cart = () => {
                   <thead>
                     <tr className="border-b border-gray-3">
                       <td className="py-5.5 px-7.5 whitespace-nowrap">
-                        <p className="text-dark">Product</p>
+                        <p className="text-dark">Produk</p>
                       </td>
 
                       <td className="py-5.5 px-7.5 whitespace-nowrap">
-                        <p className="text-dark">Price</p>
+                        <p className="text-dark">Harga</p>
                       </td>
 
                       <td className="py-5.5 px-7.5 whitespace-nowrap">
-                        <p className="text-dark">Quantity</p>
+                        <p className="text-dark">Jumlah</p>
                       </td>
 
                       <td className="py-5.5 px-7.5 whitespace-nowrap">
@@ -78,7 +78,7 @@ const Cart = () => {
                       </td>
 
                       <td className="py-5.5 px-7.5 whitespace-nowrap">
-                        <p className="text-right text-dark">Action</p>
+                        <p className="text-right text-dark">Pilihan</p>
                       </td>
                     </tr>
                   </thead>

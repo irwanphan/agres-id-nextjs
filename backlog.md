@@ -21,6 +21,9 @@ RajaOngkir Integration
 - [ok] Test Rajaongkir API
 - [] Fixcheckout doesn't have weight to calculate shipping cost
 
+Shopping Cart Page
+- [ok] Fix: Formatting language and currency
+
 Checkout Page
 - [ok] fix: Autofill name show Full Name as First Name
 - [ok] Region select box cannot use directional arrow to select region

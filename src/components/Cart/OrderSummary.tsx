@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useShoppingCart } from "use-shopping-cart";
 import { useCheckoutForm } from "../Checkout/form";
+import { formatPrice } from "@/utils/formatePrice";
 
 const OrderSummary = () => {
   const { watch } = useCheckoutForm();
@@ -11,17 +12,17 @@ const OrderSummary = () => {
       {/* <!-- order list box --> */}
       <div className="bg-white shadow-1 rounded-[10px]">
         <div className="px-6 py-5 border-b border-gray-3">
-          <h3 className="text-lg font-medium text-dark">Order Summary</h3>
+          <h3 className="text-lg font-medium text-dark">Ringkasan Pesanan</h3>
         </div>
 
         <div className="p-6">
           {/* <!-- title --> */}
           <div className="flex items-center justify-between pb-5 border-b border-gray-3">
             <div>
-              <h4 className="font-medium text-dark">Product</h4>
+              <h4 className="font-medium text-dark">Produk</h4>
             </div>
             <div>
-              <h4 className="font-medium text-right text-dark">Subtotal</h4>
+              <h4 className="font-medium text-right text-dark">Subtotal (Rp)</h4>
             </div>
           </div>
 
@@ -38,7 +39,7 @@ const OrderSummary = () => {
                   </div>
                   <div>
                     <p className="text-right text-dark">
-                      ${(product.price * product.quantity).toFixed(2)}
+                      {formatPrice(product.price * product.quantity)}
                     </p>
                   </div>
                 </div>
@@ -55,7 +56,7 @@ const OrderSummary = () => {
               </div>
               <div>
                 <p className="text-right text-dark">
-                  - ${couponDiscount.toFixed(2)}
+                  - {formatPrice(couponDiscount)}
                 </p>
               </div>
             </div>
@@ -68,7 +69,7 @@ const OrderSummary = () => {
             </div>
             <div>
               <p className="text-lg font-medium text-right text-dark">
-                ${totalPrice && (totalPrice - couponDiscount).toFixed(2)}
+                {formatPrice(totalPrice && (totalPrice - couponDiscount))}
               </p>
             </div>
           </div>
@@ -78,7 +79,7 @@ const OrderSummary = () => {
             href="/checkout"
             className="w-full flex justify-center font-medium text-white bg-blue py-3 px-6 rounded-md ease-out duration-200 hover:bg-blue-dark mt-7.5"
           >
-            Process to Checkout
+            OK, Lanjutkan Checkout
           </Link>
         </div>
       </div>
