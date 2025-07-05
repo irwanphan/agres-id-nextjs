@@ -26,7 +26,7 @@ export default function DashboardMain({ children, user, headerLogo }: IProps) {
         {/* ${sidebarOpen ? "ml-0" : "lg:ml-[290px]"} */}
         <DashboardHeader toggleSidebar={toggleSidebar} user={user} headerLogo={headerLogo} />
         <main className={`
-          w-full block
+          w-full block grow-1
           p-6
           overflow-y-auto 
           bg-gray-2 

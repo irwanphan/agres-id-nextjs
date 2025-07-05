@@ -39,7 +39,7 @@ Admin Page
 - [] Restrictions: Finished cannot be Canceled or set to Processing, Canceled cannot be set to Processing
 - [] Use button to set payment status to Paid or Failed from Pending
 - [] Button to set paid/failed can only be accessed by finance team
-- [] FIx admin page padding and off-scroll caused by double height of container
+- [ok] FIx admin page padding and off-scroll caused by double height of container
 
 Auth
 - [ok] fix: after success login, user is being redirected, but no information is shown on the page when loading and might confuse users

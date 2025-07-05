@@ -8,9 +8,12 @@ export default function Sidebar({ sidebarOpen, headerLogo }: { sidebarOpen: bool
   return (
     <aside
       className={`
-        w-[18rem] h-screen flex grow-0 shrink-0
+        w-[18rem] h-screen
         transform transition-transform duration-300 ease-in-out lg:translate-x-0 
         border-r border-gray-3 bg-white
+        fixed left-0 top-0 z-40 
+        md:relative
+        flex grow-0 shrink-0
         ${ sidebarOpen ? 
           "translate-x-0" : "-translate-x-full"
         }
