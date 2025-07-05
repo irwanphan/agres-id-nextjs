@@ -18,16 +18,16 @@ const OrderDetails = ({ orderItem }: any) => {
                 SR.
               </th>
               <th className="p-2 text-sm font-normal capitalize whitespace-nowrap">
-                Product Title
+                Nama Produk
               </th>
               <th className="p-2 text-sm font-normal capitalize whitespace-nowrap">
-                Quantity
+                Jumlah
               </th>
               <th className="p-2 text-sm font-normal capitalize whitespace-nowrap">
-                Item Price
+                Harga Satuan
               </th>
               <th className="p-2 text-sm font-normal capitalize whitespace-nowrap">
-                Amount
+                Subtotal Harga
               </th>
             </tr>
           </thead>
@@ -51,15 +51,15 @@ const OrderDetails = ({ orderItem }: any) => {
       <div className="mt-5">
         <ul className="space-y-3">
           <li className="flex items-center justify-between">
-            <p className="font-medium">Shipping Cost</p>
+            <p className="font-medium">Ongkos Kirim</p>
             <p>{formatPrice(shippingCost)}</p>
           </li>
           <li className="flex items-center justify-between">
-            <p className="font-medium">Discount</p>
+            <p className="font-medium">Diskon</p>
             <p>{formatPrice(discount)}</p>
           </li>
           <li className="flex items-center justify-between">
-            <p className="font-medium">Total Amount</p>
+            <p className="font-medium">Total Harga</p>
             <p className="text-lg font-bold text-red-600">
               {formatPrice(totalAmount)}
             </p>

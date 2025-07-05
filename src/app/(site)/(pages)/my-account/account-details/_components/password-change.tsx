@@ -57,7 +57,7 @@ export function PasswordChange() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2 className="mt-5 mb-5 text-base font-medium text-dark">
-        Password Change
+        Ubah Password
       </h2>
 
       <div className="p-6 space-y-5 bg-white shadow-1 rounded-xl">
@@ -71,7 +71,7 @@ export function PasswordChange() {
           render={({ field, fieldState }) => (
             <div className="w-full">
               <InputGroup
-                label="Old Password"
+                label="Password Lama"
                 type="password"
                 required
                 error={!!fieldState.error}
@@ -94,7 +94,7 @@ export function PasswordChange() {
           render={({ field, fieldState }) => (
             <div className="w-full">
               <InputGroup
-                label="New Password"
+                label="Password Baru"
                 type="password"
                 required
                 error={!!fieldState.error}
@@ -119,7 +119,7 @@ export function PasswordChange() {
           render={({ field, fieldState }) => (
             <div className="w-full">
               <InputGroup
-                label="Confirm New Password"
+                label="Konfirmasi Password Baru"
                 type="password"
                 required
                 error={!!fieldState.error}
@@ -144,7 +144,7 @@ export function PasswordChange() {
           )}
           disabled={isLoading}
         >
-          Change Password {isLoading && <Loader />}
+          Ubah Password {isLoading && <Loader />}
         </button>
       </div>
     </form>

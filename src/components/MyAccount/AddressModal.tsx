@@ -47,6 +47,17 @@ const AddressModal = ({
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        closeModal();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, closeModal]);
+
+  useEffect(() => {
     // closing modal while clicking outside
     function handleClickOutside(event: any) {
       if (!event.target.closest(".modal-content")) {

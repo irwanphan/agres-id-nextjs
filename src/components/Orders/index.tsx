@@ -51,22 +51,22 @@ const Orders = () => {
                 <thead>
                   <tr className="border-b border-gray-3">
                     <th className="px-6 py-3 font-medium text-custom-sm text-gray-6">
-                      Order
+                      Order No.
                     </th>
                     <th className="px-6 py-3 font-medium text-custom-sm text-gray-6">
-                      Date
+                      Tanggal
                     </th>
                     <th className="px-6 py-3 font-medium text-custom-sm text-gray-6">
                       Status
                     </th>
                     <th className="px-6 py-3 font-medium text-custom-sm text-gray-6">
-                      Payment Method
+                      Metode Pembayaran
                     </th>
                     <th className="px-6 py-3 font-medium text-custom-sm text-gray-6">
                       Total
                     </th>
                     <th className="px-6 py-3 font-medium text-custom-sm text-gray-6">
-                      Action
+                      Pilihan
                     </th>
                   </tr>
                 </thead>

@@ -3,10 +3,11 @@
 import Loader from "@/components/Common/Loader";
 import { ChevronDownIcon } from "@/components/MyAccount/icons";
 import { InputGroup } from "@/components/ui/input";
+import { splitName } from "@/utils/splitName";
 import cn from "@/utils/cn";
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
@@ -17,20 +18,23 @@ type Input = {
 };
 
 export function AccountInfo() {
+  const [isLoading, setIsLoading] = useState(false);
   const { data: session } = useSession();
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<Input>({
-    defaultValues: {
-      firstName: session?.user?.name?.split(" ")[0],
-      lastName: session?.user?.name?.split(" ")[1],
-    },
-  });
+    setValue,
+  } = useForm<Input>();
 
-  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    if (session?.user?.name) {
+      const { firstName, lastName } = splitName(session.user.name);
+      setValue("firstName", firstName);
+      setValue("lastName", lastName);
+    }
+  }, [session?.user?.name, setValue]);
 
   const onSubmit = async (data: Input) => {
     setIsLoading(true);
@@ -98,7 +102,7 @@ export function AccountInfo() {
 
         <div className="mb-5">
           <label htmlFor="country" className="block mb-1.5 text-sm text-gray-6">
-            Country/ Region <span className="text-red">*</span>
+            Negara <span className="text-red">*</span>
           </label>
 
           <div className="relative">
@@ -106,21 +110,25 @@ export function AccountInfo() {
               id="country"
               {...register("country", { required: true })}
               className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
+              defaultValue="Indonesia"
             >
-              <option value="" hidden>
-                Select your country
+              <option value="Indonesia">
+                Indonesia
               </option>
+              {/* <option value="" hidden>
+                Select your country
+              </option> */}
 
-              {["australia", "america", "england"].map((country) => (
+              {/* {["australia", "america", "england"].map((country) => (
                 <option key={country} value={country} className="capitalize">
                   {country}
                 </option>
-              ))}
+              ))} */}
             </select>
           </div>
 
           {errors.country && (
-            <p className="text-sm text-red mt-1.5">Country is required</p>
+            <p className="text-sm text-red mt-1.5">Negara harus diisi</p>
           )}
         </div>
 
@@ -133,12 +141,12 @@ export function AccountInfo() {
           )}
           disabled={isLoading}
         >
-          Save Changes {isLoading && <Loader />}
+          Simpan Perubahan {isLoading && <Loader />}
         </button>
       </form>
       <p className="mt-5 text-custom-sm">
-        This will be how your name will be displayed in the account section and
-        in reviews
+        Ini akan menjadi nama Anda yang akan ditampilkan di bagian akun dan
+        di ulasan
       </p>
     </>
   );
