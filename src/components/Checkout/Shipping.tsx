@@ -28,9 +28,9 @@ export default function Shipping() {
   console.log(shipToDestination);
   
   // testing purpose only
-  useEffect(() => {
-    setValue("shipping.destination", 'Jalan-jalan Ke Puncak Gunung, Tinggi 2 kilometer');
-  }, [setValue]);
+  // useEffect(() => {
+  //   setValue("shipping.destination", 'Jalan-jalan Ke Puncak Gunung, Tinggi 2 kilometer');
+  // }, [setValue]);
 
   useEffect(() => {
     if (shipToDifferentAddress) {
