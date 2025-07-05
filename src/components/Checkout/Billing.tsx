@@ -56,13 +56,16 @@ export default function Billing() {
   }, [session.data?.user?.id]);
 
   useEffect(() => {
-    if (addressData) {
+    if (addressData && session.data?.user?.name) {
+      const { firstName, lastName } = splitName(session.data.user.name);
+      setValue("billing.firstName", firstName);
+      setValue("billing.lastName", lastName);
       setValue("billing.phone", addressData.phone || "");
       setValue("billing.email", addressData.email || "");
       setValue("billing.address.address1", addressData.address?.address1 || "");
       setValue("billing.address.address2", addressData.address?.address2 || "");
     }
-  }, [addressData, setValue]);
+  }, [addressData, setValue, session.data?.user?.name]);
 
   return (
     <div className="bg-white shadow-1 rounded-[10px] ">
@@ -156,7 +159,6 @@ export default function Billing() {
                   name={field.name}
                   value={field.value}
                   onChange={field.onChange}
-                  readOnly={!!session?.data?.user?.email}
                 />
               )}
             />

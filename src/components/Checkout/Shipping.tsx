@@ -10,19 +10,37 @@ import { SHIPPING_METHODS, ShippingMethodsCard } from "./ShippingMethod";
 import { IconChevronsUpRight } from "@tabler/icons-react";
 import { formatPrice } from "@/utils/formatePrice";
 import { ShippingCalculateDomesticCostResponse } from "@/types";
+import { useSession } from "next-auth/react";
+
+type AddressType = {
+  name: string;
+  email: string;
+  phone: string;
+  address: {
+    address1: string;
+    address2: string;
+  };
+  id: string;
+};
 
 export default function Shipping() {
   const [dropdown, setDropdown] = useState(true);
+  const session = useSession();
   const { register, control, setValue, watch } = useCheckoutForm();
   const shipToDifferentAddress = watch("shipToDifferentAddress");
   const shipToDestination = watch("shipping.destination");
   const [selectedCourier, setSelectedCourier] = useState<string>("");
   const [shippingCost, setShippingCost] = useState<number|null>(null);
   const [loadingOngkir, setLoadingOngkir] = useState(false);
-
+  const [addressData, setAddressData] = useState<AddressType>();
   const [citySearch, setCitySearch] = useState("");
   const [cityOptions, setCityOptions] = useState<any[]>([]);
   const [destinationCityId, setDestinationCityId] = useState<string>("");
+
+  const shippingAddressOption = watch("shippingAddressOption");
+  const billingAddress = watch("billing.address");
+  const billingPhone = watch("billing.phone");
+  const billingEmail = watch("billing.email");
 
   // console.log(watch("shipToDifferentAddress"));
   console.log(shipToDestination);
@@ -33,11 +51,28 @@ export default function Shipping() {
   // }, [setValue]);
 
   useEffect(() => {
-    if (shipToDifferentAddress) {
-      setValue("shipping.address.address1", watch("billing.address.address1"));
-      setValue("shipping.address.address2", watch("billing.address.address2"));
-      setValue("shipping.phone", watch("billing.phone"));
-      setValue("shipping.email", watch("billing.email"));
+    if (!session.data?.user?.id) return;
+    fetch(`/api/user/${session.data.user.id}/address?type=SHIPPING`)
+    .then(res => res.json())
+    .then(data => setAddressData(data));
+  }, [session.data?.user?.id]);
+
+  useEffect(() => {
+    setValue("shippingAddressOption", "default");
+    // eslint-disable-next-line react-hooks/exhaustive-deps 
+  }, [setValue]);
+
+  useEffect(() => {
+    if (shippingAddressOption === "default") {
+      setValue("shipping.address.address1", addressData?.address?.address1 || "");
+      setValue("shipping.address.address2", addressData?.address?.address2 || "");
+      setValue("shipping.phone", addressData?.phone || "");
+      setValue("shipping.email", addressData?.email || "");
+    } else if (shippingAddressOption === "sameAsBilling") {
+      setValue("shipping.address.address1", billingAddress?.address1 || "");
+      setValue("shipping.address.address2", billingAddress?.address2 || "");
+      setValue("shipping.phone", billingPhone || "");
+      setValue("shipping.email", billingEmail || "");
     } else {
       setValue("shipping.address.address1", "");
       setValue("shipping.address.address2", "");
@@ -45,7 +80,7 @@ export default function Shipping() {
       setValue("shipping.email", "");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shipToDifferentAddress, setValue]);
+  }, [shippingAddressOption, addressData, billingAddress, billingPhone, billingEmail, setValue]);
 
   // Handler pencarian kota destinasi
   const handleCitySearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -151,18 +186,44 @@ export default function Shipping() {
             </datalist>
           </div>
 
+          <p className="text-sm text-gray-6 mb-5">Gunakan alamat pengiriman yang mana?</p>
           <div className="mb-5">
             <Controller
               control={control}
-              name="shipToDifferentAddress"
+              name="shippingAddressOption"
               render={({ field }) => (
-                <InputGroup
-                  type="checkbox"
-                  label="Gunakan alamat pengiriman yang sama dengan alamat pembayaran"
-                  name={field.name}
-                  value={field.value.toString()}
-                  onChange={field.onChange}
-                />
+                <div className="flex flex-col gap-2">
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      value="default"
+                      checked={field.value === "default"}
+                      onChange={field.onChange}
+                      name={field.name}
+                    />
+                    Default Pengiriman
+                  </label>
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      value="sameAsBilling"
+                      checked={field.value === "sameAsBilling"}
+                      onChange={field.onChange}
+                      name={field.name}
+                    />
+                    Sama dengan Billing
+                  </label>
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      value="other"
+                      checked={field.value === "other"}
+                      onChange={field.onChange}
+                      name={field.name}
+                    />
+                    Lainnya, Isi Alamat Pengiriman
+                  </label>
+                </div>
               )}
             />
           </div>
@@ -176,7 +237,7 @@ export default function Shipping() {
                   label="Street Address"
                   placeholder="House number and street name"
                   required
-                  readOnly={shipToDifferentAddress}
+                  readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
                   name={field.name}
                   value={field.value !== undefined ? field.value : ""}
                   onChange={field.onChange}
@@ -188,9 +249,16 @@ export default function Shipping() {
               <input
                 type="text"
                 {...register("shipping.address.address2")}
-                readOnly={shipToDifferentAddress}
+                readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
                 placeholder="Apartment, suite, unit, etc. (optional)"
-                className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
+                className={`
+                  rounded-lg border placeholder:text-sm 
+                  text-sm placeholder:font-normal border-gray-3 h-11
+                  focus:border-blue focus:outline-0
+                  placeholder:text-dark-5 w-full
+                  py-2.5 px-4 duration-200 focus:ring-0
+                  ${shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default" ? "bg-gray-2" : ""}
+                `}
               />
             </div>
           </div>
@@ -204,7 +272,7 @@ export default function Shipping() {
                   type="tel"
                   label="Phone"
                   required
-                  readOnly={shipToDifferentAddress}
+                  readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
                   name={field.name}
                   value={field.value !== undefined ? field.value : ""}
                   onChange={field.onChange}
@@ -220,7 +288,7 @@ export default function Shipping() {
                   label="Email Address"
                   type="email"
                   required
-                  readOnly={shipToDifferentAddress}
+                  readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
                   name={field.name}
                   value={field.value !== undefined ? field.value : ""}
                   onChange={field.onChange}

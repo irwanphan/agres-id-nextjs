@@ -61,6 +61,7 @@ export type CheckoutInput = {
     createAccount?: boolean;
   };
   shipToDifferentAddress: boolean;
+  shippingAddressOption: "default" | "sameAsBilling" | "other";
   shipping?: {
     // origin: string;
     destination: string;
