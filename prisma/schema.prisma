@@ -143,7 +143,7 @@ model Address {
   name    String
   email   String
   phone   String
-  address String
+  address Json
   type    AddressType @default(ALL)
   user    User        @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
