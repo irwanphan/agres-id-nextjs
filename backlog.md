@@ -61,5 +61,14 @@ Affiliate & Store Account Management
 - [] Add Affiliate & Store Account Management Page to Admin Page
 
 Product Management
+- [] Add ProductCode to main Product model
 - [] Add Weight to main Product model
-- [] fix: product page doesn't show the updated data after editing or adding new product
+- [ok] fix: product page doesn't show the updated data after editing or adding new product
+
+Site Nav
+- [] Add product menu with category filter
+
+Data Preparation
+- [] Converter from MPL to clean_import.csv
+- [] Query import from clean_import.csv to database
+- [] Query import from master_product_attributes.csv to update products
