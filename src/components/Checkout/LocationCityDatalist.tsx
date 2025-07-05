@@ -16,7 +16,7 @@ type Props = {
   setValue: (name: any, value: string) => void;
 };
 
-export default function RajaOngkirCityDatalist({ name, register, error, cities, setValue }: Props) { 
+export default function LocationCityDatalist({ name, register, error, cities, setValue }: Props) { 
   return (
     <div>
       <label htmlFor="province">

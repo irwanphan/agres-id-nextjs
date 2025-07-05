@@ -32,6 +32,7 @@ Checkout Page
 - [] Calculate total with shipping cost
 - [] "Pickup di Gerai AGRES" option shows Pickup Point selection
 - [] Show map for Pickup Point selection
+- [ok] fix: orders summary, product lines broken when product name is too long
 
 RBAC / Fine Grained Access Control
 - [] Add RBAC / Fine Grained Access Control

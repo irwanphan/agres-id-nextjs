@@ -2,15 +2,15 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { Controller } from "react-hook-form";
-import RajaOngkirProvinceDatalist from "./RajaOngkirProvinceDatalist";
+import LocationProvinceDatalist from "./LocationProvinceDatalist";
 import { InputGroup } from "../ui/input";
 import { useCheckoutForm } from "./form";
 import { splitName } from "@/utils/splitName";
 import { CheckMarkIcon } from "@/assets/icons";
-import RajaOngkirCityDatalist from "./RajaOngkirCityDatalist";
+import LocationCityDatalist from "./LocationCityDatalist";
 // import { ChevronDown } from "./icons";
-import { Province } from "./RajaOngkirProvinceDatalist";
-import { City } from "./RajaOngkirCityDatalist";
+import { Province } from "./LocationProvinceDatalist";
+import { City } from "./LocationCityDatalist";
 import { ChevronDown } from "./icons";
 
 export default function Billing() {
@@ -25,14 +25,14 @@ export default function Billing() {
   // console.log(cityId);
 
   useEffect(() => {
-    fetch('/api/rajaongkir/province')
+    fetch('/api/location/province')
     .then((res) => res.json())
     .then((data) => setProvinces(data));
   }, []);
 
   useEffect(() => {
     if (!provinceId) return setCities([]);
-    fetch(`/api/rajaongkir/city?provinceId=${provinceId}`)
+    fetch(`/api/location/city?provinceId=${provinceId}`)
     .then((res) => res.json())
     .then((data) => setCities(data));
   }, [provinceId]);
@@ -135,14 +135,14 @@ export default function Billing() {
               <option value="america">America</option>
               <option value="england">England</option>
             </select> */}
-            <RajaOngkirProvinceDatalist 
+            <LocationProvinceDatalist 
               provinces={provinces}
               name="billing.province"
               register={register} 
               error={errors.billing?.province}
               setValue={setValue}
             />
-            <RajaOngkirCityDatalist 
+            <LocationCityDatalist 
               cities={cities}
               name="billing.city" 
               register={register} 
