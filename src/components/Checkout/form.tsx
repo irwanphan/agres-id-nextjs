@@ -96,7 +96,7 @@ export type CheckoutInput = {
   // RajaOngkir specific fields
   // originDestination?: string;
   // destinationDestination?: string;
-  // packageWeight?: number;
+  packageWeight?: number;
   // rajaOngkirData?: {
   //   origin: RajaOngkirDestination;
   //   destination: RajaOngkirDestination;
