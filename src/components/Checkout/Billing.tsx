@@ -12,6 +12,17 @@ import { Province } from "./LocationProvinceDatalist";
 import { City } from "./LocationCityDatalist";
 import { ChevronDown } from "./icons";
 
+type AddressType = {
+  name: string;
+  email: string;
+  phone: string;
+  address: {
+    address1: string;
+    address2: string;
+  };
+  id: string;
+};
+
 export default function Billing() {
   const [dropdown, setDropdown] = useState(true);
 
@@ -21,6 +32,7 @@ export default function Billing() {
   // const cityId = watch("billing.cityId");
   const [provinces, setProvinces] = useState<Province[]>([]);
   const [cities, setCities] = useState<City[]>([]);
+  const [addressData, setAddressData] = useState<AddressType>();
   // console.log(cityId);
 
   useEffect(() => {
@@ -37,13 +49,20 @@ export default function Billing() {
   }, [provinceId]);
 
   useEffect(() => {
-    if (session.data?.user?.name && session.data?.user?.email) {
-      const { firstName, lastName } = splitName(session.data.user.name);
-      setValue("billing.firstName", firstName);
-      setValue("billing.lastName", lastName);
-      setValue("billing.email", session.data.user.email);
+    if (!session.data?.user?.id) return;
+    fetch(`/api/user/${session.data.user.id}/address?type=BILLING`)
+      .then(res => res.json())
+      .then(data => setAddressData(data));
+  }, [session.data?.user?.id]);
+
+  useEffect(() => {
+    if (addressData) {
+      setValue("billing.phone", addressData.phone || "");
+      setValue("billing.email", addressData.email || "");
+      setValue("billing.address.address1", addressData.address?.address1 || "");
+      setValue("billing.address.address2", addressData.address?.address2 || "");
     }
-  }, [session.data?.user, setValue])
+  }, [addressData, setValue]);
 
   return (
     <div className="bg-white shadow-1 rounded-[10px] ">

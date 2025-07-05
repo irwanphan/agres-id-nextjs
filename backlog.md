@@ -36,6 +36,8 @@ Checkout Page
 - [ok] Get province and city from database/json instead of using RajaOngkir API
 - [ok] Implement province and city local datalist
 - [ok] Remove RajaOngkir API from the code and Rajaongkir name from any route and path
+- [ok] auto fetch billing address from user account management page to billing section
+- [] auto fetch shipping address from user account management page to shipping section
 
 RBAC / Fine Grained Access Control
 - [] Add RBAC / Fine Grained Access Control
@@ -50,6 +52,7 @@ Admin Page
 
 User Account Management Page
 - [] Add Join Date to User Account Management Page, show in Sidebar
+- [ok] Change Address to Json with Address1 and Address2 on User Account Management Page
 
 Auth
 - [ok] fix: after success login, user is being redirected, but no information is shown on the page when loading and might confuse users
