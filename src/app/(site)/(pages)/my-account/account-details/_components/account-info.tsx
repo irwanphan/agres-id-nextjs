@@ -143,11 +143,11 @@ export function AccountInfo() {
         >
           Simpan Perubahan {isLoading && <Loader />}
         </button>
+        <p className="mt-5 text-custom-sm">
+          Ini akan menjadi nama Anda yang akan ditampilkan di bagian akun dan
+          di ulasan
+        </p>
       </form>
-      <p className="mt-5 text-custom-sm">
-        Ini akan menjadi nama Anda yang akan ditampilkan di bagian akun dan
-        di ulasan
-      </p>
     </>
   );
 }
