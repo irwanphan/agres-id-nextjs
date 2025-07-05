@@ -5,7 +5,7 @@ const Discount = () => {
     <div className="w-full lg:col-span-8">
       <div className="bg-white shadow-1 rounded-[10px]">
         <div className="border-b border-gray-3 py-5 px-4 sm:px-5.5">
-          <h3 className="">Have any discount code?</h3>
+          <h3 className="">Ada kode diskon? Masukkan kode diskon di sini</h3>
         </div>
 
         <div className="py-8 px-4 sm:px-8.5">

@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { useShoppingCart } from "use-shopping-cart";
 import cn from "@/utils/cn";
 import { MinusIcon, PlusIcon, TrashIcon } from "@/assets/icons";
+import { formatPrice } from "@/utils/formatePrice";
 
 const SingleItem = ({ item }: any) => {
   console.log(item, "item in cart");
@@ -48,7 +49,7 @@ const SingleItem = ({ item }: any) => {
       </td>
 
       <td className="py-5 px-7.5 whitespace-nowrap">
-        <p className="text-dark">{item.price}</p>
+        <p className="text-dark">{formatPrice(item.price)}</p>
       </td>
 
       <td className="py-5 px-7.5  whitespace-nowrap">
@@ -82,7 +83,7 @@ const SingleItem = ({ item }: any) => {
       </td>
 
       <td className="py-5 px-7.5 whitespace-nowrap">
-        <p className="text-dark">${item.price * item.quantity}</p>
+        <p className="text-dark">{formatPrice(item.price * item.quantity)}</p>
       </td>
 
       <td className="py-5 px-7.5 whitespace-nowrap text-right">

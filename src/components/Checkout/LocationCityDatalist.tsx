@@ -16,7 +16,7 @@ type Props = {
   setValue: (name: any, value: string) => void;
 };
 
-export default function RajaOngkirCityDatalist({ name, register, error, cities, setValue }: Props) { 
+export default function LocationCityDatalist({ name, register, error, cities, setValue }: Props) { 
   return (
     <div>
       <label htmlFor="province">
@@ -32,7 +32,6 @@ export default function RajaOngkirCityDatalist({ name, register, error, cities, 
         })}
         type="text" 
         name={name} 
-        // autoComplete="on" 
         className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
         placeholder="Silahkan Ketik dan Pilih Kota..."
         onBlur={e => {

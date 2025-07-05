@@ -14,7 +14,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 const ContactPage = () => {
   const formId = process.env.FORMBOLD_FORM_ID;
   return (
-    <main>
+    <>
       <Breadcrumb
         items={[
           {
@@ -29,7 +29,7 @@ const ContactPage = () => {
         seoHeading={true}
       />
       <Contact formId={formId || ""} />
-    </main>
+    </>
   );
 };
 

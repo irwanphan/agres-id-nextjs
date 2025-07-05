@@ -14,7 +14,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
 const MailSuccessPage = () => {
   return (
-    <main>
+    <>
       <Breadcrumb
         items={[
           {
@@ -28,7 +28,7 @@ const MailSuccessPage = () => {
         ]}
       />
       <MailSuccess />
-    </main>
+    </>
   );
 };
 

@@ -2,15 +2,14 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { Controller } from "react-hook-form";
-import RajaOngkirProvinceDatalist from "./RajaOngkirProvinceDatalist";
+import LocationProvinceDatalist from "./LocationProvinceDatalist";
 import { InputGroup } from "../ui/input";
 import { useCheckoutForm } from "./form";
 import { splitName } from "@/utils/splitName";
 import { CheckMarkIcon } from "@/assets/icons";
-import RajaOngkirCityDatalist from "./RajaOngkirCityDatalist";
-// import { ChevronDown } from "./icons";
-import { Province } from "./RajaOngkirProvinceDatalist";
-import { City } from "./RajaOngkirCityDatalist";
+import LocationCityDatalist from "./LocationCityDatalist";
+import { Province } from "./LocationProvinceDatalist";
+import { City } from "./LocationCityDatalist";
 import { ChevronDown } from "./icons";
 
 export default function Billing() {
@@ -25,14 +24,14 @@ export default function Billing() {
   // console.log(cityId);
 
   useEffect(() => {
-    fetch('/api/rajaongkir/province')
+    fetch('/api/location/province')
     .then((res) => res.json())
     .then((data) => setProvinces(data));
   }, []);
 
   useEffect(() => {
     if (!provinceId) return setCities([]);
-    fetch(`/api/rajaongkir/city?provinceId=${provinceId}`)
+    fetch(`/api/location/city?provinceId=${provinceId}`)
     .then((res) => res.json())
     .then((data) => setCities(data));
   }, [provinceId]);
@@ -105,117 +104,6 @@ export default function Billing() {
             />
           </div>
 
-          <div>
-            <Controller
-              control={control}
-              name="billing.companyName"
-              render={({ field }) => (
-                <InputGroup
-                  label="Company Name"
-                  name={field.name}
-                  value={field.value}
-                  onChange={field.onChange}
-                />
-              )}
-            />
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            {/* <select
-              {...register("billing.regionName", { required: true })}
-              id="regionName"
-              className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
-              required
-            >
-              <option value="" hidden>
-                Select your country
-              </option>
-
-              <option value="australia">Australia</option>
-              <option value="america">America</option>
-              <option value="england">England</option>
-            </select> */}
-            <RajaOngkirProvinceDatalist 
-              provinces={provinces}
-              name="billing.province"
-              register={register} 
-              error={errors.billing?.province}
-              setValue={setValue}
-            />
-            <RajaOngkirCityDatalist 
-              cities={cities}
-              name="billing.city" 
-              register={register} 
-              error={errors.billing?.city}
-              setValue={setValue}
-            />
-          </div>
-
-          <div>
-            <Controller
-              control={control}
-              rules={{ required: true }}
-              name="billing.address.address1"
-              render={({ field, fieldState }) => (
-                <InputGroup
-                  label="Street Address"
-                  placeholder="House number and street name"
-                  required
-                  error={!!fieldState.error}
-                  errorMessage="Street address is required"
-                  name={field.name}
-                  value={field.value}
-                  onChange={field.onChange}
-                />
-              )}
-            />
-
-            <div className="mt-5">
-              <input
-                type="text"
-                {...register("billing.address.address2")}
-                placeholder="Apartment, suite, unit, etc. (optional)"
-                className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
-              />
-            </div>
-          </div>
-
-          {/* <div>
-            <Controller
-              control={control}
-              rules={{ required: true }}
-              name="billing.town"
-              render={({ field, fieldState }) => (
-                <InputGroup
-                  label="Town/City"
-                  required
-                  error={!!fieldState.error}
-                  errorMessage="Town is required"
-                  name={field.name}
-                  value={field.value}
-                  onChange={field.onChange}
-                />
-              )}
-            />
-          </div> */}
-
-          {/* <div>
-            <Controller
-              control={control}
-              rules={{ required: true }}
-              name="billing.country"
-              render={({ field }) => (
-                <InputGroup
-                  label="Country"
-                  required
-                  name={field.name}
-                  value={field.value}
-                  onChange={field.onChange}
-                />
-              )}
-            />
-          </div> */}
-
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <Controller
               control={control}
@@ -255,6 +143,69 @@ export default function Billing() {
             />
           </div>
 
+          <div>
+            <Controller
+              control={control}
+              name="billing.companyName"
+              render={({ field }) => (
+                <InputGroup
+                  label="Company Name"
+                  name={field.name}
+                  value={field.value}
+                  onChange={field.onChange}
+                />
+              )}
+            />
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <LocationProvinceDatalist 
+              provinces={provinces}
+              name="billing.province"
+              register={register} 
+              error={errors.billing?.province}
+              setValue={setValue}
+            />
+            <LocationCityDatalist 
+              cities={cities}
+              name="billing.city" 
+              register={register} 
+              error={errors.billing?.city}
+              setValue={setValue}
+            />
+          </div>
+
+          <div>
+            <Controller
+              control={control}
+              rules={{ required: true }}
+              name="billing.address.address1"
+              render={({ field, fieldState }) => (
+                <InputGroup
+                  label="Street Address"
+                  placeholder="House number and street name"
+                  required
+                  error={!!fieldState.error}
+                  errorMessage="Street address is required"
+                  name={field.name}
+                  value={field.value}
+                  onChange={field.onChange}
+                />
+              )}
+            />
+
+            <div className="mt-5">
+              <input
+                type="text"
+                {...register("billing.address.address2")}
+                placeholder="Apartment, suite, unit, etc. (optional)"
+                className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
+              />
+            </div>
+          </div>
+
+          
+
           {!session?.data?.user?.email && (
             <div>
               <label
@@ -276,8 +227,6 @@ export default function Billing() {
               </label>
             </div>
           )}
-
-          
         </div>
       )}
     </div>

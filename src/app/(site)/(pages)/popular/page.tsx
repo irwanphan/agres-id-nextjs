@@ -31,7 +31,7 @@ const ShopWithoutSidebarPage = async ({ searchParams }: PageProps) => {
   const products = await getAllProducts(orderBy);
 
   return (
-    <main>
+    <>
       <Breadcrumb
         items={[
           {
@@ -46,7 +46,7 @@ const ShopWithoutSidebarPage = async ({ searchParams }: PageProps) => {
         seoHeading={true}
       />
       <ShopWithoutSidebar key={sort} shopData={products} />
-    </main>
+    </>
   );
 };
 

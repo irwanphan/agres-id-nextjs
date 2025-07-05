@@ -12,7 +12,7 @@ export default function Orders() {
   // const origin = watch("shipping.origin");
   const origin = "AGRES.ID Mangga Dua Square";
   const destination = watch("shipping.destination");
-  const packageWeight = watch("packageWeight");
+  const packageWeight = watch("shipping.weight");
 
   // console.log(watch("shipping.destination"));
 
@@ -37,7 +37,7 @@ export default function Orders() {
             {cartCount && cartCount > 0 ? (
               Object.values(cartDetails ?? {}).map((product, key) => (
                 <tr key={key} className="border-b border-gray-3">
-                  <td className="py-5 text-sm truncate">{product.name}</td>
+                  <td className="py-5 text-sm break-words">{product.name}</td>
                   <td className="py-5 text-sm text-right">
                     {formatPrice(product.price)}
                   </td>
@@ -170,7 +170,7 @@ export default function Orders() {
                 });
               }
             }} className="text-sm text-blue-light flex items-center gap-2">
-              Next, Scroll ke Detail Pesanan <IconChevronsDown className="w-4 h-4" />
+              Next, Scroll ke Metode Pembayaran <IconChevronsDown className="w-4 h-4" />
             </button>
           </span>
         </div>

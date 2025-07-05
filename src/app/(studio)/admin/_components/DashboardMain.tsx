@@ -10,6 +10,8 @@ type IProps = {
 };
 export default function DashboardMain({ children, user, headerLogo }: IProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // toggle sidebar is used to open and close the sidebar on Mobile View
   const toggleSidebar = () => {
     setSidebarOpen((prev) => !prev);
   };
@@ -17,10 +19,18 @@ export default function DashboardMain({ children, user, headerLogo }: IProps) {
     <>
       <Sidebar sidebarOpen={sidebarOpen} headerLogo={headerLogo} />
       <div
-        className={`flex-1 h-screen ${sidebarOpen ? "ml-0" : "lg:ml-[290px]"}`}
-      >
+        className={`
+          flex flex-col h-screen grow-1
+          `}
+          >
+        {/* ${sidebarOpen ? "ml-0" : "lg:ml-[290px]"} */}
         <DashboardHeader toggleSidebar={toggleSidebar} user={user} headerLogo={headerLogo} />
-        <main className={`p-8 overflow-y-auto bg-gray-2 `}>{children}</main>
+        <main className={`
+          w-full block grow-1
+          p-6
+          overflow-y-auto 
+          bg-gray-2 
+        `}>{children}</main>
       </div>
 
       {/* Overlays */}

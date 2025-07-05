@@ -1,4 +1,4 @@
-import { RajaOngkirCalculateDomesticCostResponse } from '@/types';
+import { ShippingCalculateDomesticCostResponse } from '@/types';
 import { NextRequest, NextResponse } from 'next/server';
 
 type RequestBodyParams = {
@@ -25,10 +25,10 @@ export async function POST(req: NextRequest) {
   // const origin = 155 // Rajaongkir ID for Jakarta Utara, API v1
   const origin = '17650' // Rajaongkir ID for Jakarta Utara, API v2
   
-  console.log('origin: ', origin);
-  console.log('destination: ', destination);
-  console.log('weight: ', weight);
-  console.log('courier: ', courier);
+  // console.log('origin: ', origin);
+  // console.log('destination: ', destination);
+  // console.log('weight: ', weight);
+  // console.log('courier: ', courier);
 
   const body = {
     origin,
@@ -52,8 +52,8 @@ export async function POST(req: NextRequest) {
     body: new URLSearchParams(body),
   });
 
-  console.log('response: ', response);
-  const data: RajaOngkirCalculateDomesticCostResponse = await response.json();
-  console.log('data: ', data);
+  // console.log('response: ', response);
+  const data: ShippingCalculateDomesticCostResponse = await response.json();
+  // console.log('data: ', data);
   return NextResponse.json(data);
 }
