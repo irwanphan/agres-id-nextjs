@@ -33,6 +33,9 @@ Checkout Page
 - [] "Pickup di Gerai AGRES" option shows Pickup Point selection
 - [] Show map for Pickup Point selection
 - [ok] fix: orders summary, product lines broken when product name is too long
+- [ok] Get province and city from database/json instead of using RajaOngkir API
+- [ok] Implement province and city local datalist
+- [ok] Remove RajaOngkir API from the code and Rajaongkir name from any route and path
 
 RBAC / Fine Grained Access Control
 - [] Add RBAC / Fine Grained Access Control

@@ -1,4 +1,4 @@
-export interface RajaOngkirDestination {
+export interface ShippingDestination {
   id: string;
   name: string;
   type: string;
@@ -11,7 +11,7 @@ export interface RajaOngkirDestination {
   postal_code?: string;
 }
 
-export interface RajaOngkirShippingCost {
+export interface ShippingCost {
   courier: string;
   service: string;
   description: string;
@@ -20,16 +20,16 @@ export interface RajaOngkirShippingCost {
   note?: string;
 }
 
-export interface RajaOngkirSearchResponse {
+export interface ShippingSearchResponse {
   meta: {
     message: string;
     code: number;
     status: string;
   };
-  data: RajaOngkirDestination[];
+  data: ShippingDestination[];
 }
 
-export interface RajaOngkirCalculateResponse {
+export interface ShippingCalculateResponse {
   meta: {
     message: string;
     code: number;
@@ -39,21 +39,21 @@ export interface RajaOngkirCalculateResponse {
     origin: string;
     destination: string;
     weight: number;
-    courier: RajaOngkirShippingCost[];
+    courier: ShippingCost[];
   };
 }
 
-export interface RajaOngkirCheckoutData {
-  origin: RajaOngkirDestination;
-  destination: RajaOngkirDestination;
+export interface ShippingCheckoutData {
+  origin: ShippingDestination;
+  destination: ShippingDestination;
   weight: number;
-  selectedOption: RajaOngkirShippingCost;
+  selectedOption: ShippingCost;
   itemValue?: number;
 } 
 
 
 // V2 API
-export interface RajaOngkirDomesticDestination {
+export interface ShippingDomesticDestination {
   id: number;
   label: string;
   province_name: string;
@@ -63,16 +63,16 @@ export interface RajaOngkirDomesticDestination {
   zip_code: string;
 }
 
-export interface RajaOngkirDomesticDestinationResponse {
+export interface ShippingDomesticDestinationResponse {
   meta: {
     message: string;
     code: number;
     status: string;
   };
-  data: RajaOngkirDomesticDestination[];
+  data: ShippingDomesticDestination[];
 }
 
-export interface RajaOngkirDomesticShippingCost {
+export interface ShippingDomesticShippingCost {
   name: string;
   code: string;
   service: string;
@@ -81,11 +81,11 @@ export interface RajaOngkirDomesticShippingCost {
   etd: string;
 }
 
-export interface RajaOngkirCalculateDomesticCostResponse {
+export interface ShippingCalculateDomesticCostResponse {
   meta: {
     message: string;
     code: number;
     status: string;
   };
-  data: RajaOngkirDomesticShippingCost[];
+  data: ShippingDomesticShippingCost[];
 }

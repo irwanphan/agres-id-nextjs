@@ -9,7 +9,7 @@ import { ChevronDown } from "./icons";
 import { SHIPPING_METHODS, ShippingMethodsCard } from "./ShippingMethod";
 import { IconChevronsUpRight } from "@tabler/icons-react";
 import { formatPrice } from "@/utils/formatePrice";
-import { RajaOngkirCalculateDomesticCostResponse, RajaOngkirCalculateResponse } from "@/types";
+import { ShippingCalculateDomesticCostResponse } from "@/types";
 
 export default function Shipping() {
   const [dropdown, setDropdown] = useState(true);
@@ -56,7 +56,7 @@ export default function Shipping() {
       return;
     }
     try {
-      const res = await fetch(`/api/rajaongkir/destination?search=${encodeURIComponent(value)}`);
+      const res = await fetch(`/api/shipping/destination?search=${encodeURIComponent(value)}`);
       const data = await res.json();
       setCityOptions(data.data || []);
     } catch (err) {
@@ -87,7 +87,7 @@ export default function Shipping() {
     setLoadingOngkir(true);
     setShippingCost(null);
     try {
-      const res = await fetch("/api/rajaongkir/calculate", {
+      const res = await fetch("/api/shipping/calculate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -97,8 +97,8 @@ export default function Shipping() {
           courier,
         }),
       });
-      const data: RajaOngkirCalculateDomesticCostResponse = await res.json();
-      // Ambil ongkir dari response (asumsi response format RajaOngkir)
+      const data: ShippingCalculateDomesticCostResponse = await res.json();
+      // Ambil ongkir dari response (asumsi response format Shipping)
       const selectedShipping = data.data[0];
       const cost = selectedShipping?.cost ?? 0;
       setShippingCost(cost || 0);

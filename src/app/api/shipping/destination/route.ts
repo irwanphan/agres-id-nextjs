@@ -1,4 +1,4 @@
-import { RajaOngkirDomesticDestinationResponse } from "@/types";
+import { ShippingDomesticDestinationResponse } from "@/types";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
@@ -11,7 +11,7 @@ export async function GET(request: Request) {
     },
   });
 
-  const data: RajaOngkirDomesticDestinationResponse = await response.json();
+  const data: ShippingDomesticDestinationResponse = await response.json();
   return NextResponse.json(data);
 }
 

@@ -1,5 +1,5 @@
 // Export all types
-export * from './rajaongkir';
+export * from './shipping';
 export * from './author';
 export * from './blogItem';
 export * from './category';
