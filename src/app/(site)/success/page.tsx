@@ -19,7 +19,7 @@ const Success = async ({
 }) => {
   const { amount, bankInfo } = await searchParams;
   return (
-    <main>
+    <>
       <Breadcrumb
         items={[
           {
@@ -33,7 +33,7 @@ const Success = async ({
         ]}
       />
       <CheckoutSuccess amount={amount} bankInfo={bankInfo} />
-    </main>
+    </>
   );
 };
 

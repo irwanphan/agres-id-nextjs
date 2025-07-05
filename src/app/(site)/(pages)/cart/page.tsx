@@ -14,7 +14,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
 const CartPage = () => {
   return (
-    <main>
+    <>
       <Breadcrumb
         items={[
           {
@@ -28,7 +28,7 @@ const CartPage = () => {
         ]}
       />
       <Cart />
-    </main>
+    </>
   );
 };
 

@@ -15,7 +15,7 @@ const PrivacyPolicyPage = async () => {
   const privacyPolicyData = await getPrivacyPolicies();
   const policyItem = privacyPolicyData[0] || null;
   return (
-    <main>
+    <>
       <Breadcrumb
         items={[
           {
@@ -46,7 +46,7 @@ const PrivacyPolicyPage = async () => {
           )}
         </div>
       </section>
-    </main>
+    </>
   );
 };
 

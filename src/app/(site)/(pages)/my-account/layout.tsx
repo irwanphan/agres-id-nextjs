@@ -32,7 +32,7 @@ export default function Layout({ children }: PropsWithChildren) {
         <div className="w-full px-4 mx-auto max-w-7xl sm:px-8 xl:px-0">
           <div className="grid grid-cols-12 gap-6">
             <Sidebar />
-            <main className="xl:col-span-9">{children}</main>
+            <div className="xl:col-span-9">{children}</div>
           </div>
         </div>
       </section>

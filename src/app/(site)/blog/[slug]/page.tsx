@@ -95,13 +95,13 @@ const BlogDetailsPage = async ({ params }: Params) => {
   });
 
   return (
-    <main>
+    <>
       {post ? (
         <BlogDetails blogData={post} />
       ) : (
         <div className="pb-20 pt-40 text-center">No blog article has been found</div>
       )}
-    </main>
+    </>
   );
 };
 

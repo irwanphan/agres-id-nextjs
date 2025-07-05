@@ -16,7 +16,7 @@ const TermsConditionPage = async () => {
   const termsData = await getTermsConditions();
   const termsItem = termsData[0] || null;
   return (
-    <main>
+    <>
       <Breadcrumb
         items={[
           {
@@ -54,7 +54,7 @@ const TermsConditionPage = async () => {
           )}
         </div>
       </section>
-    </main>
+    </>
   );
 };
 

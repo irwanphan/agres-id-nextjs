@@ -150,7 +150,7 @@ const CategoryPage = async ({ params, searchParams }: Params) => {
   }));
 
   return (
-    <main>
+    <>
       <Breadcrumb
         items={[
           {
@@ -165,7 +165,7 @@ const CategoryPage = async ({ params, searchParams }: Params) => {
         seoHeading={true}
       />
       <ShopWithoutSidebar shopData={formattedProducts} />
-    </main>
+    </>
   );
 };
 

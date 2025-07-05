@@ -14,7 +14,7 @@ export default async function DashboardWrapper({
   const user = await getSingleUser(session?.user?.email as string) || { name: "Unknown", image: null, role: "USER" };
   const headerSetting = await getHeaderSettings();
   return (
-    <div className="h-screen lg:flex bg-gray-2">
+    <div className="h-screen lg:flex bg-gray-2 max-w-100% overflow-hidden">
       <DashboardMain user={user} headerLogo={headerSetting?.headerLogo || null}>{children}</DashboardMain>
     </div>
   );

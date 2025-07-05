@@ -23,13 +23,13 @@ const BlogDetailsWithSidebarPage = async () => {
   const blogData = await getSingleBlog(slug);
 
   return (
-    <main>
+    <>
       {blogData ? (
         <BlogDetailsWithSidebar blogData={blogData} />
       ) : (
         <div className="pb-20 pt-40 text-center">No blog article has been found</div>
       )}
-    </main>
+    </>
   );
 };
 
