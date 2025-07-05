@@ -50,3 +50,11 @@ Overview
 
 Footer
 - [] Social links can be dynamic from the database and edited on admin page
+
+Pickup Point
+- [] Add Pickup Point
+- [] Add Pickup Point to the Checkout Page
+- [] Add Pickup Management Page to Admin Page
+
+Product Management
+- [] Add Weight to main Product model
