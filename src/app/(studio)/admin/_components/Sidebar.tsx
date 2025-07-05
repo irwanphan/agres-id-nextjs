@@ -17,7 +17,7 @@ export default function Sidebar({ sidebarOpen, headerLogo }: { sidebarOpen: bool
       `}
         // fixed left-0 top-0 z-40 
     >
-      <div className="fixed left-0 top-0 z-40 w-[18rem] h-screen bg-white">
+      <div className="fixed left-0 top-0 bottom-0 z-40 w-[18rem] bg-white">
 
         <div className="flex flex-col h-full">
           {/* Fixed logo section */}
