@@ -4,7 +4,8 @@
       "main": true,
       "dev": false,
       "dev-raja-ongkir-int": false,
-      "dev-user-update": false
+      "dev-user-update": false,
+      "dev-product-extend-weight": false
     }
   }
 }
