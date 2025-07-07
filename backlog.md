@@ -68,7 +68,7 @@ Footer
 - [] Social links can be dynamic from the database and edited on admin page
 
 Pickup Point
-- [] Add Pickup Point
+- [ok] Add Pickup Point
 - [] Add Pickup Management Page to Admin Page
 - [] Add Pickup Point to the Checkout Page
 - [] Save Pickup Point to the Order

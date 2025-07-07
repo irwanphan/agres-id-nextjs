@@ -4,6 +4,6 @@ export type PickupPoint = {
   address: string;
   city: string;
   province: string;
-  phone: string;
+  phone: string | null;
   isActive: boolean;
 };

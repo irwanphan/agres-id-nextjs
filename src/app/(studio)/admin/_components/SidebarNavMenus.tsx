@@ -76,6 +76,18 @@ const sidebarMenuData = [
     href: "/admin/reviews",
     icon: <ReviewIcon />,
   },
+
+  {
+    title: "Business Settings",
+    icon: <AccountSettingIcon />,
+    children: [
+      {
+        title: "Pickup Points",
+        href: "/admin/pickup-points",
+      },
+    ],
+  },
+
   {
     title: "Settings",
     icon: <AccountSettingIcon />,
