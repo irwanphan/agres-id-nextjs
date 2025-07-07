@@ -30,6 +30,8 @@ export async function generateMetadata({ params }: Props) {
   const siteURL = process.env.SITE_URL;
   const site_name = await getSiteName();
 
+  console.log("product", product);
+
   const defaultVariant = Array.isArray(product?.productVariants)
     ? product.productVariants.find((variant) => variant.isDefault)
     : undefined;

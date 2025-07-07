@@ -13,8 +13,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useShoppingCart } from "use-shopping-cart";
-import Breadcrumb from "../Common/Breadcrumb";
+import { useShoppingCart } from "use-shopping-cart";  
 import PreLoader from "../Common/PreLoader";
 import ReviewStar from "../Shop/ReviewStar";
 import DetailsTabs from "./DetailsTabs";
@@ -39,10 +38,14 @@ const ShopDetails = ({ product, avgRating, totalRating }: IProps) => {
   );
   const { openPreviewModal } = usePreviewSlider();
   const router = useRouter();
-  const [previewImg, setPreviewImg] = useState(defaultVariant?.image);
+  const [previewImg, setPreviewImg] = useState(defaultVariant?.image || product?.productVariants?.[0]?.image);
   const [quantity, setQuantity] = useState(1);
-  const [activeColor, setActiveColor] = useState(defaultVariant?.color);
-  const [activeSize, setActiveSize] = useState(defaultVariant?.size);
+  const [activeColor, setActiveColor] = useState(defaultVariant?.color || product?.productVariants?.[0]?.color);
+  const [activeSize, setActiveSize] = useState(defaultVariant?.size || product?.productVariants?.[0]?.size);
+  const [activeWeight, setActiveWeight] = useState(defaultVariant?.weight || product?.productVariants?.[0]?.weight);
+  const [activeLength, setActiveLength] = useState(defaultVariant?.length || product?.productVariants?.[0]?.length);
+  const [activeWidth, setActiveWidth] = useState(defaultVariant?.width || product?.productVariants?.[0]?.width);
+  const [activeHeight, setActiveHeight] = useState(defaultVariant?.height || product?.productVariants?.[0]?.height);
   const [selectedAttributes, setSelectedAttributes] =
     useState<SelectedAttributesType>({});
 
@@ -61,11 +64,15 @@ const ShopDetails = ({ product, avgRating, totalRating }: IProps) => {
     name: product.title,
     price: product.discountedPrice || product.price,
     currency: "usd",
-    image: defaultVariant ? defaultVariant?.image : "",
+    image: defaultVariant?.image || product?.productVariants?.[0]?.image || "",
     slug: product?.slug,
     availableQuantity: product.quantity,
-    color: activeColor,
+    color: activeColor || "",
     size: activeSize || "",
+    weight: activeWeight || "",
+    length: activeLength || "",
+    width: activeWidth || "",
+    height: activeHeight || "",
     attribute: selectedAttributes || "",
   };
 
@@ -168,6 +175,25 @@ const ShopDetails = ({ product, avgRating, totalRating }: IProps) => {
     }
   }, [product?.customAttributes]);
 
+  // Update active variant when product changes
+  useEffect(() => {
+    const defaultVariant = product?.productVariants?.find(
+      (variant) => variant.isDefault
+    );
+    const firstVariant = product?.productVariants?.[0];
+    
+    if (defaultVariant || firstVariant) {
+      const variant = defaultVariant || firstVariant;
+      setActiveColor(variant.color);
+      setActiveSize(variant.size);
+      setActiveWeight(variant.weight);
+      setActiveLength(variant.length);
+      setActiveWidth(variant.width);
+      setActiveHeight(variant.height);
+      setPreviewImg(variant.image);
+    }
+  }, [product?.productVariants]);
+
   // wishlist
   const wishlistItems = useAppSelector((state) => state.wishlistReducer.items);
   const isAlreadyWishListed = wishlistItems.some(
@@ -179,7 +205,7 @@ const ShopDetails = ({ product, avgRating, totalRating }: IProps) => {
         id: product.id,
         title: product.title,
         slug: product.slug,
-        image: defaultVariant?.image ? defaultVariant.image : "",
+        image: defaultVariant?.image || product?.productVariants?.[0]?.image || "",
         price: product.discountedPrice
           ? product.discountedPrice
           : product.price,
@@ -216,23 +242,26 @@ const ShopDetails = ({ product, avgRating, totalRating }: IProps) => {
                   </div>
 
                   <div className="flex flex-wrap sm:flex-nowrap gap-4.5 mt-6">
-                    {(product.productVariants || []).map((item: any, key: any) => (
-                      <button
-                        onClick={() => setPreviewImg(item?.image)}
-                        key={key}
-                        className={`flex items-center justify-center w-15 sm:w-25 h-15 sm:h-25 overflow-hidden rounded-lg bg-gray-2 shadow-1 ease-out duration-200 border-2 hover:border-blue ${item?.image === previewImg
-                            ? "border-blue"
-                            : "border-transparent"
-                          }`}
-                      >
-                        <Image
-                          width={50}
-                          height={50}
-                          src={item.image}
-                          alt="thumbnail"
-                        />
-                      </button>
-                    ))}
+                    {(product.productVariants || []).map((item: any, key: any) => {
+                      console.log(item);
+                      return (
+                        <button
+                          onClick={() => setPreviewImg(item?.image)}
+                          key={key}
+                          className={`flex items-center justify-center w-15 sm:w-25 h-15 sm:h-25 overflow-hidden rounded-lg bg-gray-2 shadow-1 ease-out duration-200 border-2 hover:border-blue ${item?.image === previewImg
+                              ? "border-blue"
+                              : "border-transparent"
+                            }`}
+                        >
+                          <Image
+                            width={50}
+                            height={50}
+                            src={item.image}
+                            alt="thumbnail"
+                          />
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
 
@@ -307,17 +336,19 @@ const ShopDetails = ({ product, avgRating, totalRating }: IProps) => {
                   <form onSubmit={(e) => e.preventDefault()}>
                     <div className="flex flex-col gap-4.5 border-y border-gray-3 mt-7.5 mb-9 py-9">
                       {/* <!-- details item --> */}
-                      <div className="flex items-center gap-4">
-                        <div className="min-w-[65px]">
-                          <h4 className="text-base font-normal capitalize text-dark">
-                            Color:
-                          </h4>
-                        </div>
 
-                        <ul className="flex items-center gap-2.5">
-                          {(product?.productVariants || []).map((item, key) => (
-                            <li
-                              key={key}
+                      {/* Product Variant */}
+                      <div className="flex items-center gap-4">
+                        {(product?.productVariants || []).map((item, key) => {
+                          console.log(item);
+                          return (
+                            <div 
+                              key={key} 
+                              className={`border py-1.5 px-3 rounded-lg text-sm font-normal cursor-pointer transition-colors duration-200 ${
+                                activeColor === item.color
+                                  ? "border-blue bg-blue/5"
+                                  : "border-gray-3 hover:border-gray-4"
+                              }`}
                               onClick={() => {
                                 setActiveColor(item.color);
                                 setPreviewImg(
@@ -326,103 +357,72 @@ const ShopDetails = ({ product, avgRating, totalRating }: IProps) => {
                                   )?.image || ""
                                 );
                               }}
-                              className={`w-[22px] cursor-pointer h-[22px] rounded-full inline-flex items-center justify-center ${item.color === "white" ||
-                                  item.color === "#ffffff"
-                                  ? "border border-gray-3"
-                                  : "border-transparent"
-                                }`}
-                              style={{ backgroundColor: `${item.color}` }}
                             >
-                              <svg
-                                className={
-                                  activeColor === item.color
-                                    ? "block"
-                                    : "hidden"
-                                }
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="12"
-                                height="12"
-                                viewBox="0 0 12 12"
-                                fill="none"
-                              >
-                                <path
-                                  d="M10.0517 3.27002L4.59172 8.73002L1.94922 6.08755"
-                                  stroke={
-                                    activeColor === "white" ||
-                                      activeColor === "#ffffff" ||
-                                      item.color === "white" ||
-                                      item.color === "#ffffff"
-                                      ? "black"
-                                      : "white"
-                                  }
-                                  strokeWidth="2"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                              </svg>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {product?.customAttributes &&
-                        (product.customAttributes || []).map((item, itemIndex) => (
-                          <div
-                            key={itemIndex}
-                            className="flex items-center gap-4"
-                          >
-                            <div className="min-w-[65px]">
-                              <h4 className="font-normal capitalize text-dark">
-                                {item?.attributeName}:
-                              </h4>
-                            </div>
-                            <div className="flex items-center gap-4">
-                              {(item.attributeValues || []).map((value, valueIndex) => (
-                                <span
-                                  key={valueIndex}
-                                  onClick={() =>
-                                    toggleSelectedAttribute(itemIndex, value.id)
-                                  }
-                                  className={`border py-1 px-2.5 rounded-md text-sm font-normal cursor-pointer ${selectedAttributes[itemIndex] === value.id
-                                      ? "border-blue text-blue"
-                                      : "border-gray-3 text-dark-3"
-                                    }`}
+                              <div className="flex items-center gap-2 mb-2">
+                                <p className="font-medium">Color</p>
+                                <div
+                                  className={`w-[1.125rem] h-[1.125rem] rounded-full inline-flex items-center justify-center ${
+                                    item.color === "white" || item.color === "#ffffff"
+                                      ? "border border-gray-3"
+                                      : "border-transparent"
+                                  }`}
+                                  style={{ backgroundColor: `${item.color}` }}
                                 >
-                                  {value.title}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        ))}
-                      {product?.productVariants.find(
-                        (variant) => variant.size
-                      ) && (
-                          <div className="flex items-center gap-4">
-                            <div className="min-w-[65px]">
-                              <h4 className="font-normal capitalize text-dark">
-                                Size:
-                              </h4>
-                            </div>
-                            <div className="flex items-center gap-4">
-                              {(product?.productVariants || []).map(
-                                (value, valueIndex) => (
-                                  <span
-                                    key={valueIndex}
-                                    onClick={() => setActiveSize(value.size)}
-                                    className={`border py-1 px-2.5 rounded-md text-sm font-normal cursor-pointer ${activeSize === value.size
-                                        ? "border-blue text-blue"
-                                        : "border-gray-3 text-dark-3"
-                                      }`}
+                                  <svg
+                                    className={
+                                      activeColor === item.color
+                                        ? "block"
+                                        : "hidden"
+                                    }
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="12"
+                                    height="12"
+                                    viewBox="0 0 12 12"
+                                    fill="none"
                                   >
-                                    {value.size}
-                                  </span>
-                                )
-                              )}
+                                    <path
+                                      d="M10.0517 3.27002L4.59172 8.73002L1.94922 6.08755"
+                                      stroke={
+                                        activeColor === "white" ||
+                                          activeColor === "#ffffff" ||
+                                          item.color === "white" ||
+                                          item.color === "#ffffff"
+                                          ? "black"
+                                          : "white"
+                                      }
+                                      strokeWidth="2"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    />
+                                  </svg>
+                                </div>
+                              </div>
+                              <div className="space-y-1 text-sm">
+                                <div className="flex gap-2">
+                                  <p className="text-gray-600">Size:</p>
+                                  <p className="font-medium">{item.size || '-'}</p>
+                                </div>
+                                <div className="flex gap-2">
+                                  <p className="text-gray-600">Weight:</p>
+                                  <p className="font-medium">{item.weight ? `${item.weight} g` : '-'}</p>
+                                </div>
+                                <div className="flex gap-2">
+                                  <p className="text-gray-600">Dimension:</p>
+                                  <div className="">
+                                    <p>p: {item.length ? `${item.length} cm` : '-'}</p>
+                                    <p>l: {item.width ? `${item.width} cm` : '-'}</p>
+                                    <p>t: {item.height ? `${item.height} cm` : '-'}</p>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                        )}
+                          );
+                        })}
+
+                      </div>
                     </div>
 
+                    {/* Action Buttons */}
                     <div className="flex flex-wrap items-center gap-4.5">
                       <div className="flex items-center border rounded-lg border-gray-3">
                         <button
