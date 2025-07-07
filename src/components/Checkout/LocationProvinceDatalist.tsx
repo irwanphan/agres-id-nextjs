@@ -18,9 +18,10 @@ type Props = {
 export default function LocationProvinceDatalist({ provinces, name, register, error, setValue }: Props) { 
   return (
     <div>
-      <label htmlFor="province">
+      <label htmlFor="province" className="block text-sm font-normal text-gray-6 mb-1.5">
         Provinsi <span className="text-red">*</span>
       </label>
+      
       <input
         list="province-list" 
         id="province" 

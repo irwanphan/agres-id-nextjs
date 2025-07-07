@@ -14,7 +14,7 @@ export default async function PickupPointsPage() {
       <div className="flex items-center justify-between px-6 py-5 border-b border-gray-3">
         <h2 className="text-base font-semibold text-dark">Pickup Points</h2>
         <Link href="/admin/pickup-points/add" className="btn-primary flex items-center gap-2">
-          <IconCirclePlus /> Add Pickup Point
+          <IconCirclePlus /> Tambah Pickup Point
         </Link>
       </div>
       <div>

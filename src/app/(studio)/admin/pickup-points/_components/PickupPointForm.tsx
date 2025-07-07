@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import { PickupPoint } from "@prisma/client";
 import toast from "react-hot-toast";
 import { createPickupPoint, updatePickupPoint } from "@/app/actions/pickup-point";
+import LocationProvinceDatalist, { Province } from "@/components/Checkout/LocationProvinceDatalist";
+import LocationCityDatalist, { City } from "@/components/Checkout/LocationCityDatalist";
 
 interface PickupPointInput {
   name: string;
@@ -29,6 +31,7 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
     formState: { errors },
     setValue,
     reset,
+    watch,
   } = useForm<PickupPointInput>({
     defaultValues: {
       name: pickupPointItem?.name || "",
@@ -42,6 +45,22 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
 
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [provinces, setProvinces] = useState<Province[]>([]);
+  const selectedProvince = watch("province");
+  const [cities, setCities] = useState<City[]>([]);
+
+  useEffect(() => {
+    fetch('/api/location/province')
+    .then((res) => res.json())
+    .then((data) => setProvinces(data));
+  }, []);
+
+  useEffect(() => {
+    if (!selectedProvince) return setCities([]);
+    fetch(`/api/location/city?provinceId=${selectedProvince}`)
+    .then((res) => res.json())
+    .then((data) => setCities(data));
+  }, [selectedProvince]);
 
   useEffect(() => {
     if (pickupPointItem) {
@@ -96,11 +115,11 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
             render={({ field, fieldState }) => (
               <div className="w-full">
                 <InputGroup
-                  label="Name"
+                  label="Nama"
                   type="text"
                   required
                   error={!!fieldState.error}
-                  errorMessage="Name is required"
+                  errorMessage="Nama Pickup Point harus diisi"
                   name={field.name}
                   value={field.value ?? ""}
                   onChange={field.onChange}
@@ -117,8 +136,9 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
             render={({ field }) => (
               <div className="w-full">
                 <InputGroup
-                  label="Phone"
+                  label="No. Telepon"
                   type="text"
+                  required
                   name={field.name}
                   value={field.value ?? ""}
                   onChange={field.onChange}
@@ -137,8 +157,9 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
             render={({ field }) => (
               <div className="w-full">
                 <InputGroup
-                  label="Address"
+                  label="Alamat"
                   type="text"
+                  required
                   name={field.name}
                   value={field.value ?? ""}
                   onChange={field.onChange}
@@ -149,39 +170,19 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
         </div>
 
         <div className="grid grid-cols-2 gap-5">
-          {/* province */}
-          <Controller
-            control={control}
+          <LocationProvinceDatalist 
+            provinces={provinces}
             name="province"
-            rules={{ required: false }}
-            render={({ field }) => (
-              <div className="w-full">
-                <InputGroup
-                  label="Province"
-                  type="text"
-                  name={field.name}
-                  value={field.value ?? ""}
-                  onChange={field.onChange}
-                />
-              </div>
-            )}
+            register={register} 
+            error={errors.province}
+            setValue={setValue}
           />
-
-          <Controller
-            control={control}
-            name="city"
-            rules={{ required: false }}
-            render={({ field }) => (
-              <div className="w-full">
-                <InputGroup
-                  label="City"
-                  type="text"
-                  name={field.name}
-                  value={field.value ?? ""}
-                  onChange={field.onChange}
-                />
-              </div>
-            )}
+          <LocationCityDatalist 
+            cities={cities}
+            name="city" 
+            register={register} 
+            error={errors.city}
+            setValue={setValue}
           />
         </div>
 
@@ -214,7 +215,7 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
         )}
         disabled={isLoading}
       >
-        {isLoading ? "Saving..." : pickupPointItem ? "Update Pickup Point" : "Save Pickup Point"}
+        {isLoading ? "Menyimpan..." : pickupPointItem ? "Update Pickup Point" : "Simpan Pickup Point"}
       </button>
     </form>
   );
