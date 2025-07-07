@@ -571,6 +571,8 @@ export default function ProductAddForm({ product, categories }: ProductProps) {
                             </th>
                             <th className="p-3 text-sm font-medium">Color</th>
                             <th className="p-3 text-sm font-medium">Size</th>
+                            <th className="p-3 text-sm font-medium">Weight (g)</th> 
+                            <th className="p-3 text-sm font-medium">Dimension</th>
                             <th className="p-3 text-sm font-medium">
                               Is Default
                             </th>
@@ -607,6 +609,18 @@ export default function ProductAddForm({ product, categories }: ProductProps) {
                               {/* Size */}
                               <td className="p-3 text-gray-7 whitespace-nowrap">
                                 {thumb.size}
+                              </td>
+
+                              {/* Weight */}
+                              <td className="p-3 text-gray-7 whitespace-nowrap">
+                                {thumb.weight}
+                              </td>
+
+                              {/* Dimension */}
+                              <td className="p-3 text-gray-7 whitespace-nowrap">
+                                <p>p: {thumb.length} cm</p>
+                                <p>l: {thumb.width} cm</p>
+                                <p>t: {thumb.height} cm</p>
                               </td>
 
                               {/* Is Default */}
@@ -744,7 +758,7 @@ export default function ProductAddForm({ product, categories }: ProductProps) {
               <span className="mr-2">
                 <PlusIcon width="12" height="12" />
               </span>
-              <span>Add item</span>
+              <span>Add Attribute</span>
             </button>
           </div>
 
@@ -754,7 +768,7 @@ export default function ProductAddForm({ product, categories }: ProductProps) {
               htmlFor="thumbnails"
               className="block mb-1.5 text-sm text-gray-6"
             >
-              Additional Information
+              Additional Information <span className="text-gray-5 text-sm">(PC Specification dimasukkan ke sini)</span>
             </label>
 
             {existingAdditionalInfo?.length > 0 ? (
@@ -796,7 +810,7 @@ export default function ProductAddForm({ product, categories }: ProductProps) {
               <span className="mr-2">
                 <PlusIcon width="12" height="12" />
               </span>
-              <span>Add item</span>
+              <span>Add Information</span>
             </button>
           </div>
 
