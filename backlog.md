@@ -54,7 +54,7 @@ Admin Page
 - [ok] FIx admin page padding and off-scroll caused by double height of container
 
 User Account Management Page
-- [] Add Join Date to User Account Management Page, show in Sidebar
+- [ok] Add Join Date to User Account Management Page, show in Sidebar
 - [ok] Change Address to Json with Address1 and Address2 on User Account Management Page
 
 Auth
@@ -69,7 +69,7 @@ Footer
 
 Pickup Point
 - [ok] Add Pickup Point
-- [] Add Pickup Management Page to Admin Page
+- [ok] Add Pickup Management Page to Admin Page
 - [] Add Pickup Point to the Checkout Page
 - [] Save Pickup Point to the Order
 

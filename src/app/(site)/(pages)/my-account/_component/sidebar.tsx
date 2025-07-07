@@ -32,11 +32,11 @@ export default function Sidebar() {
             <IconUserCircle className="w-10 h-10" stroke={1.5} />
           </div>
           <div className="flex-1">
-            <p className="font-medium text-dark mb-0.5">
+            <p className="font-medium text-dark mb-0">
               {session?.user?.name}
             </p>
             {/* TODO: Tambahkan tanggal pembuatan akun */}
-            {/* <p className="text-custom-xs">Bergabung sejak ...</p> */}
+            <p className="text-custom-xs">Bergabung sejak {new Date(session?.user?.createdAt || "").toLocaleDateString()}</p>
           </div>
         </div>
 
