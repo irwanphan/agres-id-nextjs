@@ -40,6 +40,7 @@ Checkout Page
 - [ok] auto fetch shipping address from user account management page to shipping section
 - [] fix: checkout page doesn't show the product variant selected
 - [] fix: db doesn't have the product variant selected
+- [] fix: count weight and dimension of product variant
 
 RBAC / Fine Grained Access Control
 - [] Add RBAC / Fine Grained Access Control
