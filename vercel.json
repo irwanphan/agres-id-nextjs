@@ -1,0 +1,10 @@
+{
+  "git": {
+    "deploymentEnabled": {
+      "main": false,
+      "dev": false,
+      "dev-raja-ongkir-int": false,
+      "dev-user-update": false
+    }
+  }
+}

@@ -8,6 +8,7 @@ import {
   LogOutIcon,
   UserIcon,
 } from "@/components/MyAccount/icons";
+import { IconUserCircle } from "@tabler/icons-react";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import NextLink from "next/link";
@@ -19,21 +20,23 @@ export default function Sidebar() {
   return (
     <div className="w-full xl:col-span-3 ">
       <div className="flex bg-white xl:flex-col rounded-xl shadow-1">
-        <div className="flex items-center gap-5 p-4 border-b border-gray-3">
-          <div className="overflow-hidden rounded-full">
-            <Image
+        <div className="flex items-center gap-3 p-4 border-b border-gray-3">
+          <div className="overflow-hidden rounded-full bg-red-light-5">
+            {/* <Image
               src={session?.user?.image || "/images/avatar.jpeg"}
               alt="user"
               width={48}
               height={48}
               className="rounded-full"
-            />
+            /> */}
+            <IconUserCircle className="w-10 h-10" stroke={1.5} />
           </div>
           <div className="flex-1">
             <p className="font-medium text-dark mb-0.5">
               {session?.user?.name}
             </p>
-            <p className="text-custom-xs">Member Since Sep 2020</p>
+            {/* TODO: Tambahkan tanggal pembuatan akun */}
+            {/* <p className="text-custom-xs">Bergabung sejak ...</p> */}
           </div>
         </div>
 

@@ -127,7 +127,7 @@ const ProductDetails = async ({ params }: Props) => {
   });
 
   return (
-    <main>
+    <>
       <Breadcrumb
         items={[
           {
@@ -151,7 +151,7 @@ const ProductDetails = async ({ params }: Props) => {
       />
       <RecentlyViewedItems products={recentProducts} />
       <Newsletter />
-    </main>
+    </>
   );
 };
 

@@ -40,6 +40,8 @@ export async function POST(
     return NextResponse.json('Missing Fields', { status: 400 });
   }
 
+  console.log(address);
+
   try {
     const data = await prisma.address.create({
       data: {

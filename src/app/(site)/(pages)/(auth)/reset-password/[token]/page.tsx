@@ -18,7 +18,7 @@ const ResetPasswordPage = async ({
 }) => {
   const { token } = await params;
   return (
-    <main>
+    <>
       <Breadcrumb
         items={[
           {
@@ -33,7 +33,7 @@ const ResetPasswordPage = async ({
         seoHeading={true}
       />
       <ResetPassword token={token} />
-    </main>
+    </>
   );
 };
 

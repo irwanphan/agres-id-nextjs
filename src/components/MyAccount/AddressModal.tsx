@@ -13,7 +13,10 @@ type Input = {
   name: string;
   email: string;
   phone: string;
-  address: string;
+  address: {
+    address1: string;
+    address2: string;
+  };
 };
 
 type PropsType = {
@@ -45,6 +48,17 @@ const AddressModal = ({
   });
 
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        closeModal();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, closeModal]);
 
   useEffect(() => {
     // closing modal while clicking outside
@@ -145,26 +159,6 @@ const AddressModal = ({
                   )}
                 />
               </div>
-
-              <div className="w-full">
-                <Controller
-                  control={form.control}
-                  name="email"
-                  rules={{ required: "Email is required" }}
-                  render={({ field, fieldState }) => (
-                    <InputGroup
-                      type="email"
-                      label="Email"
-                      name={field.name}
-                      value={field.value}
-                      onChange={field.onChange}
-                      error={!!fieldState.error}
-                      errorMessage={fieldState.error?.message}
-                      required
-                    />
-                  )}
-                />
-              </div>
             </div>
 
             <div className="flex flex-col gap-5 mb-5 lg:flex-row sm:gap-8">
@@ -191,11 +185,12 @@ const AddressModal = ({
               <div className="w-full">
                 <Controller
                   control={form.control}
-                  name="address"
-                  rules={{ required: "Address is required" }}
+                  name="email"
+                  rules={{ required: "Email is required" }}
                   render={({ field, fieldState }) => (
                     <InputGroup
-                      label="Address"
+                      type="email"
+                      label="Email"
                       name={field.name}
                       value={field.value}
                       onChange={field.onChange}
@@ -206,6 +201,42 @@ const AddressModal = ({
                   )}
                 />
               </div>
+            </div>
+
+            <div className="w-full mb-5">
+              <Controller
+                control={form.control}
+                name="address.address1"
+                rules={{ required: "Address is required" }}
+                render={({ field, fieldState }) => (
+                  <InputGroup
+                    label="Address"
+                    name={field.name}
+                    value={field.value}
+                    onChange={field.onChange}
+                    error={!!fieldState.error}
+                    errorMessage={fieldState.error?.message}
+                    required
+                  />
+                )}
+              />
+            </div>
+
+            <div className="w-full mb-5">
+              <Controller
+                control={form.control}
+                name="address.address2"
+                render={({ field, fieldState }) => (
+                  <InputGroup
+                    label="Address 2"
+                    name={field.name}
+                    value={field.value}
+                    onChange={field.onChange}
+                    error={!!fieldState.error}
+                    errorMessage={fieldState.error?.message}
+                  />
+                )}
+              />
             </div>
 
             <button

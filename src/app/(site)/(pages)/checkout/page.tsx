@@ -13,7 +13,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
 const CheckoutPage = () => {
   return (
-    <main>
+    <>
       <Breadcrumb
         items={[
           {
@@ -28,7 +28,7 @@ const CheckoutPage = () => {
         seoHeading={true}
       />
       <CheckoutMain />
-    </main>
+    </>
   );
 };
 

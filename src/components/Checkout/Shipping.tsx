@@ -7,18 +7,80 @@ import { useCheckoutForm } from "./form";
 import { ChevronDown } from "./icons";
 
 import { SHIPPING_METHODS, ShippingMethodsCard } from "./ShippingMethod";
+import { IconChevronsUpRight } from "@tabler/icons-react";
+import { formatPrice } from "@/utils/formatePrice";
+import { ShippingCalculateDomesticCostResponse } from "@/types";
+import { useSession } from "next-auth/react";
+
+type AddressType = {
+  name: string;
+  email: string;
+  phone: string;
+  address: {
+    address1: string;
+    address2: string;
+  };
+  id: string;
+};
 
 export default function Shipping() {
   const [dropdown, setDropdown] = useState(true);
+  const session = useSession();
   const { register, control, setValue, watch } = useCheckoutForm();
   const shipToDifferentAddress = watch("shipToDifferentAddress");
+  const shipToDestination = watch("shipping.destination");
   const [selectedCourier, setSelectedCourier] = useState<string>("");
   const [shippingCost, setShippingCost] = useState<number|null>(null);
   const [loadingOngkir, setLoadingOngkir] = useState(false);
-
+  const [addressData, setAddressData] = useState<AddressType>();
   const [citySearch, setCitySearch] = useState("");
   const [cityOptions, setCityOptions] = useState<any[]>([]);
   const [destinationCityId, setDestinationCityId] = useState<string>("");
+
+  const shippingAddressOption = watch("shippingAddressOption");
+  const billingAddress = watch("billing.address");
+  const billingPhone = watch("billing.phone");
+  const billingEmail = watch("billing.email");
+
+  // console.log(watch("shipToDifferentAddress"));
+  console.log(shipToDestination);
+  
+  // testing purpose only
+  // useEffect(() => {
+  //   setValue("shipping.destination", 'Jalan-jalan Ke Puncak Gunung, Tinggi 2 kilometer');
+  // }, [setValue]);
+
+  useEffect(() => {
+    if (!session.data?.user?.id) return;
+    fetch(`/api/user/${session.data.user.id}/address?type=SHIPPING`)
+    .then(res => res.json())
+    .then(data => setAddressData(data));
+  }, [session.data?.user?.id]);
+
+  useEffect(() => {
+    setValue("shippingAddressOption", "default");
+    // eslint-disable-next-line react-hooks/exhaustive-deps 
+  }, [setValue]);
+
+  useEffect(() => {
+    if (shippingAddressOption === "default") {
+      setValue("shipping.address.address1", addressData?.address?.address1 || "");
+      setValue("shipping.address.address2", addressData?.address?.address2 || "");
+      setValue("shipping.phone", addressData?.phone || "");
+      setValue("shipping.email", addressData?.email || "");
+    } else if (shippingAddressOption === "sameAsBilling") {
+      setValue("shipping.address.address1", billingAddress?.address1 || "");
+      setValue("shipping.address.address2", billingAddress?.address2 || "");
+      setValue("shipping.phone", billingPhone || "");
+      setValue("shipping.email", billingEmail || "");
+    } else {
+      setValue("shipping.address.address1", "");
+      setValue("shipping.address.address2", "");
+      setValue("shipping.phone", "");
+      setValue("shipping.email", "");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shippingAddressOption, addressData, billingAddress, billingPhone, billingEmail, setValue]);
 
   // Handler pencarian kota destinasi
   const handleCitySearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +91,7 @@ export default function Shipping() {
       return;
     }
     try {
-      const res = await fetch(`/api/rajaongkir/destination?search=${encodeURIComponent(value)}`);
+      const res = await fetch(`/api/shipping/destination?search=${encodeURIComponent(value)}`);
       const data = await res.json();
       setCityOptions(data.data || []);
     } catch (err) {
@@ -43,26 +105,24 @@ export default function Shipping() {
     const found = cityOptions.find(opt => opt.label === label);
     if (found) {
       setDestinationCityId(String(found.id));
+      setValue("shipping.destination", found.label);
     }
   };
-
-  useEffect(() => {
-    if (dropdown) {
-      setValue("shipToDifferentAddress", true);
-    } else {
-      setValue("shipToDifferentAddress", false);
-    }
-  }, [dropdown, setValue]);
 
   // Handler untuk fetch ongkir
   const handleCourierChange = async (courier: string) => {
     console.log(destinationCityId);
 
     setSelectedCourier(courier);
+    if (courier === "free") {
+      setShippingCost(0);
+      setLoadingOngkir(false);
+      return;
+    }
     setLoadingOngkir(true);
     setShippingCost(null);
     try {
-      const res = await fetch("/api/rajaongkir/calculate", {
+      const res = await fetch("/api/shipping/calculate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -72,12 +132,17 @@ export default function Shipping() {
           courier,
         }),
       });
-      const data = await res.json();
-      // Ambil ongkir dari response (asumsi response format RajaOngkir)
-      const cost = data?.rajaongkir?.results?.[0]?.costs?.[0]?.cost?.[0]?.value;
-      setShippingCost(cost || null);
+      const data: ShippingCalculateDomesticCostResponse = await res.json();
+      // Ambil ongkir dari response (asumsi response format Shipping)
+      const selectedShipping = data.data[0];
+      const cost = selectedShipping?.cost ?? 0;
+      setShippingCost(cost || 0);
+      setValue("shippingMethod.name", selectedShipping.name);
+      setValue("shippingMethod.price", selectedShipping.cost);
+      setValue("shippingMethod.service", selectedShipping.service);
     } catch (e) {
       setShippingCost(null);
+      throw e;
     }
     setLoadingOngkir(false);
   };
@@ -102,22 +167,134 @@ export default function Shipping() {
         <div className="p-6 border-t border-gray-3">
           <div className="mb-5">
             <label htmlFor="destination-city-search" className="block mb-1.5 text-sm text-gray-6">
-              Cari Kota Tujuan (API Komerce)
+              Cari Kota / Kabupaten Tujuan <span className="text-red">*</span>
             </label>
             <input
               id="destination-city-search"
               className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11 focus:border-blue focus:outline-0 placeholder:text-dark-5 w-full py-2.5 px-4 duration-200 focus:ring-0"
               list="destination-city-options"
               value={citySearch}
+              required
               onChange={handleCitySearch}
               onBlur={handleCitySelect}
-              placeholder="Ketik nama kota tujuan..."
+              placeholder="Mulai cari nama kota atau kabupaten tujuan..."
             />
             <datalist id="destination-city-options">
               {cityOptions.map(opt => (
                 <option key={opt.id} value={opt.label} />
               ))}
             </datalist>
+          </div>
+
+          <p className="text-sm text-gray-6 mb-5">Gunakan alamat pengiriman yang mana?</p>
+          <div className="mb-5">
+            <Controller
+              control={control}
+              name="shippingAddressOption"
+              render={({ field }) => (
+                <div className="flex flex-col gap-2">
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      value="default"
+                      checked={field.value === "default"}
+                      onChange={field.onChange}
+                      name={field.name}
+                    />
+                    Default Pengiriman
+                  </label>
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      value="sameAsBilling"
+                      checked={field.value === "sameAsBilling"}
+                      onChange={field.onChange}
+                      name={field.name}
+                    />
+                    Sama dengan Billing
+                  </label>
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      value="other"
+                      checked={field.value === "other"}
+                      onChange={field.onChange}
+                      name={field.name}
+                    />
+                    Lainnya, Isi Alamat Pengiriman
+                  </label>
+                </div>
+              )}
+            />
+          </div>
+
+          <div className="mb-5">
+            <Controller
+              control={control}
+              name="shipping.address.address1"
+              render={({ field }) => (
+                <InputGroup
+                  label="Street Address"
+                  placeholder="House number and street name"
+                  required
+                  // readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
+                  name={field.name}
+                  value={field.value !== undefined ? field.value : ""}
+                  onChange={field.onChange}
+                />
+              )}
+            />
+
+            <div className="mt-5">
+              <input
+                type="text"
+                {...register("shipping.address.address2")}
+                // readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
+                placeholder="Apartment, suite, unit, etc. (optional)"
+                className={`
+                  rounded-lg border placeholder:text-sm 
+                  text-sm placeholder:font-normal border-gray-3 h-11
+                  focus:border-blue focus:outline-0
+                  placeholder:text-dark-5 w-full
+                  py-2.5 px-4 duration-200 focus:ring-0
+                  `}
+                  // ${shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default" ? "bg-gray-2" : ""}
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 mb-5">
+            <Controller
+              control={control}
+              name="shipping.phone"
+              render={({ field }) => (
+                <InputGroup
+                  type="tel"
+                  label="Phone"
+                  required
+                  // readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
+                  name={field.name}
+                  value={field.value !== undefined ? field.value : ""}
+                  onChange={field.onChange}
+                />
+              )}
+            />
+
+            <Controller
+              control={control}
+              name="shipping.email"
+              render={({ field }) => (
+                <InputGroup
+                  label="Email Address"
+                  type="email"
+                  required
+                  // readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
+                  name={field.name}
+                  value={field.value !== undefined ? field.value : ""}
+                  onChange={field.onChange}
+                />
+              )}
+            />
           </div>
 
           <div className="mb-5">
@@ -155,7 +332,25 @@ export default function Shipping() {
             </div>
             {loadingOngkir && <div className="text-sm text-gray-500 mt-2">Menghitung ongkir...</div>}
             {shippingCost!==null && !loadingOngkir && (
-              <div className="text-sm text-green-600 mt-2">Ongkos kirim: Rp{shippingCost.toLocaleString()}</div>
+              <div className="text-sm text-green-600 mt-4 flex items-center justify-between px-4 gap-2 border border-gray-4 h-14 rounded-lg">
+                <span className="text-sm font-bold">
+                  Ongkos kirim: Rp {formatPrice(shippingCost).toLocaleString()}
+                </span>
+                <span className="text-sm">
+                <button type="button" onClick={()=>{
+                    const element = document.getElementById("section-orders");
+                    if (element) {
+                      const elementPosition = element.offsetTop - 128;
+                      window.scrollTo({
+                        top: elementPosition,
+                        behavior: "smooth"
+                      });
+                    }
+                  }} className="text-sm text-blue-light flex items-center gap-2">
+                    Next, Scroll ke Detail Pesanan <IconChevronsUpRight className="w-4 h-4" />
+                  </button>
+                </span>
+              </div>
             )}
           </div>
         </div>

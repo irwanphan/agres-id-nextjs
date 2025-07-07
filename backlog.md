@@ -19,7 +19,10 @@ RajaOngkir Integration
 - [ok] Create options
 - [] Repack using modular option
 - [ok] Test Rajaongkir API
-- [] Fixcheckout doesn't have weight to calculate shipping cost
+- [] Fix:checkout doesn't have weight to calculate shipping cost
+
+Shopping Cart Page
+- [ok] Fix: Formatting language and currency
 
 Checkout Page
 - [ok] fix: Autofill name show Full Name as First Name
@@ -27,6 +30,14 @@ Checkout Page
 - [ok] fix: email is prefilled with the email of the user who is logged in, but checkout is failed with email not filled
 - [] Page for user to check order status based on Order ID
 - [] Calculate total with shipping cost
+- [] "Pickup di Gerai AGRES" option shows Pickup Point selection
+- [] Show map for Pickup Point selection
+- [ok] fix: orders summary, product lines broken when product name is too long
+- [ok] Get province and city from database/json instead of using RajaOngkir API
+- [ok] Implement province and city local datalist
+- [ok] Remove RajaOngkir API from the code and Rajaongkir name from any route and path
+- [ok] auto fetch billing address from user account management page to billing section
+- [ok] auto fetch shipping address from user account management page to shipping section
 
 RBAC / Fine Grained Access Control
 - [] Add RBAC / Fine Grained Access Control
@@ -37,7 +48,11 @@ Admin Page
 - [] Restrictions: Finished cannot be Canceled or set to Processing, Canceled cannot be set to Processing
 - [] Use button to set payment status to Paid or Failed from Pending
 - [] Button to set paid/failed can only be accessed by finance team
-- [] FIx admin page padding and off-scroll caused by double height of container
+- [ok] FIx admin page padding and off-scroll caused by double height of container
+
+User Account Management Page
+- [] Add Join Date to User Account Management Page, show in Sidebar
+- [ok] Change Address to Json with Address1 and Address2 on User Account Management Page
 
 Auth
 - [ok] fix: after success login, user is being redirected, but no information is shown on the page when loading and might confuse users
@@ -48,3 +63,25 @@ Overview
 
 Footer
 - [] Social links can be dynamic from the database and edited on admin page
+
+Pickup Point
+- [] Add Pickup Point
+- [] Add Pickup Point to the Checkout Page
+- [] Add Pickup Management Page to Admin Page
+
+Affiliate & Store Account Management
+- [] Confirm how to treat the store account and affiliate account, bonus, discount, etc.
+- [] Add Affiliate & Store Account Management Page to Admin Page
+
+Product Management
+- [] Add ProductCode to main Product model
+- [] Add Weight to main Product model
+- [ok] fix: product page doesn't show the updated data after editing or adding new product
+
+Site Nav
+- [] Add product menu with category filter
+
+Data Preparation
+- [] Converter from MPL to clean_import.csv
+- [] Query import from clean_import.csv to database
+- [] Query import from master_product_attributes.csv to update products

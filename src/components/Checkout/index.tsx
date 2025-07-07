@@ -1,5 +1,5 @@
 "use client";
-import convertToSubcurrency from "@/lib/convertToSubcurrency";
+// import convertToSubcurrency from "@/lib/convertToSubcurrency";
 import { useForm } from "react-hook-form";
 import { CheckoutFormProvider, CheckoutInput } from "./form";
 import { useShoppingCart } from "use-shopping-cart";
@@ -27,6 +27,36 @@ export default function CheckoutMain() {
   const { register, formState, watch, control, handleSubmit, setValue } =
     useForm<CheckoutInput>({
       defaultValues: {
+        billing: {
+          address: {
+            address1: "",
+            address2: "",
+          },
+          companyName: "",
+          // country: "",
+          email: session.data?.user?.email || "",
+          firstName: session.data?.user?.name ? splitName(session.data.user.name).firstName : "",
+          lastName: session.data?.user?.name ? splitName(session.data.user.name).lastName : "",
+          phone: "",
+          // regionName: "",
+          province: "KALIMANTAN BARAT",
+          // town: "",
+          city: "",
+          createAccount: false,
+        },
+        shipping: {
+          address: {
+            address1: "",
+            address2: "",
+          },
+          // country: "",
+          email: "",
+          phone: "",
+          // town: "",
+          // countryName: "",
+          destination: "",
+          weight: 0,
+        },
         shippingMethod: {
           name: "free",
           price: 0,
@@ -34,34 +64,6 @@ export default function CheckoutMain() {
         paymentMethod: "midtrans",
         couponDiscount: 0,
         couponCode: "",
-        billing: {
-          address: {
-            address1: "",
-            address2: "",
-          },
-          companyName: "",
-          country: "",
-          email: session.data?.user?.email || "",
-          firstName: session.data?.user?.name ? splitName(session.data.user.name).firstName : "",
-          lastName: session.data?.user?.name ? splitName(session.data.user.name).lastName : "",
-          phone: "",
-          // regionName: "",
-          province: "",
-          // town: "",
-          city: "",
-          createAccount: false,
-        },
-        shipping: {
-          address: {
-            street: "",
-            apartment: "",
-          },
-          country: "",
-          email: "",
-          phone: "",
-          town: "",
-          countryName: "",
-        },
         notes: "",
         shipToDifferentAddress: false,
       },

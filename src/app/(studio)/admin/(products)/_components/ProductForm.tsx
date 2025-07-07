@@ -260,6 +260,7 @@ export default function ProductAddForm({ product, categories }: ProductProps) {
         );
         reset();
         router.push("/admin/products");
+        window.location.reload();
       } else {
         toast.error(result?.message || "Failed to upload product");
       }

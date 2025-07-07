@@ -13,7 +13,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
 const ForgotPasswordPage = () => {
   return (
-    <main>
+    <>
       <Breadcrumb
         items={[
           {
@@ -28,7 +28,7 @@ const ForgotPasswordPage = () => {
         seoHeading={true}
       />
       <ForgotPassword />
-    </main>
+    </>
   );
 };
 

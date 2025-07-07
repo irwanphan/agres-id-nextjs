@@ -35,18 +35,17 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { shipToDifferentAddress, couponDiscount, couponCode, products, ...orderData } = body;
+    const { selectedBank, shipToDifferentAddress, couponDiscount, couponCode, products, ...orderData } = body;
 
-    // Remove selectedBank from orderData if present
-    const { selectedBank, ...orderDataWithoutBank } = orderData;
+    // console.log("🔔 Order data:", orderData);
 
     // Start a transaction to ensure atomic updates
     const order = await prisma.$transaction(async (tx) => {
       const newOrder = await tx.order.create({
         data: {
-          ...orderDataWithoutBank,
-          products, 
-          couponDiscount,
+          ...orderData,
+          products,
+          // shippingStatus: 'pending'
         },
       });
 

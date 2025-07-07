@@ -1,8 +1,10 @@
+'use client';
+
 import Image from "next/image";
 import { Controller } from "react-hook-form";
 import { RadioInput } from "../ui/input/radio";
 import { useCheckoutForm } from "./form";
-import { PaymentElement } from "@stripe/react-stripe-js";
+// import { PaymentElement } from "@stripe/react-stripe-js";
 import BankSelection from "./BankSelection";
 
 const PaymentMethod = ({ amount }: { amount: number }) => {
@@ -15,7 +17,7 @@ const PaymentMethod = ({ amount }: { amount: number }) => {
   };
 
   return (
-    <div className="bg-white shadow-1 rounded-[10px]">
+    <div id="section-payment-method" className="bg-white shadow-1 rounded-[10px]">
       <div className="px-6 py-5 border-b border-gray-3">
         <h3 className="text-lg font-medium text-dark">Metode Pembayaran</h3>
       </div>
@@ -107,7 +109,7 @@ type CardProps = {
 function PaymentMethodCard({ method }: CardProps) {
   const data = {
     bank_transfer: {
-      name: "Transfer Bank",
+      name: "Transfer Bank (Virtual Account)",
       image: {
         src: "/images/checkout/bank-transfer.svg",
         width: 75,
@@ -115,7 +117,7 @@ function PaymentMethodCard({ method }: CardProps) {
       },
     },
     snap: {
-      name: "Ragam Pembayaran",
+      name: "Ragam Channel Pembayaran",
       image: {
         src: "/images/checkout/midtrans.svg",
         width: 75,

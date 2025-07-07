@@ -27,17 +27,17 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
   const { cartDetails, clearCart } = useShoppingCart();
 
   // Handle checkout
-  const handleCheckout = async (data: CheckoutInput) => {
+  const handleCheckout = async (formData: CheckoutInput) => {
     setLoading(true);
     setErrorMessage("");
 
-    if (data.billing.createAccount) {
+    if (formData.billing.createAccount) {
       const response = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email: data.billing.email,
-          name: data.billing.firstName,
+          email: formData.billing.email,
+          name: formData.billing.firstName,
           password: "12345678",
         }),
       });
@@ -53,14 +53,14 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
 
     // Helper function to create order
     const createOrder = async (paymentStatus: "pending" | "paid") => {
-      // console.log('🔔 Creating order with data:', data);
+      // console.log('🔔 Creating order with formData:', formData);
 
       const orderData = {
-        ...data,
-        totalAmount: amount,
+        ...formData,
         userId: session?.user?.id || null,
+        totalAmount: amount,
         paymentStatus,
-        couponCode: data.couponCode,
+        couponCode: formData.couponCode,
         products: Object.values(cartDetails ?? {}).map((item) => ({
           id: item.id,
           name: item.name,
@@ -95,7 +95,7 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
       }
     };
 
-    if (data.paymentMethod === "cod") {
+    if (formData.paymentMethod === "manual") {
       const order = await createOrder("pending");
       setLoading(false);
       if (!order) return;
@@ -116,7 +116,7 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
     }
 
     try {
-      if (data.paymentMethod === "snap") {
+      if (formData.paymentMethod === "snap") {
         // Create Midtrans transaction
         const midtransResponse = await fetch("/api/midtrans/create-transaction", {
           method: "POST",
@@ -125,25 +125,29 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
             orderId: order.id,
             amount: amount,
             customerDetails: {
-              firstName: data.billing.firstName,
-              lastName: data.billing.lastName,
-              email: data.billing.email,
-              phone: data.billing.phone,
+              firstName: formData.billing.firstName,
+              lastName: formData.billing.lastName,
+              email: formData.billing.email,
+              phone: formData.billing.phone,
               billingAddress: {
-                firstName: data.billing.firstName,
-                lastName: data.billing.lastName,
-                phone: data.billing.phone,
-                address: `${data.billing.address.address1} ${data.billing.address.address2}`,
-                city: data.billing.city,
+                firstName: formData.billing.firstName,
+                lastName: formData.billing.lastName,
+                province: formData.billing.province,
+                city: formData.billing.city,
+                address: `${formData.billing.address.address1} ${formData.billing.address.address2}`,
+                phone: formData.billing.phone,
+                email: formData.billing.email,
                 postalCode: "",
                 countryCode: "IDN",
               },
-              shippingAddress: data.shipToDifferentAddress && data.shipping ? {
-                firstName: data.billing.firstName, // Use billing name as fallback
-                lastName: data.billing.lastName || "",
-                phone: data.shipping.phone,
-                address: `${data.shipping.address.street} ${data.shipping.address.apartment || ""}`,
-                city: data.shipping.town,
+              shippingAddress: formData.shipToDifferentAddress && formData.shipping ? {
+                firstName: formData.billing.firstName, // Use billing name as fallback
+                lastName: formData.billing.lastName || "",
+                // city: data.shipping.city,
+                destination: formData.shipping.destination,
+                address: `${formData.shipping.address.address1} ${formData.shipping.address.address2 || ""}`,
+                phone: formData.shipping.phone,
+                email: formData.shipping.email,
                 postalCode: "",
                 countryCode: "IDN",
               } : undefined,
@@ -169,7 +173,7 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
 
         // Redirect to Midtrans payment page
         window.location.href = midtransResult.data.redirect_url;
-      } else if (data.paymentMethod === "bank_transfer") {
+      } else if (formData.paymentMethod === "bank_transfer") {
         // Create bank transfer transaction
         const bankTransferResponse = await fetch("/api/midtrans/bank-transfer", {
           method: "POST",
@@ -178,10 +182,10 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
             orderId: order.id,
             amount: amount,
             customerDetails: {
-              firstName: data.billing.firstName,
-              lastName: data.billing.lastName,
-              email: data.billing.email,
-              phone: data.billing.phone,
+              firstName: formData.billing.firstName,
+              lastName: formData.billing.lastName,
+              email: formData.billing.email,
+              phone: formData.billing.phone,
             },
             itemDetails: Object.values(cartDetails ?? {}).map((item) => ({
               id: item.id,
@@ -189,7 +193,7 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
               quantity: item.quantity,
               name: item.name,
             })),
-            bankType: data.selectedBank || "bca", // Use selected bank or default to BCA
+            bankType: formData.selectedBank || "bca", // Use selected bank or default to BCA
           }),
         });
 
@@ -202,8 +206,8 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
         }
 
         // Show bank transfer instructions
-        const vaNumbers = bankTransferResult.data.va_numbers;
-        const permataVaNumber = bankTransferResult.data.permata_va_number;
+        const vaNumbers = bankTransferResult.formData.va_numbers;
+        const permataVaNumber = bankTransferResult.formData.permata_va_number;
         
         let bankInfo = "";
         if (vaNumbers && vaNumbers.length > 0) {
@@ -243,13 +247,10 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
               </div>
               <div className="w-full space-y-6 lg:col-span-2">
                 <Orders />
-                <Notes />
+                {/* <Notes /> */}
                 {/* <Coupon /> */}
                 {/* <ShippingMethod /> */}
-
-
                 <PaymentMethod amount={amount} />
-
                 <button
                   type="submit"
                   className="flex justify-center w-full px-6 py-3 font-medium text-white duration-200 ease-out rounded-md bg-blue hover:bg-blue-dark "

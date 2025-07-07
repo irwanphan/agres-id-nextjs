@@ -1,8 +1,20 @@
+"use client";
+import { useEffect } from "react";
 import { XIcon } from "@/assets/icons";
 import EditOrder from "./EditOrder";
 import OrderDetails from "./OrderDetails";
 
 const OrderModal = ({ showDetails, showEdit, toggleModal, order }: any) => {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        toggleModal(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [toggleModal]);
+
   if (!showDetails && !showEdit) {
     return null;
   }

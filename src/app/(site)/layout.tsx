@@ -26,7 +26,9 @@ export default async function SiteLayout({
           />
           <MainHeader headerData={headerSettingData} />
           <Toaster position="top-center" reverseOrder={false} />
-          {children}
+          <main className="pt-10 sm:pt-15">
+            {children}
+          </main>
         </Providers>
 
         <ScrollToTop />

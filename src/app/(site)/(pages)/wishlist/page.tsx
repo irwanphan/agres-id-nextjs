@@ -14,7 +14,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
 const WishlistPage = () => {
   return (
-    <main>
+    <>
       <Breadcrumb
         items={[
           {
@@ -29,7 +29,7 @@ const WishlistPage = () => {
         seoHeading={true}
       />
       <Wishlist />
-    </main>
+    </>
   );
 };
 

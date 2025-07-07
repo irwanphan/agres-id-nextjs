@@ -13,7 +13,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
 const ErrorPage = () => {
   return (
-    <main>
+    <>
       <Breadcrumb
         items={[
           {
@@ -27,7 +27,7 @@ const ErrorPage = () => {
         ]}
       />
       <Error />
-    </main>
+    </>
   );
 };
 

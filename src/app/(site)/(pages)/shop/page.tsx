@@ -127,7 +127,7 @@ const ShopWithSidebarPage = async ({ searchParams }: PageProps) => {
   }));
 
   return (
-    <main>
+    <>
       <Breadcrumb
         items={[
           {
@@ -151,7 +151,7 @@ const ShopWithSidebarPage = async ({ searchParams }: PageProps) => {
           highestPrice: highestPrice._max.price?.toNumber() || 0,
         }}
       />
-    </main>
+    </>
   );
 };
 
