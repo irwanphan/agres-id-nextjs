@@ -246,7 +246,15 @@ const ShopDetails = ({ product, avgRating, totalRating }: IProps) => {
                       console.log(item);
                       return (
                         <button
-                          onClick={() => setPreviewImg(item?.image)}
+                          onClick={() => {
+                            setPreviewImg(item.image);
+                            setActiveColor(item.color);
+                            setActiveSize(item.size);
+                            setActiveWeight(item.weight);
+                            setActiveLength(item.length);
+                            setActiveWidth(item.width);
+                            setActiveHeight(item.height);
+                          }}
                           key={key}
                           className={`flex items-center justify-center w-15 sm:w-25 h-15 sm:h-25 overflow-hidden rounded-lg bg-gray-2 shadow-1 ease-out duration-200 border-2 hover:border-blue ${item?.image === previewImg
                               ? "border-blue"

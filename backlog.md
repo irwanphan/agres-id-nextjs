@@ -38,6 +38,8 @@ Checkout Page
 - [ok] Remove RajaOngkir API from the code and Rajaongkir name from any route and path
 - [ok] auto fetch billing address from user account management page to billing section
 - [ok] auto fetch shipping address from user account management page to shipping section
+- [] fix: checkout page doesn't show the product variant selected
+- [] fix: db doesn't have the product variant selected
 
 RBAC / Fine Grained Access Control
 - [] Add RBAC / Fine Grained Access Control
@@ -74,10 +76,14 @@ Affiliate & Store Account Management
 - [] Add Affiliate & Store Account Management Page to Admin Page
 
 Product Management
-- [] Add ProductCode to main Product model
-- [] Add Weight to main Product model
+- [ok] Add ProductCode to main Product model
+- [ok] Add Weight to main Product model
+- [ok] Add Dimension to main Product model
 - [ok] fix: product page doesn't show the updated data after editing or adding new product
 
+Product Page
+- [ok] Grouping Product Variant on Product Page
+- [] Add Product Variant to Shopping Cart
 Site Nav
 - [] Add product menu with category filter
 
