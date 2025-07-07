@@ -4,7 +4,12 @@ import { unstable_cache } from "next/cache";
 // get pickup points
 export const getPickupPoints = unstable_cache(
   async () => {
-    return await prisma.pickupPoint.findMany({ where: { isActive: true } });
+    try {
+      return await prisma.pickupPoint.findMany({ where: { isActive: true } });
+    } catch (error) {
+      console.error("Error fetching pickup points:", error);
+      throw new Error("Failed to fetch pickup points");
+    }
   },
-  ['pickupPoints'], { tags: ['pickupPoints'] }
+  ['pickup-points'], { tags: ['pickup-points'], revalidate: 60 }
 );

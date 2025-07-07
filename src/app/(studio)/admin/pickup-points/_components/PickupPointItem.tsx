@@ -36,10 +36,9 @@ export default function PickupPointItem({ pickupPoint }: { pickupPoint: PickupPo
     <tr key={pickupPoint.id}>
       <td className="px-6 py-3 whitespace-nowrap">#{pickupPoint?.id?.slice(-6)}</td>
       <td className="px-6 py-3 whitespace-nowrap">{pickupPoint.name}</td>
-      <td className="px-6 py-3 whitespace-nowrap">{pickupPoint.address}</td>
       <td className="px-6 py-3 whitespace-nowrap">{pickupPoint.city}</td>
       <td className="px-6 py-3 whitespace-nowrap">{pickupPoint.province}</td>
-      <td className="px-6 py-3 whitespace-nowrap">{pickupPoint.phone}</td>
+      <td className="px-6 py-3 whitespace-nowrap">{pickupPoint.isActive ? "Active" : "Inactive"}</td>
       <td className="px-6 py-3">
         <div className="flex items-center justify-end gap-2.5">
           <button

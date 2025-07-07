@@ -14,9 +14,10 @@ export default function PickupPointArea({ points }: { points: PickupPoint[] }) {
                 <thead>
                     <tr className="border-b border-gray-3">
                         <th className="px-6 py-3 text-sm font-medium text-left">Id</th>
-                        <th className="px-6 py-3 text-sm font-medium text-left">Joining Date</th>
                         <th className="px-6 py-3 text-sm font-medium text-left">Name</th>
-                        <th className="px-6 py-3 text-sm font-medium text-left">Email</th>
+                        <th className="px-6 py-3 text-sm font-medium text-left">Kota</th>
+                        <th className="px-6 py-3 text-sm font-medium text-left">Provinsi</th>
+                        <th className="px-6 py-3 text-sm font-medium text-left">Status</th>
                         <th className="px-6 py-3 text-sm font-medium text-right">
                             Actions
                         </th> 

@@ -1,12 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { InputGroup } from "@/components/ui/input";
 import cn from "@/utils/cn";
 import { useRouter } from "next/navigation";
 import { PickupPoint } from "@prisma/client";
 import toast from "react-hot-toast";
-import { generateSlug } from "@/utils/slugGenerate";
 import { createPickupPoint, updatePickupPoint } from "@/app/actions/pickup-point";
 
 interface PickupPointInput {
@@ -28,6 +27,7 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
     control,
     register,
     formState: { errors },
+    setValue,
     reset,
   } = useForm<PickupPointInput>({
     defaultValues: {
@@ -36,12 +36,18 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
       city: pickupPointItem?.city || "",
       province: pickupPointItem?.province || "",
       phone: pickupPointItem?.phone || "",
-      isActive: pickupPointItem?.isActive || false,
+      isActive: pickupPointItem?.isActive || true,
     },
   });
 
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (pickupPointItem) {
+      setValue("isActive", pickupPointItem.isActive);
+    }
+  }, [pickupPointItem, setValue]);
 
   const onSubmit = async (data: PickupPointInput) => {
     setIsLoading(true);
@@ -66,6 +72,7 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
         );
         reset();
         router.push("/admin/pickup-points");
+        router.refresh();
       } else {
         toast.error(result?.message || "Failed to upload pickup point");
       }
