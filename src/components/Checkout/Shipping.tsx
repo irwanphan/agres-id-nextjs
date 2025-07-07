@@ -8,9 +8,10 @@ import { ChevronDown } from "./icons";
 
 import { SHIPPING_METHODS, ShippingMethodsCard } from "./ShippingMethod";
 import { IconChevronsUpRight } from "@tabler/icons-react";
-import { formatPrice } from "@/utils/formatePrice";
+import { formatPrice } from "@/utils/formatPrice";
 import { ShippingCalculateDomesticCostResponse } from "@/types";
 import { useSession } from "next-auth/react";
+import { formatPackageWeightKg } from "@/utils/formatPackageWeight";
 
 type AddressType = {
   name: string;
@@ -42,8 +43,11 @@ export default function Shipping() {
   const billingPhone = watch("billing.phone");
   const billingEmail = watch("billing.email");
 
+  const packageWeight = watch("shipping.weight");
+
   // console.log(watch("shipToDifferentAddress"));
-  console.log(shipToDestination);
+  console.log("shipToDestination", shipToDestination);
+  console.log("packageWeight", packageWeight);
   
   // testing purpose only
   // useEffect(() => {
@@ -128,7 +132,7 @@ export default function Shipping() {
         body: JSON.stringify({
           // origin: originCityId,
           destination: destinationCityId,
-          weight: 1000,
+          weight: packageWeight,
           courier,
         }),
       });
@@ -139,7 +143,9 @@ export default function Shipping() {
       setShippingCost(cost || 0);
       setValue("shippingMethod.name", selectedShipping.name);
       setValue("shippingMethod.price", selectedShipping.cost);
+      setValue("shippingMethod.courier", selectedShipping.name);
       setValue("shippingMethod.service", selectedShipping.service);
+      setValue("shippingMethod.etd", selectedShipping.etd);
     } catch (e) {
       setShippingCost(null);
       throw e;
@@ -298,7 +304,7 @@ export default function Shipping() {
           </div>
 
           <div className="mb-5">
-            <label className="block mb-1.5 text-sm text-gray-6">Kurir</label>
+            <label className="block mb-1.5 text-sm text-gray-6">Kurir ({formatPackageWeightKg(packageWeight || 0)})</label>
             <div className="grid grid-cols-2 gap-4">
               <label className="flex items-center gap-2">
                 <input 

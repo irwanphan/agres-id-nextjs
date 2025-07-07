@@ -1,7 +1,7 @@
 "use client";
+import { useState } from "react";
 import { updateOrderStatus } from "@/app/actions/order";
 import { ChevronDownIcon } from "@/assets/icons";
-import React from "react";
 import toast from "react-hot-toast";
 
 enum EnumShippingStatus {
@@ -18,7 +18,7 @@ export default function OrderSelect({
   id: string;
   status: string;
 }) {
-  const [orderStatus, setOrderStatus] = React.useState(status);
+  const [orderStatus, setOrderStatus] = useState(status);
   const handleChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     const target = e.target as HTMLSelectElement;
     setOrderStatus(target.value);

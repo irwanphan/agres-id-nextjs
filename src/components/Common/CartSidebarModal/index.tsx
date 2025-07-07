@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useShoppingCart } from "use-shopping-cart";
 import EmptyCart from "./EmptyCart";
 import SingleItem from "./SingleItem";
-import { formatPrice } from "@/utils/formatePrice";
+import { formatPrice } from "@/utils/formatPrice";
 import { useRouter } from "next/navigation";
 
 const CartSidebarModal = () => {

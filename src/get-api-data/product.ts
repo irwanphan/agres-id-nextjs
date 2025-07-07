@@ -37,6 +37,10 @@ export const getNewArrivalsProduct = unstable_cache(
             image: true,
             color: true,
             size: true,
+            weight: true,
+            length: true,
+            width: true,
+            height: true,
             isDefault: true
           }
         },
@@ -81,6 +85,10 @@ export const getBestSellingProducts = unstable_cache(
             image: true,
             color: true,
             size: true,
+            weight: true,
+            length: true,
+            width: true,
+            height: true,
             isDefault: true
           }
         },
@@ -130,6 +138,10 @@ export const getLatestProducts = unstable_cache(
             image: true,
             color: true,
             size: true,
+            weight: true,
+            length: true,
+            width: true,
+            height: true,
             isDefault: true
           }
         },
@@ -182,6 +194,10 @@ export const getAllProducts = unstable_cache(
             image: true,
             color: true,
             size: true,
+            weight: true,
+            length: true,
+            width: true,
+            height: true,
             isDefault: true
           }
         },
@@ -233,6 +249,10 @@ export const getProductBySlug = unstable_cache(
             image: true,
             color: true,
             size: true,
+            weight: true,
+            length: true,
+            width: true,
+            height: true,
             isDefault: true
           }
         },
@@ -366,6 +386,10 @@ export const getRelatedProducts = unstable_cache(
             image: true,
             color: true,
             size: true,
+            weight: true,
+            length: true,
+            width: true,
+            height: true,
             isDefault: true,
           },
         },

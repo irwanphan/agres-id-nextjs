@@ -1,5 +1,5 @@
 'use client';
-import React from 'react'
+
 import { User } from '@prisma/client'
 import CustomerItem from './CustomerItem'
 import Pagination from '@/components/Common/Pagination';

@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { useShoppingCart } from "use-shopping-cart";
 import cn from "@/utils/cn";
 import { MinusIcon, PlusIcon, TrashIcon } from "@/assets/icons";
-import { formatPrice } from "@/utils/formatePrice";
+import { formatPrice } from "@/utils/formatPrice";
 
 const SingleItem = ({ item }: any) => {
   console.log(item, "item in cart");

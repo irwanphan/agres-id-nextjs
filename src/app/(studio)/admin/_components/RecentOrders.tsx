@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { formatPrice } from "@/utils/formatePrice";
+import { formatPrice } from "@/utils/formatPrice";
 
 type EnumShippingStatus = "pending" | "processing" | "delivered" | "cancel";
 

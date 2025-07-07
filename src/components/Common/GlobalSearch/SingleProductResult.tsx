@@ -1,5 +1,5 @@
 import ReviewStar from "@/components/Shop/ReviewStar";
-import { formatPrice } from "@/utils/formatePrice";
+import { formatPrice } from "@/utils/formatPrice";
 import Image from "next/image";
 import Link from "next/link";
 import { Highlight } from "react-instantsearch";

@@ -162,7 +162,6 @@ export default function HeroBannerForm({
               setImages={(files) =>
                 field.onChange({ image: files?.[0] || null })
               }
-              showTitle={false}
               required={true}
               error={!!fieldState.error}
               errorMessage={fieldState.error?.message}

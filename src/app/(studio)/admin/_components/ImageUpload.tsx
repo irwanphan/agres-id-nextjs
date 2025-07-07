@@ -2,6 +2,8 @@
 import { CircleXIcon } from "@/assets/icons";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
+import { validateFiles } from "@/utils/fileValidation";
 
 interface ImageUploadProps {
   label?: string;
@@ -9,11 +11,11 @@ interface ImageUploadProps {
   images?: (File | string)[] | null;
   setImages: (files: File[] | null) => void;
   multiple?: boolean;
-  showTitle?: boolean;
-  setColor?: (color: string) => void;
-  defaultColor?: string;
   showPrevimg?: boolean;
   col?: string;
+  error?: boolean;
+  errorMessage?: string;
+  maxSizeMB?: number; // Maximum file size in MB
 }
 
 export default function ImageUpload({
@@ -22,21 +24,12 @@ export default function ImageUpload({
   images = null,
   setImages,
   multiple = false,
-  showTitle = false,
-  setColor,
   error,
   errorMessage,
-  defaultColor,
   showPrevimg = true,
   col = "grid-cols-1",
-}: ImageUploadProps & { error?: boolean; errorMessage?: string }) {
-  // const [previews, setPreviews] = useState<string[]>(
-  //   images
-  //     ? images.map((file) =>
-  //         typeof file === "string" ? file : URL.createObjectURL(file)
-  //       )
-  //     : []
-  // );
+  maxSizeMB = 3, // Default 3MB limit
+}: ImageUploadProps) {
   const [previews, setPreviews] = useState<string[]>(() => {
     if (!images) return [];
     return images.map((file) => {
@@ -45,27 +38,35 @@ export default function ImageUpload({
       return "";
     });
   });
-  const [color, setColorState] = useState<string>(defaultColor || "");
+  
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const colorRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (defaultColor) {
-      setColorState(defaultColor);
-    }
-  }, [defaultColor]);
-
+  // Cleanup on unmount
   useEffect(() => {
     const fileInput = fileInputRef.current;
-    const colorInput = colorRef.current;
     return () => {
       if (fileInput) fileInput.value = "";
-      if (colorInput) colorInput.value = "";
     };
   }, []);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files ? Array.from(event.target.files) : [];
+
+    // Validate all files before processing
+    const validation = validateFiles(files, {
+      maxSizeMB,
+      allowedTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'],
+      maxFiles: multiple ? undefined : 1,
+    });
+
+    if (!validation.isValid) {
+      toast.error(validation.error || 'File validation failed');
+      // Clear the input if there are invalid files
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+      return;
+    }
 
     if (multiple) {
       setImages(files);
@@ -117,9 +118,16 @@ export default function ImageUpload({
               onChange={handleImageChange}
               className="absolute inset-0 opacity-0 cursor-pointer"
             />
-
-            {error && <p className="text-sm text-red mt-1.5">{errorMessage}</p>}
           </div>
+
+          {/* File size info */}
+          <p className="text-xs text-gray-500 mt-1">
+            Maximum file size: {maxSizeMB}MB. Supported formats: JPEG, PNG, WebP, GIF
+          </p>
+
+          {error && errorMessage && (
+            <p className="text-sm text-red mt-1.5">{errorMessage}</p>
+          )}
 
           {/* Previews */}
           {showPrevimg && previews.length > 0 && (
@@ -171,25 +179,6 @@ export default function ImageUpload({
             </div>
           )}
         </div>
-
-        {showTitle && setColor && (
-          <div>
-            <label className="block text-sm font-normal text-gray-600 mb-1.5">
-              Color
-            </label>
-            <input
-              ref={colorRef}
-              value={color}
-              type="text"
-              onChange={(e) => {
-                setColorState(e.target.value);
-                setColor(e.target.value);
-              }}
-              placeholder="Enter color name"
-              className="rounded-lg border border-gray-3 text-sm placeholder:text-dark-5 w-full py-2.5 px-4 h-11 focus:ring-0 duration-200 focus:border-blue focus:outline-0"
-            />
-          </div>
-        )}
       </div>
     </div>
   );

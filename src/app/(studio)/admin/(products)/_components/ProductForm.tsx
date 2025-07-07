@@ -7,7 +7,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Category } from "@prisma/client";
 import toast from "react-hot-toast";
-import ImageUpload from "../../_components/ImageUpload";
 import { ChevronDownIcon, CircleXIcon, PlusIcon } from "@/assets/icons";
 import ThumbImageModal from "./ThumbImageModal";
 import CustomAttributesModal from "./CustomProjectModal";
@@ -50,6 +49,10 @@ export default function ProductAddForm({ product, categories }: ProductProps) {
         product?.productVariants?.map((item) => ({
           color: item.color,
           size: item.size,
+          weight: item.weight,
+          length: item.length,
+          width: item.width,
+          height: item.height,
           image: typeof item.image === "string" ? item.image : null,
           isDefault: item.isDefault ? item.isDefault : false,
         })) || [],
@@ -74,8 +77,21 @@ export default function ProductAddForm({ product, categories }: ProductProps) {
     color: string;
     image: File | null;
     size: string;
+    weight: number;
+    length: number;
+    width: number;
+    height: number;
     isDefault: boolean;
-  }>({ color: "", image: null, size: "", isDefault: false });
+  }>({ 
+    color: "", 
+    image: null, 
+    size: "", 
+    weight: 0,
+    length: 0,
+    width: 0,
+    height: 0,
+    isDefault: false 
+  });
   const [tempAttribute, setTempAttribute] = useState({
     attributeName: "",
     attributeValues: [{ id: "", title: "" }],
@@ -99,6 +115,10 @@ export default function ProductAddForm({ product, categories }: ProductProps) {
       color: "",
       image: null,
       size: "",
+      weight: 0,
+      length: 0,
+      width: 0,
+      height: 0,
       isDefault: false,
     });
     setThumbModal(true);
@@ -201,8 +221,27 @@ export default function ProductAddForm({ product, categories }: ProductProps) {
 
     try {
       if (Number(data.discountedPrice) > Number(data.price)) {
-        return toast.error("Discounted Price cannot be greater than Price");
+        toast.error("Discounted Price cannot be greater than Price");
+        setIsLoading(false);
+        return;
       }
+
+      // Validate total file size before upload
+      let totalFileSize = 0;
+      const maxTotalSize = 10 * 1024 * 1024; // 10MB total limit
+      
+      data.productVariants.forEach((thumb) => {
+        if (thumb.image instanceof File) {
+          totalFileSize += thumb.image.size;
+        }
+      });
+
+      if (totalFileSize > maxTotalSize) {
+        toast.error(`Total file size (${(totalFileSize / (1024 * 1024)).toFixed(2)}MB) exceeds the limit of 10MB. Please reduce file sizes.`);
+        setIsLoading(false);
+        return;
+      }
+
       const formData = new FormData();
       formData.append("title", data.title);
       formData.append("price", data.price.toString());
@@ -245,15 +284,21 @@ export default function ProductAddForm({ product, categories }: ProductProps) {
           formData.append("thumbnails", thumb.image);
           formData.append(`color_${index}`, thumb.color);
           formData.append(`size_${index}`, thumb.size);
+          formData.append(`weight_${index}`, thumb.weight.toString());
+          formData.append(`length_${index}`, thumb.length.toString());
+          formData.append(`width_${index}`, thumb.width.toString());
+          formData.append(`height_${index}`, thumb.height.toString());
           formData.append(`isDefault_${index}`, thumb.isDefault.toString());
         }
       });
+
       let result;
       if (product && product.id) {
         result = await updateProduct(product.id, formData);
       } else {
         result = await createProduct(formData);
       }
+
       if (result?.success) {
         toast.success(
           `Product ${product ? "updated" : "created"} successfully`
@@ -266,7 +311,17 @@ export default function ProductAddForm({ product, categories }: ProductProps) {
       }
     } catch (error: any) {
       console.error("Error uploading product:", error);
-      toast.error(error?.message || "Failed to upload product");
+      
+      // Handle specific error types
+      if (error?.statusCode === 413) {
+        toast.error("File size too large. Please reduce image sizes and try again.");
+      } else if (error?.message?.includes("Body exceeded")) {
+        toast.error("Upload failed: File size exceeds the server limit. Please use smaller images.");
+      } else if (error?.message?.includes("network")) {
+        toast.error("Network error. Please check your connection and try again.");
+      } else {
+        toast.error(error?.message || "Failed to upload product. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -516,6 +571,8 @@ export default function ProductAddForm({ product, categories }: ProductProps) {
                             </th>
                             <th className="p-3 text-sm font-medium">Color</th>
                             <th className="p-3 text-sm font-medium">Size</th>
+                            <th className="p-3 text-sm font-medium">Weight (g)</th> 
+                            <th className="p-3 text-sm font-medium">Dimension</th>
                             <th className="p-3 text-sm font-medium">
                               Is Default
                             </th>
@@ -552,6 +609,18 @@ export default function ProductAddForm({ product, categories }: ProductProps) {
                               {/* Size */}
                               <td className="p-3 text-gray-7 whitespace-nowrap">
                                 {thumb.size}
+                              </td>
+
+                              {/* Weight */}
+                              <td className="p-3 text-gray-7 whitespace-nowrap">
+                                {thumb.weight}
+                              </td>
+
+                              {/* Dimension */}
+                              <td className="p-3 text-gray-7 whitespace-nowrap">
+                                <p>p: {thumb.length} cm</p>
+                                <p>l: {thumb.width} cm</p>
+                                <p>t: {thumb.height} cm</p>
                               </td>
 
                               {/* Is Default */}
@@ -609,7 +678,7 @@ export default function ProductAddForm({ product, categories }: ProductProps) {
                     <span className="mr-2">
                       <PlusIcon width="12" height="12" />
                     </span>
-                    <span>Add item</span>
+                    <span>Add Variant</span>
                   </button>
                 </div>
               </>
@@ -689,7 +758,7 @@ export default function ProductAddForm({ product, categories }: ProductProps) {
               <span className="mr-2">
                 <PlusIcon width="12" height="12" />
               </span>
-              <span>Add item</span>
+              <span>Add Attribute</span>
             </button>
           </div>
 
@@ -699,7 +768,7 @@ export default function ProductAddForm({ product, categories }: ProductProps) {
               htmlFor="thumbnails"
               className="block mb-1.5 text-sm text-gray-6"
             >
-              Additional Information
+              Additional Information <span className="text-gray-5 text-sm">(PC Specification dimasukkan ke sini)</span>
             </label>
 
             {existingAdditionalInfo?.length > 0 ? (
@@ -741,7 +810,7 @@ export default function ProductAddForm({ product, categories }: ProductProps) {
               <span className="mr-2">
                 <PlusIcon width="12" height="12" />
               </span>
-              <span>Add item</span>
+              <span>Add Information</span>
             </button>
           </div>
 

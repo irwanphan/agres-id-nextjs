@@ -86,38 +86,38 @@ enum EnumShippingStatus {
 }
 
 model Order {
-  id                     String             @id @default(cuid())
-  userId                 String?
-  billing                Json
-  shipping               Json?
-  shippingMethod         Json
-  paymentMethod          String
-  notes                  String?
-  couponDiscount         Float?
-  products               Json
-  totalAmount            Float
-  paymentStatus          String             @default("pending")
-  createdAt              DateTime           @default(now())
-  updatedAt              DateTime           @updatedAt
-  shippingStatus         EnumShippingStatus @default(pending)
-  user                   User?              @relation(fields: [userId], references: [id])
-  payments               PaymentTransaction[]
+  id             String               @id @default(cuid())
+  userId         String?
+  billing        Json
+  shipping       Json?
+  shippingMethod Json
+  paymentMethod  String
+  notes          String?
+  couponDiscount Float?
+  products       Json
+  totalAmount    Float
+  paymentStatus  String               @default("pending")
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+  shippingStatus EnumShippingStatus   @default(pending)
+  user           User?                @relation(fields: [userId], references: [id])
+  payments       PaymentTransaction[]
 }
 
 model PaymentTransaction {
-  id                  String   @id @default(cuid())
-  orderId             String   @unique
-  order               Order    @relation(fields: [orderId], references: [id])
-  provider            String   // e.g., "midtrans"
-  selectedBank        String?  // e.g., "bca", "bni"
-  vaNumber            String?
-  paymentType         String?
-  transactionId       String?
-  transactionTime     DateTime?
-  grossAmount         Float?
-  statusCode          String?
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
+  id              String    @id @default(cuid())
+  orderId         String    @unique
+  order           Order     @relation(fields: [orderId], references: [id])
+  provider        String // e.g., "midtrans"
+  selectedBank    String? // e.g., "bca", "bni"
+  vaNumber        String?
+  paymentType     String?
+  transactionId   String?
+  transactionTime DateTime?
+  grossAmount     Float?
+  statusCode      String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
 }
 
 model Coupon {
@@ -170,6 +170,7 @@ model Product {
   slug                  String                  @unique
   sku                   String?                 @unique
   body                  String?
+  productCode           String?                 @unique
   quantity              Int
   createdAt             DateTime                @default(now())
   updatedAt             DateTime                @updatedAt
@@ -190,9 +191,13 @@ model ProductVariant {
   color     String
   image     String
   size      String  @default("")
+  weight    Int     @default(0)
+  length    Int     @default(0)
+  width     Int     @default(0)
+  height    Int     @default(0)
   isDefault Boolean @default(false)
   productId String
-  product   Product @relation("ProductVariants", fields: [productId], references: [id])
+  product   Product @relation("ProductVariants", fields: [productId], references: [id], onUpdate: Cascade, onDelete: Cascade)
 }
 
 model AdditionalInformation {

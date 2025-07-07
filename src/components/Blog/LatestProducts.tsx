@@ -1,9 +1,8 @@
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/types/product";
 import { getLatestProducts } from "@/get-api-data/product";
-import { formatPrice } from "@/utils/formatePrice";
+import { formatPrice } from "@/utils/formatPrice";
 
 const LatestProducts = async () => {
   const products: Product[] = await getLatestProducts();

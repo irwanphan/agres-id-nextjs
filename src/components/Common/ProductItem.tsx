@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import { useShoppingCart } from "use-shopping-cart";
 import CheckoutBtn from "../Shop/CheckoutBtn";
 import WishlistButton from "../Wishlist/AddWishlistButton";
-import { formatPrice } from "@/utils/formatePrice";
+import { formatPrice } from "@/utils/formatPrice";
 import Tooltip from "./Tooltip";
 import { calculateDiscountPercentage } from "@/utils/calculateDiscountPercentage";
 

@@ -37,6 +37,10 @@ export type IProductByDetails = {
     color: string;
     image: string;
     size: string;
+    weight: number;
+    length: number;
+    width: number;
+    height: number;
     isDefault: boolean;
   }[];
   reviews: number;
