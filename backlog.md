@@ -69,8 +69,9 @@ Footer
 
 Pickup Point
 - [] Add Pickup Point
-- [] Add Pickup Point to the Checkout Page
 - [] Add Pickup Management Page to Admin Page
+- [] Add Pickup Point to the Checkout Page
+- [] Save Pickup Point to the Order
 
 Affiliate & Store Account Management
 - [] Confirm how to treat the store account and affiliate account, bonus, discount, etc.
