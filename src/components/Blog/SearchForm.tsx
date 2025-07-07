@@ -1,10 +1,10 @@
 "use client";
+import { useState } from "react";
 import { SearchIcon } from "@/assets/icons";
-import React from "react";
 import GlobalSearchModal from "../Common/GlobalSearch";
 
 const SearchForm = () => {
-  const [searchModalOpen, setSearchModalOpen] = React.useState(false);
+  const [searchModalOpen, setSearchModalOpen] = useState(false);
 
   return (
     <>

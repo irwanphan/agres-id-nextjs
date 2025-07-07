@@ -154,7 +154,6 @@ export default function HeaderSettingForm({
                             setImages={(files) =>
                                 field.onChange({ image: files?.[0] || null })
                             }
-                            showTitle={false}
                         />
                     )}
                 />
@@ -173,7 +172,6 @@ export default function HeaderSettingForm({
                             setImages={(files) =>
                                 field.onChange({ image: files?.[0] || null })
                             }
-                            showTitle={false}
                         />
                     )}
                 />

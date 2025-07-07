@@ -1,4 +1,3 @@
-import React from "react";
 import { Metadata } from "next";
 import { Wishlist } from "@/components/Wishlist";
 import { getSiteName } from "@/get-api-data/seo-setting";

@@ -1,4 +1,3 @@
-import React from "react";
 import OrderSelect from "@/app/(studio)/admin/orders/_components/OrderSelect";
 import PaymentStatusSelect from "@/app/(studio)/admin/orders/_components/PaymentStatusSelect";
 

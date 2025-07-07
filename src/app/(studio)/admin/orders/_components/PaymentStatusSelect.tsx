@@ -1,6 +1,6 @@
 "use client";
+import { useState } from "react";
 import { ChevronDownIcon } from "@/assets/icons";
-import React from "react";
 import toast from "react-hot-toast";
 
 export default function PaymentStatusSelect({
@@ -10,7 +10,7 @@ export default function PaymentStatusSelect({
   id: string;
   paymentStatus: string;
 }) {
-  const [currentStatus, setCurrentStatus] = React.useState(paymentStatus);
+  const [currentStatus, setCurrentStatus] = useState(paymentStatus);
   const handleChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     const target = e.target as HTMLSelectElement;
     setCurrentStatus(target.value);

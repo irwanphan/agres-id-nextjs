@@ -20,7 +20,11 @@ type variantData = {
   color: string;
   size: string;
   image: File | null | string;
-  isDefault:boolean
+  isDefault: boolean;
+  weight: number;
+  length: number;
+  width: number;
+  height: number;
 };
 
 type AdditionalInfo = {

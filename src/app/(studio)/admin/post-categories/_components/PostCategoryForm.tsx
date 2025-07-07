@@ -141,7 +141,6 @@ export default function PostCategoryForm({
               setImages={(files) =>
                 field.onChange({ image: files?.[0] || null })
               }
-              showTitle={false}
               required={false}
               error={!!fieldState.error}
               errorMessage={fieldState.error?.message}

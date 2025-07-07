@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Controller, Control } from "react-hook-form";
 
 interface TagInputProps {

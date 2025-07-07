@@ -1,13 +1,13 @@
 "use client";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useShoppingCart } from "use-shopping-cart";
 import { ArrowLeftIcon } from "./_components/icons";
 
 const CheckoutSuccess = ({ amount, bankInfo }: { amount: string; bankInfo?: string }) => {
   const { clearCart } = useShoppingCart();
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = useState(true);
 
   const { data: session } = useSession();
 

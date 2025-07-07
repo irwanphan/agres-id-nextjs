@@ -135,7 +135,6 @@ export default function SeoSettingForm({
                             setImages={(files) =>
                                 field.onChange({ image: files?.[0] || null })
                             }
-                            showTitle={false}
                         />
                     )}
                 />
@@ -189,7 +188,6 @@ export default function SeoSettingForm({
                             setImages={(files) =>
                                 field.onChange({ image: files?.[0] || null })
                             }
-                            showTitle={false}
                         />
                     )}
                 />

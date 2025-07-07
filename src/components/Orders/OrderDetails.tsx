@@ -1,5 +1,4 @@
 import { formatPrice } from "@/utils/formatePrice";
-import React from "react";
 
 const OrderDetails = ({ orderItem }: any) => {
   const products = orderItem?.products || [];
