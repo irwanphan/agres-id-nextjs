@@ -3,9 +3,11 @@
     "deploymentEnabled": {
       "main": true,
       "dev": false,
+      "dev-midtrans-int": false,
       "dev-raja-ongkir-int": false,
       "dev-user-update": false,
-      "dev-product-extend-weight": false
+      "dev-product-extend-weight": false,
+      "dev-pickup-points": false
     }
   }
 }
