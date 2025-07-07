@@ -316,6 +316,10 @@ export async function updateProduct(productId: string, formData: FormData) {
         color: string;
         image: string;
         size: string;
+        weight: string;
+        length: string;
+        width: string;
+        height: string;
         isDeault: boolean;
       }[] = [];
 
@@ -323,14 +327,18 @@ export async function updateProduct(productId: string, formData: FormData) {
         const file = thumbnailFiles[i];
         const color = formData.get(`color_${i}`) as string;
         const size = formData.get(`size_${i}`) as string;
+        const weight = formData.get(`weight_${i}`) as string;
+        const length = formData.get(`length_${i}`) as string;
+        const width = formData.get(`width_${i}`) as string;
+        const height = formData.get(`height_${i}`) as string;
         const isDeaultRaw = formData.get(`isDefault_${i}`);
         const isDeault = isDeaultRaw === "true";
 
         if (file instanceof File) {
           const imageUrl = await uploadImageToCloudinary(file, "products"); // Upload new image
-          newThumbnails.push({ color, image: imageUrl, size, isDeault });
+          newThumbnails.push({ color, image: imageUrl, size, weight, length, width, height, isDeault });
         } else if (typeof file === "string") {
-          newThumbnails.push({ color, image: file, size, isDeault }); // Keep existing image (if passed)
+          newThumbnails.push({ color, image: file, size, weight, length, width, height, isDeault }); // Keep existing image (if passed)
         }
       }
 
@@ -340,6 +348,10 @@ export async function updateProduct(productId: string, formData: FormData) {
           color: thumbnail.color,
           image: thumbnail.image,
           size: thumbnail.size,
+          weight: Number(thumbnail.weight),
+          length: Number(thumbnail.length),
+          width: Number(thumbnail.width),
+          height: Number(thumbnail.height),
           isDefault: thumbnail.isDeault,
           productId,
         })),
