@@ -127,6 +127,9 @@ model PickupPoint {
   city      String
   province  String
   phone     String?
+  latitude  Float?
+  longitude Float?
+  teamCode  String?
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
