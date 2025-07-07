@@ -183,20 +183,7 @@ model Product {
   heroSliders           HeroSlider[]
   category              Category                @relation(fields: [categoryId], references: [id])
   productVariants       ProductVariant[]        @relation("ProductVariants")
-  productPackages       ProductPackage[]        @relation("ProductPackages")
   reviews               Review[]
-}
-
-model ProductPackage {
-  id        String   @id @default(cuid())
-  productId String
-  weight    Int      @default(0)
-  length    Int      @default(0)
-  width     Int      @default(0)
-  height    Int      @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  product   Product  @relation("ProductPackages", fields: [productId], references: [id], onUpdate: Cascade, onDelete: Cascade)
 }
 
 model ProductVariant {
@@ -204,9 +191,13 @@ model ProductVariant {
   color     String
   image     String
   size      String  @default("")
+  weight    Int     @default(0)
+  length    Int     @default(0)
+  width     Int     @default(0)
+  height    Int     @default(0)
   isDefault Boolean @default(false)
   productId String
-  product   Product @relation("ProductVariants", fields: [productId], references: [id])
+  product   Product @relation("ProductVariants", fields: [productId], references: [id], onUpdate: Cascade, onDelete: Cascade)
 }
 
 model AdditionalInformation {
