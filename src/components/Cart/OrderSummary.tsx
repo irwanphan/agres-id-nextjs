@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useShoppingCart } from "use-shopping-cart";
 import { useCheckoutForm } from "../Checkout/form";
-import { formatPrice } from "@/utils/formatePrice";
+import { formatPrice } from "@/utils/formatPrice";
 
 const OrderSummary = () => {
   const { watch } = useCheckoutForm();

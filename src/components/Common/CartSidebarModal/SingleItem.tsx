@@ -2,7 +2,7 @@ import { TrashIcon } from "@/assets/icons";
 import Image from "next/image";
 import { useShoppingCart } from "use-shopping-cart";
 import { useRouter } from "next/navigation";
-import { formatPrice } from "@/utils/formatePrice";
+import { formatPrice } from "@/utils/formatPrice";
 
 const SingleItem = ({ item }: any) => {
   const { removeItem,handleCartClick } = useShoppingCart();

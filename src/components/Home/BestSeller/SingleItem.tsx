@@ -10,7 +10,7 @@ import { addItemToWishlist } from "@/redux/features/wishlist-slice";
 import { useShoppingCart } from "use-shopping-cart";
 import toast from "react-hot-toast";
 import ActionBtn from "./ActionBtn";
-import { formatPrice } from "@/utils/formatePrice";
+import { formatPrice } from "@/utils/formatPrice";
 
 const SingleItem = ({ item }: { item: Product }) => {
   const defaultVariant = item?.productVariants.find(

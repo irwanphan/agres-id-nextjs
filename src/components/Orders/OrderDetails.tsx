@@ -1,4 +1,4 @@
-import { formatPrice } from "@/utils/formatePrice";
+import { formatPrice } from "@/utils/formatPrice";
 
 const OrderDetails = ({ orderItem }: any) => {
   const products = orderItem?.products || [];

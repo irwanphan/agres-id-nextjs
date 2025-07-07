@@ -1,5 +1,7 @@
 "use client";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import Breadcrumb from "../Common/Breadcrumb";
 import Billing from "./Billing";
 import Coupon from "./Coupon";
@@ -10,14 +12,12 @@ import Shipping from "./Shipping";
 import ShippingMethod from "./ShippingMethod";
 import { CheckoutInput, useCheckoutForm } from "./form";
 import Orders from "./orders";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useShoppingCart } from "use-shopping-cart";
-import { formatPrice } from "@/utils/formatePrice";
+import { formatPrice } from "@/utils/formatPrice";
 
 const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
-  const { handleSubmit } = useCheckoutForm();
+  const { handleSubmit, setValue } = useCheckoutForm();
 
   const { data: session } = useSession();
 
@@ -25,7 +25,18 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
   const [errorMessage, setErrorMessage] = useState<string>();
   const [loading, setLoading] = useState(false);
   const { cartDetails, clearCart } = useShoppingCart();
+  // console.log("cartDetails", cartDetails);
 
+  useEffect(() => {
+    if (cartDetails) {
+      let packageWeight = 0;
+      Object.values(cartDetails).forEach((item: any) => {
+        packageWeight += (Number(item.weight) || 0) * (Number(item.quantity) || 1);
+      });
+      setValue("shipping.weight", packageWeight);
+    }
+  }, [cartDetails]);
+  
   // Handle checkout
   const handleCheckout = async (formData: CheckoutInput) => {
     setLoading(true);

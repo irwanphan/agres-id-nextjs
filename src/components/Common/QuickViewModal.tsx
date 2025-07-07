@@ -14,7 +14,7 @@ import {
 import { updateproductDetails } from "@/redux/features/product-details";
 import { addItemToWishlist } from "@/redux/features/wishlist-slice";
 import { AppDispatch, useAppSelector } from "@/redux/store";
-import { formatPrice } from "@/utils/formatePrice";
+import { formatPrice } from "@/utils/formatPrice";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";

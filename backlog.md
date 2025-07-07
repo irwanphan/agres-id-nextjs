@@ -38,9 +38,9 @@ Checkout Page
 - [ok] Remove RajaOngkir API from the code and Rajaongkir name from any route and path
 - [ok] auto fetch billing address from user account management page to billing section
 - [ok] auto fetch shipping address from user account management page to shipping section
-- [] fix: checkout page doesn't show the product variant selected
+- [ok] fix: checkout page doesn't show the product variant selected - show color
 - [] fix: db doesn't have the product variant selected
-- [] fix: count weight and dimension of product variant
+- [ok] fix: count weight and dimension of product variant
 
 RBAC / Fine Grained Access Control
 - [] Add RBAC / Fine Grained Access Control
@@ -84,7 +84,7 @@ Product Management
 
 Product Page
 - [ok] Grouping Product Variant on Product Page
-- [] Add Product Variant to Shopping Cart
+- [ok] Add Product Variant to Shopping Cart - added color
 Site Nav
 - [] Add product menu with category filter
 

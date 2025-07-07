@@ -18,7 +18,7 @@ import PreLoader from "../Common/PreLoader";
 import ReviewStar from "../Shop/ReviewStar";
 import DetailsTabs from "./DetailsTabs";
 import toast from "react-hot-toast";
-import { formatPrice } from "@/utils/formatePrice";
+import { formatPrice } from "@/utils/formatPrice";
 import { addItemToWishlist } from "@/redux/features/wishlist-slice";
 import { useRouter } from "next/navigation";
 

@@ -13,7 +13,7 @@ import { useShoppingCart } from "use-shopping-cart";
 import CheckoutBtn from "./CheckoutBtn";
 import ReviewStar from "./ReviewStar";
 import WishlistButton from "../Wishlist/AddWishlistButton";
-import { formatPrice } from "@/utils/formatePrice";
+import { formatPrice } from "@/utils/formatPrice";
 import Tooltip from "../Common/Tooltip";
 
 const SingleListItem = ({ item }: { item: Product }) => {

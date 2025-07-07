@@ -7,7 +7,7 @@ import { removeItemFromWishlist } from "@/redux/features/wishlist-slice";
 import { useShoppingCart } from "use-shopping-cart";
 import { CircleCheckIcon, CircleXIcon } from "./icons";
 import { WishlistItem } from "@/types/wishlistItem";
-import { formatPrice } from "@/utils/formatePrice";
+import { formatPrice } from "@/utils/formatPrice";
 
 const SingleItem = ({ item }: { item: WishlistItem }) => {
   const dispatch = useDispatch<AppDispatch>();

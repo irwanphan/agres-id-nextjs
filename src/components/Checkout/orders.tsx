@@ -1,7 +1,8 @@
 import { useShoppingCart } from "use-shopping-cart";
 import { useCheckoutForm } from "./form";
-import { formatPrice } from "@/utils/formatePrice";
-import { IconTruck, IconMapPin, IconChevronsDown } from "@tabler/icons-react";
+import { formatPrice } from "@/utils/formatPrice";
+import { IconTruck, IconMapPin, IconChevronsDown, IconX } from "@tabler/icons-react";
+import { formatPackageWeightKg } from "@/utils/formatPackageWeight";
 
 export default function Orders() {
   const { watch, register } = useCheckoutForm();
@@ -14,7 +15,7 @@ export default function Orders() {
   const destination = watch("shipping.destination");
   const packageWeight = watch("shipping.weight");
 
-  // console.log(watch("shipping.destination"));
+  // console.log("packageWeight", packageWeight);
 
   return (
     <div id="section-orders" className="bg-white shadow-1 rounded-[10px]">
@@ -26,8 +27,8 @@ export default function Orders() {
         <table className="w-full text-dark mb-5">
           <thead>
             <tr className="border-b border-gray-3">
-              <th className="py-5 text-base font-medium text-left">Produk</th>
-              <th className="py-5 text-base font-medium text-right">
+              <th className="py-3 text-base font-medium text-left">Produk</th>
+              <th className="py-3 text-base font-medium text-right">
                 Subtotal
               </th>
             </tr>
@@ -37,15 +38,22 @@ export default function Orders() {
             {cartCount && cartCount > 0 ? (
               Object.values(cartDetails ?? {}).map((product, key) => (
                 <tr key={key} className="border-b border-gray-3">
-                  <td className="py-5 text-sm break-words">{product.name}</td>
-                  <td className="py-5 text-sm text-right">
-                    {formatPrice(product.price)}
+                  <td className="py-3 text-sm break-words">
+                    {product.name} <span className="text-xs text-gray-5">- {product.color}</span>
+                  </td>
+                  <td className="py-3 text-sm text-right flex flex-col items-end gap-1">
+                    {formatPrice(product.price * product.quantity)}
+                    <div className="flex items-center gap-1 text-xs text-gray-5">
+                      {formatPrice(product.price)}
+                      <IconX className="w-3 h-3" />
+                      {product.quantity}
+                    </div>
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td className="py-5 text-center" colSpan={2}>
+                <td className="py-3 text-center" colSpan={2}>
                   Tidak ada produk di keranjang
                 </td>
               </tr>
@@ -55,44 +63,37 @@ export default function Orders() {
             {shippingMethod?.price ? (
               <>
                 <tr className="border-b border-gray-3">
-                  <td className="py-5">
+                  <td className="py-3">
                     <div className="flex items-center gap-2">
                       <IconTruck className="h-4 w-4 text-blue" />
                       <span>Ongkos Kirim</span>
                     </div>
-                    {shippingMethod.courier && (
-                      <div className="text-xs text-gray-5 mt-1 ml-6">
-                        {shippingMethod.courier} - {shippingMethod.service}
-                        {shippingMethod.etd && (
-                          <span className="ml-2">({shippingMethod.etd})</span>
-                        )}
-                      </div>
-                    )}
+                    <div className="text-xs text-gray-5 mt-1 ml-6 flex flex-col gap-1">
+                      {shippingMethod.courier && (
+                        <>
+                          {shippingMethod.courier} - {shippingMethod.service}
+                        </>
+                      )}
+                      {shippingMethod.etd && (
+                        <span>({shippingMethod.etd})</span>
+                      )}
+                      Package Weight: {formatPackageWeightKg(packageWeight || 0)} ({packageWeight} gram)
+                    </div>
                   </td>
-                  <td className="py-5 text-right">
+                  <td className="py-3 text-right">
                     {formatPrice(shippingMethod.price)}
                   </td>
                 </tr>
-
-                {/* Package Weight */}
-                {packageWeight && (
-                  <tr className="border-b border-gray-3">
-                    <td className="py-5 text-sm text-gray-5">
-                      Package Weight: {packageWeight} kg
-                    </td>
-                    <td className="py-5 text-right"></td>
-                  </tr>
-                )}
               </>
             ) : (
               <tr className="border-b border-gray-3">
-                <td className="py-5">
+                <td className="py-3">
                   <div className="flex items-center gap-2">
                     <IconTruck className="h-4 w-4 text-gray-4" />
                     <span>Shipping Fee</span>
                   </div>
                 </td>
-                <td className="py-5 text-right">
+                <td className="py-3 text-right">
                   {formatPrice(shippingMethod.price)}
                 </td>
               </tr>
@@ -100,10 +101,10 @@ export default function Orders() {
 
             {!!couponDiscount && (
               <tr className="border-b border-gray-3">
-                <td className="py-5">
+                <td className="py-3">
                   Coupon Discount ({watch("couponDiscount")}%)
                 </td>
-                <td className="py-5 text-right">
+                <td className="py-3 text-right">
                   - {formatPrice(couponDiscount)}
                 </td>
               </tr>
@@ -151,7 +152,7 @@ export default function Orders() {
               {packageWeight && (
                 <div className="flex justify-between">
                   <span className="text-gray-5">Weight:</span>
-                  <span className="text-dark">{packageWeight} kg</span>
+                  <span className="text-dark">{formatPackageWeightKg(packageWeight || 0)} ({packageWeight} gram)</span>
                 </div>
               )}
             </div>
