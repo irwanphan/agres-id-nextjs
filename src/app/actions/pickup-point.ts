@@ -18,6 +18,9 @@ export async function createPickupPoint(formData: FormData) {
     const city = formData.get("city") as string;
     const province = formData.get("province") as string;
     const phone = formData.get("phone") as string;
+    const latitude = formData.get("latitude") as string;
+    const longitude = formData.get("longitude") as string;
+    const teamCode = formData.get("teamCode") as string;
 
     // check if required fields are present
     if (!name || !address || !city || !province) {
@@ -47,6 +50,9 @@ export async function createPickupPoint(formData: FormData) {
         city,
         province,
         phone,
+        latitude: latitude ? parseFloat(latitude) : null,
+        longitude: longitude ? parseFloat(longitude) : null,
+        teamCode,
       },
     });
     revalidateTag("pickup-points");
@@ -104,6 +110,9 @@ export async function updatePickupPoint(pickupPointId: string, formData: FormDat
     const city = formData.get("city") as string;
     const province = formData.get("province") as string;
     const phone = formData.get("phone") as string;
+    const latitude = formData.get("latitude") as string;
+    const longitude = formData.get("longitude") as string;
+    const teamCode = formData.get("teamCode") as string;
 
     if (!name || !address || !city || !province) {
       return errorResponse(400, "Name, address, city, and province are required");
@@ -127,6 +136,9 @@ export async function updatePickupPoint(pickupPointId: string, formData: FormDat
         city,
         province,
         phone,
+        latitude: latitude ? parseFloat(latitude) : null,
+        longitude: longitude ? parseFloat(longitude) : null,
+        teamCode,
       },
     });
 

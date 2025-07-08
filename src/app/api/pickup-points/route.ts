@@ -16,7 +16,7 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, address, city, province, phone } = await req.json();
+    const { name, address, city, province, phone, latitude, longitude, teamCode } = await req.json();
     
     // Validation
     if (!name) {
@@ -33,6 +33,9 @@ export async function POST(req: NextRequest) {
         city: city || null, 
         province: province || null, 
         phone: phone || null,
+        latitude: latitude ? parseFloat(latitude) : null,
+        longitude: longitude ? parseFloat(longitude) : null,
+        teamCode: teamCode || null,
         isActive: true 
       } 
     });

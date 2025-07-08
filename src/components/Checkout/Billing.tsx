@@ -8,8 +8,8 @@ import { useCheckoutForm } from "./form";
 import { splitName } from "@/utils/splitName";
 import { CheckMarkIcon } from "@/assets/icons";
 import LocationCityDatalist from "./LocationCityDatalist";
-import { Province } from "./LocationProvinceDatalist";
-import { City } from "./LocationCityDatalist";
+import { Province } from "@/types/province";
+import { City } from "@/types/city";
 import { ChevronDown } from "./icons";
 
 type AddressType = {

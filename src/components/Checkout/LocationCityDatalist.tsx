@@ -1,12 +1,7 @@
 'use client';
 
 import { FieldError } from "react-hook-form";
-
-export type City = {
-  city_id: string;
-  city_name: string;
-  province_id: string;
-};
+import { City } from "@/types/city";
 
 type Props = {
   name: string;

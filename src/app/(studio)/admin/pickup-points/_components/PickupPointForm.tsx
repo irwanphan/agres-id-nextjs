@@ -7,8 +7,9 @@ import { useRouter } from "next/navigation";
 import { PickupPoint } from "@prisma/client";
 import toast from "react-hot-toast";
 import { createPickupPoint, updatePickupPoint } from "@/app/actions/pickup-point";
-import LocationProvinceDatalist, { Province } from "@/components/Checkout/LocationProvinceDatalist";
-import LocationCityDatalist, { City } from "@/components/Checkout/LocationCityDatalist";
+import LocationCityDatalist from "@/components/Checkout/LocationCityDatalist";
+import { Province } from "@/types/province";
+import { City } from "@/types/city";
 
 interface PickupPointInput {
   name: string;
@@ -17,6 +18,9 @@ interface PickupPointInput {
   province: string;
   phone: string | null;
   isActive: boolean;
+  latitude: string | null;
+  longitude: string | null;
+  teamCode: string | null;
 }
 
 type PickupPointProps = {
@@ -40,26 +44,46 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
       province: pickupPointItem?.province || "",
       phone: pickupPointItem?.phone || "",
       isActive: pickupPointItem?.isActive || true,
+      latitude: pickupPointItem?.latitude?.toString() || null,
+      longitude: pickupPointItem?.longitude?.toString() || null,
+      teamCode: pickupPointItem?.teamCode || null,
     },
   });
 
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [provinces, setProvinces] = useState<Province[]>([]);
-  const selectedProvince = watch("province");
+  const [selectedProvince, setSelectedProvince] = useState<string>("");
   const [cities, setCities] = useState<City[]>([]);
 
+  console.log('selectedProvince', selectedProvince);
+
   useEffect(() => {
-    fetch('/api/location/province')
-    .then((res) => res.json())
-    .then((data) => setProvinces(data));
+    async function fetchProvinces() {
+      try {
+        const res = await fetch('/api/location/province');
+        const data = await res.json();
+        setProvinces(data);
+        console.log('provinces', data);
+      } catch (error) {
+        console.error("Error fetching provinces:", error);
+      }
+    }
+    fetchProvinces();
   }, []);
 
   useEffect(() => {
-    if (!selectedProvince) return setCities([]);
-    fetch(`/api/location/city?provinceId=${selectedProvince}`)
-    .then((res) => res.json())
-    .then((data) => setCities(data));
+    async function fetchCities() {
+      try {
+        if (!selectedProvince) return setCities([]);
+        const res = await fetch(`/api/location/city?provinceId=${selectedProvince}`);
+        const data = await res.json();
+        setCities(data);
+      } catch (error) {
+        console.error("Error fetching cities:", error);
+      }
+    }
+    fetchCities();
   }, [selectedProvince]);
 
   useEffect(() => {
@@ -79,6 +103,9 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
       formData.append("province", data.province);
       formData.append("phone", data.phone || "");
       formData.append("isActive", data.isActive.toString());
+      formData.append("latitude", data.latitude || "");
+      formData.append("longitude", data.longitude || "");
+      formData.append("teamCode", data.teamCode || "");
       let result;
       if (pickupPointItem) {
         result = await updatePickupPoint(pickupPointItem.id, formData);
@@ -106,7 +133,7 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col gap-5 mb-5">
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-3 gap-5">
           {/* Title Input */}
           <Controller
             control={control}
@@ -120,6 +147,24 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
                   required
                   error={!!fieldState.error}
                   errorMessage="Nama Pickup Point harus diisi"
+                  name={field.name}
+                  value={field.value ?? ""}
+                  onChange={field.onChange}
+                />
+              </div>
+            )}
+          />
+
+          {/* teamCode */}
+          <Controller
+            control={control}
+            name="teamCode"
+            rules={{ required: false }}
+            render={({ field }) => (
+              <div className="w-full">
+                <InputGroup
+                  label="Team Code"
+                  type="text"
                   name={field.name}
                   value={field.value ?? ""}
                   onChange={field.onChange}
@@ -170,13 +215,36 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
         </div>
 
         <div className="grid grid-cols-2 gap-5">
-          <LocationProvinceDatalist 
-            provinces={provinces}
-            name="province"
-            register={register} 
-            error={errors.province}
-            setValue={setValue}
-          />
+          <div>
+            <label htmlFor="province" className="block text-sm font-normal text-gray-6 mb-1.5">
+              Provinsi <span className="text-red">*</span>
+            </label>
+            
+            <input
+              list="province-list" 
+              id="province" 
+              {...register("province", {
+                required: true,
+                validate: (value: string) =>
+                  provinces.some(province => province.province === value) || "Pilih provinsi yang valid"
+              })}
+              type="text" 
+              name="province" 
+              className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
+              placeholder="Silahkan Ketik dan Pilih Provinsi..."
+              onBlur={() => {
+                const selected = provinces.find(p => p.province === watch("province"));
+                // console.log('selected', selected);
+                setSelectedProvince(selected ? selected.province_id : "");
+              }}
+            />
+            <datalist id="province-list">
+              {provinces.map((province) => (
+                <option key={province.province_id} value={province.province} />
+              ))}
+            </datalist>
+            {errors.province && <p className="text-sm text-red mt-1.5">{errors.province.message}</p>}
+          </div>
           <LocationCityDatalist 
             cities={cities}
             name="city" 
@@ -186,8 +254,44 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
           />
         </div>
 
+        <div className="grid grid-cols-2 gap-5">
+          <Controller
+            control={control}
+            name="longitude"
+            rules={{ required: false }}
+            render={({ field }) => (
+              <div className="w-full">
+                <InputGroup
+                  label="Longitude"
+                  type="number"
+                  name={field.name}
+                  value={field.value ?? ""}
+                  onChange={field.onChange}
+                />
+              </div>
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="latitude"
+            rules={{ required: false }}
+            render={({ field }) => (
+              <div className="w-full">
+                <InputGroup
+                  label="Latitude"
+                  type="number"
+                  name={field.name}
+                  value={field.value ?? ""}
+                  onChange={field.onChange}
+                />
+              </div>
+            )}
+          />
+        </div>
+
         {/* isActive */}
-        <div>
+        <div className="">
           <Controller
             control={control}
             name="isActive"
