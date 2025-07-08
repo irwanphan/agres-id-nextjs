@@ -35,7 +35,7 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
       });
       setValue("shipping.weight", packageWeight);
     }
-  }, [cartDetails]);
+  }, [cartDetails, setValue]);
   
   // Handle checkout
   const handleCheckout = async (formData: CheckoutInput) => {

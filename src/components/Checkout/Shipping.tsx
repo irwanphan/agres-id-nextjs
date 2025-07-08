@@ -13,6 +13,8 @@ import { ShippingCalculateDomesticCostResponse } from "@/types";
 import { useSession } from "next-auth/react";
 import { formatPackageWeightKg } from "@/utils/formatPackageWeight";
 import { useDebounce } from "use-debounce";
+import { getPickupPoints } from "@/get-api-data/pickup-point";
+import { PickupPoint } from "@/types/pickup-point";
 
 type AddressType = {
   name: string;
@@ -56,6 +58,9 @@ export default function Shipping() {
     city_name: "",
     zip_code: "",
   });
+  
+  const [pickupPoints, setPickupPoints] = useState<PickupPoint[]>([]);
+  const [selectedPickupPoint, setSelectedPickupPoint] = useState<string>("");
 
   // console.log(watch("shipToDifferentAddress"));
   // console.log("shipToDestination", shipToDestination);
@@ -200,6 +205,21 @@ export default function Shipping() {
     }
     setLoadingOngkir(false);
   };
+
+  useEffect(() => {
+    async function fetchPickupPoints() {
+      try {
+        if (selectedCourier === "free") {
+          const res = await fetch("/api/pickup-points");
+          const data = await res.json();
+          setPickupPoints(Array.isArray(data) ? data : []);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    fetchPickupPoints();
+  }, [selectedCourier]);
 
   return (
     <div className="bg-white shadow-1 rounded-[10px] break-inside-avoid">
@@ -390,6 +410,32 @@ export default function Shipping() {
                   </div>
               </label>
             </div>
+
+            {selectedCourier === "free" && (
+              <div className="mt-2">
+                <label className="block text-sm mb-1">Pilih Pickup Point</label>
+                <select
+                  className="w-full rounded border px-3 py-2"
+                  value={selectedPickupPoint}
+                  onChange={e => {
+                    setSelectedPickupPoint(e.target.value);
+                    setValue("shipping.pickupPointId", e.target.value); // jika pakai react-hook-form
+                    setValue('shipping.destination', pickupPoints.find(point => point.id === e.target.value)?.name || "");
+                  }}
+                  required
+                >
+                  <option value="">-- Pilih Pickup Point --</option>
+                  {pickupPoints
+                    .filter(point => point.city.toLowerCase().includes(destinationCity.city_name.toLowerCase()))
+                    .map((point: PickupPoint) => (
+                      <option key={point.id} value={point.id}>
+                        {point.name} - {point.city}, {point.province}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            )}
+
             {loadingOngkir && <div className="text-sm text-gray-500 mt-2">Menghitung ongkir...</div>}
             {shippingCost!==null && !loadingOngkir && (
               <div className="text-sm text-green-600 mt-4 flex items-center justify-between px-4 gap-2 border border-gray-4 h-14 rounded-lg">

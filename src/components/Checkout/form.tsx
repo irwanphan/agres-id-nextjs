@@ -64,6 +64,7 @@ export type CheckoutInput = {
   shippingAddressOption: "default" | "sameAsBilling" | "other";
   shipping?: {
     // origin: string;
+    pickupPointId?: string;
     destination: string;
     weight?: number;
     // countryName: string;
