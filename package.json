@@ -9,6 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "import-demo-data": "node scripts/import-demo-data.js",
+    "preview-pickup-points": "node scripts/preview-pickup-points.js",
+    "import-pickup-points": "node scripts/import-pickup-points.js",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run"
