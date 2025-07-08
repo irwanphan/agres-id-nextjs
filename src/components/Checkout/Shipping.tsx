@@ -262,7 +262,7 @@ export default function Shipping() {
                 onChange={() => setIsPickedUp(!isPickedUp)}
                 name="isPickedUp"
               />
-              <div className="rounded-md border-[0.5px] shadow-1 border-gray-4 py-2.5 px-4 ease-out duration-200 hover:bg-gray-2 hover:border-transparent hover:shadow-none peer-checked:shadow-none peer-checked:border-transparent peer-checked:bg-gray-2">
+              <div className="rounded-md border-[0.5px] shadow-1 border-gray-4 py-2.5 px-4 ease-out duration-200 hover:bg-gray-2 hover:border-transparent hover:shadow-none peer-checked:shadow-none peer-checked:border-transparent peer-checked:bg-gray-2 cursor-pointer">
                 Dikirim
               </div>
             </label>
@@ -275,7 +275,7 @@ export default function Shipping() {
                 onChange={() => setIsPickedUp(!isPickedUp)}
                 name="isPickedUp"
               />
-              <div className="rounded-md border-[0.5px] shadow-1 border-gray-4 py-2.5 px-4 ease-out duration-200 hover:bg-gray-2 hover:border-transparent hover:shadow-none peer-checked:shadow-none peer-checked:border-transparent peer-checked:bg-gray-2">
+              <div className="rounded-md border-[0.5px] shadow-1 border-gray-4 py-2.5 px-4 ease-out duration-200 hover:bg-gray-2 hover:border-transparent hover:shadow-none peer-checked:shadow-none peer-checked:border-transparent peer-checked:bg-gray-2 cursor-pointer">
                 Diambil sendiri (pickup) di gerai AGRES
               </div>
             </label>
@@ -314,7 +314,57 @@ export default function Shipping() {
           {!isPickedUp && (
             <>
               {/* get destination id from API call */}
-                <div className={`mb-5 transition-all duration-300 ease-out h-auto ${isPickedUp ? "opacity-0" : "opacity-100"}`}>
+              <div className={`mb-5 transition-all duration-300 ease-out h-auto ${isPickedUp ? "opacity-0" : "opacity-100"}`}>
+
+                {/* pilih alamat pengiriman: default, billing, lainnya */}
+                <p className="text-sm text-gray-6 mb-5">Gunakan alamat pengiriman yang mana?</p>
+                <div className="mb-5">
+                  <Controller
+                    control={control}
+                    name="shippingAddressOption"
+                    render={({ field }) => (
+                      <div className="flex flex-col gap-2">
+                        <label className="flex items-center gap-2">
+                          <input
+                            type="radio"
+                            value="default"
+                            checked={field.value === "default"}
+                            onChange={field.onChange}
+                            name={field.name}
+                          />
+                          <div className="rounded-md border-[0.5px] shadow-1 border-gray-4 py-2.5 px-4 ease-out duration-200 hover:bg-gray-2 hover:border-transparent hover:shadow-none peer-checked:shadow-none peer-checked:border-transparent peer-checked:bg-gray-2 cursor-pointer">
+                            Default Pengiriman
+                          </div>
+                        </label>
+                        <label className="flex items-center gap-2">
+                          <input
+                            type="radio"
+                            value="sameAsBilling"
+                            checked={field.value === "sameAsBilling"}
+                            onChange={field.onChange}
+                            name={field.name}
+                          />
+                          <div className="rounded-md border-[0.5px] shadow-1 border-gray-4 py-2.5 px-4 ease-out duration-200 hover:bg-gray-2 hover:border-transparent hover:shadow-none peer-checked:shadow-none peer-checked:border-transparent peer-checked:bg-gray-2 cursor-pointer">
+                            Sama dengan Billing
+                          </div>
+                        </label>
+                        <label className="flex items-center gap-2">
+                          <input
+                            type="radio"
+                            value="other"
+                            checked={field.value === "other"}
+                            onChange={field.onChange}
+                            name={field.name}
+                          />
+                          <div className="rounded-md border-[0.5px] shadow-1 border-gray-4 py-2.5 px-4 ease-out duration-200 hover:bg-gray-2 hover:border-transparent hover:shadow-none peer-checked:shadow-none peer-checked:border-transparent peer-checked:bg-gray-2 cursor-pointer">
+                            Lainnya, Isi Alamat Pengiriman
+                          </div>
+                        </label>
+                      </div>
+                    )}
+                  />
+                </div>
+                
                 <label htmlFor="destination-city-search" className="block mb-1.5 text-sm text-gray-6">
                   Cari Kota / Kabupaten Tujuan <span className="text-red">*</span>
                   {loadingCitySearch && (
@@ -339,152 +389,109 @@ export default function Shipping() {
                     <option key={opt.id} value={opt.label} />
                   ))}
                 </datalist>
-              </div>
 
-              {/* pilih alamat pengiriman: default, billing, lainnya */}
-              <p className="text-sm text-gray-6 mb-5">Gunakan alamat pengiriman yang mana?</p>
-              <div className="mb-5">
-                <Controller
-                  control={control}
-                  name="shippingAddressOption"
-                  render={({ field }) => (
-                    <div className="flex flex-col gap-2">
-                      <label className="flex items-center gap-2">
-                        <input
-                          type="radio"
-                          value="default"
-                          checked={field.value === "default"}
-                          onChange={field.onChange}
-                          name={field.name}
-                        />
-                        Default Pengiriman
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <input
-                          type="radio"
-                          value="sameAsBilling"
-                          checked={field.value === "sameAsBilling"}
-                          onChange={field.onChange}
-                          name={field.name}
-                        />
-                        Sama dengan Billing
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <input
-                          type="radio"
-                          value="other"
-                          checked={field.value === "other"}
-                          onChange={field.onChange}
-                          name={field.name}
-                        />
-                        Lainnya, Isi Alamat Pengiriman
-                      </label>
-                    </div>
-                  )}
-                />
-              </div>
+                <div className="mb-5">
+                  <Controller
+                    control={control}
+                    name="shipping.address.address1"
+                    render={({ field }) => (
+                      <InputGroup
+                        label="Street Address"
+                        placeholder="House number and street name"
+                        required
+                        // readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
+                        name={field.name}
+                        value={field.value !== undefined ? field.value : ""}
+                        onChange={field.onChange}
+                      />
+                    )}
+                  />
 
-              <div className="mb-5">
-                <Controller
-                  control={control}
-                  name="shipping.address.address1"
-                  render={({ field }) => (
-                    <InputGroup
-                      label="Street Address"
-                      placeholder="House number and street name"
-                      required
+                  <div className="mt-5">
+                    <input
+                      type="text"
+                      {...register("shipping.address.address2")}
                       // readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
-                      name={field.name}
-                      value={field.value !== undefined ? field.value : ""}
-                      onChange={field.onChange}
+                      placeholder="Apartment, suite, unit, etc. (optional)"
+                      className={`
+                        rounded-lg border placeholder:text-sm 
+                        text-sm placeholder:font-normal border-gray-3 h-11
+                        focus:border-blue focus:outline-0
+                        placeholder:text-dark-5 w-full
+                        py-2.5 px-4 duration-200 focus:ring-0
+                        `}
+                        // ${shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default" ? "bg-gray-2" : ""}
                     />
-                  )}
-                />
+                  </div>
+                </div>
 
-                <div className="mt-5">
-                  <input
-                    type="text"
-                    {...register("shipping.address.address2")}
-                    // readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
-                    placeholder="Apartment, suite, unit, etc. (optional)"
-                    className={`
-                      rounded-lg border placeholder:text-sm 
-                      text-sm placeholder:font-normal border-gray-3 h-11
-                      focus:border-blue focus:outline-0
-                      placeholder:text-dark-5 w-full
-                      py-2.5 px-4 duration-200 focus:ring-0
-                      `}
-                      // ${shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default" ? "bg-gray-2" : ""}
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 mb-5">
+                  <Controller
+                    control={control}
+                    name="shipping.phone"
+                    render={({ field }) => (
+                      <InputGroup
+                        type="tel"
+                        label="Phone"
+                        required
+                        // readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
+                        name={field.name}
+                        value={field.value !== undefined ? field.value : ""}
+                        onChange={field.onChange}
+                      />
+                    )}
+                  />
+
+                  <Controller
+                    control={control}
+                    name="shipping.email"
+                    render={({ field }) => (
+                      <InputGroup
+                        label="Email Address"
+                        type="email"
+                        required
+                        // readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
+                        name={field.name}
+                        value={field.value !== undefined ? field.value : ""}
+                        onChange={field.onChange}
+                      />
+                    )}
                   />
                 </div>
-              </div>
 
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 mb-5">
-                <Controller
-                  control={control}
-                  name="shipping.phone"
-                  render={({ field }) => (
-                    <InputGroup
-                      type="tel"
-                      label="Phone"
-                      required
-                      // readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
-                      name={field.name}
-                      value={field.value !== undefined ? field.value : ""}
-                      onChange={field.onChange}
-                    />
-                  )}
-                />
-
-                <Controller
-                  control={control}
-                  name="shipping.email"
-                  render={({ field }) => (
-                    <InputGroup
-                      label="Email Address"
-                      type="email"
-                      required
-                      // readOnly={shippingAddressOption === "sameAsBilling" || shippingAddressOption === "default"}
-                      name={field.name}
-                      value={field.value !== undefined ? field.value : ""}
-                      onChange={field.onChange}
-                    />
-                  )}
-                />
-              </div>
-
-              <div className="mb-5">
-                <label className="block mb-1.5 text-sm text-gray-6">Kurir ({formatPackageWeightKg(packageWeight || 0)})</label>
-                <div className="grid grid-cols-1 w-full md:grid-cols-2 gap-4">
-                  <label className="flex items-center gap-2">
-                    <input 
-                      type="radio" 
-                      name="courier" 
-                      value="jne" 
-                      checked={selectedCourier==="jne"} 
-                      onChange={()=>handleCourierChange("jne")} />
-                      { ShippingMethodsCard({method: "jne"})}
-                  </label>
-                  <label className="flex items-center gap-2">
-                    <input 
-                      type="radio" 
-                      name="courier" 
-                      value="sicepat" 
-                      checked={selectedCourier==="sicepat"} 
-                      onChange={()=>handleCourierChange("sicepat")} />
-                      { ShippingMethodsCard({method: "sicepat"})}
-                  </label>
-                  <label className="flex items-center gap-2">
-                    <input 
-                      type="radio" 
-                      name="courier" 
-                      value="free" 
-                      checked={selectedCourier==="free"} 
-                      onChange={()=>handleCourierChange("free")} />
-                      <div className="rounded-md border-[0.5px] shadow-1 border-gray-4 py-3.5 px-5 ease-out duration-200 hover:bg-gray-2 hover:border-transparent hover:shadow-none peer-checked:shadow-none peer-checked:border-transparent peer-checked:bg-gray-2">
-                        Pickup di Gerai <strong>AGRES</strong>
-                      </div>
-                  </label>
+                <div className="mb-5">
+                  <label className="block mb-1.5 text-sm text-gray-6">Kurir ({formatPackageWeightKg(packageWeight || 0)})</label>
+                  <div className="grid grid-cols-1 w-full md:grid-cols-2 gap-4">
+                    <label className="flex items-center gap-2">
+                      <input 
+                        type="radio" 
+                        name="courier" 
+                        value="jne" 
+                        checked={selectedCourier==="jne"} 
+                        onChange={()=>handleCourierChange("jne")} />
+                        { ShippingMethodsCard({method: "jne"})}
+                    </label>
+                    <label className="flex items-center gap-2">
+                      <input 
+                        type="radio" 
+                        name="courier" 
+                        value="sicepat" 
+                        checked={selectedCourier==="sicepat"} 
+                        onChange={()=>handleCourierChange("sicepat")} />
+                        { ShippingMethodsCard({method: "sicepat"})}
+                    </label>
+                    <label className="flex items-center gap-2">
+                      <input 
+                        type="radio" 
+                        name="courier" 
+                        value="free" 
+                        checked={selectedCourier==="free"} 
+                        onChange={()=>handleCourierChange("free")} />
+                        <div className="rounded-md border-[0.5px] shadow-1 border-gray-4 py-3.5 px-5 ease-out duration-200 hover:bg-gray-2 hover:border-transparent hover:shadow-none peer-checked:shadow-none peer-checked:border-transparent peer-checked:bg-gray-2">
+                          Pickup di Gerai <strong>AGRES</strong>
+                        </div>
+                    </label>
+                  </div>
                 </div>
               </div>
             </>
