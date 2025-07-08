@@ -62,6 +62,91 @@ export function AccountSettingIcon() {
     </svg>
   );
 }
+export function PickupPointIcon() {
+  return (
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 22 22"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Pin lokasi */}
+      <path
+        d="M11 20C11 20 17 13.5 17 9.5C17 6.18629 14.3137 3.5 11 3.5C7.68629 3.5 5 6.18629 5 9.5C5 13.5 11 20 11 20Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        fill="none"
+      />
+      {/* Titik tengah */}
+      <circle
+        cx="11"
+        cy="9.5"
+        r="2"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        fill="none"
+      />
+    </svg>
+  );
+}
+export function LocationIcon() {
+  return (
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 22 22"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Pin lokasi */}
+      <path
+        d="M11 19C11 19 16 13 16 9.5C16 6.46243 13.5376 4 10.5 4C7.46243 4 5 6.46243 5 9.5C5 13 11 19 11 19Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        fill="none"
+      />
+      {/* Titik tengah */}
+      <circle
+        cx="10.5"
+        cy="9.5"
+        r="2"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        fill="none"
+      />
+    </svg>
+  );
+}
+export function BusinessIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Modern office building */}
+      <rect
+        x="5"
+        y="6"
+        width="12"
+        height="13"
+        rx="1"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        fill="none"
+      />
+      {/* Windows - modern grid pattern */}
+      {/* <rect x="8" y="8" width="2" height="2" stroke="currentColor" strokeWidth="1.5" fill="none"/> */}
+      <rect x="11" y="10" width="3" height="3" stroke="currentColor" strokeWidth="1.1" fill="none"/>
+      <rect x="14" y="10" width="3" height="3" stroke="currentColor" strokeWidth="1.1" fill="none"/>
+      <rect x="8" y="13" width="3" height="3" stroke="currentColor" strokeWidth="1.1" fill="none"/>
+      <rect x="11" y="13" width="3" height="3" stroke="currentColor" strokeWidth="1.1" fill="none"/>
+      <rect x="14" y="13" width="3" height="3" stroke="currentColor" strokeWidth="1.1" fill="none"/>
+      <rect x="8" y="16" width="3" height="3" stroke="currentColor" strokeWidth="1.1" fill="none"/>
+      <rect x="11" y="16" width="3" height="3" stroke="currentColor" strokeWidth="1.1" fill="none"/>
+      <rect x="14" y="16" width="3" height="3" stroke="currentColor" strokeWidth="1.1" fill="none"/>
+      {/* rooftop */}
+      <rect x="7" y="3" width="8" rx="1" height="3" stroke="currentColor" strokeWidth="1.4" fill="none"/>
+    </svg>
+  );
+}
 export function OrdersIcon() {
   return (
     <svg

@@ -12,6 +12,7 @@ import {
   CouponIcon,
   HeroBannerIcon,
   OrdersIcon,
+  BusinessIcon,
   PostIcon,
   ProductIcon,
   ReviewIcon,
@@ -79,7 +80,7 @@ const sidebarMenuData = [
 
   {
     title: "Business Settings",
-    icon: <AccountSettingIcon />,
+    icon: <BusinessIcon />,
     children: [
       {
         title: "Pickup Points",
