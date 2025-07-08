@@ -34,10 +34,12 @@ export async function POST(
   { params }: { params: Promise<{ userId: string }> }
 ) {
   const { userId } = await params;
-  const { address } = await req.json();
+  const { address, city, province } = await req.json();
 
-  if (!userId || !address) {
-    return NextResponse.json('Missing Fields', { status: 400 });
+  console.log(address, city, province);
+
+  if (!address || !city || !province) {
+    return NextResponse.json({ error: "Address, city, and province are required" }, { status: 400 });
   }
 
   // console.log(address);
@@ -46,7 +48,7 @@ export async function POST(
     const data = await prisma.address.create({
       data: {
         ...address,
-        userId,
+        userId
       },
     });
 
@@ -61,20 +63,21 @@ export async function PATCH(
   { params }: { params: Promise<{ userId: string }> }
 ) {
   const { userId } = await params;
-
-  const { address, id } = await req.json();
-
-  if (!userId || !address || !id) {
-    return NextResponse.json('Missing Fields', { status: 400 });
-  }
-
   try {
-    await prisma.address.update({
+    const { address, id, city, province } = await req.json();
+    console.log("Payload:", address, city, province);
+
+    if (!userId || !address || !id) {
+      return NextResponse.json('Missing Fields', { status: 400 });
+    }
+
+    const updated = await prisma.address.update({
       where: { id, userId },
       data: address,
     });
-  } catch (error) {
-    return NextResponse.json('Internal Server Error', { status: 500 });
+    console.log("Updated address:", updated);
+  } catch (e) {
+    console.error("Error di PATCH:", e);
   }
 
   return NextResponse.json('Address updated successfully', { status: 200 });

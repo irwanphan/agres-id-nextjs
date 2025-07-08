@@ -10,6 +10,8 @@ type AddressType = {
   name: string;
   email: string;
   phone: string;
+  province: string;
+  city: string;
   address: {
     address1: string;
     address2: string;
@@ -78,6 +80,16 @@ export function ShippingAddress({ userId }: PropsType) {
               <p className="flex items-center gap-2.5 text-custom-sm">
                 <CallIcon className="shrink-0" />
                 Phone: {data?.phone}
+              </p>
+
+              <p className="flex items-center gap-2.5 text-custom-sm">
+                <MapIcon className="mt-0.5 shrink-0" />
+                Province: {data?.province}
+              </p>
+
+              <p className="flex items-center gap-2.5 text-custom-sm">
+                <MapIcon className="mt-0.5 shrink-0" />
+                City: {data?.city}
               </p>
 
               <p className="flex gap-2.5 text-custom-sm">
