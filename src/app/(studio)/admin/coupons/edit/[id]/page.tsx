@@ -35,7 +35,7 @@ async function EditCouponPage({ params }: Params) {
   const { id } = await params;
   const coupon = await getSingleCoupon(id);
   return (
-    <div className="w-full max-w-3xl mx-auto bg-white border rounded-xl shadow-1 border-gray-3">
+    <div className="w-full bg-white border rounded-xl shadow-1 border-gray-3">
       <div className="px-6 py-5 border-b border-gray-3">
         <h1 className="text-base font-semibold text-dark">Edit Coupon</h1>
       </div>
