@@ -58,7 +58,7 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
   const [selectedProvince, setSelectedProvince] = useState<string>("");
   const [cities, setCities] = useState<City[]>([]);
 
-  console.log('selectedProvince', selectedProvince);
+  // console.log('selectedProvince', selectedProvince);
 
   useEffect(() => {
     async function fetchProvinces() {
@@ -66,7 +66,7 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
         const res = await fetch('/api/location/province');
         const data = await res.json();
         setProvinces(data);
-        console.log('provinces', data);
+        // console.log('provinces', data);
       } catch (error) {
         console.error("Error fetching provinces:", error);
       }

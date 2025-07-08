@@ -36,6 +36,7 @@ async function importPickupPoints() {
         address: values[1]?.trim() || '',
         province: values[2]?.trim() || '',
         city: values[3]?.trim() || '',
+        pinAddress: values[4]?.trim() || '',
         phone: values[5]?.trim() || null,
         latitude: values[6] ? parseFloat(values[6]) : null,
         longitude: values[7] ? parseFloat(values[7]) : null,

@@ -13,3 +13,9 @@ export const getPickupPoints = unstable_cache(
   },
   ['pickup-points'], { tags: ['pickup-points'], revalidate: 60 }
 );
+
+export const getSinglePickupPoint = async (pickupPointId: string) => {
+  return await prisma.pickupPoint.findUnique({
+    where: { id: pickupPointId }
+  });
+};

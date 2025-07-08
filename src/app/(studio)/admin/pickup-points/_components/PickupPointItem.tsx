@@ -6,7 +6,7 @@ import { PickupPoint } from "@/types/pickup-point";
 import { useTransition } from "react";
 import toast from "react-hot-toast";
 import Link from "next/link";
-import { IconMap, IconMapPin2 } from "@tabler/icons-react";
+import { IconMapPin2, IconPencil } from "@tabler/icons-react";
 
 export default function PickupPointItem({ pickupPoint }: { pickupPoint: PickupPoint }) {
   const [isPending, startTransition] = useTransition();
@@ -54,6 +54,12 @@ export default function PickupPointItem({ pickupPoint }: { pickupPoint: PickupPo
       <td className="px-6 py-3 whitespace-nowrap">{pickupPoint.isActive ? "Active" : "Inactive"}</td>
       <td className="px-6 py-3">
         <div className="flex items-center justify-end gap-2.5">
+          <Link
+            href={`/admin/pickup-points/edit/${pickupPoint.id}`}
+            className="p-1.5 border rounded-md text-gray-7  hover:bg-blue-light-6 hover:border-blue-light-4 hover:text-blue size-8 inline-flex items-center justify-center border-gray-3"
+          >
+            <IconPencil className="w-4 h-4" />
+          </Link>
           <button
             aria-label="button for favorite select"
             onClick={handleClick}
