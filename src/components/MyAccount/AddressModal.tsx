@@ -8,11 +8,15 @@ import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Loader from "../Common/Loader";
 import { InputGroup } from "../ui/input";
+import { Province } from "@/types/province";
+import { City } from "@/types/city";
 
 type Input = {
   name: string;
   email: string;
   phone: string;
+  city: string;
+  province: string;
   address: {
     address1: string;
     address2: string;
@@ -38,16 +42,21 @@ const AddressModal = ({
   userId,
   onSubmitSuccess,
 }: PropsType) => {
-  const { register, ...form } = useForm<Input>({
+  const { register, setValue, watch, ...form } = useForm<Input>({
     defaultValues: {
       name: data?.name,
       email: data?.email,
       phone: data?.phone,
+      city: data?.city,
+      province: data?.province,
       address: data?.address,
     },
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  const [provinces, setProvinces] = useState<Province[]>([]);
+  const [selectedProvince, setSelectedProvince] = useState<string>("");
+  const [cities, setCities] = useState<City[]>([]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -59,6 +68,33 @@ const AddressModal = ({
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, closeModal]);
+
+  useEffect(() => {
+    async function fetchProvinces() {
+      try {
+        const res = await fetch('/api/location/province');
+        const data = await res.json();
+        setProvinces(data);
+      } catch (error) {
+        console.error("Error fetching provinces:", error);
+      }
+    }
+    fetchProvinces();
+  }, []);
+
+  useEffect(() => {
+    async function fetchCities() {
+      try {
+        if (!selectedProvince) return setCities([]);
+        const res = await fetch(`/api/location/city?provinceId=${selectedProvince}`);
+        const data = await res.json();
+        setCities(data);
+      } catch (error) {
+        console.error("Error fetching cities:", error);
+      }
+    }
+    fetchCities();
+  }, [selectedProvince]);
 
   useEffect(() => {
     // closing modal while clicking outside
@@ -78,13 +114,19 @@ const AddressModal = ({
   }, [isOpen, closeModal]);
 
   const onSubmit = async (inputData: Input) => {
+    console.log("inputData", inputData);
     if (data === null) {
       setIsLoading(true);
       // create new address
       try {
         await axios.post(`/api/user/${userId}/address`, {
           address: {
-            ...inputData,
+            address: inputData.address,
+            city: inputData.city,
+            province: inputData.province,
+            name: inputData.name,
+            email: inputData.email,
+            phone: inputData.phone,
             type: addressType,
           },
         });
@@ -102,7 +144,14 @@ const AddressModal = ({
       try {
         await axios.patch(`/api/user/${userId}/address`, {
           id: data?.id,
-          address: inputData,
+          address: {
+            name: inputData.name,
+            email: inputData.email,
+            phone: inputData.phone,
+            address: inputData.address,
+            city: inputData.city,
+            province: inputData.province,
+          },
         });
 
         toast.success("Address updated successfully");
@@ -111,7 +160,7 @@ const AddressModal = ({
         if (error instanceof AxiosError) {
           console.log(error.response?.data);
         }
-        toast.error("Failed to update address");
+        toast.error("Failed to update address " + error);
       } finally {
         setIsLoading(false);
       }
@@ -200,6 +249,54 @@ const AddressModal = ({
                     />
                   )}
                 />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-5 mb-5">
+              <div>
+                <label htmlFor="province" className="block text-sm font-normal text-gray-6 mb-1.5">
+                  Provinsi <span className="text-red">*</span>
+                </label>
+                <input
+                  list="province-list" 
+                  id="province" 
+                  {...register("province", {
+                    required: true,
+                    validate: (value: string) =>
+                      provinces.some(province => province.province === value) || "Pilih provinsi yang valid"
+                  })}
+                  type="text" 
+                  name="province" 
+                  className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
+                  placeholder="Silahkan Ketik dan Pilih Provinsi..."
+                  onBlur={() => {
+                    const selected = provinces.find(p => p.province === watch("province"));
+                    // console.log('selected', selected);
+                    setSelectedProvince(selected ? selected.province_id : "");
+                  }}
+                />
+                <datalist id="province-list">
+                  {provinces.map((province) => (
+                    <option key={province.province_id} value={province.province} />
+                  ))}
+                </datalist>
+              </div>
+
+              <div>
+                <label htmlFor="city" className="block text-sm font-normal text-gray-6 mb-1.5">
+                  Kota <span className="text-red">*</span>
+                </label>
+                <select
+                  id="city"
+                  {...register("city", {
+                    required: "Kota is required",
+                  })}
+                  className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
+                >
+                  {cities.map((city) => (
+                    <option key={city.city_id} value={city.city_name}>{city.city_name}</option>
+                  ))}
+                </select>
               </div>
             </div>
 

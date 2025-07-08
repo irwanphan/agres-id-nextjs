@@ -154,14 +154,16 @@ enum AddressType {
 }
 
 model Address {
-  id      String      @id @default(cuid())
-  userId  String
-  name    String
-  email   String
-  phone   String
-  address Json
-  type    AddressType @default(ALL)
-  user    User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id       String      @id @default(cuid())
+  userId   String
+  name     String
+  email    String
+  phone    String
+  province String?
+  city     String?
+  address  Json
+  type     AddressType @default(ALL)
+  user     User        @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Category {
