@@ -5,6 +5,8 @@ import { confirmDialog, successDialog } from "@/utils/confirmDialog";
 import { PickupPoint } from "@/types/pickup-point";
 import { useTransition } from "react";
 import toast from "react-hot-toast";
+import Link from "next/link";
+import { IconMap, IconMapPin2 } from "@tabler/icons-react";
 
 export default function PickupPointItem({ pickupPoint }: { pickupPoint: PickupPoint }) {
   const [isPending, startTransition] = useTransition();
@@ -38,7 +40,17 @@ export default function PickupPointItem({ pickupPoint }: { pickupPoint: PickupPo
       <td className="px-6 py-3 whitespace-nowrap">{pickupPoint.name}</td>
       <td className="px-6 py-3 whitespace-nowrap">{pickupPoint.province}</td>
       <td className="px-6 py-3 whitespace-nowrap">{pickupPoint.city}</td>
-      <td className="px-6 py-3 whitespace-nowrap">{pickupPoint.latitude}, {pickupPoint.longitude}</td>
+      <td className="px-6 py-3 whitespace-nowrap">
+        { pickupPoint.latitude && pickupPoint.longitude && (
+          <Link 
+            href={`https://www.google.com/maps/search/?api=1&query=${pickupPoint.latitude},${pickupPoint.longitude}`} 
+            target="_blank"
+            className="flex items-center gap-1 hover:text-blue transition-colors duration-200"
+          >
+            <IconMapPin2 className="w-4 h-4" /> {pickupPoint.latitude}, {pickupPoint.longitude}
+          </Link>
+        )}
+      </td>
       <td className="px-6 py-3 whitespace-nowrap">{pickupPoint.isActive ? "Active" : "Inactive"}</td>
       <td className="px-6 py-3">
         <div className="flex items-center justify-end gap-2.5">
