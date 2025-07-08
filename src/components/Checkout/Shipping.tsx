@@ -252,7 +252,7 @@ export default function Shipping() {
         <div className="p-6 border-t border-gray-3">
 
           <p className="text-sm text-gray-6 mb-5">Paket dikirim atau diambil sendiri (pickup) di gerai AGRES?</p>
-          <div className="mb-5">
+          <div className="mb-5 flex flex-row gap-5">
             <label className="flex items-center gap-2">
               <input
                 type="radio"
@@ -262,7 +262,9 @@ export default function Shipping() {
                 onChange={() => setIsPickedUp(!isPickedUp)}
                 name="isPickedUp"
               />
-              Dikirim
+              <div className="rounded-md border-[0.5px] shadow-1 border-gray-4 py-2.5 px-4 ease-out duration-200 hover:bg-gray-2 hover:border-transparent hover:shadow-none peer-checked:shadow-none peer-checked:border-transparent peer-checked:bg-gray-2">
+                Dikirim
+              </div>
             </label>
             <label className="flex items-center gap-2">
               <input
@@ -273,13 +275,17 @@ export default function Shipping() {
                 onChange={() => setIsPickedUp(!isPickedUp)}
                 name="isPickedUp"
               />
-              Diambil sendiri (pickup) di gerai AGRES
+              <div className="rounded-md border-[0.5px] shadow-1 border-gray-4 py-2.5 px-4 ease-out duration-200 hover:bg-gray-2 hover:border-transparent hover:shadow-none peer-checked:shadow-none peer-checked:border-transparent peer-checked:bg-gray-2">
+                Diambil sendiri (pickup) di gerai AGRES
+              </div>
             </label>
           </div>
 
+          <hr className="my-5 border-gray-3" />
+
           {/* use pickup point */}
           {isPickedUp && (
-            <div className="mb-5">
+            <div className={`mb-5 transition-all duration-300 ease-out h-auto ${!isPickedUp ? "h-0" : "h-auto"}`}>
               <div className="mt-2">
                 <label className="block text-sm mb-1">Pilih Pickup Point</label>
                 <select
@@ -308,7 +314,7 @@ export default function Shipping() {
           {!isPickedUp && (
             <>
               {/* get destination id from API call */}
-              <div className="mb-5">
+                <div className={`mb-5 transition-all duration-300 ease-out h-auto ${isPickedUp ? "opacity-0" : "opacity-100"}`}>
                 <label htmlFor="destination-city-search" className="block mb-1.5 text-sm text-gray-6">
                   Cari Kota / Kabupaten Tujuan <span className="text-red">*</span>
                   {loadingCitySearch && (
