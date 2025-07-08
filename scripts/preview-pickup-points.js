@@ -11,7 +11,7 @@ function previewPickupPoints() {
     
     // Parse CSV content
     const lines = csvContent.split('\n');
-    const headers = lines[0].split(';');
+    const headers = lines[0].split(';').map(header => header.trim().replace(/\r$/, ''));
     
     console.log('📋 Headers:', headers);
     console.log('📊 Total lines:', lines.length);
@@ -26,7 +26,7 @@ function previewPickupPoints() {
       const line = lines[i].trim();
       if (!line) continue;
       
-      const values = line.split(';');
+      const values = line.split(';').map(value => value.trim().replace(/\r$/, ''));
       
       // Check if we have enough columns
       if (values.length < headers.length) {
@@ -150,15 +150,14 @@ function previewPickupPoints() {
 
 // Run the preview
 if (require.main === module) {
-  previewPickupPoints()
-    .then(() => {
-      console.log('\n🎉 Preview completed!');
-      process.exit(0);
-    })
-    .catch((error) => {
-      console.error('💥 Preview failed:', error);
-      process.exit(1);
-    });
+  try {
+    previewPickupPoints();
+    console.log('\n🎉 Preview completed!');
+    process.exit(0);
+  } catch (error) {
+    console.error('💥 Preview failed:', error);
+    process.exit(1);
+  }
 }
 
 module.exports = { previewPickupPoints }; 

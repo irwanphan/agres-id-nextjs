@@ -14,7 +14,7 @@ async function importPickupPoints() {
     
     // Parse CSV content
     const lines = csvContent.split('\n');
-    const headers = lines[0].split(';');
+    const headers = lines[0].split(';').map(header => header.trim().replace(/\r$/, ''));
     
     console.log('📋 Headers found:', headers);
     
@@ -24,7 +24,7 @@ async function importPickupPoints() {
       const line = lines[i].trim();
       if (!line) continue;
       
-      const values = line.split(';');
+      const values = line.split(';').map(value => value.trim().replace(/\r$/, ''));
       if (values.length < headers.length) {
         console.warn(`⚠️  Skipping line ${i + 1}: insufficient columns`);
         continue;
