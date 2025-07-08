@@ -19,7 +19,7 @@ RajaOngkir Integration
 - [ok] Create options
 - [] Repack using modular option
 - [ok] Test Rajaongkir API
-- [] Fix:checkout doesn't have weight to calculate shipping cost
+- [ok] Fix:checkout doesn't have weight to calculate shipping cost
 
 Shopping Cart Page
 - [ok] Fix: Formatting language and currency
@@ -29,7 +29,7 @@ Checkout Page
 - [ok] Region select box cannot use directional arrow to select region
 - [ok] fix: email is prefilled with the email of the user who is logged in, but checkout is failed with email not filled
 - [] Page for user to check order status based on Order ID
-- [] Calculate total with shipping cost
+- [ok] Calculate total with shipping cost
 - [] "Pickup di Gerai AGRES" option shows Pickup Point selection
 - [] Show map for Pickup Point selection
 - [ok] fix: orders summary, product lines broken when product name is too long
