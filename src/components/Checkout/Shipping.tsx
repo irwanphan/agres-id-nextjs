@@ -139,6 +139,24 @@ export default function Shipping() {
 
   const [loadingCitySearch, setLoadingCitySearch] = useState(false);
 
+  // prefiltered city options for testing
+  const [filteredCityOptions, setFilteredCityOptions] = useState<any[]>([]);
+  const sampleSearchParams = "Jakarta Utara DKI Jakarta"
+  useEffect(() => {
+    const fetchSampleCities = async () => {
+      try {
+        setLoadingCitySearch(true);
+        // const res = await fetch(`/api/shipping/destination?search=${encodeURIComponent(sampleSearchParams)}`);
+        // const data = await res.json();
+        // console.log('data', data.data);
+        // setFilteredCityOptions(data.data || []);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchSampleCities();
+  }, []);
+
   useEffect(() => {
     if (citySearch !== debouncedCitySearch && citySearch.length >= 3) {
       setLoadingCitySearch(true); // Loading aktif saat user mengetik dan sebelum debounce selesai
@@ -252,7 +270,7 @@ export default function Shipping() {
         <div className="p-6 border-t border-gray-3">
 
           <p className="text-sm text-gray-6 mb-5">Paket dikirim atau diambil sendiri (pickup) di gerai AGRES?</p>
-          <div className="mb-5 flex flex-row gap-5">
+          <div className="mb-5 flex flex-col gap-5 md:flex-row">
             <label className="flex items-center gap-2">
               <input
                 type="radio"
@@ -365,30 +383,38 @@ export default function Shipping() {
                   />
                 </div>
                 
-                <label htmlFor="destination-city-search" className="block mb-1.5 text-sm text-gray-6">
-                  Cari Kota / Kabupaten Tujuan <span className="text-red">*</span>
-                  {loadingCitySearch && (
-                    <span className="ml-2 text-blue-500 text-xs">Loading...</span>
-                  )}
-                  {!loadingCitySearch && debouncedCitySearch.length > 2 && (
-                    <span className="ml-2 text-gray-6 text-xs"></span>
-                  )}
-                </label>
-                <input
-                  id="destination-city-search"
-                  className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11 focus:border-blue focus:outline-0 placeholder:text-dark-5 w-full py-2.5 px-4 duration-200 focus:ring-0"
-                  list="destination-city-options"
-                  value={citySearch}
-                  required
-                  onChange={handleCitySearch}
-                  onBlur={handleCitySelect}
-                  placeholder="Mulai cari nama kota atau kabupaten tujuan..."
-                />
-                <datalist id="destination-city-options">
-                  {cityOptions.map(opt => (
-                    <option key={opt.id} value={opt.label} />
-                  ))}
-                </datalist>
+                <div className="mb-5">
+                  <label htmlFor="destination-city-search" className="block mb-1.5 text-sm text-gray-6">
+                    Konfirmasi Ketersediaan Kota Tujuan <span className="text-red">*</span>
+                    {/* {loadingCitySearch && (
+                      <span className="ml-2 text-blue-500 text-xs">Loading...</span>
+                    )}
+                    {!loadingCitySearch && debouncedCitySearch.length > 2 && (
+                      <span className="ml-2 text-gray-6 text-xs"></span>
+                    )} */}
+                  </label>
+                  {/* <input
+                    id="destination-city-search"
+                    className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11 focus:border-blue focus:outline-0 placeholder:text-dark-5 w-full py-2.5 px-4 duration-200 focus:ring-0"
+                    list="destination-city-options"
+                    value={citySearch}
+                    required
+                    onChange={handleCitySearch}
+                    onBlur={handleCitySelect}
+                    placeholder="Mulai cari nama kota atau kabupaten tujuan..."
+                  />
+                  <datalist id="destination-city-options">
+                    {cityOptions.map(opt => (
+                      <option key={opt.id} value={opt.label} />
+                    ))}
+                  </datalist> */}
+                  <select className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11 focus:border-blue focus:outline-0 placeholder:text-dark-5 w-full py-2.5 px-4 duration-200 focus:ring-0">
+                    <option value="">-- Pilih Kota --</option>
+                    {filteredCityOptions.map(opt => (
+                      <option key={opt.id} value={opt.label}>{opt.label}</option>
+                    ))}
+                  </select>
+                </div>
 
                 <div className="mb-5">
                   <Controller
@@ -480,7 +506,7 @@ export default function Shipping() {
                         onChange={()=>handleCourierChange("sicepat")} />
                         { ShippingMethodsCard({method: "sicepat"})}
                     </label>
-                    <label className="flex items-center gap-2">
+                    {/* <label className="flex items-center gap-2">
                       <input 
                         type="radio" 
                         name="courier" 
@@ -490,7 +516,7 @@ export default function Shipping() {
                         <div className="rounded-md border-[0.5px] shadow-1 border-gray-4 py-3.5 px-5 ease-out duration-200 hover:bg-gray-2 hover:border-transparent hover:shadow-none peer-checked:shadow-none peer-checked:border-transparent peer-checked:bg-gray-2">
                           Pickup di Gerai <strong>AGRES</strong>
                         </div>
-                    </label>
+                    </label> */}
                   </div>
                 </div>
               </div>
