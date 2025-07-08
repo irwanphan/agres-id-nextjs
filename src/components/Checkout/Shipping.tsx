@@ -12,6 +12,7 @@ import { formatPrice } from "@/utils/formatPrice";
 import { ShippingCalculateDomesticCostResponse } from "@/types";
 import { useSession } from "next-auth/react";
 import { formatPackageWeightKg } from "@/utils/formatPackageWeight";
+import { useDebounce } from "use-debounce";
 
 type AddressType = {
   name: string;
@@ -30,6 +31,7 @@ export default function Shipping() {
   const { register, control, setValue, watch } = useCheckoutForm();
   const shipToDifferentAddress = watch("shipToDifferentAddress");
   const shipToDestination = watch("shipping.destination");
+  
   const [selectedCourier, setSelectedCourier] = useState<string>("");
   const [shippingCost, setShippingCost] = useState<number|null>(null);
   const [loadingOngkir, setLoadingOngkir] = useState(false);
@@ -37,7 +39,7 @@ export default function Shipping() {
   const [citySearch, setCitySearch] = useState("");
   const [cityOptions, setCityOptions] = useState<any[]>([]);
   const [destinationCityId, setDestinationCityId] = useState<string>("");
-
+  const [debouncedCitySearch] = useDebounce(citySearch, 2000); // 2000ms debounce
   const shippingAddressOption = watch("shippingAddressOption");
   const billingAddress = watch("billing.address");
   const billingPhone = watch("billing.phone");
@@ -46,8 +48,8 @@ export default function Shipping() {
   const packageWeight = watch("shipping.weight");
 
   // console.log(watch("shipToDifferentAddress"));
-  console.log("shipToDestination", shipToDestination);
-  console.log("packageWeight", packageWeight);
+  // console.log("shipToDestination", shipToDestination);
+  // console.log("packageWeight", packageWeight);
   
   // testing purpose only
   // useEffect(() => {
@@ -92,16 +94,49 @@ export default function Shipping() {
     setCitySearch(value);
     if (value.length < 3) {
       setCityOptions([]);
+      // return;
+    }
+    // try {
+    //   const res = await fetch(`/api/shipping/destination?search=${encodeURIComponent(value)}`);
+    //   const data = await res.json();
+    //   setCityOptions(data.data || []);
+    // } catch (err) {
+    //   setCityOptions([]);
+    // }
+  };
+
+  const [loadingCitySearch, setLoadingCitySearch] = useState(false);
+
+  useEffect(() => {
+    if (citySearch !== debouncedCitySearch && citySearch.length >= 3) {
+      setLoadingCitySearch(true); // Loading aktif saat user mengetik dan sebelum debounce selesai
+    }
+  }, [citySearch, debouncedCitySearch]);
+
+  useEffect(() => {
+    console.log('useEffect triggered', debouncedCitySearch);
+    if (debouncedCitySearch.length < 3) {
+      setCityOptions([]);
+      setLoadingCitySearch(false); // Pastikan loading mati jika input kurang dari 3
       return;
     }
-    try {
-      const res = await fetch(`/api/shipping/destination?search=${encodeURIComponent(value)}`);
-      const data = await res.json();
-      setCityOptions(data.data || []);
-    } catch (err) {
-      setCityOptions([]);
-    }
-  };
+    let cancelled = false;
+    const fetchCities = async () => {
+      try {
+        setLoadingCitySearch(true);
+        // const res = await fetch(`/api/shipping/destination?search=${encodeURIComponent(debouncedCitySearch)}`);
+        // const data = await res.json();
+        // if (!cancelled) setCityOptions(data.data || []);
+        if (!cancelled) setLoadingCitySearch(false);
+        console.log('debouncedCitySearch', debouncedCitySearch);
+      } catch (err) {
+        if (!cancelled) setCityOptions([]);
+        if (!cancelled) setLoadingCitySearch(false);
+      }
+    };
+    fetchCities();
+    return () => { cancelled = true; };
+  }, [debouncedCitySearch]);
 
   // Handler saat user memilih kota dari datalist
   const handleCitySelect = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -174,6 +209,12 @@ export default function Shipping() {
           <div className="mb-5">
             <label htmlFor="destination-city-search" className="block mb-1.5 text-sm text-gray-6">
               Cari Kota / Kabupaten Tujuan <span className="text-red">*</span>
+              {loadingCitySearch && (
+                <span className="ml-2 text-blue-500 text-xs">Loading...</span>
+              )}
+              {!loadingCitySearch && debouncedCitySearch.length > 2 && (
+                <span className="ml-2 text-gray-6 text-xs"></span>
+              )}
             </label>
             <input
               id="destination-city-search"
@@ -305,18 +346,7 @@ export default function Shipping() {
 
           <div className="mb-5">
             <label className="block mb-1.5 text-sm text-gray-6">Kurir ({formatPackageWeightKg(packageWeight || 0)})</label>
-            <div className="grid grid-cols-2 gap-4">
-              <label className="flex items-center gap-2">
-                <input 
-                  type="radio" 
-                  name="courier" 
-                  value="free" 
-                  checked={selectedCourier==="free"} 
-                  onChange={()=>handleCourierChange("free")} />
-                  <div className="rounded-md border-[0.5px] shadow-1 border-gray-4 py-3.5 px-5 ease-out duration-200 hover:bg-gray-2 hover:border-transparent hover:shadow-none peer-checked:shadow-none peer-checked:border-transparent peer-checked:bg-gray-2">
-                    Pickup di Gerai <strong>AGRES</strong>
-                  </div>
-              </label>
+            <div className="grid grid-cols-1 w-full md:grid-cols-2 gap-4">
               <label className="flex items-center gap-2">
                 <input 
                   type="radio" 
@@ -334,6 +364,17 @@ export default function Shipping() {
                   checked={selectedCourier==="sicepat"} 
                   onChange={()=>handleCourierChange("sicepat")} />
                   { ShippingMethodsCard({method: "sicepat"})}
+              </label>
+              <label className="flex items-center gap-2">
+                <input 
+                  type="radio" 
+                  name="courier" 
+                  value="free" 
+                  checked={selectedCourier==="free"} 
+                  onChange={()=>handleCourierChange("free")} />
+                  <div className="rounded-md border-[0.5px] shadow-1 border-gray-4 py-3.5 px-5 ease-out duration-200 hover:bg-gray-2 hover:border-transparent hover:shadow-none peer-checked:shadow-none peer-checked:border-transparent peer-checked:bg-gray-2">
+                    Pickup di Gerai <strong>AGRES</strong>
+                  </div>
               </label>
             </div>
             {loadingOngkir && <div className="text-sm text-gray-500 mt-2">Menghitung ongkir...</div>}
