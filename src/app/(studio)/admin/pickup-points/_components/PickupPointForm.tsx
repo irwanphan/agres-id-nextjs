@@ -14,6 +14,7 @@ import { City } from "@/types/city";
 interface PickupPointInput {
   name: string;
   address: string;
+  pinAddress: string;
   city: string;
   province: string;
   phone: string | null;
@@ -40,6 +41,7 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
     defaultValues: {
       name: pickupPointItem?.name || "",
       address: pickupPointItem?.address || "",
+      pinAddress: pickupPointItem?.pinAddress || "",
       city: pickupPointItem?.city || "",
       province: pickupPointItem?.province || "",
       phone: pickupPointItem?.phone || "",
@@ -99,6 +101,7 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
       const formData = new FormData();
       formData.append("name", data.name);
       formData.append("address", data.address);
+      formData.append("pinAddress", data.pinAddress);
       formData.append("city", data.city);
       formData.append("province", data.province);
       formData.append("phone", data.phone || "");
@@ -193,27 +196,6 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
           />
         </div>
 
-        {/* address Input */}
-        <div>
-          <Controller
-            control={control}
-            name="address"
-            rules={{ required: false }}
-            render={({ field }) => (
-              <div className="w-full">
-                <InputGroup
-                  label="Alamat"
-                  type="text"
-                  required
-                  name={field.name}
-                  value={field.value ?? ""}
-                  onChange={field.onChange}
-                />
-              </div>
-            )}
-          />
-        </div>
-
         <div className="grid grid-cols-2 gap-5">
           <div>
             <label htmlFor="province" className="block text-sm font-normal text-gray-6 mb-1.5">
@@ -253,6 +235,47 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
             setValue={setValue}
           />
         </div>
+
+        {/* address Input */}
+        <div>
+          <Controller
+            control={control}
+            name="address"
+            rules={{ required: false }}
+            render={({ field }) => (
+              <div className="w-full">
+                <InputGroup
+                  label="Alamat"
+                  type="text"
+                  required
+                  name={field.name}
+                  value={field.value ?? ""}
+                  onChange={field.onChange}
+                />
+              </div>
+            )}
+          />
+        </div>
+
+        {/* pinAddress Input */}
+        <div>
+          <Controller
+            control={control}
+            name="pinAddress"
+            rules={{ required: false }}
+            render={({ field }) => (
+              <div className="w-full">
+                <InputGroup
+                  label="Alamat Pencarian / Pin Google Maps"
+                  type="text"
+                  name={field.name}
+                  value={field.value ?? ""}
+                  onChange={field.onChange}
+                />
+              </div>
+            )}
+          />
+        </div>        
 
         <div className="grid grid-cols-2 gap-5">
           <Controller

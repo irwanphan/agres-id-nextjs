@@ -15,6 +15,7 @@ export async function createPickupPoint(formData: FormData) {
     // get form data
     const name = formData.get("name") as string;
     const address = formData.get("address") as string;
+    const pinAddress = formData.get("pinAddress") as string;
     const city = formData.get("city") as string;
     const province = formData.get("province") as string;
     const phone = formData.get("phone") as string;
@@ -47,6 +48,7 @@ export async function createPickupPoint(formData: FormData) {
       data: {
         name,
         address,
+        pinAddress,
         city,
         province,
         phone,

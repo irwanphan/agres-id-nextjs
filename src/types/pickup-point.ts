@@ -2,6 +2,7 @@ export type PickupPoint = {
   id: string;
   name: string;
   address: string;
+  pinAddress: string | null;
   city: string;
   province: string;
   phone: string | null;
