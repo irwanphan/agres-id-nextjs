@@ -47,6 +47,16 @@ export default function Shipping() {
 
   const packageWeight = watch("shipping.weight");
 
+  const [destinationCity, setDestinationCity] = useState<any>({
+    id: "",
+    label: "",
+    province_name: "",
+    district_name: "",
+    subdistrict_name: "",
+    city_name: "",
+    zip_code: "",
+  });
+
   // console.log(watch("shipToDifferentAddress"));
   // console.log("shipToDestination", shipToDestination);
   // console.log("packageWeight", packageWeight);
@@ -96,13 +106,6 @@ export default function Shipping() {
       setCityOptions([]);
       // return;
     }
-    // try {
-    //   const res = await fetch(`/api/shipping/destination?search=${encodeURIComponent(value)}`);
-    //   const data = await res.json();
-    //   setCityOptions(data.data || []);
-    // } catch (err) {
-    //   setCityOptions([]);
-    // }
   };
 
   const [loadingCitySearch, setLoadingCitySearch] = useState(false);
@@ -114,7 +117,6 @@ export default function Shipping() {
   }, [citySearch, debouncedCitySearch]);
 
   useEffect(() => {
-    console.log('useEffect triggered', debouncedCitySearch);
     if (debouncedCitySearch.length < 3) {
       setCityOptions([]);
       setLoadingCitySearch(false); // Pastikan loading mati jika input kurang dari 3
@@ -124,11 +126,13 @@ export default function Shipping() {
     const fetchCities = async () => {
       try {
         setLoadingCitySearch(true);
-        // const res = await fetch(`/api/shipping/destination?search=${encodeURIComponent(debouncedCitySearch)}`);
-        // const data = await res.json();
-        // if (!cancelled) setCityOptions(data.data || []);
+        const res = await fetch(`/api/shipping/destination?search=${encodeURIComponent(debouncedCitySearch)}`);
+        const data = await res.json();
+        if (!cancelled) setCityOptions(data.data || []);
         if (!cancelled) setLoadingCitySearch(false);
-        console.log('debouncedCitySearch', debouncedCitySearch);
+        // console.log('debouncedCitySearch', debouncedCitySearch);
+        // console.log('res', res);
+        // console.log('data', data.data);
       } catch (err) {
         if (!cancelled) setCityOptions([]);
         if (!cancelled) setLoadingCitySearch(false);
@@ -143,7 +147,16 @@ export default function Shipping() {
     const label = e.target.value;
     const found = cityOptions.find(opt => opt.label === label);
     if (found) {
+      // console.log('found', found);
+      /* city_name: "JAKARTA PUSAT"
+         district_name: "SAWAH BESAR"
+         id: 17625
+         label: "MANGGA DUA SELATAN, SAWAH BESAR, JAKARTA PUSAT, DKI JAKARTA, 10730"
+         province_name: "DKI JAKARTA"
+         subdistrict_name: "MANGGA DUA SELATAN"
+         zip_code: "10730" */
       setDestinationCityId(String(found.id));
+      setDestinationCity(found);
       setValue("shipping.destination", found.label);
     }
   };
