@@ -283,7 +283,11 @@ export default function Shipping() {
               <div className="mt-2">
                 <label className="block text-sm mb-1">Pilih Pickup Point</label>
                 <select
-                  className="w-full rounded border px-3 py-2"
+                  className="w-full py-2.5 pl-4 pr-8 duration-200 
+                  rounded-lg border cursor-pointer
+                  placeholder:text-sm text-sm placeholder:font-normal placeholder:text-dark-5 
+                  border-gray-3 h-11 focus:border-blue focus:outline-0 focus:ring-0
+                  "
                   value={selectedPickupPoint}
                   onChange={e => handlePickupPointChange(e)}
                   required
@@ -293,7 +297,7 @@ export default function Shipping() {
                     .filter(point => point.city.toLowerCase().includes(pickupPointCity.toLowerCase()))
                     .map((point: PickupPoint) => (
                       <option key={point.id} value={point.id}>
-                        {point.name} - {point.city}, {point.province}
+                        {point.name}-{point.address}, {point.city}, {point.province}
                       </option>
                     ))}
                 </select>
