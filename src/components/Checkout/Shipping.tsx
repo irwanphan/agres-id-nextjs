@@ -61,17 +61,39 @@ export default function Shipping() {
     zip_code: "",
   });
   
+  // HANDLE PICKUP OPTION
+  // temporary get city from billing address
+  const pickupPointCity = watch("billing.city");
   const [pickupPoints, setPickupPoints] = useState<PickupPoint[]>([]);
   const [selectedPickupPoint, setSelectedPickupPoint] = useState<string>("");
 
-  // console.log(watch("shipToDifferentAddress"));
-  // console.log("shipToDestination", shipToDestination);
-  // console.log("packageWeight", packageWeight);
+  useEffect(() => {
+    async function fetchPickupPoints() {
+      try {
+        if (isPickedUp) {
+          const res = await fetch("/api/pickup-points");
+          const data = await res.json();
+          setPickupPoints(Array.isArray(data) ? data : []);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    fetchPickupPoints();
+  }, [isPickedUp]);
   
-  // testing purpose only
-  // useEffect(() => {
-  //   setValue("shipping.destination", 'Jalan-jalan Ke Puncak Gunung, Tinggi 2 kilometer');
-  // }, [setValue]);
+  const handlePickupPointChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedPickupPoint(e.target.value);
+    setValue("shipping.pickupPointId", e.target.value); // jika pakai react-hook-form
+    setValue('shipping.destination', pickupPoints.find(point => point.id === e.target.value)?.name || "");
+    setValue("shippingMethod.name", "Pickup");
+    setValue("shippingMethod.price", 0);
+    setValue("shippingMethod.courier", "free");
+    setValue("shippingMethod.service", "Pickup");
+    setValue("shippingMethod.etd", "1-2 hari");
+    setShippingCost(0);
+  };
+
 
   useEffect(() => {
     if (!session.data?.user?.id) return;
@@ -208,20 +230,7 @@ export default function Shipping() {
     setLoadingOngkir(false);
   };
 
-  useEffect(() => {
-    async function fetchPickupPoints() {
-      try {
-        if (selectedCourier === "free") {
-          const res = await fetch("/api/pickup-points");
-          const data = await res.json();
-          setPickupPoints(Array.isArray(data) ? data : []);
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    }
-    fetchPickupPoints();
-  }, [selectedCourier]);
+  
 
   return (
     <div className="bg-white shadow-1 rounded-[10px] break-inside-avoid">
@@ -268,6 +277,7 @@ export default function Shipping() {
             </label>
           </div>
 
+          {/* use pickup point */}
           {isPickedUp && (
             <div className="mb-5">
               <div className="mt-2">
@@ -275,16 +285,12 @@ export default function Shipping() {
                 <select
                   className="w-full rounded border px-3 py-2"
                   value={selectedPickupPoint}
-                  onChange={e => {
-                    setSelectedPickupPoint(e.target.value);
-                    setValue("shipping.pickupPointId", e.target.value); // jika pakai react-hook-form
-                    setValue('shipping.destination', pickupPoints.find(point => point.id === e.target.value)?.name || "");
-                  }}
+                  onChange={e => handlePickupPointChange(e)}
                   required
                 >
                   <option value="">-- Pilih Pickup Point --</option>
                   {pickupPoints
-                    .filter(point => point.city.toLowerCase().includes(destinationCity.city_name.toLowerCase()))
+                    .filter(point => point.city.toLowerCase().includes(pickupPointCity.toLowerCase()))
                     .map((point: PickupPoint) => (
                       <option key={point.id} value={point.id}>
                         {point.name} - {point.city}, {point.province}
