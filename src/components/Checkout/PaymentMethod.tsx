@@ -125,7 +125,7 @@ function PaymentMethodCard({ method }: CardProps) {
       },
     },
     manual: {
-      name: "COD / Konfirmasi Manual",
+      name: "Konfirmasi Pembayaran Manual",
       image: {
         src: "/images/checkout/cash.svg",
         width: 21,

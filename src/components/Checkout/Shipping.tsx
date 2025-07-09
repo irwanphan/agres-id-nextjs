@@ -70,6 +70,8 @@ export default function Shipping() {
     setSelectedPickupPoint(e.target.value);
     setValue("shipping.pickupPointId", e.target.value); // jika pakai react-hook-form
     setValue('shipping.destination', pickupPoints.find(point => point.id === e.target.value)?.name || "");
+    setValue("shipping.address.address1", pickupPoints.find(point => point.id === e.target.value)?.address || "");
+    setValue("shipping.city", pickupPoints.find(point => point.id === e.target.value)?.city || "");
     setValue("shippingMethod.name", "pickup");
     setValue("shippingMethod.price", 0);
     setValue("shippingMethod.courier", "pickup");
