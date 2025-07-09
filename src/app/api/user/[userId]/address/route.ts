@@ -33,18 +33,16 @@ export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ userId: string }> }
 ) {
-  console.log('call post address');
   const { userId } = await params;
   const { addressBundle } = await req.json();
-  console.log('addressBundle: ', addressBundle)
   const { address, city, province, zipCode, name, email, phone, type } = addressBundle;
 
+  // add userId to addressBundle
   const submitData = {
     userId,
     ...addressBundle
   }
-  console.log('submitData: ', submitData)
-
+  // check if all fields are filled from addressBundle destructured
   if (!address || !city || !province || !zipCode || !name || !email || !phone || !type) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
@@ -70,18 +68,22 @@ export async function PATCH(
   const { userId } = await params;
   try {
     const { addressBundle, id } = await req.json();
-    console.log("Payload:", addressBundle, id);
-
     const { address, city, province, zipCode, name, email, phone, type } = addressBundle;
 
+    // check if all fields are filled from addressBundle destructured
     if (!userId || !address || !id || !city || !province || !zipCode || !name || !email || !phone || !type) {
       return NextResponse.json('Missing Fields', { status: 400 });
     }
+    // submitted data is addressBundle without userId
+    const submitData = {
+      ...addressBundle,
+    }
 
+    // userId amd id is used as condition to update address
     const updated = await prisma.address.update({
       where: { id, userId },
       data: {
-        ...addressBundle,
+        ...submitData,
       },
     });
     // console.log("Updated address:", updated);
