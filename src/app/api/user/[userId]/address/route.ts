@@ -36,13 +36,13 @@ export async function POST(
   const { userId } = await params;
   const { address, city, province, zipCode } = await req.json();
 
-  // console.log(address, city, province);
+  console.log(address, city, province);
 
   if (!address || !city || !province || !zipCode) {
     return NextResponse.json({ error: "Address, city, province, and zipCode are required" }, { status: 400 });
   }
 
-  // console.log(address);
+  console.log(address);
 
   try {
     const data = await prisma.address.create({
@@ -65,7 +65,7 @@ export async function PATCH(
   const { userId } = await params;
   try {
     const { address, id, city, province } = await req.json();
-    // console.log("Payload:", address, city, province);
+    console.log("Payload:", address, id, city, province);
 
     if (!userId || !address || !id) {
       return NextResponse.json('Missing Fields', { status: 400 });

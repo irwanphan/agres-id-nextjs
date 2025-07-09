@@ -49,8 +49,8 @@ export default function Billing() {
   const loadedProvinceId = provinces.find(p => p.province === addressData?.province)?.province_id;
   const loadedCityId = cities.find(c => c.city_name === addressData?.city)?.city_id;
   useEffect(() => {
-    if (addressData && session.data?.user?.name) {
-      const { firstName, lastName } = splitName(session.data.user.name);
+    if (addressData && session.data?.user) {
+      const { firstName, lastName } = splitName(session.data.user.name || "");
       setValue("billing.firstName", firstName);
       setValue("billing.lastName", lastName);
       setValue("billing.phone", addressData.phone || "");
