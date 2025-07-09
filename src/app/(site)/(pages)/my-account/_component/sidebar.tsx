@@ -18,7 +18,7 @@ export default function Sidebar() {
   const { data: session } = useSession();
 
   return (
-    <div className="w-full md:col-span-3 ">
+    <div className="w-full col-span-12 md:col-span-3 ">
       <div className="flex bg-white md:flex-col rounded-xl shadow-1">
         <div className="flex items-center gap-3 p-4 border-b border-gray-3">
           <div className="overflow-hidden rounded-full bg-red-light-5">
@@ -40,7 +40,7 @@ export default function Sidebar() {
           </div>
         </div>
 
-        <div className="p-4 xl:p-6">
+        <div className="p-4 md:p-6">
           <div className="
             flex w-full flex-row gap-1 md:flex-nowrap md:flex-col
             fixed bottom-0 left-0 right-0 p-2 bg-white
