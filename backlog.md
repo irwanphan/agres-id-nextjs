@@ -43,6 +43,7 @@ Checkout Page
 - [ok] fix: count weight and dimension of product variant
 - [] fix: product variant missing weight and dimension in db
 - [ok] patch checkout page into 2 route: to be shipped and to be picked up
+- [] fix: billing emaul should be the same as login account email
 
 RBAC / Fine Grained Access Control
 - [] Add RBAC / Fine Grained Access Control
@@ -58,6 +59,8 @@ Admin Page
 User Account Management Page
 - [ok] Add Join Date to User Account Management Page, show in Sidebar
 - [ok] Change Address to Json with Address1 and Address2 on User Account Management Page
+- [] fix: billing email should be the same as login account email
+- [] fix: update user login email also update billing email
 
 Auth
 - [ok] fix: after success login, user is being redirected, but no information is shown on the page when loading and might confuse users

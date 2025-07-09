@@ -21,11 +21,11 @@ const CheckoutSuccess = ({ amount, bankInfo }: { amount: string; bankInfo?: stri
   }, [clearCart]);
 
   return (
-    <section className="overflow-hidden py-20 bg-gray-2">
+    <section className="overflow-hidden pt-5 pb-20 bg-gray-2">
       <div className="max-w-7xl w-full mx-auto px-4 sm:px-8 xl:px-0">
         {loading ? (
           <>
-            <div className="bg-white rounded-xl shadow-1 px-4 py-10 sm:py-15 lg:py-20 xl:py-25">
+            <div className="bg-white rounded-xl shadow-1 px-4 py-10 sm:py-8 lg:py-10 xl:py-25">
               <div className="text-center">
                 <h1 className="font-bold text-blue text-4xl lg:text-[45px] lg:leading-[57px] mb-5">
                   Successful!
@@ -69,7 +69,7 @@ const CheckoutSuccess = ({ amount, bankInfo }: { amount: string; bankInfo?: stri
           </>
         ) : (
           <>
-            <div className="bg-white rounded-xl shadow-1 px-4 py-10 sm:py-15 lg:py-20 xl:py-25">
+            <div className="bg-white rounded-xl shadow-1 px-4 py-10 sm:py-8 lg:py-10 xl:py-25">
               <div className="text-center">
                 <h1 className="font-bold text-blue text-4xl lg:text-[45px] lg:leading-[57px] mb-5">
                   Successful!

@@ -1,15 +1,17 @@
 "use client";
 
-import { XIcon } from "@/assets/icons";
-import cn from "@/utils/cn";
-import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import axios, { AxiosError } from "axios";
+import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
+import cn from "@/utils/cn";
 import Loader from "../Common/Loader";
+import { XIcon } from "@/assets/icons";
 import { InputGroup } from "../ui/input";
 import { Province } from "@/types/province";
 import { City } from "@/types/city";
+import { IconDeviceFloppy } from "@tabler/icons-react";
 
 type AddressInputForm = {
   name: string;
@@ -49,15 +51,25 @@ const AddressModal = ({
       email: data?.email,
       phone: data?.phone,
       city: data?.city,
+      zipCode: data?.zipCode,
       province: data?.province,
       address: data?.address,
     },
   });
 
+  const { data: session } = useSession();
+  const userEmail = session?.user?.email || "";
+
   const [isLoading, setIsLoading] = useState(false);
   const [provinces, setProvinces] = useState<Province[]>([]);
   const [selectedProvince, setSelectedProvince] = useState<string>("");
   const [cities, setCities] = useState<City[]>([]);
+
+  useEffect(() => {
+    if (addressType === "BILLING" && data?.email !== userEmail) {
+      setValue("email", userEmail);
+    }
+  }, [addressType, data?.email, userEmail, setValue]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -115,7 +127,7 @@ const AddressModal = ({
   }, [isOpen, closeModal]);
 
   const onSubmit = async (inputData: AddressInputForm) => {
-    console.log("inputData", inputData);
+    // console.log("inputData", inputData);
     if (data === null) {
       setIsLoading(true);
       // create new address
@@ -125,6 +137,7 @@ const AddressModal = ({
             address: inputData.address,
             city: inputData.city,
             province: inputData.province,
+            zipCode: inputData.zipCode,
             name: inputData.name,
             email: inputData.email,
             phone: inputData.phone,
@@ -153,6 +166,7 @@ const AddressModal = ({
             city: inputData.city,
             province: inputData.province,
             zipCode: inputData.zipCode,
+            type: addressType,
           },
         });
 
@@ -212,7 +226,7 @@ const AddressModal = ({
               </div>
             </div>
 
-            <div className="flex flex-col gap-5 mb-5 lg:flex-row sm:gap-8">
+            <div className="flex flex-col gap-5 mb-5 md:flex-row">
               <div className="w-full">
                 <Controller
                   control={form.control}
@@ -247,6 +261,7 @@ const AddressModal = ({
                       onChange={field.onChange}
                       error={!!fieldState.error}
                       errorMessage={fieldState.error?.message}
+                      readOnly={addressType === "BILLING"}
                       required
                     />
                   )}
@@ -284,7 +299,7 @@ const AddressModal = ({
                 </datalist>
               </div>
 
-              <div className="flex flex-col gap-5 mb-5 lg:flex-row sm:gap-8">
+              <div className="flex flex-col gap-5 md:flex-row">
                 <div className="w-full">
                   <label htmlFor="city" className="block text-sm font-normal text-gray-6 mb-1.5">
                     Kota <span className="text-red">*</span>
@@ -369,7 +384,7 @@ const AddressModal = ({
               )}
               disabled={isLoading}
             >
-              Save Changes {isLoading && <Loader />}
+              <IconDeviceFloppy stroke={1.5} /> Save Changes {isLoading && <Loader />}
             </button>
           </form>
         </div>
