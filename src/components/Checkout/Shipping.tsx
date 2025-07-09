@@ -131,25 +131,41 @@ export default function Shipping() {
   const [filteredCityOptions, setFilteredCityOptions] = useState<any[]>([]);
   const citySearchParams = `${watch("shipping.city") || ""} ${watch("shipping.province") || ""} ${watch("shipping.zipCode") || ""}`;
   const [debouncedCitySearchParam] = useDebounce(citySearchParams, 1500); // 1500ms debounce
-  useEffect(() => {
-    const fetchSampleCities = async () => {     
-      try {
-        if (debouncedCitySearchParam.trim().length > 0) {
-          setLoadingCitySearch(true);
-          console.log('citySearchParams', citySearchParams);
-          // const res = await fetch(`/api/shipping/destination?search=${encodeURIComponent(citySearchParams)}`);
-          // const data = await res.json();
-          // console.log('data', data.data);
-          // setFilteredCityOptions(data.data || []);
-        }
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoadingCitySearch(false);
+  // useEffect(() => {
+  //   const fetchSampleCities = async () => {     
+  //     try {
+  //       if (debouncedCitySearchParam.trim().length > 0) {
+  //         setLoadingCitySearch(true);
+  //         console.log('citySearchParams', citySearchParams);
+  //         // const res = await fetch(`/api/shipping/destination?search=${encodeURIComponent(citySearchParams)}`);
+  //         // const data = await res.json();
+  //         // console.log('data', data.data);
+  //         // setFilteredCityOptions(data.data || []);
+  //       }
+  //     } catch (err) {
+  //       console.error(err);
+  //     } finally {
+  //       setLoadingCitySearch(false);
+  //     }
+  //   };
+  //   fetchSampleCities();
+  // }, [debouncedCitySearchParam]);
+
+  const handleFetchCityOptions = async () => {
+    try {
+      if (debouncedCitySearchParam.trim().length > 0) {
+        console.log('citySearchParams', citySearchParams);
+        setLoadingCitySearch(true);
+        const res = await fetch(`/api/shipping/destination?search=${encodeURIComponent(debouncedCitySearchParam)}`);
+        const data = await res.json();
+        setFilteredCityOptions(data.data || []);
       }
-    };
-    fetchSampleCities();
-  }, [debouncedCitySearchParam]);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoadingCitySearch(false);
+    }
+  }
 
 
   /* HANDLE CITY SEARCH USING TEXT INPUT // no longer used, keep temporarily for testing */
@@ -406,8 +422,6 @@ export default function Shipping() {
                           type="text"
                           label="Provinsi Tujuan"
                           placeholder="Provinsi Tujuan"
-                          // required
-                          // name="shipping.province"
                           value={field.value !== undefined ? field.value : ""}
                           onChange={field.onChange}
                         />
@@ -424,8 +438,6 @@ export default function Shipping() {
                           type="text"
                           label="Kota Tujuan"
                           placeholder="Kota Tujuan"
-                          // required
-                          // name="shipping.province"
                           value={field.value !== undefined ? field.value : ""}
                           onChange={field.onChange}
                         />
@@ -442,8 +454,6 @@ export default function Shipping() {
                           type="text"
                           label="Kode Pos"
                           placeholder="Kode Pos"
-                          // required
-                          // name="shipping.province"
                           value={field.value !== undefined ? field.value : ""}
                           onChange={field.onChange}
                         />
@@ -455,9 +465,10 @@ export default function Shipping() {
                 <div className="mb-5">
                   <label htmlFor="destination-city-search" className="block mb-1.5 text-sm text-gray-6">
                     Konfirmasi Ketersediaan Kota Tujuan <span className="text-red">*</span>
-                    {/* {loadingCitySearch && (
+                    {loadingCitySearch && (
                       <span className="ml-2 text-blue-500 text-xs">Loading...</span>
-                    )}
+                      )}
+                    {/* 
                     {!loadingCitySearch && debouncedCitySearch.length > 2 && (
                       <span className="ml-2 text-gray-6 text-xs"></span>
                     )} */}
@@ -477,14 +488,18 @@ export default function Shipping() {
                       <option key={opt.id} value={opt.label} />
                     ))}
                   </datalist> */}
-                  <select className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11 focus:border-blue focus:outline-0 placeholder:text-dark-5 w-full py-2.5 px-4 duration-200 focus:ring-0">
+                  <select 
+                    id="destination-city-search"
+                    className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11 focus:border-blue focus:outline-0 placeholder:text-dark-5 w-full py-2.5 px-4 duration-200 focus:ring-0"
+                    onFocus={handleFetchCityOptions}
+                  >
                     <option value="">-- Pilih Kota Destinasi --</option>
-                    { loadingCitySearch && filteredCityOptions.length > 0 && (
+                    { !loadingCitySearch && filteredCityOptions.length > 0 && (
                       filteredCityOptions.map(opt => (
                         <option key={opt.id} value={opt.label}>{opt.label}</option>
                       ))
                     )}
-                    { loadingCitySearch && (
+                    {loadingCitySearch && (
                       <option value="loading" disabled>Loading...</option>
                     )}
                     { !loadingCitySearch && filteredCityOptions.length === 0 && (
