@@ -20,6 +20,8 @@ type AddressType = {
   name: string;
   email: string;
   phone: string;
+  city: string;
+  province: string;
   address: {
     address1: string;
     address2: string;
@@ -31,26 +33,17 @@ export default function Shipping() {
   const [dropdown, setDropdown] = useState(true);
   const session = useSession();
   const [isPickedUp, setIsPickedUp] = useState(false);
-  
   const { register, control, setValue, watch } = useCheckoutForm();
+  
   const shipToDifferentAddress = watch("shipToDifferentAddress");
   const shipToDestination = watch("shipping.destination");
-  
+  // HANDLE SHIPPING COST
+  const packageWeight = watch("shipping.weight");
   const [selectedCourier, setSelectedCourier] = useState<string>("");
   const [shippingCost, setShippingCost] = useState<number|null>(null);
   const [loadingOngkir, setLoadingOngkir] = useState(false);
-  const [addressData, setAddressData] = useState<AddressType>();
-  const [citySearch, setCitySearch] = useState("");
-  const [cityOptions, setCityOptions] = useState<any[]>([]);
+  // HANDLE DESTINATION CITY
   const [destinationCityId, setDestinationCityId] = useState<string>("");
-  const [debouncedCitySearch] = useDebounce(citySearch, 2000); // 2000ms debounce
-  const shippingAddressOption = watch("shippingAddressOption");
-  const billingAddress = watch("billing.address");
-  const billingPhone = watch("billing.phone");
-  const billingEmail = watch("billing.email");
-
-  const packageWeight = watch("shipping.weight");
-
   const [destinationCity, setDestinationCity] = useState<any>({
     id: "",
     label: "",
@@ -66,7 +59,7 @@ export default function Shipping() {
   const pickupPointCity = watch("billing.city");
   const [pickupPoints, setPickupPoints] = useState<PickupPoint[]>([]);
   const [selectedPickupPoint, setSelectedPickupPoint] = useState<string>("");
-
+  // fetch Pickup Points from API
   useEffect(() => {
     async function fetchPickupPoints() {
       try {
@@ -81,7 +74,7 @@ export default function Shipping() {
     }
     fetchPickupPoints();
   }, [isPickedUp]);
-  
+  // handle pickup point change
   const handlePickupPointChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedPickupPoint(e.target.value);
     setValue("shipping.pickupPointId", e.target.value); // jika pakai react-hook-form
@@ -94,52 +87,59 @@ export default function Shipping() {
     setShippingCost(0);
   };
 
-
+  // HANDLE SHIPPING OPTION
+  const [addressData, setAddressData] = useState<AddressType>();
+  const shippingAddressOption = watch("shippingAddressOption");
+  const billingAddress = watch("billing.address");
+  const billingCity = watch("billing.city");
+  const billingProvince = watch("billing.province");
+  const billingPhone = watch("billing.phone");
+  const billingEmail = watch("billing.email");
+  // fetch shipping address from API
   useEffect(() => {
     if (!session.data?.user?.id) return;
     fetch(`/api/user/${session.data.user.id}/address?type=SHIPPING`)
     .then(res => res.json())
     .then(data => setAddressData(data));
   }, [session.data?.user?.id]);
-
+  // default shipping address using user shipping address in my-account
   useEffect(() => {
     setValue("shippingAddressOption", "default");
     // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, [setValue]);
-
+  // handle shipping address option change
   useEffect(() => {
     if (shippingAddressOption === "default") {
       setValue("shipping.address.address1", addressData?.address?.address1 || "");
       setValue("shipping.address.address2", addressData?.address?.address2 || "");
+      setValue("shipping.city", addressData?.city || "");
+      setValue("shipping.province", addressData?.province || "");
+      // setValue("shipping.zipCode", addressData?.zipCode || "");
       setValue("shipping.phone", addressData?.phone || "");
       setValue("shipping.email", addressData?.email || "");
     } else if (shippingAddressOption === "sameAsBilling") {
       setValue("shipping.address.address1", billingAddress?.address1 || "");
       setValue("shipping.address.address2", billingAddress?.address2 || "");
+      setValue("shipping.city", billingCity || "");
+      setValue("shipping.province", billingProvince || "");
+      // setValue("shipping.zipCode", billingAddress?.zipCode || "");
       setValue("shipping.phone", billingPhone || "");
       setValue("shipping.email", billingEmail || "");
     } else {
       setValue("shipping.address.address1", "");
       setValue("shipping.address.address2", "");
+      setValue("shipping.city", "");
+      setValue("shipping.province", "");
+      setValue("shipping.zipCode", "");
       setValue("shipping.phone", "");
       setValue("shipping.email", "");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shippingAddressOption, addressData, billingAddress, billingPhone, billingEmail, setValue]);
 
-  // Handler pencarian kota destinasi
-  const handleCitySearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setCitySearch(value);
-    if (value.length < 3) {
-      setCityOptions([]);
-      // return;
-    }
-  };
-
-  const [loadingCitySearch, setLoadingCitySearch] = useState(false);
-
+  // HANDLE CITY SEARCH USING SELECT
   // prefiltered city options for testing
+  const [loadingCitySearch, setLoadingCitySearch] = useState(false);
   const [filteredCityOptions, setFilteredCityOptions] = useState<any[]>([]);
   const sampleSearchParams = "Jakarta Utara DKI Jakarta"
   useEffect(() => {
@@ -152,10 +152,19 @@ export default function Shipping() {
         // setFilteredCityOptions(data.data || []);
       } catch (err) {
         console.error(err);
+      } finally {
+        setLoadingCitySearch(false);
       }
     };
     fetchSampleCities();
   }, []);
+
+
+  /* HANDLE CITY SEARCH USING TEXT INPUT // no longer used, keep temporarily for testing */
+  /*
+  const [citySearch, setCitySearch] = useState("");
+  const [cityOptions, setCityOptions] = useState<any[]>([]);
+  const [debouncedCitySearch] = useDebounce(citySearch, 2000); // 2000ms debounce
 
   useEffect(() => {
     if (citySearch !== debouncedCitySearch && citySearch.length >= 3) {
@@ -189,29 +198,41 @@ export default function Shipping() {
     return () => { cancelled = true; };
   }, [debouncedCitySearch]);
 
+  // Handler pencarian kota destinasi
+  const handleCitySearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setCitySearch(value);
+    if (value.length < 3) {
+      setCityOptions([]);
+      // return;
+    }
+  };
+  
   // Handler saat user memilih kota dari datalist
   const handleCitySelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const label = e.target.value;
     const found = cityOptions.find(opt => opt.label === label);
     if (found) {
       // console.log('found', found);
-      /* city_name: "JAKARTA PUSAT"
-         district_name: "SAWAH BESAR"
-         id: 17625
-         label: "MANGGA DUA SELATAN, SAWAH BESAR, JAKARTA PUSAT, DKI JAKARTA, 10730"
-         province_name: "DKI JAKARTA"
-         subdistrict_name: "MANGGA DUA SELATAN"
-         zip_code: "10730" */
+      // city_name: "JAKARTA PUSAT"
+      // district_name: "SAWAH BESAR"
+      // id: 17625
+      // label: "MANGGA DUA SELATAN, SAWAH BESAR, JAKARTA PUSAT, DKI JAKARTA, 10730"
+      // province_name: "DKI JAKARTA"
+      // subdistrict_name: "MANGGA DUA SELATAN"
+      // zip_code: "10730"
       setDestinationCityId(String(found.id));
       setDestinationCity(found);
       setValue("shipping.destination", found.label);
     }
   };
+  */
 
-  // Handler untuk fetch ongkir
+  // HANDLER COURIER CHANGE: calculate shipping cost & set shipping method
   const handleCourierChange = async (courier: string) => {
-    console.log(destinationCityId);
-
+    console.log('destinationCityId', destinationCityId);
+    console.log('packageWeight', packageWeight);
+    console.log('courier', courier);
     setSelectedCourier(courier);
     if (courier === "free") {
       setShippingCost(0);
@@ -382,6 +403,62 @@ export default function Shipping() {
                     )}
                   />
                 </div>
+
+                <div className="mb-5 grid grid-cols-1 gap-5 md:grid-cols-3">
+                  <div>
+                    <Controller
+                      control={control}
+                      name="shipping.province"
+                      render={({ field }) => (
+                        <InputGroup
+                          type="text"
+                          label="Provinsi Tujuan"
+                          placeholder="Provinsi Tujuan"
+                          // required
+                          // name="shipping.province"
+                          value={field.value !== undefined ? field.value : ""}
+                          onChange={field.onChange}
+                        />
+                      )}
+                    />
+                  </div>
+
+                  <div>
+                    <Controller
+                      control={control}
+                      name="shipping.city"
+                      render={({ field }) => (
+                        <InputGroup
+                          type="text"
+                          label="Kota Tujuan"
+                          placeholder="Kota Tujuan"
+                          // required
+                          // name="shipping.province"
+                          value={field.value !== undefined ? field.value : ""}
+                          onChange={field.onChange}
+                        />
+                      )}
+                    />
+                  </div>
+
+                  <div>
+                    <Controller
+                      control={control}
+                      name="shipping.zipCode"
+                      render={({ field }) => (
+                        <InputGroup
+                          type="text"
+                          label="Kode Pos"
+                          placeholder="Kode Pos"
+                          // required
+                          // name="shipping.province"
+                          value={field.value !== undefined ? field.value : ""}
+                          onChange={field.onChange}
+                        />
+                      )}
+                    />
+                  </div>
+                </div>
                 
                 <div className="mb-5">
                   <label htmlFor="destination-city-search" className="block mb-1.5 text-sm text-gray-6">
@@ -409,7 +486,7 @@ export default function Shipping() {
                     ))}
                   </datalist> */}
                   <select className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11 focus:border-blue focus:outline-0 placeholder:text-dark-5 w-full py-2.5 px-4 duration-200 focus:ring-0">
-                    <option value="">-- Pilih Kota --</option>
+                    <option value="">-- Pilih Kota Destinasi --</option>
                     {filteredCityOptions.map(opt => (
                       <option key={opt.id} value={opt.label}>{opt.label}</option>
                     ))}
@@ -530,7 +607,7 @@ export default function Shipping() {
                 Ongkos kirim: Rp {formatPrice(shippingCost).toLocaleString()}
               </span>
               <span className="text-sm">
-              <button type="button" onClick={()=>{
+                <button type="button" onClick={()=>{
                   const element = document.getElementById("section-orders");
                   if (element) {
                     const elementPosition = element.offsetTop - 128;
