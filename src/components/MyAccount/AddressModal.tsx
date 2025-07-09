@@ -67,28 +67,23 @@ const AddressModal = ({
   const [selectedProvince, setSelectedProvince] = useState<string>("");
   const [cities, setCities] = useState<City[]>([]);
 
+  // if no data, set value to userEmail and userPhone and userName
   useEffect(() => {
-    if (addressType === "BILLING" && data?.email !== userEmail) {
+    // if no data, set value to userEmail and userPhone
+    if (data?.email !== userEmail) {
       setValue("email", userEmail);
     }
-    if (addressType === "BILLING" && data?.phone !== userPhone) {
+    // if no data, set value to userPhone
+    if (data?.phone !== userPhone) {
       setValue("phone", userPhone);
     }
-
-    setValue("name", userName);
+    // if no data, set value to userName
+    if (data?.name !== userName) {
+      setValue("name", userName);
+    }
   }, [addressType, data, userEmail, userPhone, userName, setValue]);
 
-  useEffect(() => {
-    if (!isOpen) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        closeModal();
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, closeModal]);
-
+  // fetch provinces and cities, TODO: patch later, saving id to persist state
   useEffect(() => {
     async function fetchProvinces() {
       try {
@@ -116,6 +111,19 @@ const AddressModal = ({
     fetchCities();
   }, [selectedProvince]);
 
+  //  TODO: modal should be made into a component
+  //  ESC to close modal
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        closeModal();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, closeModal]);
+  // close modal while clicking outside
   useEffect(() => {
     // closing modal while clicking outside
     function handleClickOutside(event: any) {
@@ -133,6 +141,7 @@ const AddressModal = ({
     };
   }, [isOpen, closeModal]);
 
+  // handle submit
   const onSubmit = async (inputData: AddressInputForm) => {
     // console.log("inputData", inputData);
     if (data === null) {
