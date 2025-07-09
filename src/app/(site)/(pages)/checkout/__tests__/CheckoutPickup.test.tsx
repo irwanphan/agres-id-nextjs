@@ -8,3 +8,7 @@
 // -- data shipping address dan price muncul di order section
 // input data di payment method, coba dengan "manual" method
 // klik tombol bayar
+// muncul halaman /success?amount="nilai amount barangnya"
+// klik tombol Link "Account" ke /my-account/orders
+// -- muncul halaman /my-account/orders
+// -- muncul data order yang baru saja dipesan

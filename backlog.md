@@ -30,7 +30,7 @@ Checkout Page
 - [ok] fix: email is prefilled with the email of the user who is logged in, but checkout is failed with email not filled
 - [] Page for user to check order status based on Order ID
 - [ok] Calculate total with shipping cost
-- [] "Pickup di Gerai AGRES" option shows Pickup Point selection
+- [ok] "Pickup di Gerai AGRES" option shows Pickup Point selection
 - [] Show map for Pickup Point selection
 - [ok] fix: orders summary, product lines broken when product name is too long
 - [ok] Get province and city from database/json instead of using RajaOngkir API
@@ -39,8 +39,10 @@ Checkout Page
 - [ok] auto fetch billing address from user account management page to billing section
 - [ok] auto fetch shipping address from user account management page to shipping section
 - [ok] fix: checkout page doesn't show the product variant selected - show color
-- [] fix: db doesn't have the product variant selected
+- [ok] fix: db doesn't have the product variant selected
 - [ok] fix: count weight and dimension of product variant
+- [] fix: product variant missing weight and dimension in db
+- [ok] patch checkout page into 2 route: to be shipped and to be picked up
 
 RBAC / Fine Grained Access Control
 - [] Add RBAC / Fine Grained Access Control
@@ -70,8 +72,8 @@ Footer
 Pickup Point
 - [ok] Add Pickup Point
 - [ok] Add Pickup Management Page to Admin Page
-- [] Add Pickup Point to the Checkout Page
-- [] Save Pickup Point to the Order
+- [ok] Add Pickup Point to the Checkout Page
+- [ok] Save Pickup Point to the Order
 
 Affiliate & Store Account Management
 - [] Confirm how to treat the store account and affiliate account, bonus, discount, etc.
