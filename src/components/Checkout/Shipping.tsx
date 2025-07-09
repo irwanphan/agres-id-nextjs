@@ -79,7 +79,7 @@ export default function Shipping() {
     setValue("shippingMethod.name", "pickup");
     setValue("shippingMethod.price", 0);
     setValue("shippingMethod.courier", "pickup");
-    setValue("shippingMethod.service", "pickup");
+    setValue("shippingMethod.service", "Pickup Point");
     setValue("shippingMethod.etd", "1-2 hari");
     setShippingCost(0);
   };

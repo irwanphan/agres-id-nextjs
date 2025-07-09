@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useShoppingCart } from "use-shopping-cart";
 import { ArrowLeftIcon } from "./_components/icons";
 import { formatPrice } from "@/utils/formatPrice";
-import { IconLogin, IconUserCircle } from "@tabler/icons-react";
+import { IconLogin, IconShoppingCart, IconUserCircle, IconWind } from "@tabler/icons-react";
 
 const CheckoutSuccess = ({ amount, bankInfo }: { amount: string; bankInfo?: string }) => {
   const { clearCart } = useShoppingCart();
@@ -124,8 +124,12 @@ const CheckoutSuccess = ({ amount, bankInfo }: { amount: string; bankInfo?: stri
                     href="/shop"
                     className="inline-flex items-center gap-2 font-medium text-white bg-blue py-3 px-6 rounded-md ease-out duration-200 hover:bg-blue-dark"
                   >
-                    Continue Shopping
-                    <ArrowLeftIcon className="rotate-180" />
+                    Gasss, Lanjut Belanja
+                    <div className="flex items-center">
+                      <IconWind className="rotate-180 -mr-1" stroke={1.2} />
+                      <IconShoppingCart stroke={1.5} />
+                    </div>
+                    {/* <ArrowLeftIcon className="rotate-180" /> */}
                   </Link>
                 </div>
               </div>
