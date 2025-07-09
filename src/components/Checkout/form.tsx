@@ -78,7 +78,9 @@ export type CheckoutInput = {
     phone: string;
     email: string;
     city: string;
+    cityId: string;
     province: string;
+    provinceId: string;
     zipCode: string;
   };
   shippingMethod: {

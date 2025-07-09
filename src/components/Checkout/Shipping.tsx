@@ -40,11 +40,14 @@ export default function Shipping() {
     city_name: "",
     zip_code: "",
   });
+  const shippingMethod = watch("shippingMethod");
   
   // HANDLE PICKUP OPTION
   // temporary get city from billing address
   const pickupPointCity = watch("billing.city");
   const [pickupPoints, setPickupPoints] = useState<PickupPoint[]>([]);
+  const [pickupPointCityOptions, setPickupPointCityOptions] = useState<string[]>([]);
+  const [selectedPickupPointCity, setSelectedPickupPointCity] = useState<string>("");
   const [selectedPickupPoint, setSelectedPickupPoint] = useState<string>("");
   // fetch Pickup Points from API
   useEffect(() => {
@@ -54,6 +57,7 @@ export default function Shipping() {
           const res = await fetch("/api/pickup-points");
           const data = await res.json();
           setPickupPoints(Array.isArray(data) ? data : []);
+          setPickupPointCityOptions(Array.from(new Set(data.map((point: PickupPoint) => point.city))));
         }
       } catch (e) {
         console.error(e);
@@ -66,10 +70,10 @@ export default function Shipping() {
     setSelectedPickupPoint(e.target.value);
     setValue("shipping.pickupPointId", e.target.value); // jika pakai react-hook-form
     setValue('shipping.destination', pickupPoints.find(point => point.id === e.target.value)?.name || "");
-    setValue("shippingMethod.name", "Pickup");
+    setValue("shippingMethod.name", "pickup");
     setValue("shippingMethod.price", 0);
-    setValue("shippingMethod.courier", "free");
-    setValue("shippingMethod.service", "Pickup");
+    setValue("shippingMethod.courier", "pickup");
+    setValue("shippingMethod.service", "pickup");
     setValue("shippingMethod.etd", "1-2 hari");
     setShippingCost(0);
   };
@@ -150,11 +154,12 @@ export default function Shipping() {
   //   };
   //   fetchSampleCities();
   // }, [debouncedCitySearchParam]);
-
+  
+  /* populate city options using API */
   const handleFetchCityOptions = async () => {
     try {
       if (debouncedCitySearchParam.trim().length > 0) {
-        console.log('citySearchParams', citySearchParams);
+        // console.log('citySearchParams', citySearchParams);
         setLoadingCitySearch(true);
         const res = await fetch(`/api/shipping/destination?search=${encodeURIComponent(debouncedCitySearchParam)}`);
         const data = await res.json();
@@ -254,15 +259,15 @@ export default function Shipping() {
 
   // HANDLER COURIER CHANGE: calculate shipping cost & set shipping method
   const handleCourierChange = async (courier: string) => {
-    console.log('destinationCityId', destinationCityId);
-    console.log('packageWeight', packageWeight);
-    console.log('courier', courier);
+    // console.log('destinationCityId', destinationCityId);
+    // console.log('packageWeight', packageWeight);
+    // console.log('courier', courier);
     setSelectedCourier(courier);
-    if (courier === "free") {
-      setShippingCost(0);
-      setLoadingOngkir(false);
-      return;
-    }
+    // if (courier === "free") {
+    //   setShippingCost(0);
+    //   setLoadingOngkir(false);
+    //   return;
+    // }
     setLoadingOngkir(true);
     setShippingCost(null);
     try {
@@ -349,6 +354,24 @@ export default function Shipping() {
           {/* use pickup point */}
           {isPickedUp && (
             <div className={`mb-5 transition-all duration-300 ease-out h-auto ${!isPickedUp ? "h-0" : "h-auto"}`}>
+              <div>
+                <p className="text-sm text-gray-6 mb-5">Pilih Kota Pickup Point AGRES</p>
+                <select 
+                  className="w-full py-2.5 pl-4 pr-8 duration-200 
+                  rounded-lg border cursor-pointer
+                  placeholder:text-sm text-sm placeholder:font-normal placeholder:text-dark-5 
+                  border-gray-3 h-11 focus:border-blue focus:outline-0 focus:ring-0
+                  "
+                  value={selectedPickupPointCity}
+                  onChange={e => setSelectedPickupPointCity(e.target.value)}
+                  >
+                  <option value="">-- Pilih Kota Pickup Point --</option>
+                  {pickupPointCityOptions.map(city => (
+                    <option key={city} value={city}>{city}</option>
+                  ))}
+                </select>
+              </div>
+              
               <div className="mt-2">
                 <label className="block text-sm mb-1">Pilih Pickup Point</label>
                 <select
@@ -363,7 +386,7 @@ export default function Shipping() {
                 >
                   <option value="">-- Pilih Pickup Point --</option>
                   {pickupPoints
-                    .filter(point => point.city.toLowerCase().includes(pickupPointCity.toLowerCase()))
+                    .filter(point => point.city.toLowerCase().includes(selectedPickupPointCity.toLowerCase()))
                     .map((point: PickupPoint) => (
                       <option key={point.id} value={point.id}>
                         {point.name}-{point.address}, {point.city}, {point.province}
@@ -629,16 +652,23 @@ export default function Shipping() {
           )}
 
           {loadingOngkir && (
-            <div className="text-sm mt-4 flex items-center px-4 gap-2 border border-gray-4 h-14 rounded-lg">
+            <div className="text-sm mt-4 flex items-center px-4 py-1.5 gap-2 border border-gray-4 min-h-14 rounded-lg">
               Menghitung ongkir...
               <IconLoader2 className="w-5 h-5 animate-spin" />
             </div>
           )}
           {shippingCost!==null && !loadingOngkir && (
-            <div className="text-sm text-green-600 mt-4 flex items-center justify-between px-4 gap-2 border border-gray-4 h-14 rounded-lg">
-              <span className="text-sm font-bold">
-                Ongkos kirim: Rp {formatPrice(shippingCost).toLocaleString()}
-              </span>
+            <div className="text-sm text-green-600 mt-4 flex items-center justify-between px-4 py-1.5 gap-2 border border-gray-4 min-h-14 rounded-lg">
+              <div className="text-sm flex flex-wrap">
+                <p>
+                  Ongkos kirim: 
+                  <span className="font-bold ml-1 text-green">{formatPrice(shippingCost).toLocaleString()}</span>,
+                </p>
+                <p>
+                  Estimasi Pengiriman (ETD)
+                  <span className="font-bold ml-1 text-green">{shippingMethod.etd}</span>
+                </p>
+              </div>
               <span className="text-sm">
                 <button type="button" onClick={()=>{
                   const element = document.getElementById("section-orders");

@@ -16,6 +16,7 @@ export default function Orders() {
   const packageWeight = watch("shipping.weight");
 
   // console.log("packageWeight", packageWeight);
+  // console.log("shippingMethod", shippingMethod);
 
   return (
     <div id="section-orders" className="bg-white shadow-1 rounded-[10px]">
@@ -60,7 +61,7 @@ export default function Orders() {
             )}
 
             {/* Shipping Information */}
-            {shippingMethod?.price ? (
+            {shippingMethod?.name ? (
               <>
                 <tr className="border-b border-gray-3">
                   <td className="py-3">
@@ -90,11 +91,12 @@ export default function Orders() {
                 <td className="py-3">
                   <div className="flex items-center gap-2">
                     <IconTruck className="h-4 w-4 text-gray-4" />
-                    <span>Shipping Fee</span>
+                    <span>Ongkos Kirim</span>
                   </div>
                 </td>
                 <td className="py-3 text-right">
-                  {formatPrice(shippingMethod.price)}
+                  Belum pilih metode pengiriman
+                  {/* {formatPrice(shippingMethod.price)} */}
                 </td>
               </tr>
             )}
