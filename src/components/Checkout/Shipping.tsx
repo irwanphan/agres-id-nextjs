@@ -7,7 +7,7 @@ import { useCheckoutForm } from "./form";
 import { ChevronDown } from "./icons";
 
 import { SHIPPING_METHODS, ShippingMethodsCard } from "./ShippingMethod";
-import { IconChevronsUpRight } from "@tabler/icons-react";
+import { IconChevronsDown, IconChevronsUpRight, IconLoader2 } from "@tabler/icons-react";
 import { formatPrice } from "@/utils/formatPrice";
 import { ShippingCalculateDomesticCostResponse } from "@/types";
 import { useSession } from "next-auth/react";
@@ -166,7 +166,23 @@ export default function Shipping() {
       setLoadingCitySearch(false);
     }
   }
-
+  const handleSelectedCity = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const label = e.target.value;
+    const found = filteredCityOptions.find(opt => opt.label === label);
+    if (found) {
+      // console.log('found', found);
+      // city_name: "JAKARTA PUSAT"
+      // district_name: "SAWAH BESAR"
+      // id: 17625
+      // label: "MANGGA DUA SELATAN, SAWAH BESAR, JAKARTA PUSAT, DKI JAKARTA, 10730"
+      // province_name: "DKI JAKARTA"
+      // subdistrict_name: "MANGGA DUA SELATAN"
+      // zip_code: "10730"
+      setDestinationCityId(String(found.id));
+      setDestinationCity(found);
+      setValue("shipping.destination", found.label);
+    }
+  }
 
   /* HANDLE CITY SEARCH USING TEXT INPUT // no longer used, keep temporarily for testing */
   /*
@@ -468,10 +484,6 @@ export default function Shipping() {
                     {loadingCitySearch && (
                       <span className="ml-2 text-blue-500 text-xs">Loading...</span>
                       )}
-                    {/* 
-                    {!loadingCitySearch && debouncedCitySearch.length > 2 && (
-                      <span className="ml-2 text-gray-6 text-xs"></span>
-                    )} */}
                   </label>
                   {/* <input
                     id="destination-city-search"
@@ -490,8 +502,9 @@ export default function Shipping() {
                   </datalist> */}
                   <select 
                     id="destination-city-search"
-                    className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11 focus:border-blue focus:outline-0 placeholder:text-dark-5 w-full py-2.5 px-4 duration-200 focus:ring-0"
+                    className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11 focus:border-blue focus:outline-0 placeholder:text-dark-5 w-full py-2.5 pl-4 pr-8 duration-200 focus:ring-0"
                     onFocus={handleFetchCityOptions}
+                    onChange={handleSelectedCity}
                   >
                     <option value="">-- Pilih Kota Destinasi --</option>
                     { !loadingCitySearch && filteredCityOptions.length > 0 && (
@@ -615,7 +628,12 @@ export default function Shipping() {
             </>
           )}
 
-          {loadingOngkir && <div className="text-sm text-gray-500 mt-2">Menghitung ongkir...</div>}
+          {loadingOngkir && (
+            <div className="text-sm mt-4 flex items-center px-4 gap-2 border border-gray-4 h-14 rounded-lg">
+              Menghitung ongkir...
+              <IconLoader2 className="w-5 h-5 animate-spin" />
+            </div>
+          )}
           {shippingCost!==null && !loadingOngkir && (
             <div className="text-sm text-green-600 mt-4 flex items-center justify-between px-4 gap-2 border border-gray-4 h-14 rounded-lg">
               <span className="text-sm font-bold">
@@ -632,7 +650,9 @@ export default function Shipping() {
                     });
                   }
                 }} className="text-sm text-blue-light flex items-center gap-2">
-                  Next, Scroll ke Detail Pesanan <IconChevronsUpRight className="w-4 h-4" />
+                  Next, Scroll ke Detil Pesanan
+                  <IconChevronsUpRight className="w-5 h-5 hidden md:block" />
+                  <IconChevronsDown className="w-5 h-5 block md:hidden" />
                 </button>
               </span>
             </div>

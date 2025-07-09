@@ -171,7 +171,7 @@ export default function Orders() {
                 });
               }
             }} className="text-sm text-blue-light flex items-center gap-2">
-              Next, Scroll ke Metode Pembayaran <IconChevronsDown className="w-4 h-4" />
+              Next, Scroll ke Metode Pembayaran <IconChevronsDown className="w-5 h-5" />
             </button>
           </span>
         </div>

@@ -252,7 +252,7 @@ export default function Billing() {
                 });
               }
             }} className="text-sm text-blue-light flex items-center gap-2">
-              Next, Scroll ke Detil Alamat Pengiriman <IconChevronsDown className="w-4 h-4" />
+              Next, Scroll ke Detil Alamat Pengiriman <IconChevronsDown className="w-5 h-5" />
             </button>
           </div>
         </div>
