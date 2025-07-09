@@ -5,19 +5,7 @@ import AddressModal from "@/components/MyAccount/AddressModal";
 import { SquarePencilIcon, UserIcon } from "@/components/MyAccount/icons";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
-type AddressType = {
-  name: string;
-  email: string;
-  phone: string;
-  province: string;
-  city: string;
-  address: {
-    address1: string;
-    address2: string;
-  };
-  id: string;
-};
+import { AddressType } from "@/get-api-data/address";
 
 type PropsType = {
   userId?: string;
@@ -91,6 +79,11 @@ export function BillingAddress({ userId }: PropsType) {
               <p className="flex items-center gap-2.5 text-custom-sm">
                 <MapIcon className="mt-0.5 shrink-0" />
                 City: {data?.city}
+              </p>
+
+              <p className="flex items-center gap-2.5 text-custom-sm">
+                <MapIcon className="mt-0.5 shrink-0" />
+                Zip Code: {data?.zipCode}
               </p>
 
               <p className="flex gap-2.5 text-custom-sm">

@@ -34,12 +34,12 @@ export async function POST(
   { params }: { params: Promise<{ userId: string }> }
 ) {
   const { userId } = await params;
-  const { address, city, province } = await req.json();
+  const { address, city, province, zipCode } = await req.json();
 
-  console.log(address, city, province);
+  // console.log(address, city, province);
 
-  if (!address || !city || !province) {
-    return NextResponse.json({ error: "Address, city, and province are required" }, { status: 400 });
+  if (!address || !city || !province || !zipCode) {
+    return NextResponse.json({ error: "Address, city, province, and zipCode are required" }, { status: 400 });
   }
 
   // console.log(address);
@@ -65,7 +65,7 @@ export async function PATCH(
   const { userId } = await params;
   try {
     const { address, id, city, province } = await req.json();
-    console.log("Payload:", address, city, province);
+    // console.log("Payload:", address, city, province);
 
     if (!userId || !address || !id) {
       return NextResponse.json('Missing Fields', { status: 400 });
@@ -75,7 +75,7 @@ export async function PATCH(
       where: { id, userId },
       data: address,
     });
-    console.log("Updated address:", updated);
+    // console.log("Updated address:", updated);
   } catch (e) {
     console.error("Error di PATCH:", e);
   }

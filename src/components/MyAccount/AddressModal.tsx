@@ -11,12 +11,13 @@ import { InputGroup } from "../ui/input";
 import { Province } from "@/types/province";
 import { City } from "@/types/city";
 
-type Input = {
+type AddressInputForm = {
   name: string;
   email: string;
   phone: string;
   city: string;
   province: string;
+  zipCode: string;
   address: {
     address1: string;
     address2: string;
@@ -28,7 +29,7 @@ type PropsType = {
   isOpen: boolean;
   closeModal: () => void;
   addressType: "SHIPPING" | "BILLING";
-  data?: Input & {
+  data?: AddressInputForm & {
     id: string;
   };
   onSubmitSuccess?: () => void;
@@ -42,7 +43,7 @@ const AddressModal = ({
   userId,
   onSubmitSuccess,
 }: PropsType) => {
-  const { register, setValue, watch, ...form } = useForm<Input>({
+  const { register, setValue, watch, ...form } = useForm<AddressInputForm>({
     defaultValues: {
       name: data?.name,
       email: data?.email,
@@ -113,7 +114,7 @@ const AddressModal = ({
     };
   }, [isOpen, closeModal]);
 
-  const onSubmit = async (inputData: Input) => {
+  const onSubmit = async (inputData: AddressInputForm) => {
     console.log("inputData", inputData);
     if (data === null) {
       setIsLoading(true);
@@ -151,6 +152,7 @@ const AddressModal = ({
             address: inputData.address,
             city: inputData.city,
             province: inputData.province,
+            zipCode: inputData.zipCode,
           },
         });
 
@@ -282,21 +284,43 @@ const AddressModal = ({
                 </datalist>
               </div>
 
-              <div>
-                <label htmlFor="city" className="block text-sm font-normal text-gray-6 mb-1.5">
-                  Kota <span className="text-red">*</span>
-                </label>
-                <select
-                  id="city"
-                  {...register("city", {
-                    required: "Kota is required",
-                  })}
-                  className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
-                >
-                  {cities.map((city) => (
-                    <option key={city.city_id} value={city.city_name}>{city.city_name}</option>
-                  ))}
-                </select>
+              <div className="flex flex-col gap-5 mb-5 lg:flex-row sm:gap-8">
+                <div className="w-full">
+                  <label htmlFor="city" className="block text-sm font-normal text-gray-6 mb-1.5">
+                    Kota <span className="text-red">*</span>
+                  </label>
+                  <select
+                    id="city"
+                    {...register("city", {
+                      required: "Kota is required",
+                    })}
+                    className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
+                  >
+                    {cities.map((city) => (
+                      <option key={city.city_id} value={city.city_name}>{city.city_name}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="w-full">
+                  <Controller
+                    control={form.control}
+                    name="zipCode"
+                    rules={{ required: "Zip Code is required" }}
+                    render={({ field, fieldState }) => (
+                      <InputGroup
+                        type="text"
+                        label="Zip Code"
+                        name={field.name}
+                        value={field.value}
+                        onChange={field.onChange}
+                        error={!!fieldState.error}
+                        errorMessage={fieldState.error?.message}
+                        required
+                      />
+                    )}
+                  />
+                </div>
               </div>
             </div>
 

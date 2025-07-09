@@ -161,6 +161,7 @@ model Address {
   phone    String
   province String?
   city     String?
+  zipCode  String?
   address  Json
   type     AddressType @default(ALL)
   user     User        @relation(fields: [userId], references: [id], onDelete: Cascade)

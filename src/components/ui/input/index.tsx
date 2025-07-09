@@ -31,6 +31,7 @@ export function InputGroup({
       <input
         id={id}
         {...props}
+        value={props.value || ""}
         className={cn(`
           border border-gray-3 focus:border-blue focus:outline-0 
           placeholder:text-sm text-sm placeholder:font-normal placeholder:text-dark-5 

@@ -13,21 +13,8 @@ import { ShippingCalculateDomesticCostResponse } from "@/types";
 import { useSession } from "next-auth/react";
 import { formatPackageWeightKg } from "@/utils/formatPackageWeight";
 import { useDebounce } from "use-debounce";
-import { getPickupPoints } from "@/get-api-data/pickup-point";
 import { PickupPoint } from "@/types/pickup-point";
-
-type AddressType = {
-  name: string;
-  email: string;
-  phone: string;
-  city: string;
-  province: string;
-  address: {
-    address1: string;
-    address2: string;
-  };
-  id: string;
-};
+import { AddressType } from "@/get-api-data/address";
 
 export default function Shipping() {
   const [dropdown, setDropdown] = useState(true);

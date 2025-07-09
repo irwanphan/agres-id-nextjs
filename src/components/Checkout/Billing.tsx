@@ -11,17 +11,7 @@ import LocationCityDatalist from "./LocationCityDatalist";
 import { Province } from "@/types/province";
 import { City } from "@/types/city";
 import { ChevronDown } from "./icons";
-
-type AddressType = {
-  name: string;
-  email: string;
-  phone: string;
-  address: {
-    address1: string;
-    address2: string;
-  };
-  id: string;
-};
+import { AddressType } from "@/get-api-data/address";
 
 export default function Billing() {
   const [dropdown, setDropdown] = useState(true);
@@ -62,6 +52,9 @@ export default function Billing() {
       setValue("billing.lastName", lastName);
       setValue("billing.phone", addressData.phone || "");
       setValue("billing.email", addressData.email || "");
+      setValue("billing.city", addressData.city || "");
+      setValue("billing.province", addressData.province || "");
+      // setValue("billing.zipCode", addressData.zipCode || "");
       setValue("billing.address.address1", addressData.address?.address1 || "");
       setValue("billing.address.address2", addressData.address?.address2 || "");
     }
