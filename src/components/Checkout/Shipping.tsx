@@ -141,11 +141,12 @@ export default function Shipping() {
   // prefiltered city options for testing
   const [loadingCitySearch, setLoadingCitySearch] = useState(false);
   const [filteredCityOptions, setFilteredCityOptions] = useState<any[]>([]);
-  const sampleSearchParams = "Jakarta Utara DKI Jakarta"
+  const sampleSearchParams = `${watch("shipping.city") || ""} ${watch("shipping.province") || ""} ${watch("shipping.zipCode") || ""}`;
   useEffect(() => {
     const fetchSampleCities = async () => {
       try {
         setLoadingCitySearch(true);
+        console.log('sampleSearchParams', sampleSearchParams);
         // const res = await fetch(`/api/shipping/destination?search=${encodeURIComponent(sampleSearchParams)}`);
         // const data = await res.json();
         // console.log('data', data.data);
@@ -157,7 +158,7 @@ export default function Shipping() {
       }
     };
     fetchSampleCities();
-  }, []);
+  }, [sampleSearchParams]);
 
 
   /* HANDLE CITY SEARCH USING TEXT INPUT // no longer used, keep temporarily for testing */
