@@ -59,9 +59,10 @@ Admin Page
 User Account Management Page
 - [ok] Add Join Date to User Account Management Page, show in Sidebar
 - [ok] Change Address to Json with Address1 and Address2 on User Account Management Page
-- [] fix: billing email should be the same as login account email
+- [ok] fix: billing email should be the same as login account email
 - [] fix: update user login email also update billing email
 - [] Add phone number to user account management page
+- [ok] Fix: URGENT: mobile view is a mess, need to fix, put menu on thumb area
 
 Auth
 - [ok] fix: after success login, user is being redirected, but no information is shown on the page when loading and might confuse users
@@ -99,6 +100,7 @@ Site Nav
 - [] Add product menu with category filter
 
 Data Preparation
-- [] Converter from MPL to clean_import.csv
-- [] Query import from clean_import.csv to database
-- [] Query import from master_product_attributes.csv to update products
+- [] step 1: prepare Converter from MPL to clean_import.csv
+- [] step 2: Query import from clean_import.csv to database
+- [] step 3: Query import from master_product_attributes.csv to update products
+- [] step 4: Create uploader from script above to upload MPL.xlsx to database
