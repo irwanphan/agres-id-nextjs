@@ -10,7 +10,7 @@ export default function Page() {
     <div className="p-6 bg-white rounded-lg shadow-1">
       <p className="text-dark text-sm">
         <span className="font-bold text-xl mr-3">
-          Hello {session?.user?.name}
+          Hello, {session?.user?.name}
         </span>
         <span className="font-normal">
           (bukan {session?.user?.name} ?

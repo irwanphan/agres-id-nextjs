@@ -12,7 +12,6 @@ import {
   Img,
 } from "@react-email/components";
 import * as React from "react";
-import Image from "next/image";
 
 interface WelcomeEmailProps {
   username: string;
@@ -37,7 +36,7 @@ export const WelcomeEmail = ({
       <Body style={main}>
         <Container style={container}>
           <Section style={header}>
-            <Image
+            <Img
               src={logoUrl}
               alt={`${siteName} Logo`}
               width={150}

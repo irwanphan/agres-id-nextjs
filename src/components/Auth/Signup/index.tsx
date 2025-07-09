@@ -50,7 +50,9 @@ const Signup = () => {
         return;
       }
 
-      toast.success("Sign Up Successful!");
+      toast.success("Pendaftaran berhasil! Anda segera dialihkan ke halaman akun Anda.", {
+        duration: 5000,
+      });
 
       // Ensure page refresh only after successful sign-in
       router.refresh();
