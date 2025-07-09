@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useShoppingCart } from "use-shopping-cart";
 import { ArrowLeftIcon } from "./_components/icons";
+import { formatPrice } from "@/utils/formatPrice";
+import { IconLogin, IconUserCircle } from "@tabler/icons-react";
 
 const CheckoutSuccess = ({ amount, bankInfo }: { amount: string; bankInfo?: string }) => {
   const { clearCart } = useShoppingCart();
@@ -74,7 +76,7 @@ const CheckoutSuccess = ({ amount, bankInfo }: { amount: string; bankInfo?: stri
                 </h1>
 
                 <h2 className="font-medium text-dark text-xl sm:text-2xl mb-3">
-                  Order Placed Successfully! amount: {amount}
+                  Order Placed Successfully! amount: {formatPrice(Number(amount))}
                 </h2>
 
                 <p className="max-w-[491px] w-full mx-auto mb-7.5">
@@ -104,8 +106,18 @@ const CheckoutSuccess = ({ amount, bankInfo }: { amount: string; bankInfo?: stri
                     href={`${session?.user ? "/my-account" : "/signin"}`}
                     className="inline-flex items-center gap-2 font-medium text-white bg-blue-light py-3 px-6 rounded-md ease-out duration-200 hover:bg-blue-dark"
                   >
-                    <ArrowLeftIcon />
-                    {`${session?.user ? "Account" : "Sign In"}`}
+                    {/* <ArrowLeftIcon /> */}
+                    { session?.user ? (
+                        <div className="flex items-center gap-2">
+                          <IconUserCircle stroke={1.5} />
+                          Account
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-2">
+                          <IconLogin stroke={1.5} />
+                          Sign In
+                        </div>
+                      ) }
                   </Link>
 
                   <Link
