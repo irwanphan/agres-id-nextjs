@@ -479,9 +479,17 @@ export default function Shipping() {
                   </datalist> */}
                   <select className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11 focus:border-blue focus:outline-0 placeholder:text-dark-5 w-full py-2.5 px-4 duration-200 focus:ring-0">
                     <option value="">-- Pilih Kota Destinasi --</option>
-                    {filteredCityOptions.map(opt => (
-                      <option key={opt.id} value={opt.label}>{opt.label}</option>
-                    ))}
+                    { loadingCitySearch && filteredCityOptions.length > 0 && (
+                      filteredCityOptions.map(opt => (
+                        <option key={opt.id} value={opt.label}>{opt.label}</option>
+                      ))
+                    )}
+                    { loadingCitySearch && (
+                      <option value="loading" disabled>Loading...</option>
+                    )}
+                    { !loadingCitySearch && filteredCityOptions.length === 0 && (
+                      <option value="not-found" disabled>Kota tujuan tidak ditemukan</option>
+                    )}
                   </select>
                 </div>
 
