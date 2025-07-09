@@ -141,16 +141,19 @@ export default function Shipping() {
   // prefiltered city options for testing
   const [loadingCitySearch, setLoadingCitySearch] = useState(false);
   const [filteredCityOptions, setFilteredCityOptions] = useState<any[]>([]);
-  const sampleSearchParams = `${watch("shipping.city") || ""} ${watch("shipping.province") || ""} ${watch("shipping.zipCode") || ""}`;
+  const citySearchParams = `${watch("shipping.city") || ""} ${watch("shipping.province") || ""} ${watch("shipping.zipCode") || ""}`;
+  const [debouncedCitySearchParam] = useDebounce(citySearchParams, 1500); // 1500ms debounce
   useEffect(() => {
-    const fetchSampleCities = async () => {
+    const fetchSampleCities = async () => {     
       try {
-        setLoadingCitySearch(true);
-        console.log('sampleSearchParams', sampleSearchParams);
-        // const res = await fetch(`/api/shipping/destination?search=${encodeURIComponent(sampleSearchParams)}`);
-        // const data = await res.json();
-        // console.log('data', data.data);
-        // setFilteredCityOptions(data.data || []);
+        if (debouncedCitySearchParam.trim().length > 0) {
+          setLoadingCitySearch(true);
+          console.log('citySearchParams', citySearchParams);
+          // const res = await fetch(`/api/shipping/destination?search=${encodeURIComponent(citySearchParams)}`);
+          // const data = await res.json();
+          // console.log('data', data.data);
+          // setFilteredCityOptions(data.data || []);
+        }
       } catch (err) {
         console.error(err);
       } finally {
@@ -158,7 +161,7 @@ export default function Shipping() {
       }
     };
     fetchSampleCities();
-  }, [sampleSearchParams]);
+  }, [debouncedCitySearchParam]);
 
 
   /* HANDLE CITY SEARCH USING TEXT INPUT // no longer used, keep temporarily for testing */
