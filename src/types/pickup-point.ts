@@ -1,11 +1,12 @@
 export type PickupPoint = {
   id: string;
   name: string;
+  phone: string | null;
   address: string;
   pinAddress: string | null;
-  city: string;
   province: string;
-  phone: string | null;
+  city: string;
+  zipCode: string | null;
   latitude: number | null;
   longitude: number | null;
   teamCode: string | null;

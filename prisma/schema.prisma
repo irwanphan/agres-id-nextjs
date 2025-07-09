@@ -127,6 +127,7 @@ model PickupPoint {
   pinAddress String?
   city       String
   province   String
+  zipCode    String?
   phone      String?
   latitude   Float?
   longitude  Float?
