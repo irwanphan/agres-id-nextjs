@@ -21,6 +21,9 @@ export async function GET(req: NextRequest) {
           equals: session.user.email,
         },
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
     return NextResponse.json({ orders }, { status: 200 });

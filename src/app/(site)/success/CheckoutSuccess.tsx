@@ -103,7 +103,7 @@ const CheckoutSuccess = ({ amount, bankInfo }: { amount: string; bankInfo?: stri
 
                 <div className="flex justify-center gap-5">
                   <Link
-                    href={`${session?.user ? "/my-account" : "/signin"}`}
+                    href={`${session?.user ? "/my-account/orders" : "/signin"}`}
                     className="inline-flex items-center gap-2 font-medium text-white bg-blue-light py-3 px-6 rounded-md ease-out duration-200 hover:bg-blue-dark"
                   >
                     {/* <ArrowLeftIcon /> */}
