@@ -80,6 +80,7 @@ export default function Shipping() {
   const billingAddress = watch("billing.address");
   const billingCity = watch("billing.city");
   const billingProvince = watch("billing.province");
+  const billingZipCode = watch("billing.zipCode");
   const billingPhone = watch("billing.phone");
   const billingEmail = watch("billing.email");
   // fetch shipping address from API
@@ -101,7 +102,7 @@ export default function Shipping() {
       setValue("shipping.address.address2", addressData?.address?.address2 || "");
       setValue("shipping.city", addressData?.city || "");
       setValue("shipping.province", addressData?.province || "");
-      // setValue("shipping.zipCode", addressData?.zipCode || "");
+      setValue("shipping.zipCode", addressData?.zipCode || "");
       setValue("shipping.phone", addressData?.phone || "");
       setValue("shipping.email", addressData?.email || "");
     } else if (shippingAddressOption === "sameAsBilling") {
@@ -109,7 +110,7 @@ export default function Shipping() {
       setValue("shipping.address.address2", billingAddress?.address2 || "");
       setValue("shipping.city", billingCity || "");
       setValue("shipping.province", billingProvince || "");
-      // setValue("shipping.zipCode", billingAddress?.zipCode || "");
+      setValue("shipping.zipCode", billingZipCode || "");
       setValue("shipping.phone", billingPhone || "");
       setValue("shipping.email", billingEmail || "");
     } else {
@@ -263,7 +264,7 @@ export default function Shipping() {
   
 
   return (
-    <div className="bg-white shadow-1 rounded-[10px] break-inside-avoid">
+    <div id="section-shipping" className="bg-white shadow-1 rounded-[10px] break-inside-avoid">
       <div
         onClick={() => setDropdown(!dropdown)}
         className="cursor-pointer flex items-center gap-2.5 font-medium text-lg text-dark py-5 px-6 "

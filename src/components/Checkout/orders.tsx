@@ -161,7 +161,7 @@ export default function Orders() {
 
         <div className="text-sm text-green-600 flex items-center justify-end gap-2 h-14 rounded-lg">
           <span className="text-sm">
-          <button type="button" onClick={()=>{
+            <button type="button" onClick={()=>{
               const element = document.getElementById("section-payment-method");
               if (element) {
                 const elementPosition = element.offsetTop - 128;
