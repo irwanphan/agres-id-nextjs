@@ -182,7 +182,7 @@ const Signup = () => {
                     />
                   </div>
 
-                  {formState.errors.email && (
+                  {formState.errors.phone && (
                     <p className="text-sm text-red mt-1.5">Nomor Hp harus diisi</p>
                   )}
                 </div>

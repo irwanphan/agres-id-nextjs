@@ -46,6 +46,7 @@ model User {
   emailVerified         DateTime?
   countryCode           String?
   phone                 String?   @unique
+  fullPhone             String?   @unique
   phoneVerified         DateTime?
   image                 String?
   password              String?
