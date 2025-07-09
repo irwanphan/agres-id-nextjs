@@ -46,6 +46,8 @@ export default function Billing() {
       .then(data => setAddressData(data));
   }, [session.data?.user?.id]);
 
+  const loadedProvinceId = provinces.find(p => p.province === addressData?.province)?.province_id;
+  const loadedCityId = cities.find(c => c.city_name === addressData?.city)?.city_id;
   useEffect(() => {
     if (addressData && session.data?.user?.name) {
       const { firstName, lastName } = splitName(session.data.user.name);
@@ -54,7 +56,9 @@ export default function Billing() {
       setValue("billing.phone", addressData.phone || "");
       setValue("billing.email", addressData.email || "");
       setValue("billing.city", addressData.city || "");
+      setValue("billing.cityId", loadedCityId || "");
       setValue("billing.province", addressData.province || "");
+      setValue("billing.provinceId", loadedProvinceId || "");
       setValue("billing.zipCode", addressData.zipCode || "");
       setValue("billing.address.address1", addressData.address?.address1 || "");
       setValue("billing.address.address2", addressData.address?.address2 || "");
