@@ -59,6 +59,7 @@ const AddressModal = ({
 
   const { data: session } = useSession();
   const userEmail = session?.user?.email || "";
+  const userPhone = session?.user?.fullPhone || "";
 
   const [isLoading, setIsLoading] = useState(false);
   const [provinces, setProvinces] = useState<Province[]>([]);
@@ -69,7 +70,10 @@ const AddressModal = ({
     if (addressType === "BILLING" && data?.email !== userEmail) {
       setValue("email", userEmail);
     }
-  }, [addressType, data?.email, userEmail, setValue]);
+    if (addressType === "BILLING" && data?.phone !== userPhone) {
+      setValue("phone", userPhone);
+    }
+  }, [addressType, data?.email, userEmail, data?.phone, userPhone, setValue]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -241,6 +245,7 @@ const AddressModal = ({
                       onChange={field.onChange}
                       error={!!fieldState.error}
                       errorMessage={fieldState.error?.message}
+                      readOnly={addressType === "BILLING"}
                       required
                     />
                   )}
