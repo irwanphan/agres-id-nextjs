@@ -3,7 +3,10 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const points = await prisma.pickupPoint.findMany({ where: { isActive: true } });
+    const points = await prisma.pickupPoint.findMany({ 
+      where: { isActive: true }, 
+      orderBy: { createdAt: 'asc' } 
+    });
     return NextResponse.json(points);
   } catch (error) {
     console.error("Error fetching pickup points:", error);
@@ -38,7 +41,7 @@ export async function POST(req: NextRequest) {
         longitude: longitude ? parseFloat(longitude) : null,
         teamCode: teamCode || null,
         isActive: true 
-      } 
+      },
     });
     return NextResponse.json(point);
   } catch (error) {

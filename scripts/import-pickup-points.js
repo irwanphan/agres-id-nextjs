@@ -36,11 +36,12 @@ async function importPickupPoints() {
         address: values[1]?.trim() || '',
         province: values[2]?.trim() || '',
         city: values[3]?.trim() || '',
-        pinAddress: values[4]?.trim() || '',
-        phone: values[5]?.trim() || null,
-        latitude: values[6] ? parseFloat(values[6]) : null,
-        longitude: values[7] ? parseFloat(values[7]) : null,
-        teamCode: values[8]?.trim() || null,
+        zipCode: values[4]?.trim() || '',
+        pinAddress: values[5]?.trim() || '',
+        phone: values[6]?.trim() || null,
+        latitude: values[7] ? parseFloat(values[7]) : null,
+        longitude: values[8] ? parseFloat(values[8]) : null,
+        teamCode: values[9]?.trim() || null,
         isActive: true
       };
       
@@ -59,14 +60,16 @@ async function importPickupPoints() {
     console.log('🗑️  Clearing existing pickup points...');
     await prisma.pickupPoint.deleteMany({});
     
-    // Import pickup points
+    // Import pickup points satu per satu dengan jeda 1 ms
     console.log('📥 Importing pickup points...');
-    const results = await prisma.pickupPoint.createMany({
-      data: pickupPoints,
-      skipDuplicates: true
-    });
+    for (const pickupPoint of pickupPoints) {
+      await prisma.pickupPoint.create({
+        data: pickupPoint,
+      });
+      await new Promise(resolve => setTimeout(resolve, 1)); // jeda 1 ms
+    }
     
-    console.log(`✅ Successfully imported ${results.count} pickup points`);
+    console.log(`✅ Successfully imported ${pickupPoints.length} pickup points`);
     
     // Verify import
     const totalCount = await prisma.pickupPoint.count();

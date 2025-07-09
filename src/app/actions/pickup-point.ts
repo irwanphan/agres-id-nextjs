@@ -18,6 +18,7 @@ export async function createPickupPoint(formData: FormData) {
     const pinAddress = formData.get("pinAddress") as string;
     const city = formData.get("city") as string;
     const province = formData.get("province") as string;
+    const zipCode = formData.get("zipCode") as string;
     const phone = formData.get("phone") as string;
     const latitude = formData.get("latitude") as string;
     const longitude = formData.get("longitude") as string;
@@ -51,6 +52,7 @@ export async function createPickupPoint(formData: FormData) {
         pinAddress,
         city,
         province,
+        zipCode,
         phone,
         latitude: latitude ? parseFloat(latitude) : null,
         longitude: longitude ? parseFloat(longitude) : null,
@@ -112,6 +114,7 @@ export async function updatePickupPoint(pickupPointId: string, formData: FormDat
     const pinAddress = formData.get("pinAddress") as string;
     const city = formData.get("city") as string;
     const province = formData.get("province") as string;
+    const zipCode = formData.get("zipCode") as string;
     const phone = formData.get("phone") as string;
     const latitude = formData.get("latitude") as string;
     const longitude = formData.get("longitude") as string;
@@ -139,6 +142,7 @@ export async function updatePickupPoint(pickupPointId: string, formData: FormDat
         pinAddress,
         city,
         province,
+        zipCode,
         phone,
         latitude: latitude ? parseFloat(latitude) : null,
         longitude: longitude ? parseFloat(longitude) : null,

@@ -4,25 +4,12 @@ import { useForm, Controller } from "react-hook-form";
 import { InputGroup } from "@/components/ui/input";
 import cn from "@/utils/cn";
 import { useRouter } from "next/navigation";
-import { PickupPoint } from "@prisma/client";
 import toast from "react-hot-toast";
 import { createPickupPoint, updatePickupPoint } from "@/app/actions/pickup-point";
 import LocationCityDatalist from "@/components/Checkout/LocationCityDatalist";
 import { Province } from "@/types/province";
 import { City } from "@/types/city";
-
-interface PickupPointInput {
-  name: string;
-  address: string;
-  pinAddress: string;
-  city: string;
-  province: string;
-  phone: string | null;
-  isActive: boolean;
-  latitude: string | null;
-  longitude: string | null;
-  teamCode: string | null;
-}
+import { PickupPoint } from "@/types/pickup-point";
 
 type PickupPointProps = {
   pickupPointItem?: PickupPoint | null; // Existing pickup point for editing
@@ -37,18 +24,19 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
     setValue,
     reset,
     watch,
-  } = useForm<PickupPointInput>({
+  } = useForm<PickupPoint>({
     defaultValues: {
       name: pickupPointItem?.name || "",
       address: pickupPointItem?.address || "",
       pinAddress: pickupPointItem?.pinAddress || "",
       city: pickupPointItem?.city || "",
       province: pickupPointItem?.province || "",
+      zipCode: pickupPointItem?.zipCode || "",
       phone: pickupPointItem?.phone || "",
       isActive: pickupPointItem?.isActive || true,
-      latitude: pickupPointItem?.latitude?.toString() || null,
-      longitude: pickupPointItem?.longitude?.toString() || null,
-      teamCode: pickupPointItem?.teamCode || null,
+      latitude: pickupPointItem?.latitude || null,
+      longitude: pickupPointItem?.longitude || null,
+      teamCode: pickupPointItem?.teamCode || "",
     },
   });
 
@@ -94,20 +82,21 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
     }
   }, [pickupPointItem, setValue]);
 
-  const onSubmit = async (data: PickupPointInput) => {
+  const onSubmit = async (data: PickupPoint) => {
     setIsLoading(true);
 
     try {
       const formData = new FormData();
       formData.append("name", data.name);
       formData.append("address", data.address);
-      formData.append("pinAddress", data.pinAddress);
+      formData.append("pinAddress", data.pinAddress || "");
       formData.append("city", data.city);
       formData.append("province", data.province);
+      formData.append("zipCode", data.zipCode || "");
       formData.append("phone", data.phone || "");
       formData.append("isActive", data.isActive.toString());
-      formData.append("latitude", data.latitude || "");
-      formData.append("longitude", data.longitude || "");
+      formData.append("latitude", data.latitude?.toString() || "");
+      formData.append("longitude", data.longitude?.toString() || "");
       formData.append("teamCode", data.teamCode || "");
       let result;
       if (pickupPointItem) {
@@ -196,7 +185,7 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-3 gap-5">
           <div>
             <label htmlFor="province" className="block text-sm font-normal text-gray-6 mb-1.5">
               Provinsi <span className="text-red">*</span>
@@ -233,6 +222,24 @@ export default function PickupPointForm({ pickupPointItem }: PickupPointProps) {
             register={register} 
             error={errors.city}
             setValue={setValue}
+          />
+
+          {/* zipCode */}
+          <Controller
+            control={control}
+            name="zipCode"
+            rules={{ required: false }}
+            render={({ field }) => (
+              <div className="w-full">
+                <InputGroup
+                  label="Kode Pos"
+                  type="text"
+                  name={field.name}
+                  value={field.value ?? ""}
+                  onChange={field.onChange}
+                />
+              </div>
+            )}
           />
         </div>
 

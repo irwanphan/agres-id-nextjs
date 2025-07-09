@@ -51,7 +51,17 @@ export default async function EditPickupPointPage({ params }: Params) {
         </div>
       </div>
       <div className="p-6">
-        {pickupPoint ? <PickupPointForm pickupPointItem={pickupPoint} /> : <p>Pickup point not found</p>}
+        {pickupPoint ? (
+          <PickupPointForm
+            pickupPointItem={{
+              ...pickupPoint,
+              latitude: pickupPoint.latitude !== null ? parseFloat(pickupPoint.latitude.toString()) : null,
+              longitude: pickupPoint.longitude !== null ? parseFloat(pickupPoint.longitude.toString()) : null,
+            }}
+          />
+        ) : (
+          <p>Pickup point not found</p>
+        )}
       </div>
     </div>
   );
