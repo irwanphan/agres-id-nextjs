@@ -140,7 +140,7 @@ const AddressModal = ({
       // create new address
       try {
         await axios.post(`/api/user/${userId}/address`, {
-          address: {
+          addressBundle: {
             address: inputData.address,
             city: inputData.city,
             province: inputData.province,

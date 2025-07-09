@@ -33,27 +33,32 @@ export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ userId: string }> }
 ) {
+  console.log('call post address');
   const { userId } = await params;
-  const { address, city, province, zipCode } = await req.json();
+  const { addressBundle } = await req.json();
+  console.log('addressBundle: ', addressBundle)
+  const { address, city, province, zipCode, name, email, phone, type } = addressBundle;
 
-  console.log(address, city, province);
-
-  if (!address || !city || !province || !zipCode) {
-    return NextResponse.json({ error: "Address, city, province, and zipCode are required" }, { status: 400 });
+  const submitData = {
+    userId,
+    ...addressBundle
   }
+  console.log('submitData: ', submitData)
 
-  console.log(address);
+  if (!address || !city || !province || !zipCode || !name || !email || !phone || !type) {
+    return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+  }
 
   try {
     const data = await prisma.address.create({
       data: {
-        ...address,
-        userId
+        ...submitData,
       },
     });
 
     return NextResponse.json(data, { status: 201 });
   } catch (error) {
+    console.error("Prisma error:", error);
     return NextResponse.json('Internal Server Error', { status: 500 });
   }
 }
@@ -64,16 +69,20 @@ export async function PATCH(
 ) {
   const { userId } = await params;
   try {
-    const { address, id, city, province } = await req.json();
-    console.log("Payload:", address, id, city, province);
+    const { addressBundle, id } = await req.json();
+    console.log("Payload:", addressBundle, id);
 
-    if (!userId || !address || !id) {
+    const { address, city, province, zipCode, name, email, phone, type } = addressBundle;
+
+    if (!userId || !address || !id || !city || !province || !zipCode || !name || !email || !phone || !type) {
       return NextResponse.json('Missing Fields', { status: 400 });
     }
 
     const updated = await prisma.address.update({
       where: { id, userId },
-      data: address,
+      data: {
+        ...addressBundle,
+      },
     });
     // console.log("Updated address:", updated);
   } catch (e) {
