@@ -278,7 +278,7 @@ const AddressModal = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-5 mb-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
               <div>
                 <label htmlFor="province" className="block text-sm font-normal text-gray-6 mb-1.5">
                   Provinsi <span className="text-red">*</span>
@@ -386,7 +386,7 @@ const AddressModal = ({
 
             <button
               className={cn(
-                "inline-flex items-center gap-2 font-medium text-white bg-blue py-3 px-5 text-sm rounded-lg ease-out duration-200 hover:bg-blue-dark",
+                "inline-flex items-center gap-2 font-medium text-white bg-blue py-3 px-5 text-sm rounded-lg ease-out duration-200 hover:bg-blue-dark w-full md:w-auto justify-center",
                 {
                   "opacity-80 pointer-events-none": isLoading,
                 }

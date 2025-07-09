@@ -18,8 +18,8 @@ export default function Sidebar() {
   const { data: session } = useSession();
 
   return (
-    <div className="w-full xl:col-span-3 ">
-      <div className="flex bg-white xl:flex-col rounded-xl shadow-1">
+    <div className="w-full col-span-12 md:col-span-3 ">
+      <div className="flex bg-white md:flex-col rounded-xl shadow-1">
         <div className="flex items-center gap-3 p-4 border-b border-gray-3">
           <div className="overflow-hidden rounded-full bg-red-light-5">
             {/* <Image
@@ -40,31 +40,47 @@ export default function Sidebar() {
           </div>
         </div>
 
-        <div className="p-4 xl:p-6">
-          <div className="flex flex-wrap gap-4 xl:flex-nowrap xl:flex-col">
+        <div className="p-4 md:p-6">
+          <div className="
+            flex w-full flex-row gap-1 md:flex-nowrap md:flex-col
+            fixed bottom-0 left-0 right-0 p-2 bg-white
+            md:relative md:w-full md:flex-col md:gap-4 md:p-0 md:bg-transparent
+            border-t border-gray-3 md:border-t-0
+            justify-center md:justify-start
+          ">
             <Link href="/my-account">
               <DashboardIcon />
-              Dashboard
+              <span className="hidden md:block">
+                Dashboard
+              </span>
             </Link>
 
             <Link href="/my-account/orders">
               <BasketIcon />
-              Orders
+              <span className="hidden md:block">
+                Orders
+              </span>
             </Link>
 
             <Link href="/my-account/downloads">
               <DownloadsIcon />
-              Downloads
+              <span className="hidden md:block">
+                Downloads
+              </span>
             </Link>
 
             <Link href="/my-account/addresses">
               <HomeIcon />
-              Addresses
+              <span className="hidden md:block">
+                Addresses
+              </span>
             </Link>
 
             <Link href="/my-account/account-details">
               <UserIcon />
-              Account Details
+              <span className="hidden md:block">
+                Account Details
+              </span>
             </Link>
 
             <button
@@ -76,7 +92,9 @@ export default function Sidebar() {
               className="flex items-center rounded-md gap-2.5 py-3 px-4.5 ease-out duration-200 hover:bg-blue hover:text-white text-dark-2 bg-gray-1"
             >
               <LogOutIcon />
-              Logout
+              <span className="hidden md:block">
+                Logout
+              </span>
             </button>
           </div>
         </div>
