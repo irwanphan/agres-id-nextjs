@@ -58,30 +58,32 @@ const AddressModal = ({
   });
 
   const { data: session } = useSession();
+  const userName = session?.user?.name || "";
   const userEmail = session?.user?.email || "";
+  const userPhone = session?.user?.fullPhone || "";
 
   const [isLoading, setIsLoading] = useState(false);
   const [provinces, setProvinces] = useState<Province[]>([]);
   const [selectedProvince, setSelectedProvince] = useState<string>("");
   const [cities, setCities] = useState<City[]>([]);
 
+  // if no data, set value to userEmail and userPhone and userName
   useEffect(() => {
-    if (addressType === "BILLING" && data?.email !== userEmail) {
+    // if no data, set value to userEmail and userPhone
+    if (data?.email !== userEmail) {
       setValue("email", userEmail);
     }
-  }, [addressType, data?.email, userEmail, setValue]);
+    // if no data, set value to userPhone
+    if (data?.phone !== userPhone) {
+      setValue("phone", userPhone);
+    }
+    // if no data, set value to userName
+    if (data?.name !== userName) {
+      setValue("name", userName);
+    }
+  }, [addressType, data, userEmail, userPhone, userName, setValue]);
 
-  useEffect(() => {
-    if (!isOpen) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        closeModal();
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, closeModal]);
-
+  // fetch provinces and cities, TODO: patch later, saving id to persist state
   useEffect(() => {
     async function fetchProvinces() {
       try {
@@ -109,6 +111,19 @@ const AddressModal = ({
     fetchCities();
   }, [selectedProvince]);
 
+  //  TODO: modal should be made into a component
+  //  ESC to close modal
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        closeModal();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, closeModal]);
+  // close modal while clicking outside
   useEffect(() => {
     // closing modal while clicking outside
     function handleClickOutside(event: any) {
@@ -126,6 +141,7 @@ const AddressModal = ({
     };
   }, [isOpen, closeModal]);
 
+  // handle submit
   const onSubmit = async (inputData: AddressInputForm) => {
     // console.log("inputData", inputData);
     if (data === null) {
@@ -133,7 +149,7 @@ const AddressModal = ({
       // create new address
       try {
         await axios.post(`/api/user/${userId}/address`, {
-          address: {
+          addressBundle: {
             address: inputData.address,
             city: inputData.city,
             province: inputData.province,
@@ -210,16 +226,17 @@ const AddressModal = ({
                 <Controller
                   control={form.control}
                   name="name"
-                  rules={{ required: "Name is required" }}
+                  // rules={{ required: "Nama Lengkap harus diisi" }}
+                  rules={{ required: false }}
                   render={({ field, fieldState }) => (
                     <InputGroup
-                      label="Name"
+                      label="Nama Lengkap"
                       name={field.name}
                       value={field.value}
                       onChange={field.onChange}
                       error={!!fieldState.error}
                       errorMessage={fieldState.error?.message}
-                      required
+                      // required
                     />
                   )}
                 />
@@ -231,7 +248,7 @@ const AddressModal = ({
                 <Controller
                   control={form.control}
                   name="phone"
-                  rules={{ required: "Phone number is required" }}
+                  rules={{ required: "Nomor Hp harus diisi" }}
                   render={({ field, fieldState }) => (
                     <InputGroup
                       type="tel"
@@ -241,6 +258,7 @@ const AddressModal = ({
                       onChange={field.onChange}
                       error={!!fieldState.error}
                       errorMessage={fieldState.error?.message}
+                      readOnly={addressType === "BILLING"}
                       required
                     />
                   )}
@@ -307,7 +325,7 @@ const AddressModal = ({
                   <select
                     id="city"
                     {...register("city", {
-                      required: "Kota is required",
+                      required: "Kota harus diisi",
                     })}
                     className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
                   >
@@ -321,17 +339,17 @@ const AddressModal = ({
                   <Controller
                     control={form.control}
                     name="zipCode"
-                    rules={{ required: "Zip Code is required" }}
+                    rules={{ required: "Kode Pos harus diisi" }}
                     render={({ field, fieldState }) => (
                       <InputGroup
                         type="text"
-                        label="Zip Code"
+                        label="Kode Pos"
                         name={field.name}
                         value={field.value}
                         onChange={field.onChange}
                         error={!!fieldState.error}
                         errorMessage={fieldState.error?.message}
-                        // required
+                        required
                       />
                     )}
                   />
@@ -343,10 +361,10 @@ const AddressModal = ({
               <Controller
                 control={form.control}
                 name="address.address1"
-                rules={{ required: "Address is required" }}
+                rules={{ required: "Alamat harus diisi" }}
                 render={({ field, fieldState }) => (
                   <InputGroup
-                    label="Address"
+                    label="Alamat"
                     name={field.name}
                     value={field.value}
                     onChange={field.onChange}
@@ -364,7 +382,7 @@ const AddressModal = ({
                 name="address.address2"
                 render={({ field, fieldState }) => (
                   <InputGroup
-                    label="Address 2"
+                    label="Alamat 2"
                     name={field.name}
                     value={field.value}
                     onChange={field.onChange}
