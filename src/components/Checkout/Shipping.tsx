@@ -356,8 +356,8 @@ export default function Shipping() {
           {/* use pickup point */}
           {isPickedUp && (
             <div className={`mb-5 transition-all duration-300 ease-out h-auto ${!isPickedUp ? "h-0" : "h-auto"}`}>
-              <div>
-                <p className="text-sm text-gray-6 mb-5">Pilih Kota Pickup Point AGRES</p>
+              <div className="mb-5">
+                <p className="text-sm text-gray-6 mb-1">Pilih Kota Pickup Point AGRES</p>
                 <select 
                   className="w-full py-2.5 pl-4 pr-8 duration-200 
                   rounded-lg border cursor-pointer
@@ -374,7 +374,7 @@ export default function Shipping() {
                 </select>
               </div>
               
-              <div className="mt-2">
+              <div className="">
                 <label className="block text-sm mb-1">Pilih Pickup Point</label>
                 <select
                   className="w-full py-2.5 pl-4 pr-8 duration-200 
