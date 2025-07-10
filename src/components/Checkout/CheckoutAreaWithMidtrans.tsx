@@ -207,6 +207,7 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
             bankType: formData.selectedBank || "bca", // Use selected bank or default to BCA
           }),
         });
+        // console.log('🔔 bankTransferResponse :', bankTransferResponse)
 
         const bankTransferResult = await bankTransferResponse.json();
 
