@@ -38,16 +38,18 @@ export async function POST(req: NextRequest) {
     const transaction = await core.charge(bankTransferDetails);
 
     return sendSuccessResponse(200, 'Bank transfer transaction created successfully', {
-      transaction_id: transaction.transaction_id,
-      order_id: transaction.order_id,
-      payment_type: transaction.payment_type,
-      transaction_status: transaction.transaction_status,
-      transaction_time: transaction.transaction_time,
-      gross_amount: transaction.gross_amount,
-      va_numbers: transaction.va_numbers,
-      permata_va_number: transaction.permata_va_number,
-      bill_key: transaction.bill_key,
-      biller_code: transaction.biller_code,
+      formData: {
+        transaction_id: transaction.transaction_id,
+        order_id: transaction.order_id,
+        payment_type: transaction.payment_type,
+        transaction_status: transaction.transaction_status,
+        transaction_time: transaction.transaction_time,
+        gross_amount: transaction.gross_amount,
+        va_numbers: transaction.va_numbers,
+        permata_va_number: transaction.permata_va_number,
+        bill_key: transaction.bill_key,
+        biller_code: transaction.biller_code,
+      }
     });
   } catch (error: any) {
     console.error('Midtrans bank transfer error:', error);
