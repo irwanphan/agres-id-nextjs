@@ -64,7 +64,7 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
 
     // Helper function to create order
     const createOrder = async (paymentStatus: "pending" | "paid") => {
-      // console.log('🔔 Creating order with formData:', formData);
+      console.log('🔔 Creating order with formData:', formData);
 
       const orderData = {
         ...formData,
@@ -91,7 +91,7 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
         });
 
         const result = await orderResponse.json();
-        // console.log('🔔 Order result:', result);
+        console.log('🔔 Order result:', result);
 
         if (!result?.success) {
           toast.error(result?.message || "Failed to create order");
@@ -100,7 +100,7 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
 
         return result.data;
       } catch (err: any) {
-        // console.error("Order creation error:", err);
+        console.error("Order creation error:", err);
         toast.error(err?.message || "Failed to create order");
         return false;
       }
@@ -119,7 +119,7 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
 
     // Create order first for Midtrans payments
     const order = await createOrder("pending");
-    // console.log('🔔 Creating order for Midtrans payments', order);
+    console.log('🔔 Creating order for Midtrans payments', order);
 
     if (!order) {
       setLoading(false);
@@ -174,7 +174,7 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
 
         const midtransResult = await midtransResponse.json();
 
-        // console.log('🔔 Midtrans result:', midtransResult);
+        console.log('🔔 Midtrans result:', midtransResult);
 
         if (!midtransResult?.success) {
           toast.error(midtransResult?.message || "Failed to create Midtrans transaction");
@@ -207,7 +207,7 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
             bankType: formData.selectedBank || "bca", // Use selected bank or default to BCA
           }),
         });
-        // console.log('🔔 bankTransferResponse :', bankTransferResponse)
+        console.log('🔔 bankTransferResponse :', bankTransferResponse)
 
         const bankTransferResult = await bankTransferResponse.json();
 
