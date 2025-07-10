@@ -65,6 +65,8 @@ export default function Billing() {
     }
   }, [addressData, setValue, session.data?.user?.name]);
 
+  console.log('session.data?.user :', session.data?.user)
+
   return (
     <div className="bg-white shadow-1 rounded-[10px] ">
       <div
@@ -95,7 +97,7 @@ export default function Billing() {
                   placeholder="John"
                   required
                   error={!!fieldState.error}
-                  errorMessage="First name is required"
+                  errorMessage="Nama depan wajib diisi"
                   name={field.name}
                   value={field.value}
                   onChange={field.onChange}
@@ -114,7 +116,7 @@ export default function Billing() {
                   placeholder="Doe"
                   required
                   error={!!fieldState.error}
-                  errorMessage="Last name is required"
+                  errorMessage="Nama belakang wajib diisi"
                   name={field.name}
                   value={field.value}
                   onChange={field.onChange}
@@ -135,10 +137,11 @@ export default function Billing() {
                   label="Phone"
                   required
                   error={!!fieldState.error}
-                  errorMessage="Phone number is required"
+                  errorMessage="No. HP wajib diisi"
                   name={field.name}
                   value={field.value}
                   onChange={field.onChange}
+                  readOnly={!!session.data?.user?.fullPhone}
                 />
               )}
             />
@@ -153,10 +156,11 @@ export default function Billing() {
                   type="email"
                   required
                   error={!!fieldState.error}
-                  errorMessage="Email is required"
+                  errorMessage="Email wajib diisi"
                   name={field.name}
                   value={field.value}
                   onChange={field.onChange}
+                  readOnly={!!session.data?.user?.email}
                 />
               )}
             />
@@ -205,7 +209,7 @@ export default function Billing() {
                   placeholder="House number and street name"
                   required
                   error={!!fieldState.error}
-                  errorMessage="Street address is required"
+                  errorMessage="Alamat wajib diisi"
                   name={field.name}
                   value={field.value}
                   onChange={field.onChange}
@@ -240,7 +244,7 @@ export default function Billing() {
                   <CheckMarkIcon />
                 </div>
 
-                <span>Create an Account</span>
+                <span>Buat Akun</span>
               </label>
             </div>
           )}
