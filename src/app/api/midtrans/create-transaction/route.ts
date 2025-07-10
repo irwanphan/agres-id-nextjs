@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
   let body;
   try {
     body = await req.json();
-    console.log('[Midtrans] Incoming create-transaction request:', body);
+    // console.log('[Midtrans] Incoming create-transaction request:', body);
     const { 
       orderId, 
       amount, 
@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
     };
 
     const transaction = await snap.createTransaction(transactionDetails);
-    console.log('[Midtrans] Response from core.charge:', transaction);
+    // console.log('[Midtrans] Response from core.charge:', transaction);
 
     return sendSuccessResponse(200, 'Transaction created successfully', {
       token: transaction.token,

@@ -72,7 +72,8 @@ export default function CheckoutMain() {
           service: "",
           etd: "",
         },
-        paymentMethod: "midtrans",
+        // default to snap payment method
+        paymentMethod: "snap",
         couponDiscount: 0,
         couponCode: "",
         notes: "",

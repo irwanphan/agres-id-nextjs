@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
 
     // Start a transaction to ensure atomic updates
     const order = await prisma.$transaction(async (tx) => {
-      console.log('[Order] Before create order');
+      // console.log('[Order] Before create order');
       const newOrder = await tx.order.create({
         data: {
           ...orderData,
@@ -52,16 +52,16 @@ export async function POST(req: NextRequest) {
           // shippingStatus: 'pending'
         },
       });
-      console.log('[Order] After create order');
+      // console.log('[Order] After create order');
 
       // Update product quantity
       for (const item of products) {
-        console.log(`[Order] Before update product ${item.id}`);
+        // console.log(`[Order] Before update product ${item.id}`);
         const product = await tx.product.findUnique({
           where: { id: item.id },
           select: { quantity: true },
         });
-        console.log(`[Order] After find product ${item.id}`);
+        // console.log(`[Order] After find product ${item.id}`);
 
         if (!product || product.quantity < item.quantity) {
           throw new Error(`Insufficient quantity for product: ${item.name}`);
@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
           where: { id: item.id },
           data: { quantity: { decrement: item.quantity } },
         });
-        console.log(`[Order] After update product ${item.id}`);
+        // console.log(`[Order] After update product ${item.id}`);
       }
 
       // If a coupon was applied, update its redemption count

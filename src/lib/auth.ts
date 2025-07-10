@@ -142,7 +142,7 @@ export const authOptions: NextAuthOptions = {
 
 export async function authenticate() {
   const session = await getServerSession(authOptions);
-  console.log("Authenticate function - Session:", session);
+  // console.log("Authenticate function - Session:", session);
   if (!session || session.user.role !== "ADMIN" && session.user.role !== "MANAGER") {
     console.log("Authentication failed - No session or insufficient role");
     return null;
