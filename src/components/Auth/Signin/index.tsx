@@ -142,7 +142,7 @@ const Signin = () => {
                     Sign In with Google
                   </button>
 
-                  <button
+                  {/* <button
                     onClick={() => signIn("github")}
                     type="button"
                     className="flex justify-center items-center text-sm h-11 gap-3.5 rounded-lg border border-gray-3 bg-gray-1 p-3 ease-out duration-200 hover:text-dark hover:bg-gray-2 disabled:pointer-events-none disabled:opacity-60"
@@ -150,7 +150,7 @@ const Signin = () => {
                   >
                     <GitHubIcon />
                     Sign In with Github
-                  </button>
+                  </button> */}
                 </div>
 
                 <p className="mt-6 text-sm text-center">

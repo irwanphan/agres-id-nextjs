@@ -17,9 +17,9 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json();
-  const { name, email, password } = body;
+  const { name, email, phone, countryCode, password } = body;
 
-  if (!name || !email || !password) {
+  if (!name || !email || !phone || !countryCode || !password) {
     return new NextResponse("Missing required fields", { status: 400 });
   }
 
@@ -43,18 +43,32 @@ export async function POST(request: Request) {
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
+  const fullPhone = `+${countryCode.replace(/^\+/, "")}${phone.replace(/^0+/, "")}`;
 
   const newUser: {
     name: string;
     email: string;
+    countryCode: string;
+    phone: string;
+    fullPhone: string;
     password: string;
     role: UserRole;
   } = {
     name,
     email: formatedEmail,
+    countryCode,
+    phone,
+    fullPhone,
     password: hashedPassword,
     role: UserRole.USER,
   };
+
+  const existPhone = await prisma.user.findUnique({
+    where: { phone: fullPhone },
+  });
+  if (existPhone) {
+    return new NextResponse("Phone number already exists", { status: 400 });
+  }
   
   if (isAdminEmail(formatedEmail)) {
     newUser.role = UserRole.ADMIN;
@@ -79,6 +93,9 @@ export async function POST(request: Request) {
         id: user.id,
         name: user.name,
         email: user.email,
+        countryCode: user.countryCode,
+        phone: user.phone,
+        fullPhone: user.fullPhone,
       },
     });
   } catch (error: any) {

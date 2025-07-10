@@ -61,10 +61,14 @@ User Account Management Page
 - [ok] Change Address to Json with Address1 and Address2 on User Account Management Page
 - [] fix: billing email should be the same as login account email
 - [] fix: update user login email also update billing email
+- [] Add phone number to user account management page
 
 Auth
 - [ok] fix: after success login, user is being redirected, but no information is shown on the page when loading and might confuse users
 - [] Email verification is not implemented yet, need to set verificationUrl, clue in WelcomeEmail.tsx
+- [ok] Add phone number to user data
+- [ok] Add country code, phone and full phone when register
+- [] Enable user to login using phone number
 
 Overview
 - [ok] Use Indonesian language and currency symbol
