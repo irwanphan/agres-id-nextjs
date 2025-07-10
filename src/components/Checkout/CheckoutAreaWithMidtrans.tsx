@@ -217,8 +217,8 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
           return;
         }
 
-        const vaNumbers = bankTransferResult.data.va_numbers;
-        const permataVaNumber = bankTransferResult.data.permata_va_number;
+        const vaNumbers = bankTransferResult.data.formData?.va_numbers;
+        const permataVaNumber = bankTransferResult.data.formData?.permata_va_number;
         
         let bankInfo = "";
         if (vaNumbers && vaNumbers.length > 0) {
