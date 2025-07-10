@@ -44,6 +44,10 @@ model User {
   name                  String?
   email                 String?   @unique
   emailVerified         DateTime?
+  countryCode           String?
+  phone                 String?   @unique
+  fullPhone             String?   @unique
+  phoneVerified         DateTime?
   image                 String?
   password              String?
   passwordResetToken    String?   @unique
@@ -120,6 +124,23 @@ model PaymentTransaction {
   updatedAt       DateTime  @updatedAt
 }
 
+model PickupPoint {
+  id         String   @id @default(cuid())
+  name       String
+  address    String
+  pinAddress String?
+  city       String
+  province   String
+  zipCode    String?
+  phone      String?
+  latitude   Float?
+  longitude  Float?
+  teamCode   String?
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
 model Coupon {
   id             String   @id @default(cuid())
   name           String
@@ -138,14 +159,17 @@ enum AddressType {
 }
 
 model Address {
-  id      String      @id @default(cuid())
-  userId  String
-  name    String
-  email   String
-  phone   String
-  address Json
-  type    AddressType @default(ALL)
-  user    User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id       String      @id @default(cuid())
+  userId   String
+  name     String
+  email    String
+  phone    String
+  province String?
+  city     String?
+  zipCode  String?
+  address  Json
+  type     AddressType @default(ALL)
+  user     User        @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Category {

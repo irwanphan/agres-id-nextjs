@@ -14,6 +14,7 @@ declare module "next-auth" {
     user: {
       id: string;
       role: string;
+      createdAt?: string;
     } & DefaultSession["user"];
   }
 }
@@ -74,7 +75,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Incorrect password");
         }
 
-        console.log("User authenticated:", { email: user.email, role: user.role });
+        // console.log("User authenticated:", { email: user.email, role: user.role });
         return user;
       },
     }),
@@ -94,14 +95,15 @@ export const authOptions: NextAuthOptions = {
     jwt: async (payload: any) => {
       const { token, user } = payload;
       if (user) {
-        console.log("JWT Callback - User data:", { id: user.id, role: user.role });
+        // console.log("JWT Callback - User data:", { id: user.id, role: user.role, createdAt: user.createdAt });
         return {
           ...token,
           id: user.id,
           role: user.role,
+          createdAt: user.createdAt,
         };
       }
-      console.log("JWT Callback - Token data:", { id: token.id, role: token.role });
+      // console.log("JWT Callback - Token data:", { id: token.id, role: token.role, createdAt: token.createdAt });
       return token;
     },
 
@@ -109,11 +111,13 @@ export const authOptions: NextAuthOptions = {
       if (session?.user) {
         session.user.id = token.id as string;
         session.user.role = token.role as string;
-        console.log("Session Callback - Session data:", { 
-          id: session.user.id, 
-          role: session.user.role,
-          email: session.user.email 
-        });
+        session.user.createdAt = token.createdAt as string;
+        // console.log("Session Callback - Session data:", { 
+        //   id: session.user.id, 
+        //   role: session.user.role,
+        //   email: session.user.email,
+        //   createdAt: session.user.createdAt
+        // });
         return session;
       }
       return session;

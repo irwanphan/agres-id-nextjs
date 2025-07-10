@@ -12,6 +12,7 @@ import {
   CouponIcon,
   HeroBannerIcon,
   OrdersIcon,
+  BusinessIcon,
   PostIcon,
   ProductIcon,
   ReviewIcon,
@@ -76,6 +77,18 @@ const sidebarMenuData = [
     href: "/admin/reviews",
     icon: <ReviewIcon />,
   },
+
+  {
+    title: "Business Settings",
+    icon: <BusinessIcon />,
+    children: [
+      {
+        title: "Pickup Points",
+        href: "/admin/pickup-points",
+      },
+    ],
+  },
+
   {
     title: "Settings",
     icon: <AccountSettingIcon />,

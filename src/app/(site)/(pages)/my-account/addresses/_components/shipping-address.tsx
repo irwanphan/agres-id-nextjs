@@ -1,21 +1,11 @@
 "use client";
 
-import { CallIcon, EmailIcon, MapIcon } from "@/assets/icons";
 import AddressModal from "@/components/MyAccount/AddressModal";
-import { SquarePencilIcon, UserIcon } from "@/components/MyAccount/icons";
+import { SquarePencilIcon } from "@/components/MyAccount/icons";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
-type AddressType = {
-  name: string;
-  email: string;
-  phone: string;
-  address: {
-    address1: string;
-    address2: string;
-  };
-  id: string;
-};
+import { AddressType } from "@/get-api-data/address";
+import { IconMail, IconMap2, IconMapPin, IconMapRoute, IconMailbox, IconPhone, IconUser } from "@tabler/icons-react";
 
 type PropsType = {
   userId?: string;
@@ -64,26 +54,41 @@ export function ShippingAddress({ userId }: PropsType) {
 
         <div className="p-4 sm:p-7.5">
           {data ? (
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
               <p className="flex items-center gap-2.5 text-custom-sm">
-                <UserIcon className="shrink-0" />
-                Name: {data?.name}
+                <IconUser stroke={1.2} />
+                Name: <span className="font-medium text-dark">{data?.name}</span>
               </p>
 
               <p className="flex items-center gap-2.5 text-custom-sm">
-                <EmailIcon className="shrink-0" />
-                Email: {data?.email}
+                <IconMail stroke={1.2} />
+                Email: <span className="font-medium text-dark">{data?.email}</span>
               </p>
 
               <p className="flex items-center gap-2.5 text-custom-sm">
-                <CallIcon className="shrink-0" />
-                Phone: {data?.phone}
+                <IconPhone stroke={1.2} />
+                Phone: <span className="font-medium text-dark">{data?.phone}</span>
+              </p>
+
+              <p className="flex items-center gap-2.5 text-custom-sm">
+                <IconMap2 stroke={1.2} />
+                Province: <span className="font-medium text-dark">{data?.province}</span>
+              </p>
+
+              <p className="flex items-center gap-2.5 text-custom-sm">
+                <IconMapRoute stroke={1.2} />
+                City: <span className="font-medium text-dark">{data?.city}</span>
+              </p>
+
+              <p className="flex items-center gap-2.5 text-custom-sm">
+                <IconMailbox stroke={1.2} />
+                Zip Code: <span className="font-medium text-dark">{data?.zipCode}</span>
               </p>
 
               <p className="flex gap-2.5 text-custom-sm">
-                <MapIcon className="mt-0.5 shrink-0" />
-                Address: {data?.address.address1}
-                {data?.address.address2 && `, ${data?.address.address2}`}
+                <IconMapPin stroke={1.2} />
+                Address: <span className="font-medium text-dark">{data?.address.address1}
+                {data?.address.address2 && `, ${data?.address.address2}`}</span>
               </p>
             </div>
           ) : (

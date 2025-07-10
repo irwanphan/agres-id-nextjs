@@ -140,3 +140,60 @@ Create a `.env` file in the root directory:
 
 - **Currency Support**: Multiple currency support
 - **Localization**: Adaptation for local markets
+
+
+
+## Test Notes
+
+# Run all tests
+npm run test:run
+
+# Run specific test
+npm run test:run src/app/(studio)/admin/(products)/_components/__tests__/ProductForm.basic.test.tsx
+
+# Run in watch mode
+npm run test
+
+# Run with UI
+npm run test:ui
+
+Dependencies:
+@testing-library/react - Testing React components
+@testing-library/user-event - User event simulation
+@testing-library/jest-dom - Additional matchers
+vitest - Test runner modern
+jsdom - DOM environment for testing
+@vitejs/plugin-react - React support for Vite
+
+Konfigurasi Files:
+vitest.config.ts - Configuration for Vitest
+src/setupTests.ts - Setup file for testing
+package.json - Scripts testing added
+📋 Test Coverage
+Business Logic Testing:
+✅ Form field validation
+✅ Price and discount validation
+✅ Product data structure
+✅ Product variant structure
+✅ Custom attribute structure
+✅ File upload validation
+✅ Slug generation logic
+✅ Create vs edit mode
+Data Structure Testing:
+✅ Product variant structure
+✅ Custom attribute structure
+✅ Additional information structure
+✅ Form submission data
+✅ Required fields validation
+
+1. ProductForm.basic.test.tsx - 11 Tests ✅
+- Form field structure validation - Validate form field structure
+- Required field validation - Validate required fields
+- Product variant handling - Handle product variant structure
+- Custom attributes structure - Validate custom attribute structure
+- Additional information handling - Handle additional information
+- Price validation logic - Validate price and discount logic
+- Form submission data structure - Validate form submission data structure
+- File upload validation - Validate file upload
+- Slug generation logic - Validate slug generation
+- Create vs Edit mode handling - Handle create and edit mode

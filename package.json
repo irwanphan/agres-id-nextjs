@@ -9,6 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "import-demo-data": "node scripts/import-demo-data.js",
+    "preview-pickup-points": "node scripts/preview-pickup-points.js",
+    "import-pickup-points": "node scripts/import-pickup-points.js",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run"
@@ -57,6 +59,7 @@
     "sweetalert2": "^11.17.2",
     "swiper": "^11.0.7",
     "tailwind-merge": "^3.0.1",
+    "use-debounce": "^10.0.5",
     "use-shopping-cart": "^3.1.8"
   },
   "devDependencies": {

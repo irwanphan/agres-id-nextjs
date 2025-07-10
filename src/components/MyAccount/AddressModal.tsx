@@ -1,18 +1,25 @@
 "use client";
 
-import { XIcon } from "@/assets/icons";
-import cn from "@/utils/cn";
-import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import axios, { AxiosError } from "axios";
+import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
+import cn from "@/utils/cn";
 import Loader from "../Common/Loader";
+import { XIcon } from "@/assets/icons";
 import { InputGroup } from "../ui/input";
+import { Province } from "@/types/province";
+import { City } from "@/types/city";
+import { IconDeviceFloppy } from "@tabler/icons-react";
 
-type Input = {
+type AddressInputForm = {
   name: string;
   email: string;
   phone: string;
+  city: string;
+  province: string;
+  zipCode: string;
   address: {
     address1: string;
     address2: string;
@@ -24,7 +31,7 @@ type PropsType = {
   isOpen: boolean;
   closeModal: () => void;
   addressType: "SHIPPING" | "BILLING";
-  data?: Input & {
+  data?: AddressInputForm & {
     id: string;
   };
   onSubmitSuccess?: () => void;
@@ -38,16 +45,31 @@ const AddressModal = ({
   userId,
   onSubmitSuccess,
 }: PropsType) => {
-  const { register, ...form } = useForm<Input>({
+  const { register, setValue, watch, ...form } = useForm<AddressInputForm>({
     defaultValues: {
       name: data?.name,
       email: data?.email,
       phone: data?.phone,
+      city: data?.city,
+      zipCode: data?.zipCode,
+      province: data?.province,
       address: data?.address,
     },
   });
 
+  const { data: session } = useSession();
+  const userEmail = session?.user?.email || "";
+
   const [isLoading, setIsLoading] = useState(false);
+  const [provinces, setProvinces] = useState<Province[]>([]);
+  const [selectedProvince, setSelectedProvince] = useState<string>("");
+  const [cities, setCities] = useState<City[]>([]);
+
+  useEffect(() => {
+    if (addressType === "BILLING" && data?.email !== userEmail) {
+      setValue("email", userEmail);
+    }
+  }, [addressType, data?.email, userEmail, setValue]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -59,6 +81,33 @@ const AddressModal = ({
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, closeModal]);
+
+  useEffect(() => {
+    async function fetchProvinces() {
+      try {
+        const res = await fetch('/api/location/province');
+        const data = await res.json();
+        setProvinces(data);
+      } catch (error) {
+        console.error("Error fetching provinces:", error);
+      }
+    }
+    fetchProvinces();
+  }, []);
+
+  useEffect(() => {
+    async function fetchCities() {
+      try {
+        if (!selectedProvince) return setCities([]);
+        const res = await fetch(`/api/location/city?provinceId=${selectedProvince}`);
+        const data = await res.json();
+        setCities(data);
+      } catch (error) {
+        console.error("Error fetching cities:", error);
+      }
+    }
+    fetchCities();
+  }, [selectedProvince]);
 
   useEffect(() => {
     // closing modal while clicking outside
@@ -77,14 +126,21 @@ const AddressModal = ({
     };
   }, [isOpen, closeModal]);
 
-  const onSubmit = async (inputData: Input) => {
+  const onSubmit = async (inputData: AddressInputForm) => {
+    // console.log("inputData", inputData);
     if (data === null) {
       setIsLoading(true);
       // create new address
       try {
         await axios.post(`/api/user/${userId}/address`, {
           address: {
-            ...inputData,
+            address: inputData.address,
+            city: inputData.city,
+            province: inputData.province,
+            zipCode: inputData.zipCode,
+            name: inputData.name,
+            email: inputData.email,
+            phone: inputData.phone,
             type: addressType,
           },
         });
@@ -102,7 +158,16 @@ const AddressModal = ({
       try {
         await axios.patch(`/api/user/${userId}/address`, {
           id: data?.id,
-          address: inputData,
+          address: {
+            name: inputData.name,
+            email: inputData.email,
+            phone: inputData.phone,
+            address: inputData.address,
+            city: inputData.city,
+            province: inputData.province,
+            zipCode: inputData.zipCode,
+            type: addressType,
+          },
         });
 
         toast.success("Address updated successfully");
@@ -111,7 +176,7 @@ const AddressModal = ({
         if (error instanceof AxiosError) {
           console.log(error.response?.data);
         }
-        toast.error("Failed to update address");
+        toast.error("Failed to update address " + error);
       } finally {
         setIsLoading(false);
       }
@@ -161,7 +226,7 @@ const AddressModal = ({
               </div>
             </div>
 
-            <div className="flex flex-col gap-5 mb-5 lg:flex-row sm:gap-8">
+            <div className="flex flex-col gap-5 mb-5 md:flex-row">
               <div className="w-full">
                 <Controller
                   control={form.control}
@@ -196,10 +261,81 @@ const AddressModal = ({
                       onChange={field.onChange}
                       error={!!fieldState.error}
                       errorMessage={fieldState.error?.message}
+                      readOnly={addressType === "BILLING"}
                       required
                     />
                   )}
                 />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+              <div>
+                <label htmlFor="province" className="block text-sm font-normal text-gray-6 mb-1.5">
+                  Provinsi <span className="text-red">*</span>
+                </label>
+                <input
+                  list="province-list" 
+                  id="province" 
+                  {...register("province", {
+                    required: true,
+                    validate: (value: string) =>
+                      provinces.some(province => province.province === value) || "Pilih provinsi yang valid"
+                  })}
+                  type="text" 
+                  name="province" 
+                  className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
+                  placeholder="Silahkan Ketik dan Pilih Provinsi..."
+                  onBlur={() => {
+                    const selected = provinces.find(p => p.province === watch("province"));
+                    // console.log('selected', selected);
+                    setSelectedProvince(selected ? selected.province_id : "");
+                  }}
+                />
+                <datalist id="province-list">
+                  {provinces.map((province) => (
+                    <option key={province.province_id} value={province.province} />
+                  ))}
+                </datalist>
+              </div>
+
+              <div className="flex flex-col gap-5 md:flex-row">
+                <div className="w-full">
+                  <label htmlFor="city" className="block text-sm font-normal text-gray-6 mb-1.5">
+                    Kota <span className="text-red">*</span>
+                  </label>
+                  <select
+                    id="city"
+                    {...register("city", {
+                      required: "Kota is required",
+                    })}
+                    className="rounded-lg border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
+                  >
+                    {cities.map((city) => (
+                      <option key={city.city_id} value={city.city_name}>{city.city_name}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="w-full">
+                  <Controller
+                    control={form.control}
+                    name="zipCode"
+                    rules={{ required: "Zip Code is required" }}
+                    render={({ field, fieldState }) => (
+                      <InputGroup
+                        type="text"
+                        label="Zip Code"
+                        name={field.name}
+                        value={field.value}
+                        onChange={field.onChange}
+                        error={!!fieldState.error}
+                        errorMessage={fieldState.error?.message}
+                        // required
+                      />
+                    )}
+                  />
+                </div>
               </div>
             </div>
 
@@ -241,14 +377,14 @@ const AddressModal = ({
 
             <button
               className={cn(
-                "inline-flex items-center gap-2 font-medium text-white bg-blue py-3 px-5 text-sm rounded-lg ease-out duration-200 hover:bg-blue-dark",
+                "inline-flex items-center gap-2 font-medium text-white bg-blue py-3 px-5 text-sm rounded-lg ease-out duration-200 hover:bg-blue-dark w-full md:w-auto justify-center",
                 {
                   "opacity-80 pointer-events-none": isLoading,
                 }
               )}
               disabled={isLoading}
             >
-              Save Changes {isLoading && <Loader />}
+              <IconDeviceFloppy stroke={1.5} /> Save Changes {isLoading && <Loader />}
             </button>
           </form>
         </div>

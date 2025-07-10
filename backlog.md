@@ -19,7 +19,7 @@ RajaOngkir Integration
 - [ok] Create options
 - [] Repack using modular option
 - [ok] Test Rajaongkir API
-- [] Fix:checkout doesn't have weight to calculate shipping cost
+- [ok] Fix:checkout doesn't have weight to calculate shipping cost
 
 Shopping Cart Page
 - [ok] Fix: Formatting language and currency
@@ -29,8 +29,8 @@ Checkout Page
 - [ok] Region select box cannot use directional arrow to select region
 - [ok] fix: email is prefilled with the email of the user who is logged in, but checkout is failed with email not filled
 - [] Page for user to check order status based on Order ID
-- [] Calculate total with shipping cost
-- [] "Pickup di Gerai AGRES" option shows Pickup Point selection
+- [ok] Calculate total with shipping cost
+- [ok] "Pickup di Gerai AGRES" option shows Pickup Point selection
 - [] Show map for Pickup Point selection
 - [ok] fix: orders summary, product lines broken when product name is too long
 - [ok] Get province and city from database/json instead of using RajaOngkir API
@@ -39,8 +39,11 @@ Checkout Page
 - [ok] auto fetch billing address from user account management page to billing section
 - [ok] auto fetch shipping address from user account management page to shipping section
 - [ok] fix: checkout page doesn't show the product variant selected - show color
-- [] fix: db doesn't have the product variant selected
+- [ok] fix: db doesn't have the product variant selected
 - [ok] fix: count weight and dimension of product variant
+- [] fix: product variant missing weight and dimension in db
+- [ok] patch checkout page into 2 route: to be shipped and to be picked up
+- [] fix: billing emaul should be the same as login account email
 
 RBAC / Fine Grained Access Control
 - [] Add RBAC / Fine Grained Access Control
@@ -54,12 +57,18 @@ Admin Page
 - [ok] FIx admin page padding and off-scroll caused by double height of container
 
 User Account Management Page
-- [] Add Join Date to User Account Management Page, show in Sidebar
+- [ok] Add Join Date to User Account Management Page, show in Sidebar
 - [ok] Change Address to Json with Address1 and Address2 on User Account Management Page
+- [] fix: billing email should be the same as login account email
+- [] fix: update user login email also update billing email
+- [] Add phone number to user account management page
 
 Auth
 - [ok] fix: after success login, user is being redirected, but no information is shown on the page when loading and might confuse users
 - [] Email verification is not implemented yet, need to set verificationUrl, clue in WelcomeEmail.tsx
+- [ok] Add phone number to user data
+- [ok] Add country code, phone and full phone when register
+- [] Enable user to login using phone number
 
 Overview
 - [ok] Use Indonesian language and currency symbol
@@ -68,9 +77,10 @@ Footer
 - [] Social links can be dynamic from the database and edited on admin page
 
 Pickup Point
-- [] Add Pickup Point
-- [] Add Pickup Point to the Checkout Page
-- [] Add Pickup Management Page to Admin Page
+- [ok] Add Pickup Point
+- [ok] Add Pickup Management Page to Admin Page
+- [ok] Add Pickup Point to the Checkout Page
+- [ok] Save Pickup Point to the Order
 
 Affiliate & Store Account Management
 - [] Confirm how to treat the store account and affiliate account, bonus, discount, etc.

@@ -1,12 +1,7 @@
 'use client';
 
 import { FieldError } from "react-hook-form";
-
-export type City = {
-  city_id: string;
-  city_name: string;
-  province_id: string;
-};
+import { City } from "@/types/city";
 
 type Props = {
   name: string;
@@ -19,14 +14,14 @@ type Props = {
 export default function LocationCityDatalist({ name, register, error, cities, setValue }: Props) { 
   return (
     <div>
-      <label htmlFor="province">
+      <label htmlFor="city" className="block text-sm font-normal text-gray-6 mb-1.5">
         Kota <span className="text-red">*</span>
       </label>
       <input
         list="city-list" 
         id="city"
         {...register(name, {
-          required: "Province is required",
+          required: "Kota is required",
           validate: (value: string) =>
             cities.some(city => city.city_name === value) || "Pilih kota yang valid"
         })}

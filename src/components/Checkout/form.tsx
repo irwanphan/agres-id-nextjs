@@ -52,6 +52,7 @@ export type CheckoutInput = {
     provinceId: string;
     city: string;
     cityId: string;
+    zipCode: string;
     address: {
       address1: string;
       address2?: string;
@@ -64,6 +65,7 @@ export type CheckoutInput = {
   shippingAddressOption: "default" | "sameAsBilling" | "other";
   shipping?: {
     // origin: string;
+    pickupPointId?: string;
     destination: string;
     weight?: number;
     // countryName: string;
@@ -75,6 +77,11 @@ export type CheckoutInput = {
     // country?: string;
     phone: string;
     email: string;
+    city: string;
+    cityId: string;
+    province: string;
+    provinceId: string;
+    zipCode: string;
   };
   shippingMethod: {
     name: string;

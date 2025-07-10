@@ -43,7 +43,7 @@ async function PostAuthorEditPage({ params }: Params) {
   const { id } = await params;
   const authorItem = await getPostAuthorItem(Number(id));
   return (
-    <div className="max-w-3xl p-6 mx-auto bg-white border rounded-xl shadow-1 border-gray-3">
+    <div className="p-6 bg-white border rounded-xl shadow-1 border-gray-3">
       <h1 className="font-semibold text-xl  text-dark mb-2.5">Edit Author</h1>
       <PostAuthorForm authorItem={authorItem} />
     </div>

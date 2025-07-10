@@ -21,6 +21,9 @@ export async function GET(req: NextRequest) {
           equals: session.user.email,
         },
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
     return NextResponse.json({ orders }, { status: 200 });
@@ -35,7 +38,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { selectedBank, shipToDifferentAddress, couponDiscount, couponCode, products, ...orderData } = body;
+    const { selectedBank, shipToDifferentAddress, shippingAddressOption, couponDiscount, couponCode, products, ...orderData } = body;
 
     // console.log("🔔 Order data:", orderData);
 

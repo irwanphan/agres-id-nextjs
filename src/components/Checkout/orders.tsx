@@ -16,6 +16,7 @@ export default function Orders() {
   const packageWeight = watch("shipping.weight");
 
   // console.log("packageWeight", packageWeight);
+  // console.log("shippingMethod", shippingMethod);
 
   return (
     <div id="section-orders" className="bg-white shadow-1 rounded-[10px]">
@@ -60,7 +61,7 @@ export default function Orders() {
             )}
 
             {/* Shipping Information */}
-            {shippingMethod?.price ? (
+            {shippingMethod?.name ? (
               <>
                 <tr className="border-b border-gray-3">
                   <td className="py-3">
@@ -90,11 +91,12 @@ export default function Orders() {
                 <td className="py-3">
                   <div className="flex items-center gap-2">
                     <IconTruck className="h-4 w-4 text-gray-4" />
-                    <span>Shipping Fee</span>
+                    <span>Ongkos Kirim</span>
                   </div>
                 </td>
                 <td className="py-3 text-right">
-                  {formatPrice(shippingMethod.price)}
+                  Belum pilih metode pengiriman
+                  {/* {formatPrice(shippingMethod.price)} */}
                 </td>
               </tr>
             )}
@@ -161,7 +163,7 @@ export default function Orders() {
 
         <div className="text-sm text-green-600 flex items-center justify-end gap-2 h-14 rounded-lg">
           <span className="text-sm">
-          <button type="button" onClick={()=>{
+            <button type="button" onClick={()=>{
               const element = document.getElementById("section-payment-method");
               if (element) {
                 const elementPosition = element.offsetTop - 128;
@@ -171,7 +173,7 @@ export default function Orders() {
                 });
               }
             }} className="text-sm text-blue-light flex items-center gap-2">
-              Next, Scroll ke Metode Pembayaran <IconChevronsDown className="w-4 h-4" />
+              Next, Scroll ke Metode Pembayaran <IconChevronsDown className="w-5 h-5" />
             </button>
           </span>
         </div>

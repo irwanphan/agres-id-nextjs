@@ -8,20 +8,11 @@ import { useCheckoutForm } from "./form";
 import { splitName } from "@/utils/splitName";
 import { CheckMarkIcon } from "@/assets/icons";
 import LocationCityDatalist from "./LocationCityDatalist";
-import { Province } from "./LocationProvinceDatalist";
-import { City } from "./LocationCityDatalist";
+import { Province } from "@/types/province";
+import { City } from "@/types/city";
 import { ChevronDown } from "./icons";
-
-type AddressType = {
-  name: string;
-  email: string;
-  phone: string;
-  address: {
-    address1: string;
-    address2: string;
-  };
-  id: string;
-};
+import { AddressType } from "@/get-api-data/address";
+import { IconChevronsDown } from "@tabler/icons-react";
 
 export default function Billing() {
   const [dropdown, setDropdown] = useState(true);
@@ -55,6 +46,8 @@ export default function Billing() {
       .then(data => setAddressData(data));
   }, [session.data?.user?.id]);
 
+  const loadedProvinceId = provinces.find(p => p.province === addressData?.province)?.province_id;
+  const loadedCityId = cities.find(c => c.city_name === addressData?.city)?.city_id;
   useEffect(() => {
     if (addressData && session.data?.user?.name) {
       const { firstName, lastName } = splitName(session.data.user.name);
@@ -62,6 +55,11 @@ export default function Billing() {
       setValue("billing.lastName", lastName);
       setValue("billing.phone", addressData.phone || "");
       setValue("billing.email", addressData.email || "");
+      setValue("billing.city", addressData.city || "");
+      setValue("billing.cityId", loadedCityId || "");
+      setValue("billing.province", addressData.province || "");
+      setValue("billing.provinceId", loadedProvinceId || "");
+      setValue("billing.zipCode", addressData.zipCode || "");
       setValue("billing.address.address1", addressData.address?.address1 || "");
       setValue("billing.address.address2", addressData.address?.address2 || "");
     }
@@ -85,7 +83,7 @@ export default function Billing() {
       {/* <!-- dropdown menu --> */}
       {dropdown && (
 
-        <div className="p-6 space-y-5">
+        <div className="p-6 border-t border-gray-3 space-y-5">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <Controller
               control={control}
@@ -225,8 +223,6 @@ export default function Billing() {
             </div>
           </div>
 
-          
-
           {!session?.data?.user?.email && (
             <div>
               <label
@@ -248,6 +244,21 @@ export default function Billing() {
               </label>
             </div>
           )}
+
+          <div className="text-sm text-green-600 flex items-center justify-end gap-2 h-14 rounded-lg">
+            <button type="button" onClick={()=>{
+              const element = document.getElementById("section-shipping");
+              if (element) {
+                const elementPosition = element.offsetTop - 128;
+                window.scrollTo({
+                  top: elementPosition,
+                  behavior: "smooth"
+                });
+              }
+            }} className="text-sm text-blue-light flex items-center gap-2">
+              Next, Scroll ke Detil Alamat Pengiriman <IconChevronsDown className="w-5 h-5" />
+            </button>
+          </div>
         </div>
       )}
     </div>

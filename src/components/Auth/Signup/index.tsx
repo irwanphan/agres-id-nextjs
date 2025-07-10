@@ -6,13 +6,15 @@ import axios, { AxiosError } from "axios";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 type Input = {
   name: string;
   email: string;
+  phone: string;
+  countryCode: string;
   password: string;
   confirmPassword: string;
 };
@@ -48,7 +50,9 @@ const Signup = () => {
         return;
       }
 
-      toast.success("Sign Up Successful!");
+      toast.success("Pendaftaran berhasil! Anda segera dialihkan ke halaman akun Anda.", {
+        duration: 5000,
+      });
 
       // Ensure page refresh only after successful sign-in
       router.refresh();
@@ -93,14 +97,14 @@ const Signup = () => {
                 Sign Up with Google
               </button>
 
-              <button
+              {/* <button
                 onClick={() => signIn("github")}
                 className="flex justify-center h-11 text-sm items-center gap-3.5 rounded-lg border border-gray-3 bg-gray-1 p-3 ease-out duration-200 hover:text-dark hover:bg-gray-2 disabled:pointer-events-none disabled:opacity-60"
                 disabled={isLoading}
               >
                 <GitHubIcon />
                 Sign Up with Github
-              </button>
+              </button> */}
             </div>
 
             <span className="relative z-1 block font-medium text-center mt-4.5">
@@ -115,20 +119,20 @@ const Signup = () => {
                     htmlFor="name"
                     className="block mb-1.5 text-sm text-gray-6"
                   >
-                    Full Name <span className="text-red">*</span>
+                    Nama Lengkap <span className="text-gray-5">(Full Name)</span> <span className="text-red">*</span>
                   </label>
 
                   <input
                     type="text"
                     {...register("name", { required: true })}
                     id="name"
-                    placeholder="John"
+                    placeholder="Boedi Ono"
                     className="rounded-lg text-dark border placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
                     required
                   />
 
                   {formState.errors.name && (
-                    <p className="text-sm text-red mt-1.5">Name is required</p>
+                    <p className="text-sm text-red mt-1.5">Nama Lengkap harus diisi</p>
                   )}
                 </div>
 
@@ -137,20 +141,51 @@ const Signup = () => {
                     htmlFor="email"
                     className="block mb-1.5 text-sm text-gray-6"
                   >
-                    Email Address <span className="text-red">*</span>
+                    Alamat Email <span className="text-gray-5">(Email Address)</span> <span className="text-red">*</span>
                   </label>
 
                   <input
                     type="email"
                     {...register("email", { required: true })}
                     id="email"
-                    placeholder="john@gmail.com"
+                    placeholder="boedi@gmail.com"
                     className="rounded-lg border text-dark placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11  focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full  py-2.5 px-4 duration-200  focus:ring-0"
                     required
                   />
 
                   {formState.errors.email && (
-                    <p className="text-sm text-red mt-1.5">Email is required</p>
+                    <p className="text-sm text-red mt-1.5">Alamat Email harus diisi</p>
+                  )}
+                </div>
+
+                <div className="mb-5">
+                  <label
+                    htmlFor="phone"
+                    className="block mb-1.5 text-sm text-gray-6"
+                  >
+                    Nomor Hp <span className="text-gray-5">(Phone Number)</span> <span className="text-red">*</span>
+                  </label>
+
+                  <div className="flex">
+                    <input id="countryCode" type="hidden" value="62" />
+                    <input 
+                      type="text" {...register("countryCode", { required: true })} 
+                      disabled
+                      value="+62"
+                      className="rounded-l-lg border border-r-0 text-dark text-sm border-gray-3 h-11 w-16 py-2.5 px-4 bg-gray-1"
+                    />
+                    <input
+                      type="tel"
+                      {...register("phone", { required: true })}
+                      id="phone"
+                      placeholder="8123456789XX"
+                      className="rounded-r-lg border text-dark placeholder:text-sm text-sm placeholder:font-normal border-gray-3 h-11 focus:border-blue focus:outline-0  placeholder:text-dark-5 w-full py-2.5 px-4 duration-200 focus:ring-0"
+                      required
+                    />
+                  </div>
+
+                  {formState.errors.phone && (
+                    <p className="text-sm text-red mt-1.5">Nomor Hp harus diisi</p>
                   )}
                 </div>
 
@@ -159,7 +194,7 @@ const Signup = () => {
                     htmlFor="password"
                     className="block mb-1.5 text-sm text-gray-6"
                   >
-                    Password <span className="text-red">*</span>
+                    Password <span className="text-gray-5">(Password)</span> <span className="text-red">*</span>
                   </label>
 
                   <input
@@ -177,8 +212,7 @@ const Signup = () => {
 
                   {formState.errors.password && (
                     <p className="text-sm text-red mt-1.5">
-                      Minimum 6 characters with 1 uppercase, 1 lowercase, and 1
-                      number.
+                      Password harus diisi dengan minimum 6 karakter, 1 huruf besar, 1 huruf kecil, dan 1 angka.
                     </p>
                   )}
                 </div>
@@ -188,7 +222,7 @@ const Signup = () => {
                     htmlFor="re-type-password"
                     className="block mb-1.5 text-sm text-gray-6"
                   >
-                    Re-type Password <span className="text-red">*</span>
+                    Konfirmasi Password <span className="text-red">*</span>
                   </label>
 
                   <input
