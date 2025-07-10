@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useShoppingCart } from "use-shopping-cart";
 import { ArrowLeftIcon } from "./_components/icons";
 import { formatPrice } from "@/utils/formatPrice";
-import { IconLogin, IconUserCircle } from "@tabler/icons-react";
+import { IconLogin, IconShoppingCart, IconUserCircle, IconWind } from "@tabler/icons-react";
 
 const CheckoutSuccess = ({ amount, bankInfo }: { amount: string; bankInfo?: string }) => {
   const { clearCart } = useShoppingCart();
@@ -72,16 +72,15 @@ const CheckoutSuccess = ({ amount, bankInfo }: { amount: string; bankInfo?: stri
             <div className="bg-white rounded-xl shadow-1 px-4 py-10 sm:py-8 lg:py-10 xl:py-25">
               <div className="text-center">
                 <h1 className="font-bold text-blue text-4xl lg:text-[45px] lg:leading-[57px] mb-5">
-                  Successful!
+                  Terima Kasih!
                 </h1>
 
                 <h2 className="font-medium text-dark text-xl sm:text-2xl mb-3">
-                  Order Placed Successfully! amount: {formatPrice(Number(amount))}
+                  Pesanan Anda telah berhasil diproses! amount: {formatPrice(Number(amount))}
                 </h2>
 
                 <p className="max-w-[491px] w-full mx-auto mb-7.5">
-                  Sign In with & Track the order. If you are not already Signed
-                  Up use the purchase email to Sign up.
+                  Silakan cek email Anda untuk detail pesanan.
                 </p>
 
                 {bankInfo && (
@@ -110,12 +109,12 @@ const CheckoutSuccess = ({ amount, bankInfo }: { amount: string; bankInfo?: stri
                     { session?.user ? (
                         <div className="flex items-center gap-2">
                           <IconUserCircle stroke={1.5} />
-                          Account
+                          Cek Pesanan
                         </div>
                       ) : (
                         <div className="flex items-center gap-2">
                           <IconLogin stroke={1.5} />
-                          Sign In
+                          Masuk
                         </div>
                       ) }
                   </Link>
@@ -124,8 +123,12 @@ const CheckoutSuccess = ({ amount, bankInfo }: { amount: string; bankInfo?: stri
                     href="/shop"
                     className="inline-flex items-center gap-2 font-medium text-white bg-blue py-3 px-6 rounded-md ease-out duration-200 hover:bg-blue-dark"
                   >
-                    Continue Shopping
-                    <ArrowLeftIcon className="rotate-180" />
+                    Gasss, Lanjut Belanja
+                    <div className="flex items-center">
+                      <IconWind className="rotate-180 -mr-1" stroke={1.2} />
+                      <IconShoppingCart stroke={1.5} />
+                    </div>
+                    {/* <ArrowLeftIcon className="rotate-180" /> */}
                   </Link>
                 </div>
               </div>

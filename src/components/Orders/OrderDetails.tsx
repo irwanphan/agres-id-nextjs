@@ -9,6 +9,21 @@ const OrderDetails = ({ orderItem }: any) => {
   return (
     <div className="w-full ">
       {/* Product Table */}
+      <div className="mb-8">
+        <h1 className="text-lg font-bold text-gray-7">
+          No. Pesanan #{orderItem?.orderNumber}
+        </h1>
+        <p className="text-sm font-normal text-gray-6">
+          Tanggal Pesanan:
+          <span className="ml-1 font-semibold">
+            {new Date(orderItem?.createdAt).toLocaleDateString("id-ID", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+            })}
+          </span>
+        </p>
+      </div>
       <div className="overflow-x-auto">
         <table className="min-w-[700px] w-full border-collapse text-left mb-6">
           <thead className="bg-gray-100 border-b text-gray-7 border-gray-3">
@@ -39,7 +54,7 @@ const OrderDetails = ({ orderItem }: any) => {
                 <td className="p-2 whitespace-nowrap">
                   {formatPrice(item?.price)}
                 </td>
-                <td className="p-2 font-medium text-red-600 whitespace-nowrap">
+                <td className="p-2 font-medium text-green whitespace-nowrap">
                   {formatPrice(parseInt(item?.quantity) * parseInt(item?.price))}
                 </td>
               </tr>
@@ -59,8 +74,32 @@ const OrderDetails = ({ orderItem }: any) => {
           </li>
           <li className="flex items-center justify-between">
             <p className="font-medium">Total Harga</p>
-            <p className="text-lg font-bold text-red-600">
+            <p className="text-lg font-bold text-green">
               {formatPrice(totalAmount)}
+            </p>
+          </li>
+          <li className="flex items-center justify-between">
+            <p className="font-medium">Status Pembayaran</p>
+            <p className={`text-lg font-bold ${orderItem?.paymentStatus === "pending"
+              ? "text-yellow-500"
+              : orderItem?.paymentStatus === "paid"
+                ? "text-green"
+                : orderItem?.paymentStatus === "cancel"
+                  ? "text-red-500"
+                  : "text-gray-7"}`}>
+              {orderItem?.paymentStatus}
+            </p>
+          </li>
+          <li className="flex items-center justify-between">
+            <p className="font-medium">Status Pengiriman</p>
+            <p className={`text-lg font-bold ${orderItem?.shippingStatus === "pending"
+              ? "text-yellow-500"
+              : orderItem?.shippingStatus === "delivered"
+                ? "text-green"
+                : orderItem?.shippingStatus === "cancel"
+                  ? "text-red-500"
+                  : "text-gray-7"}`}>
+              {orderItem?.shippingStatus}
             </p>
           </li>
         </ul>
