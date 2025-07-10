@@ -3,11 +3,10 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useShoppingCart } from "use-shopping-cart";
-import { ArrowLeftIcon } from "./_components/icons";
 import { formatPrice } from "@/utils/formatPrice";
 import { IconLogin, IconShoppingCart, IconUserCircle, IconWind } from "@tabler/icons-react";
 
-const CheckoutSuccess = ({ amount, bankInfo }: { amount: string; bankInfo?: string }) => {
+const CheckoutSuccess = ({ amount, bankInfo, orderId }: { amount: string; bankInfo?: string; orderId?: string }) => {
   const { clearCart } = useShoppingCart();
   const [loading, setLoading] = useState(true);
 
@@ -28,16 +27,15 @@ const CheckoutSuccess = ({ amount, bankInfo }: { amount: string; bankInfo?: stri
             <div className="bg-white rounded-xl shadow-1 px-4 py-10 sm:py-8 lg:py-10 xl:py-25">
               <div className="text-center">
                 <h1 className="font-bold text-blue text-4xl lg:text-[45px] lg:leading-[57px] mb-5">
-                  Successful!
+                  Terima Kasih!
                 </h1>
 
                 <h2 className="font-medium text-dark text-xl sm:text-2xl mb-3">
-                  Order Placed Successfully! amount: {amount}
+                  Pesanan Anda dengan nomor {orderId} telah berhasil diproses! amount: {formatPrice(Number(amount))}
                 </h2>
 
                 <p className="max-w-[491px] w-full mx-auto mb-7.5">
-                  Wait a second while we save the order. You will receive an
-                  email with details of your order.
+                  Silakan cek email Anda untuk detail pesanan.
                 </p>
 
                 <div className="flex justify-center gap-5">
@@ -76,7 +74,7 @@ const CheckoutSuccess = ({ amount, bankInfo }: { amount: string; bankInfo?: stri
                 </h1>
 
                 <h2 className="font-medium text-dark text-xl sm:text-2xl mb-3">
-                  Pesanan Anda telah berhasil diproses! amount: {formatPrice(Number(amount))}
+                  Pesanan Anda dengan nomor {orderId} telah berhasil diproses! amount: {formatPrice(Number(amount))}
                 </h2>
 
                 <p className="max-w-[491px] w-full mx-auto mb-7.5">
@@ -85,9 +83,9 @@ const CheckoutSuccess = ({ amount, bankInfo }: { amount: string; bankInfo?: stri
 
                 {bankInfo && (
                   <div className="max-w-[491px] w-full mx-auto mb-7.5 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                    <h3 className="font-semibold text-blue mb-2">Bank Transfer Instructions</h3>
+                    <h3 className="font-semibold text-blue mb-2">Instruksi Transfer Bank</h3>
                     <p className="text-sm text-gray-700 mb-2">
-                      Please transfer the amount to the following account:
+                      Silakan transfer jumlah pesanan Anda ke salah satu rekening berikut:
                     </p>
                     <div className="bg-white p-3 rounded border">
                       <pre className="text-sm font-mono text-gray-800 whitespace-pre-wrap">
@@ -95,7 +93,7 @@ const CheckoutSuccess = ({ amount, bankInfo }: { amount: string; bankInfo?: stri
                       </pre>
                     </div>
                     <p className="text-xs text-gray-600 mt-2">
-                      Please complete the transfer within 24 hours to avoid order cancellation.
+                      Silakan selesaikan transfer dalam waktu 24 jam untuk menghindari pembatalan pesanan.
                     </p>
                   </div>
                 )}

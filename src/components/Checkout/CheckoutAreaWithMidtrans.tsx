@@ -231,7 +231,7 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
 
         toast.success("Bank transfer instructions sent to your email");
         clearCart();
-        router.push(`/success?amount=${amount}&bankInfo=${encodeURIComponent(bankInfo)}`);
+        router.push(`/success?amount=${amount}&orderId=${order.id}&bankInfo=${encodeURIComponent(bankInfo)}`);
       }
     } catch (err: any) {
       console.error("Payment processing error:", err);
