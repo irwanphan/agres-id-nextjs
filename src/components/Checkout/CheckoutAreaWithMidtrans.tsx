@@ -211,15 +211,14 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
 
         const bankTransferResult = await bankTransferResponse.json();
 
-        if (!bankTransferResult?.success) {
+        if (!bankTransferResult?.success || !bankTransferResult.data) {
           toast.error(bankTransferResult?.message || "Failed to create bank transfer");
           setLoading(false);
           return;
         }
 
-        // Show bank transfer instructions
-        const vaNumbers = bankTransferResult.formData.va_numbers;
-        const permataVaNumber = bankTransferResult.formData.permata_va_number;
+        const vaNumbers = bankTransferResult.data.va_numbers;
+        const permataVaNumber = bankTransferResult.data.permata_va_number;
         
         let bankInfo = "";
         if (vaNumbers && vaNumbers.length > 0) {
