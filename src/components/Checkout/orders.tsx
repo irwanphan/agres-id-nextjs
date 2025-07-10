@@ -144,19 +144,25 @@ export default function Orders() {
             </h4>
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
-                <span className="text-gray-5">From:</span>
+                <span className="text-gray-5">Dari:</span>
                 <span className="text-dark text-right">{origin}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-5">To:</span>
+                <span className="text-gray-5">Ke:</span>
                 <span className="text-dark text-right">{destination}</span>
               </div>
-              {packageWeight && (
-                <div className="flex justify-between">
-                  <span className="text-gray-5">Weight:</span>
-                  <span className="text-dark">{formatPackageWeightKg(packageWeight || 0)} ({packageWeight} gram)</span>
-                </div>
-              )}
+              <div className="flex justify-between">
+                <span className="text-gray-5">Berat:</span>
+                {packageWeight ? (
+                  <span className="text-dark">{formatPackageWeightKg(packageWeight)} ({packageWeight} gram)</span>
+                ) : (
+                  <span className="text-dark">Berat paket tidak didefinisikan</span>
+                )}
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-5">Akan tiba dalam:</span>
+                <span className="text-dark text-right">{shippingMethod?.etd}</span>
+              </div>
             </div>
           </div>
         )}
