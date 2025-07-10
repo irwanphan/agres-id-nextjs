@@ -57,7 +57,11 @@ export default function Shipping() {
           const res = await fetch("/api/pickup-points");
           const data = await res.json();
           setPickupPoints(Array.isArray(data) ? data : []);
-          setPickupPointCityOptions(Array.from(new Set(data.map((point: PickupPoint) => point.city))));
+          setPickupPointCityOptions(
+            Array.from(new Set(
+              data.map((point: PickupPoint) => point.city)
+              .sort((a: string, b: string) => a.localeCompare(b))
+            )));
         }
       } catch (e) {
         console.error(e);
@@ -75,7 +79,7 @@ export default function Shipping() {
     setValue("shippingMethod.name", "pickup");
     setValue("shippingMethod.price", 0);
     setValue("shippingMethod.courier", "pickup");
-    setValue("shippingMethod.service", "pickup");
+    setValue("shippingMethod.service", "Pickup Point");
     setValue("shippingMethod.etd", "1-2 hari");
     setShippingCost(0);
   };
@@ -356,8 +360,8 @@ export default function Shipping() {
           {/* use pickup point */}
           {isPickedUp && (
             <div className={`mb-5 transition-all duration-300 ease-out h-auto ${!isPickedUp ? "h-0" : "h-auto"}`}>
-              <div>
-                <p className="text-sm text-gray-6 mb-5">Pilih Kota Pickup Point AGRES</p>
+              <div className="mb-5">
+                <p className="text-sm text-gray-6 mb-1">Pilih Kota Pickup Point AGRES</p>
                 <select 
                   className="w-full py-2.5 pl-4 pr-8 duration-200 
                   rounded-lg border cursor-pointer
@@ -374,7 +378,7 @@ export default function Shipping() {
                 </select>
               </div>
               
-              <div className="mt-2">
+              <div className="mb-5">
                 <label className="block text-sm mb-1">Pilih Pickup Point</label>
                 <select
                   className="w-full py-2.5 pl-4 pr-8 duration-200 
@@ -388,7 +392,10 @@ export default function Shipping() {
                 >
                   <option value="">-- Pilih Pickup Point --</option>
                   {pickupPoints
-                    .filter(point => point.city.toLowerCase().includes(selectedPickupPointCity.toLowerCase()))
+                    .filter(point => point.city
+                      .toLowerCase()
+                      .includes(selectedPickupPointCity
+                        .toLowerCase()))
                     .map((point: PickupPoint) => (
                       <option key={point.id} value={point.id}>
                         {point.name}-{point.address}, {point.city}, {point.province}

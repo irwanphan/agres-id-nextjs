@@ -34,26 +34,29 @@ export async function POST(
   { params }: { params: Promise<{ userId: string }> }
 ) {
   const { userId } = await params;
-  const { address, city, province, zipCode } = await req.json();
+  const { addressBundle } = await req.json();
+  const { address, city, province, zipCode, name, email, phone, type } = addressBundle;
 
-  // console.log(address, city, province);
-
-  if (!address || !city || !province || !zipCode) {
-    return NextResponse.json({ error: "Address, city, province, and zipCode are required" }, { status: 400 });
+  // add userId to addressBundle
+  const submitData = {
+    userId,
+    ...addressBundle
   }
-
-  // console.log(address);
+  // check if all fields are filled from addressBundle destructured
+  if (!address || !city || !province || !zipCode || !name || !email || !phone || !type) {
+    return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+  }
 
   try {
     const data = await prisma.address.create({
       data: {
-        ...address,
-        userId
+        ...submitData,
       },
     });
 
     return NextResponse.json(data, { status: 201 });
   } catch (error) {
+    console.error("Prisma error:", error);
     return NextResponse.json('Internal Server Error', { status: 500 });
   }
 }
@@ -64,16 +67,24 @@ export async function PATCH(
 ) {
   const { userId } = await params;
   try {
-    const { address, id, city, province } = await req.json();
-    // console.log("Payload:", address, city, province);
+    const { addressBundle, id } = await req.json();
+    const { address, city, province, zipCode, name, email, phone, type } = addressBundle;
 
-    if (!userId || !address || !id) {
+    // check if all fields are filled from addressBundle destructured
+    if (!userId || !address || !id || !city || !province || !zipCode || !name || !email || !phone || !type) {
       return NextResponse.json('Missing Fields', { status: 400 });
     }
+    // submitted data is addressBundle without userId
+    const submitData = {
+      ...addressBundle,
+    }
 
+    // userId amd id is used as condition to update address
     const updated = await prisma.address.update({
       where: { id, userId },
-      data: address,
+      data: {
+        ...submitData,
+      },
     });
     // console.log("Updated address:", updated);
   } catch (e) {

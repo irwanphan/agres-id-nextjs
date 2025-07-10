@@ -14,7 +14,11 @@ declare module "next-auth" {
     user: {
       id: string;
       role: string;
+      name?: string;
       createdAt?: string;
+      phone?: string;
+      countryCode?: string;
+      fullPhone?: string;
     } & DefaultSession["user"];
   }
 }
@@ -35,9 +39,9 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "credentials",
       credentials: {
-        email: { label: "Email", type: "text", placeholder: "Jhondoe" },
+        email: { label: "Email", type: "text", placeholder: "Boedi Ono" },
         password: { label: "Password", type: "password" },
-        username: { label: "Username", type: "text", placeholder: "Jhon Doe" },
+        username: { label: "Username", type: "text", placeholder: "Boedi Ono" },
       },
 
       async authorize(credentials) {
@@ -100,7 +104,11 @@ export const authOptions: NextAuthOptions = {
           ...token,
           id: user.id,
           role: user.role,
+          name: user.name,
           createdAt: user.createdAt,
+          phone: user.phone,
+          countryCode: user.countryCode,
+          fullPhone: user.fullPhone,
         };
       }
       // console.log("JWT Callback - Token data:", { id: token.id, role: token.role, createdAt: token.createdAt });
@@ -111,7 +119,11 @@ export const authOptions: NextAuthOptions = {
       if (session?.user) {
         session.user.id = token.id as string;
         session.user.role = token.role as string;
+        session.user.name = token.name as string;
         session.user.createdAt = token.createdAt as string;
+        session.user.phone = token.phone as string;
+        session.user.countryCode = token.countryCode as string;
+        session.user.fullPhone = token.fullPhone as string;
         // console.log("Session Callback - Session data:", { 
         //   id: session.user.id, 
         //   role: session.user.role,
