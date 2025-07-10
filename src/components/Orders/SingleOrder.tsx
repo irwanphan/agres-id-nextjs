@@ -21,7 +21,11 @@ const SingleOrder = ({ orderItem, onViewDetails, onEdit, showAll }: IProps) => {
         </td>
         <td className="px-6 py-3.5">
           <p className="text-custom-sm text-gray-6 whitespace-nowrap">
-            {new Date(orderItem.createdAt).toDateString()}
+            {new Date(orderItem.createdAt).toLocaleDateString("id-ID", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+            })}
           </p>
         </td>
         <td className="px-6 py-3.5 whitespace-nowrap">
@@ -62,6 +66,16 @@ const SingleOrder = ({ orderItem, onViewDetails, onEdit, showAll }: IProps) => {
         <td className="px-6 py-3.5 whitespace-nowrap">
           <p className="text-custom-sm text-gray-6">
             {orderItem?.paymentMethod}
+              <span className={`inline-block text-xs py-0.5 px-2.5 rounded-full capitalize ml-2 ${orderItem.paymentStatus === "pending"
+                  ? "text-yellow-500 bg-yellow-50"
+                  : orderItem.paymentStatus === "paid"
+                    ? "text-blue bg-blue-light-5"
+                    : orderItem.paymentStatus === "cancel"
+                      ? "text-red-500 bg-red-50"
+                      : "text-gray-7 bg-gray-2"
+              }`}>
+                {orderItem?.paymentStatus}
+              </span>
           </p>
         </td>
 

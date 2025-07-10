@@ -63,6 +63,8 @@ User Account Management Page
 - [] fix: update user login email also update billing email
 - [] Add phone number to user account management page
 - [ok] Fix: URGENT: mobile view is a mess, need to fix, put menu on thumb area
+- [] Payment status is not shown on user dashboard
+- [] Link to submit/upload payment proof on user dashboard
 
 Auth
 - [ok] fix: after success login, user is being redirected, but no information is shown on the page when loading and might confuse users
