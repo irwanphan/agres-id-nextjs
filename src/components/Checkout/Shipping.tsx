@@ -368,9 +368,11 @@ export default function Shipping() {
                   onChange={e => setSelectedPickupPointCity(e.target.value)}
                   >
                   <option value="">-- Pilih Kota Pickup Point --</option>
-                  {pickupPointCityOptions.map(city => (
-                    <option key={city} value={city}>{city}</option>
-                  ))}
+                    {pickupPointCityOptions
+                      .sort((a: string, b: string) => a.localeCompare(b))
+                      .map(city => (
+                      <option key={city} value={city}>{city}</option>
+                    ))}
                 </select>
               </div>
               

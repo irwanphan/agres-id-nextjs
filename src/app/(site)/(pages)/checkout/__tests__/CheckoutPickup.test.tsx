@@ -24,7 +24,7 @@
 // input catatn di order section
 // -- data shipping address dan price muncul di order section
 // input data di payment method, coba dengan "bank_transfer" method
-// -- pilih bank "BCA"
+// -- pilih bank "Mandiri"
 // klik tombol bayar
 // muncul halaman /success?amount="nilai amount barangnya"
 // klik tombol Link "Account" ke /my-account/orders
