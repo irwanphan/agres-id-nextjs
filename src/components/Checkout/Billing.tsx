@@ -65,8 +65,6 @@ export default function Billing() {
     }
   }, [addressData, setValue, session.data?.user?.name]);
 
-  console.log('session.data?.user :', session.data?.user)
-
   return (
     <div className="bg-white shadow-1 rounded-[10px] ">
       <div
