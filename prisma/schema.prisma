@@ -111,7 +111,7 @@ model Order {
 model PaymentTransaction {
   id              String    @id @default(cuid())
   orderId         String    @unique
-  order           Order     @relation(fields: [orderId], references: [id])
+  order           Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
   provider        String // e.g., "midtrans"
   selectedBank    String? // e.g., "bca", "bni"
   vaNumber        String?

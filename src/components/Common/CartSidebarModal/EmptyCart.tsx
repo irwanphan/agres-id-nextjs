@@ -11,7 +11,7 @@ const EmptyCart = () => {
         <EmptyCartIcon className="mx-auto" />
       </div>
 
-      <p className="pb-6">Your cart is empty!</p>
+      <p className="pb-6">Keranjang belanja Anda masih kosong</p>
 
       <Link
         onClick={() => {
@@ -20,7 +20,7 @@ const EmptyCart = () => {
         href="/shop"
         className="w-full lg:w-10/12 mx-auto flex justify-center font-medium text-white bg-dark py-[13px] px-6 rounded-lg ease-out duration-200 hover:bg-opacity-95"
       >
-        Continue Shopping
+        Lanjutkan Belanja
       </Link>
     </div>
   );

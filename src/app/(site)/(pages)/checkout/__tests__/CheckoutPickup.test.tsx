@@ -30,3 +30,4 @@
 // klik tombol Link "Account" ke /my-account/orders
 // -- muncul halaman /my-account/orders
 // -- muncul data order yang baru saja dipesan
+// Coba ulang dengan memilih bank yang berbeda

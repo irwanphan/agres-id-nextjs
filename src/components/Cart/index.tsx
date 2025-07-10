@@ -152,13 +152,13 @@ const Cart = () => {
               </svg>
             </div>
 
-            <p className="pb-6">Your cart is empty!</p>
+            <p className="pb-6">Keranjang belanja Anda masih kosong</p>
 
             <Link
               href="/shop"
               className="w-96 mx-auto flex justify-center font-medium text-white bg-dark py-[13px] px-6 rounded-md ease-out duration-200 hover:bg-opacity-95"
             >
-              Continue Shopping
+              Lanjutkan Belanja
             </Link>
           </div>
         </>
