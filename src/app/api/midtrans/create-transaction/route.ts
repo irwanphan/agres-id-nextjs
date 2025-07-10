@@ -3,8 +3,10 @@ import { snap } from '@/lib/midtrans';
 import { sendErrorResponse, sendSuccessResponse } from '@/utils/sendResponse';
 
 export async function POST(req: NextRequest) {
+  let body;
   try {
-    const body = await req.json();
+    body = await req.json();
+    console.log('[Midtrans] Incoming create-transaction request:', body);
     const { 
       orderId, 
       amount, 
@@ -70,13 +72,14 @@ export async function POST(req: NextRequest) {
     };
 
     const transaction = await snap.createTransaction(transactionDetails);
+    console.log('[Midtrans] Response from core.charge:', transaction);
 
     return sendSuccessResponse(200, 'Transaction created successfully', {
       token: transaction.token,
       redirect_url: transaction.redirect_url,
     });
   } catch (error: any) {
-    console.error('Midtrans transaction creation error:', error);
+    console.error('[Midtrans] Error in create-transaction:', error, error?.message, error?.stack);
     return sendErrorResponse(500, error.message || 'Failed to create transaction');
   }
 } 

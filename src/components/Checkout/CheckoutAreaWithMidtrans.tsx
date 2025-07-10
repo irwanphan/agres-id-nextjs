@@ -2,14 +2,10 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Breadcrumb from "../Common/Breadcrumb";
 import Billing from "./Billing";
-import Coupon from "./Coupon";
 import Login from "./Login";
-import Notes from "./Notes";
 import PaymentMethod from "./PaymentMethod";
 import Shipping from "./Shipping";
-import ShippingMethod from "./ShippingMethod";
 import { CheckoutInput, useCheckoutForm } from "./form";
 import Orders from "./orders";
 import toast from "react-hot-toast";
@@ -25,7 +21,6 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
   const [errorMessage, setErrorMessage] = useState<string>();
   const [loading, setLoading] = useState(false);
   const { cartDetails, clearCart } = useShoppingCart();
-  // console.log("cartDetails", cartDetails);
 
   useEffect(() => {
     if (cartDetails) {
@@ -176,7 +171,7 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
 
         console.log('🔔 Midtrans result:', midtransResult);
 
-        if (!midtransResult?.success) {
+        if (!midtransResult?.success || !midtransResult.data?.redirect_url) {
           toast.error(midtransResult?.message || "Failed to create Midtrans transaction");
           setLoading(false);
           return;
@@ -258,9 +253,6 @@ const CheckoutAreaWithMidtrans = ({ amount }: { amount: number }) => {
               </div>
               <div className="w-full space-y-6 lg:col-span-2">
                 <Orders />
-                {/* <Notes /> */}
-                {/* <Coupon /> */}
-                {/* <ShippingMethod /> */}
                 <PaymentMethod amount={amount} />
                 <button
                   type="submit"
