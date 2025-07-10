@@ -7,7 +7,10 @@
       "dev-raja-ongkir-int": false,
       "dev-user-update": false,
       "dev-product-extend-weight": false,
-      "dev-pickup-points": false
+      "dev-pickup-points": false,
+      "dev-sheckout": false,
+      "dev-checkout": false,
+      "dev-product-sync": false
     }
   }
 }
