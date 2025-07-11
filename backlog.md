@@ -108,5 +108,5 @@ Data Preparation
 - [] step 4: Create uploader from script above to upload MPL.xlsx to database
 
 Import Initial Data from Legacy Database to New Database
-- [] upload images from legacy assets to Cloudinary
+- [ok] upload images from legacy assets to Cloudinary
 - [] data migrator from legacy database to new database, for product related data
