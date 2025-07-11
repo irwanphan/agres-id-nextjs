@@ -106,3 +106,7 @@ Data Preparation
 - [] step 2: Query import from clean_import.csv to database
 - [] step 3: Query import from master_product_attributes.csv to update products
 - [] step 4: Create uploader from script above to upload MPL.xlsx to database
+
+Import Initial Data from Legacy Database to New Database
+- [] upload images from legacy assets to Cloudinary
+- [] data migrator from legacy database to new database, for product related data
