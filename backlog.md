@@ -109,4 +109,5 @@ Data Preparation
 
 Import Initial Data from Legacy Database to New Database
 - [ok] upload images from legacy assets to Cloudinary
+- [] manual create category and sub category from legacy database to new database
 - [] data migrator from legacy database to new database, for product related data
