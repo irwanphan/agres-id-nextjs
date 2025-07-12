@@ -111,4 +111,4 @@ Import Initial Data from Legacy Database to New Database
 - [ok] upload images from legacy assets to Cloudinary
 - [ok] manual create category and sub category from legacy database to new database
 - [ok] data migrator from legacy database to new database, for product related data
-- [] import images from legacy database to new database, add new Table: ProductImage
+- [ok] import images from legacy database to new database, add new Table: ProductImage
