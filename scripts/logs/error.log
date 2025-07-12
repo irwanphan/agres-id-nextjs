@@ -1,0 +1,1848 @@
+[2025-07-12T04:51:25.079Z] ❌ SKU tes producttes product failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Brand",
+             description: null,
+             productId: "cmczrq65d013rsgw4icv2v8cm",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:51:38.573Z] ❌ SKU PR-LAP-AC-SP513-55N-72J8 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrqg6q01ddsgw47e9atgf8",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:51:39.241Z] ❌ SKU PR-LAP-AS-UX325EA-OLED752 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrqgpe01dxsgw4uw5wrsm8",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:51:39.551Z] ❌ SKU PR-LAP-AS-UX435EAL-1WIPS511 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Graphic Card",
+             description: null,
+             productId: "cmczrqh7j01ehsgw4116asrud",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:51:41.995Z] ❌ SKU PR-LAP-AS-GA401QE-R7R5B6TO failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrqise01fvsgw404joxsv0",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:51:43.652Z] ❌ SKU PR-LAP-AS-G732LXS-I78SD6T failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrqjyr01gzsgw4948rtely",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:51:44.219Z] ❌ SKU PR-LAP-AS-G532LWS-I77SD7T failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Operating System",
+             description: null,
+             productId: "cmczrqkma01hjsgw4hli80uyf",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:51:44.912Z] ❌ SKU PR-LAP-TH-20RBS6JS00 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrql1x01i1sgw43p2pqdfx",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:51:45.659Z] ❌ SKU PR-LAP-TH-20VG0095ID failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrqllj01ilsgw4cuhlfqwx",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:51:46.382Z] ❌ SKU PR-LAP-TH-20VD00AMID failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrqm5q01j5sgw4ob10zu5k",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:51:47.111Z] ❌ SKU PR-LAP-MS-MOD-14-B11MO-072 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrqmqx01jpsgw4j0i8tj23",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:51:47.864Z] ❌ SKU PR-LAP-TH-20SL00MJID failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrqnc301k9sgw4f72xwnra",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:51:48.520Z] ❌ SKU PR-LAP-TH-82C401D8ID failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrqnv401ktsgw4lscye94k",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:51:49.192Z] ❌ SKU PR-LAP-TH-82C400TJID/512 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrqodf01ldsgw4qsszb9pd",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:51:49.792Z] ❌ SKU PR-LAP-TH-82C400TJID/256 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrqow201lxsgw4qmnv5bfc",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:51:50.119Z] ❌ SKU PR-LAP-AP-MYD82ID failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Graphic Card",
+             description: null,
+             productId: "cmczrqpcx01mhsgw4g72jvnbi",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:51:52.992Z] ❌ SKU PR-LAP-TH-20U2S69200 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrqrbn01ofsgw4ibcpfbi8",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:51:53.759Z] ❌ SKU PR-LAP-AS-A516JP-FHD5121 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrqrvu01ozsgw497d9rrxe",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:51:56.037Z] ❌ SKU PR-LAP-MS-BRA-15-B5DD-046 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Storage",
+             description: null,
+             productId: "cmczrqtru01qnsgw4g46hvdmc",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:51:56.734Z] ❌ SKU PR-LAP-HP-245-G7-2E6K2PA/8 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrqu6201r1sgw45owhqhd6",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:51:57.440Z] ❌ SKU PR-LAP-HP-240-G7-20R05PA/256 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrquqe01rlsgw48ddajkyq",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:51:58.760Z] ❌ SKU PR-LAP-AS-M415DA-EK305TS failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrqvt001spsgw4ln3n1m3r",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:51:59.388Z] ❌ SKU PR-LAP-AS-A416JA-FHD351 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrqw9z01t9sgw46gtjv5m0",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:52:00.257Z] ❌ SKU test2 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Brand",
+             description: null,
+             productId: "cmczrqxau01udsgw4q39avb1x",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:52:00.883Z] ❌ SKU PR-LAP-AS-A416JA-VIPS351 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrqxf701ujsgw4qa9jnv8c",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:52:01.482Z] ❌ SKU PR-LAP-AS-M413DA-VIPS551 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrqxwp01v3sgw4xkelltui",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:52:02.109Z] ❌ SKU PR-LAP-AS-K413EA-EB352TS failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrqydi01vnsgw4x485kstt",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:52:02.758Z] ❌ SKU PR-LAP-AS-K413JQ-VIPS553 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrqyuz01w7sgw4jm9ein2y",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:52:03.430Z] ❌ SKU PR-LAP-AS-K413EQ-EB553TS failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrqzcw01wrsgw4udm668ii",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:52:06.151Z] ❌ SKU PR-LAP-TH-20U1S16S00/8512 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrr1ib01yzsgw44usxv8pv",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:52:10.018Z] ❌ Error migrating SKU test: 
+Invalid `prisma.product.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateProducts.js:61:44
+
+  58   continue;
+  59 }
+  60 
+→ 61 const product = await prisma.product.create(
+Unique constraint failed on the fields: (`slug`)
+[2025-07-12T04:52:11.752Z] ❌ SKU quick___tes failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Brand",
+             description: null,
+             productId: "cmczrr663023hsgw4eof1dmlo",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:52:11.929Z] ❌ SKU tes failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Brand",
+             description: null,
+             productId: "cmczrr6az023nsgw46sa92z4m",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:52:14.276Z] ❌ SKU PR-TAB-EV-HE-WINTAB-U70B failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Brand",
+             description: null,
+             productId: "cmczrr832025bsgw4qd0h2wrm",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:52:14.510Z] ❌ SKU PR-TAB-MA-MAX-GENTAB failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Brand",
+             description: null,
+             productId: "cmczrr88v025hsgw4od5fha65",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:52:17.453Z] ❌ SKU PR-AIO-LE-F0E800U6ID failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrra7h027bsgw4u5qmnn15",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:52:25.335Z] ❌ SKU PR-LAP-AS-FX506HCB-I535B6GO failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrrg9302c5sgw4au6mme03",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:52:25.994Z] ❌ SKU PR-LAP-AS-FX506HM-I736B6GO failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrrgs802cpsgw4jthmvrgo",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:52:26.721Z] ❌ SKU PR-LAP-AC-PH315-54-712C failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczrrhch02d9sgw4frlwaeee",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T04:52:27.937Z] ❌ Error migrating SKU 123213: 
+Invalid `prisma.product.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateProducts.js:61:44
+
+  58   continue;
+  59 }
+  60 
+→ 61 const product = await prisma.product.create(
+Unique constraint failed on the fields: (`slug`)
+[2025-07-12T04:53:11.340Z] ❌ SKU PR-LAP-AP-MGN73ID failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Graphic Card",
+             description: null,
+             productId: "cmczrsg1h03apsgw4cwh9r8im",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:04.736Z] ❌ SKU tes producttes product failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Brand",
+             description: null,
+             productId: "cmczs1b3h013rsgwaueq25bxw",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:17.359Z] ❌ SKU PR-LAP-AC-SP513-55N-72J8 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs1kk701ddsgwa37nlf34y",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:17.943Z] ❌ SKU PR-LAP-AS-UX325EA-OLED752 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs1kzt01dxsgwa4ayrjrtd",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:18.245Z] ❌ SKU PR-LAP-AS-UX435EAL-1WIPS511 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Graphic Card",
+             description: null,
+             productId: "cmczs1lga01ehsgwanrzlcm0w",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:20.310Z] ❌ SKU PR-LAP-AS-GA401QE-R7R5B6TO failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs1msk01fvsgwar81mx8ey",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:21.669Z] ❌ SKU PR-LAP-AS-G732LXS-I78SD6T failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs1ntz01gzsgwa4gysbao0",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:22.265Z] ❌ SKU PR-LAP-AS-G532LWS-I77SD7T failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Operating System",
+             description: null,
+             productId: "cmczs1obn01hjsgwaabcmusss",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:22.867Z] ❌ SKU PR-LAP-TH-20RBS6JS00 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs1osa01i1sgwaugv1jh42",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:23.468Z] ❌ SKU PR-LAP-TH-20VG0095ID failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs1p8x01ilsgwawfc8ru86",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:24.120Z] ❌ SKU PR-LAP-TH-20VD00AMID failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs1ppx01j5sgwaoe81egzx",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:24.737Z] ❌ SKU PR-LAP-MS-MOD-14-B11MO-072 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs1q8g01jpsgwang2c99np",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:25.398Z] ❌ SKU PR-LAP-TH-20SL00MJID failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs1qqj01k9sgwan0janx17",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:26.003Z] ❌ SKU PR-LAP-TH-82C401D8ID failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs1r7101ktsgwafjholsz9",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:26.578Z] ❌ SKU PR-LAP-TH-82C400TJID/512 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs1ro401ldsgwaju3483ku",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:27.168Z] ❌ SKU PR-LAP-TH-82C400TJID/256 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs1s3v01lxsgwambynigub",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:27.511Z] ❌ SKU PR-LAP-AP-MYD82ID failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Graphic Card",
+             description: null,
+             productId: "cmczs1ska01mhsgwa7yjmbl63",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:30.454Z] ❌ SKU PR-LAP-TH-20U2S69200 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs1ulv01ofsgwapncxpt6q",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:31.028Z] ❌ SKU PR-LAP-AS-A516JP-FHD5121 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs1v3i01ozsgwajm832on0",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:33.009Z] ❌ SKU PR-LAP-MS-BRA-15-B5DD-046 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Storage",
+             description: null,
+             productId: "cmczs1wq201qnsgwafye9gafd",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:33.602Z] ❌ SKU PR-LAP-HP-245-G7-2E6K2PA/8 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs1x2q01r1sgwax2hwceui",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:34.222Z] ❌ SKU PR-LAP-HP-240-G7-20R05PA/256 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs1xiy01rlsgwaxt59o79y",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:35.477Z] ❌ SKU PR-LAP-AS-M415DA-EK305TS failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs1yi001spsgwav36x654f",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:36.104Z] ❌ SKU PR-LAP-AS-A416JA-FHD351 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs1yzh01t9sgwafm1dhnrt",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:36.855Z] ❌ SKU test2 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Brand",
+             description: null,
+             productId: "cmczs1zx001udsgwacnyjte8f",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:37.532Z] ❌ SKU PR-LAP-AS-A416JA-VIPS351 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs201f01ujsgwabzrmir7m",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:38.148Z] ❌ SKU PR-LAP-AS-M413DA-VIPS551 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs20ki01v3sgwa067hf5q8",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:38.749Z] ❌ SKU PR-LAP-AS-K413EA-EB352TS failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs211u01vnsgwai5ob2ttg",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:39.324Z] ❌ SKU PR-LAP-AS-K413JQ-VIPS553 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs21hu01w7sgwafesdr53t",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:39.842Z] ❌ SKU PR-LAP-AS-K413EQ-EB553TS failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs21xu01wrsgwafaqwusia",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:42.363Z] ❌ SKU PR-LAP-TH-20U1S16S00/8512 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs23sv01yzsgwas6wue1tb",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:46.384Z] ❌ Error migrating SKU test: 
+Invalid `prisma.product.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateProducts.js:56:44
+
+  53   continue;
+  54 }
+  55 
+→ 56 const product = await prisma.product.create(
+Unique constraint failed on the fields: (`slug`)
+[2025-07-12T05:00:48.012Z] ❌ SKU quick___tes failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Brand",
+             description: null,
+             productId: "cmczs28i5023hsgwac9fql2kw",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:48.198Z] ❌ SKU tes failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Brand",
+             description: null,
+             productId: "cmczs28nk023nsgwa202dd4y0",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:50.349Z] ❌ SKU PR-TAB-EV-HE-WINTAB-U70B failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Brand",
+             description: null,
+             productId: "cmczs2aau025bsgwa2oi3mvoo",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:50.543Z] ❌ SKU PR-TAB-MA-MAX-GENTAB failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Brand",
+             description: null,
+             productId: "cmczs2agb025hsgwaudx9jqqq",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:00:53.219Z] ❌ SKU PR-AIO-LE-F0E800U6ID failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs2c6w027bsgwavo8d95u6",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:01:00.147Z] ❌ SKU PR-LAP-AS-FX506HCB-I535B6GO failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs2hkq02c5sgwa80gz72k1",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:01:00.759Z] ❌ SKU PR-LAP-AS-FX506HM-I736B6GO failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs2i0f02cpsgwac2k0s948",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:01:01.441Z] ❌ SKU PR-LAP-AC-PH315-54-712C failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Warranty",
+             description: null,
+             productId: "cmczs2ihn02d9sgwaynr8ypdq",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:01:02.508Z] ❌ Error migrating SKU 123213: 
+Invalid `prisma.product.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateProducts.js:56:44
+
+  53   continue;
+  54 }
+  55 
+→ 56 const product = await prisma.product.create(
+Unique constraint failed on the fields: (`slug`)
+[2025-07-12T05:01:44.932Z] ❌ SKU PR-LAP-AP-MGN73ID failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Graphic Card",
+             description: null,
+             productId: "cmczs3gb903apsgwa0bp30ih0",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.
+[2025-07-12T05:03:11.314Z] ❌ Error migrating SKU tes123123123: 
+Invalid `prisma.product.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateProducts.js:56:44
+
+  53   continue;
+  54 }
+  55 
+→ 56 const product = await prisma.product.create(
+Unique constraint failed on the fields: (`slug`)
+[2025-07-12T05:06:59.361Z] ❌ Error migrating SKU PR-AIO-LE-F0E800XHID: 
+Invalid `prisma.product.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateProducts.js:56:44
+
+  53   continue;
+  54 }
+  55 
+→ 56 const product = await prisma.product.create(
+Unique constraint failed on the fields: (`slug`)
+[2025-07-12T05:10:05.270Z] ❌ Error migrating SKU PR-LAP-MS-GF63-10SC-860/16512: 
+Invalid `prisma.product.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateProducts.js:56:44
+
+  53   continue;
+  54 }
+  55 
+→ 56 const product = await prisma.product.create(
+Unique constraint failed on the fields: (`slug`)
+[2025-07-12T05:10:05.391Z] ❌ Error migrating SKU PR-LAP-MS-GF63-11SC-654: 
+Invalid `prisma.product.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateProducts.js:56:44
+
+  53   continue;
+  54 }
+  55 
+→ 56 const product = await prisma.product.create(
+Unique constraint failed on the fields: (`slug`)
+[2025-07-12T05:10:05.507Z] ❌ Error migrating SKU PR-LAP-MS-GF63-11SC-1039: 
+Invalid `prisma.product.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateProducts.js:56:44
+
+  53   continue;
+  54 }
+  55 
+→ 56 const product = await prisma.product.create(
+Unique constraint failed on the fields: (`slug`)
+[2025-07-12T05:10:05.646Z] ❌ Error migrating SKU PR-LAP-MS-GF63-11UC-1204: 
+Invalid `prisma.product.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateProducts.js:56:44
+
+  53   continue;
+  54 }
+  55 
+→ 56 const product = await prisma.product.create(
+Unique constraint failed on the fields: (`slug`)
+[2025-07-12T05:10:05.769Z] ❌ Error migrating SKU PR-LAP-MS-GF63-11SC-1039/16: 
+Invalid `prisma.product.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateProducts.js:56:44
+
+  53   continue;
+  54 }
+  55 
+→ 56 const product = await prisma.product.create(
+Unique constraint failed on the fields: (`slug`)
+[2025-07-12T05:10:05.885Z] ❌ Error migrating SKU PR-LAP-MS-GF63-11UC-1200: 
+Invalid `prisma.product.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateProducts.js:56:44
+
+  53   continue;
+  54 }
+  55 
+→ 56 const product = await prisma.product.create(
+Unique constraint failed on the fields: (`slug`)
+[2025-07-12T05:10:06.013Z] ❌ Error migrating SKU PR-LAP-MS-GF63-11UC-1200/16: 
+Invalid `prisma.product.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateProducts.js:56:44
+
+  53   continue;
+  54 }
+  55 
+→ 56 const product = await prisma.product.create(
+Unique constraint failed on the fields: (`slug`)
+[2025-07-12T05:10:06.118Z] ❌ Error migrating SKU PR-LAP-MS-GF63-11UD-1096: 
+Invalid `prisma.product.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateProducts.js:56:44
+
+  53   continue;
+  54 }
+  55 
+→ 56 const product = await prisma.product.create(
+Unique constraint failed on the fields: (`slug`)
+[2025-07-12T05:12:42.993Z] ❌ Error migrating SKU PR-LAP-MS-BRA-15-C7VFK-207: 
+Invalid `prisma.product.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateProducts.js:56:44
+
+  53   continue;
+  54 }
+  55 
+→ 56 const product = await prisma.product.create(
+Unique constraint failed on the fields: (`slug`)
+[2025-07-12T05:16:26.770Z] ❌ Error migrating SKU asdasd: 
+Invalid `prisma.product.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateProducts.js:56:44
+
+  53   continue;
+  54 }
+  55 
+→ 56 const product = await prisma.product.create(
+Unique constraint failed on the fields: (`slug`)
+[2025-07-12T05:24:12.213Z] ❌ Error migrating SKU 123213: 
+Invalid `prisma.product.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateProducts.js:56:44
+
+  53   continue;
+  54 }
+  55 
+→ 56 const product = await prisma.product.create(
+Unique constraint failed on the fields: (`slug`)
+[2025-07-12T05:24:25.358Z] ❌ Error migrating SKU tes123123123: 
+Invalid `prisma.product.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateProducts.js:56:44
+
+  53   continue;
+  54 }
+  55 
+→ 56 const product = await prisma.product.create(
+Unique constraint failed on the fields: (`slug`)
+[2025-07-12T05:24:48.366Z] ❌ Error migrating SKU PR-AIO-LE-F0E800XHID: 
+Invalid `prisma.product.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateProducts.js:56:44
+
+  53   continue;
+  54 }
+  55 
+→ 56 const product = await prisma.product.create(
+Unique constraint failed on the fields: (`slug`)
+[2025-07-12T05:25:24.196Z] ❌ Error migrating SKU PR-LAP-MS-BRA-15-C7VFK-207: 
+Invalid `prisma.product.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateProducts.js:56:44
+
+  53   continue;
+  54 }
+  55 
+→ 56 const product = await prisma.product.create(
+Unique constraint failed on the fields: (`slug`)
+[2025-07-12T05:25:45.447Z] ❌ Error migrating SKU asdasd: 
+Invalid `prisma.product.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateProducts.js:56:44
+
+  53   continue;
+  54 }
+  55 
+→ 56 const product = await prisma.product.create(
+Unique constraint failed on the fields: (`slug`)
+[2025-07-12T05:26:27.187Z] ❌ SKU 213123123123123123123123 failed to parse spec: 
+Invalid `prisma.additionalInformation.create()` invocation in
+/Users/irwanphan/TurbidDev/agres-id-nextjs/scripts/services/migrateAddional.js:11:42
+
+   8 try {
+   9   const specObj = JSON.parse(spesification);
+  10   for (const [key, value] of Object.entries(specObj)) {
+→ 11     await prisma.additionalInformation.create({
+           data: {
+             name: "Brand",
+             description: null,
+             productId: "cmczsz85c009dsg6e7iimpg93",
+         +   product: {
+         +     create: ProductCreateWithoutAdditionalInformationInput | ProductUncheckedCreateWithoutAdditionalInformationInput,
+         +     connectOrCreate: ProductCreateOrConnectWithoutAdditionalInformationInput,
+         +     connect: ProductWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `product` is missing.

@@ -1,16 +1,19 @@
+// utils/logger.js
+
 const fs = require('fs');
 const path = require('path');
 
-// Auto-create 'logs' folder if it doesn't exist
-const logsDir = path.join(__dirname, '..', 'logs');
-if (!fs.existsSync(logsDir)) {
-  fs.mkdirSync(logsDir);
-}
+const isDryRun = process.argv.includes('--dry-run');
 
 function logToFile(type, message) {
+  if (isDryRun && type !== 'error') return; // skip log except for errors
+
   const now = new Date().toISOString();
-  const filePath = path.join(logsDir, `${type}.log`);
-  fs.appendFileSync(filePath, `[${now}] ${message}\n`);
+  const filePath = path.join('logs', `${type}.log`);
+
+  fs.appendFile(filePath, `[${now}] ${message}\n`, (err) => {
+    if (err) console.error('⚠️ Failed to write log:', err.message);
+  });
 }
 
 module.exports = { logToFile };

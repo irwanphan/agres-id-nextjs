@@ -7,7 +7,7 @@ const { createAdditionalInformation } = require('./migrateAddional.js');
 const prisma = new PrismaClient();
 const CLOUDINARY_PREFIX = 'https://res.cloudinary.com/dc6svbdh9/image/upload/v1744194351/products/';
 
-async function migrateProducts({ isDryRun = false }) {
+async function migrateProducts({ isDryRun = false, onLog }) {
   const mysqlDb = await mysql.createConnection({
     host: 'localhost',
     port: 8889,
@@ -19,6 +19,13 @@ async function migrateProducts({ isDryRun = false }) {
   if (!isDryRun) {
     await prisma.productVariant.deleteMany();
     await prisma.additionalInformation.deleteMany();
+    await prisma.productImage.deleteMany();
+    await prisma.attributeValue.deleteMany();
+    await prisma.customAttribute.deleteMany();
+    await prisma.heroBanner.deleteMany();
+    await prisma.heroSlider.deleteMany();
+    await prisma.countdown.deleteMany();
+    await prisma.review.deleteMany();
     await prisma.product.deleteMany();
     console.log('🧹 Old data deleted.');
   }
@@ -29,6 +36,35 @@ async function migrateProducts({ isDryRun = false }) {
     LEFT JOIN item_images im ON i.id = im.item_id AND im.is_primary = 1
     WHERE i.sku IS NOT NULL
   `);
+
+  const [images] = await mysqlDb.execute(`
+    SELECT 
+      i.id, 
+      i.sku, 
+      (
+        SELECT REPLACE(im.img_name, ' ', '_')
+        FROM item_images im
+        WHERE im.item_id = i.id AND im.img_name IS NOT NULL
+        ORDER BY im.is_primary DESC, im.id ASC
+        LIMIT 1
+      ) AS img_name
+    FROM items i
+    WHERE i.sku IS NOT NULL
+  `);
+  
+  const sanitizeFileName = (name) => {
+    return name
+      .toLowerCase()
+      .replace(/\.[^/.]+$/, '')     // remove extension if needed
+      .replace(/\s+/g, '_')         // replace spaces with underscores
+      .replace(/[^a-z0-9_]/g, '')   // optional: remove non-alphanumeric except underscore
+  };
+  
+  const imgName = sanitizeFileName(row.img_name); // safe for public_id  
+  
+  for (const img of images) {
+    imageMap[img.sku] = img.img_name;
+  }
 
   for (const item of items) {
     try {
@@ -42,12 +78,7 @@ async function migrateProducts({ isDryRun = false }) {
       });
 
       if (exists) {
-        logToFile('skip', `SKU already exists: ${item.sku}`);
-        continue;
-      }
-
-      if (isDryRun) {
-        console.log(`[DRY-RUN] Simulate insert SKU: ${item.sku}`);
+        onLog?.({ type: 'skip', sku: item.sku });
         continue;
       }
 
@@ -70,13 +101,20 @@ async function migrateProducts({ isDryRun = false }) {
           categoryId: item.category_id,
         }
       });
-
-      await createVariant({ productId: product.id, item, CLOUDINARY_PREFIX });
+      
+      await createVariant({ productId: product.id, item, image: imgName, CLOUDINARY_PREFIX });
       await createAdditionalInformation({ productId: product.id, spesification: item.spesification, sku: item.sku });
 
-      logToFile('success', `✅ Migrated SKU: ${item.sku}`);
+      if (!isDryRun) {
+        console.log(`✅ Migrated SKU: ${item.sku}`);
+        onLog?.({ type: 'success', sku: item.sku });
+      } else {
+        console.log(`[DRY-RUN] Simulate insert SKU: ${item.sku} - image: ${imageMap[item.sku]} - variant: ${item.variant_color}`);
+        onLog?.({ type: 'skip', sku: item.sku });
+      }
     } catch (err) {
       logToFile('error', `❌ Error migrating SKU ${item.sku}: ${err.message}`);
+      onLog?.({ type: 'error', sku: item.sku });
     }
   }
 
