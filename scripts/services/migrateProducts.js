@@ -5,7 +5,7 @@ const { createVariant } = require('./migrateVariants.js');
 const { createAdditionalInformation } = require('./migrateAddional.js');
 
 const prisma = new PrismaClient();
-const CLOUDINARY_PREFIX = 'https://res.cloudinary.com/dc6svbdh9/image/upload/v1744194351/products/';
+const CLOUDINARY_PREFIX = 'https://res.cloudinary.com/dbuug9eey/image/upload/products/';
 
 async function migrateProducts({ isDryRun = false, onLog }) {
   const mysqlDb = await mysql.createConnection({
@@ -53,17 +53,20 @@ async function migrateProducts({ isDryRun = false, onLog }) {
   `);
   
   const sanitizeFileName = (name) => {
+    if (!name) return ''; // Cegah error null/undefined
+  
     return name
       .toLowerCase()
-      .replace(/\.[^/.]+$/, '')     // remove extension if needed
-      .replace(/\s+/g, '_')         // replace spaces with underscores
-      .replace(/[^a-z0-9_]/g, '')   // optional: remove non-alphanumeric except underscore
+      .replace(/\.[^/.]+$/, '')     // remove extension
+      .replace(/\s+/g, '_')         // replace spaces with _
+      .replace(/[^a-z0-9_]/g, '');  // remove symbols
   };
   
-  const imgName = sanitizeFileName(row.img_name); // safe for public_id  
-  
+  const imageMap = {};
+
   for (const img of images) {
-    imageMap[img.sku] = img.img_name;
+    const sanitized = sanitizeFileName(img.img_name);
+    imageMap[img.sku] = sanitized;
   }
 
   for (const item of items) {
@@ -102,7 +105,12 @@ async function migrateProducts({ isDryRun = false, onLog }) {
         }
       });
       
-      await createVariant({ productId: product.id, item, image: imgName, CLOUDINARY_PREFIX });
+      await createVariant({
+        productId: product.id,
+        item,
+        image: imageMap[item.sku],
+        CLOUDINARY_PREFIX
+      });
       await createAdditionalInformation({ productId: product.id, spesification: item.spesification, sku: item.sku });
 
       if (!isDryRun) {

@@ -4,7 +4,7 @@ const { logToFile } = require('../utils/logger.js');
 
 const prisma = new PrismaClient();
 
-const CLOUDINARY_PREFIX = 'https://res.cloudinary.com/dc6svbdh9/image/upload/products/';
+const CLOUDINARY_PREFIX = 'https://res.cloudinary.com/dbuug9eey/image/upload/products/';
 
 async function migrateImages({ isDryRun = false, onLog }) {
   const mysqlDb = await mysql.createConnection({
@@ -22,12 +22,15 @@ async function migrateImages({ isDryRun = false, onLog }) {
     WHERE i.sku IS NOT NULL AND im.img_name IS NOT NULL
   `);
 
-  function normalizeFileName(name) {
+  const sanitizeFileName = (name) => {
+    if (!name) return ''; // Cegah error null/undefined
+  
     return name
-      .replace(/\s+/g, '_')          // Ganti spasi dengan underscore
-      .replace(/[^\w.-]/g, '')       // Hilangkan karakter aneh kecuali huruf, angka, _ . -
-      .trim();                       // Hilangkan spasi awal/akhir
-  }
+      .toLowerCase()
+      .replace(/\.[^/.]+$/, '')     // remove extension
+      .replace(/\s+/g, '_')         // replace spaces with _
+      .replace(/[^a-z0-9_]/g, '');  // remove symbols
+  };
 
   for (const img of images) {
     try {
@@ -40,7 +43,7 @@ async function migrateImages({ isDryRun = false, onLog }) {
         continue;
       }
   
-      const normalizedImgName = normalizeFileName(img.img_name);
+      const normalizedImgName = sanitizeFileName(img.img_name);
   
       await prisma.productImage.create({
         data: {
