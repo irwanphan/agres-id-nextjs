@@ -11,7 +11,7 @@ cloudinary.config({
 
 const dir = path.join(__dirname, '../assets-to-migrate/assets/images/product');
 const batchSize = 100; // jumlah file per batch
-const uploadedLog = path.join(__dirname, '../assets-to-migrate/uploaded-to-cloudinary.json');
+const uploadedLog = path.join(__dirname, '../logs/uploaded-to-cloudinary.json');
 
 // Load file yang sudah di-upload
 let uploaded = [];

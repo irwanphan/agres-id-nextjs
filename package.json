@@ -14,7 +14,9 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
-    "upload-to-cloudinary": "node scripts/upload-to-cloudinary.js"
+    "upload-to-cloudinary": "node scripts/upload-to-cloudinary.js",
+    "migrate-products": "node scripts/migrate.js",
+    "migrate-products-dry-run": "node scripts/migrate.js --dry-run"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^1.0.10",
@@ -38,12 +40,14 @@
     "dayjs": "^1.11.13",
     "dotenv": "^17.2.0",
     "midtrans-client": "^1.4.3",
+    "mysql2": "^3.14.2",
     "next": "^15.3.2",
     "next-auth": "^4.24.11",
     "next-share": "^0.27.0",
     "next-sitemap": "^4.2.3",
     "nextjs-toploader": "^1.6.12",
     "nodemailer": "^6.9.13",
+    "pg": "^8.16.3",
     "quill": "^2.0.3",
     "rate-limiter-flexible": "^7.0.0",
     "react": "^19.0.0",
