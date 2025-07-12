@@ -1,8 +1,16 @@
-import fs from 'fs';
-import path from 'path';
+const fs = require('fs');
+const path = require('path');
 
-export function logToFile(type, message) {
+// Auto-create 'logs' folder if it doesn't exist
+const logsDir = path.join(__dirname, '..', 'logs');
+if (!fs.existsSync(logsDir)) {
+  fs.mkdirSync(logsDir);
+}
+
+function logToFile(type, message) {
   const now = new Date().toISOString();
-  const filePath = path.join('logs', `${type}.log`);
+  const filePath = path.join(logsDir, `${type}.log`);
   fs.appendFileSync(filePath, `[${now}] ${message}\n`);
 }
+
+module.exports = { logToFile };

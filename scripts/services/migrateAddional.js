@@ -1,8 +1,8 @@
-import { PrismaClient } from '@prisma/client';
-import { logToFile } from '../utils/logger.js';
+const { PrismaClient } = require('@prisma/client');
+const { logToFile } = require('../utils/logger.js');
 const prisma = new PrismaClient();
 
-export async function createAdditionalInformation({ productId, spesification, sku }) {
+async function createAdditionalInformation({ productId, spesification, sku }) {
   if (!spesification) return;
 
   try {
@@ -20,3 +20,5 @@ export async function createAdditionalInformation({ productId, spesification, sk
     logToFile('error', `❌ SKU ${sku} failed to parse spec: ${e.message}`);
   }
 }
+
+module.exports = { createAdditionalInformation };

@@ -1,7 +1,7 @@
-import { PrismaClient } from '@prisma/client';
+const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-export async function createVariant({ productId, item, CLOUDINARY_PREFIX }) {
+async function createVariant({ productId, item, CLOUDINARY_PREFIX }) {
   return prisma.productVariant.create({
     data: {
       productId: productId,
@@ -16,3 +16,5 @@ export async function createVariant({ productId, item, CLOUDINARY_PREFIX }) {
     }
   });
 }
+
+module.exports = { createVariant };

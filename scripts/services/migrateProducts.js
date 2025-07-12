@@ -1,13 +1,13 @@
-import { PrismaClient } from '@prisma/client';
-import mysql from 'mysql2/promise';
-import { logToFile } from '../utils/logger.js';
-import { createVariant } from './migrateVariants.js';
-import { createAdditionalInformation } from './migrateAdditional.js';
+const { PrismaClient } = require('@prisma/client');
+const mysql = require('mysql2/promise');
+const { logToFile } = require('../utils/logger.js');
+const { createVariant } = require('./migrateVariants.js');
+const { createAdditionalInformation } = require('./migrateAddional.js');
 
 const prisma = new PrismaClient();
 const CLOUDINARY_PREFIX = 'https://res.cloudinary.com/dc6svbdh9/image/upload/v1744194351/products/';
 
-export async function migrateProducts({ isDryRun = false }) {
+async function migrateProducts({ isDryRun = false }) {
   const mysqlDb = await mysql.createConnection({
     host: 'localhost',
     port: 8889,
@@ -83,3 +83,5 @@ export async function migrateProducts({ isDryRun = false }) {
   await mysqlDb.end();
   await prisma.$disconnect();
 }
+
+module.exports = { migrateProducts };
