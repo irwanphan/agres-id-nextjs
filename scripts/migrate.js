@@ -1,6 +1,6 @@
 // scripts/migrate.js
 
-const { migrateProducts } = require('./services/migrateProducts.js');
+// const { migrateProducts } = require('./services/migrateProducts.js');
 const { migrateImages } = require('./services/migrateImages.js');
 const dotenv = require('dotenv');
 dotenv.config();
@@ -13,7 +13,7 @@ async function main() {
   console.log(chalk.cyanBright(`🚀 Starting migration ${isDryRun ? '[DRY-RUN MODE]' : ''}`));
 
   try {
-    await migrateProducts({ isDryRun });
+    // await migrateProducts({ isDryRun });
     await migrateImages({ isDryRun });
     console.log(chalk.greenBright(`✅ Migration completed ${isDryRun ? '[SIMULATION]' : ''}`));
   } catch (err) {

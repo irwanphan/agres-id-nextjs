@@ -233,7 +233,7 @@ model ProductImage {
   imgName          String
   imgPath          String
   isPrimary        Boolean         @default(false)
-  type             String // optional: 'gallery', 'thumbnail', etc.
+  type             String? // optional: 'gallery', 'thumbnail', etc.
   createdAt        DateTime        @default(now())
   productVariantId String?
   productVariant   ProductVariant? @relation(fields: [productVariantId], references: [id])

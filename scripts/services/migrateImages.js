@@ -48,6 +48,7 @@ async function migrateImages({ isDryRun = false, onLog }) {
       await prisma.productImage.create({
         data: {
           productId: product.id,
+          type: 'gallery',
           imgName: normalizedImgName,
           imgPath: `${CLOUDINARY_PREFIX}${normalizedImgName}`,
           isPrimary: img.is_primary === true
